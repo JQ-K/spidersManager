@@ -4,7 +4,7 @@ wrapper base on redis-py client code
 import redis
 class RedisClient(object):
     
-    def __init__(self, host, port, default_expire_time, db=0):
+    def __init__(self, host, port, db=0, default_expire_time=None):
         self.db = db
         self.host = host
         self.port = port
@@ -102,3 +102,7 @@ class RedisClient(object):
 
     def incr(self, name, amount=1):
         self.client.incr(name, amount)
+
+    def sadd(self, key, value):
+        self.client.sadd(key, value)
+
