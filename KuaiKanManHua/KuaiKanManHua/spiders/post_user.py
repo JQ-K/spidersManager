@@ -4,8 +4,15 @@ import json
 import redis
 import time
 
-from KuaiKanManHua.conf.configure import *
-from KuaiKanManHua.items import UserItem
+#from KuaiKanManHua.conf.configure import *
+#from KuaiKanManHua.items import UserItem
+
+
+import sys
+sys.path.append("..")
+
+from ..items import UserItem
+from ..conf.configure import *
 
 
 class PostUserSpider(scrapy.Spider):
@@ -76,6 +83,7 @@ class PostUserSpider(scrapy.Spider):
         print(response.url)
 
         for info in rltUserInfoList:
+
             item = UserItem()
             item['user_id'] = info[0]  # int
             item['pic_url'] = info[1]
