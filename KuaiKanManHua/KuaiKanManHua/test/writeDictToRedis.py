@@ -1,18 +1,17 @@
 # -*- coding: UTF-8 -*-
-#import json
-#import redis
+import sys
+import os
 
-import sys,os
-#sys.path.append("..")
-sys.path.append(os.path.dirname(__file__) + os.sep + '../')
+from utils.myredis import RedisClient
 
-print(os.path.dirname(__file__) + os.sep + '../')
-#from ..conf.configure import *
-from ..utils.myredis import RedisClient
 
-#redisClient = RedisClient(REDIS_CONF['host'], REDIS_CONF['port'], REDIS_CONF['db'])
+import  configparser
+conf = configparser.ConfigParser()
 
-#print(redisClient.host)
-#print(CHANNEL_CONF)
+
+redisClient = RedisClient.from_settings()
+
+print(redisClient.host)
+
 
 

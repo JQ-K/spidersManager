@@ -2,6 +2,9 @@
 wrapper base on redis-py client code
 """
 import redis
+import  configparser
+import  os,sys
+
 class RedisClient(object):
     
     def __init__(self, host, port, db=0, default_expire_time=None):
@@ -11,13 +14,25 @@ class RedisClient(object):
         self.default_expire_time = default_expire_time 
         self.client = redis.Redis(host, port, db)
 
+    # @classmethod
+    # def from_settings(cls, settings):
+    #     host = settings.get('host')
+    #     port = settings.get('port')
+    #     db = settings.get('db', 0)
+    #     default_expire_time = settings.get('default_expire_time')
+    #     return cls(host, port, default_expire_time, db)
+
     @classmethod
-    def from_settings(cls, settings):
-        host = settings.get('host')
-        port = settings.get('port')
-        db = settings.get('db', 0)
-        default_expire_time = settings.get('default_expire_time')
-        return cls(host, port, default_expire_time, db)
+    def from_settings(cls):
+        current_path = os.path.dirname(os.path.realpath(__file__))
+        parent_path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+        conf_path = os.path.join(parent_path, 'conf\dbconf.ini')
+        conf = configparser.ConfigParser()
+        conf.read(conf_path)
+        host = conf.get('redis', 'host')
+        port = conf.get('redis', 'port')
+        db = conf.get('redis', 'db')
+        return cls(host, port, db)
         
     def __str__(self):
         return "redis client, connect to [%s:%s], db:%s, expire:%s"%\
