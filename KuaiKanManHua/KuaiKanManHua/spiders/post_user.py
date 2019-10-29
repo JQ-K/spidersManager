@@ -3,16 +3,15 @@ import scrapy
 import json
 import redis
 import time
+import sys
+import os
 
+sys.path.append(os.path.abspath('..'))
+from items import UserItem
+from conf.configure import *
+from utils.myredis import RedisClient
 #from KuaiKanManHua.conf.configure import *
 #from KuaiKanManHua.items import UserItem
-
-
-import sys
-sys.path.append("..")
-
-from ..items import UserItem
-from ..conf.configure import *
 
 
 class PostUserSpider(scrapy.Spider):
@@ -44,8 +43,14 @@ class PostUserSpider(scrapy.Spider):
         }
         self.spiderUrlNums = 0
         # connect redis
-        self.pool = redis.ConnectionPool(host=redisHost, port=redisPort, db=redisDb)
-        self.r = redis.Redis(connection_pool=self.pool)
+        #self.pool = redis.ConnectionPool(host=redisHost, port=redisPort, db=redisDb)
+        #self.r = redis.Redis(connection_pool=self.pool)
+
+        self.redisClient = RedisClient(REDIS_CONF['host'], REDIS_CONF['port'], REDIS_CONF['db'])
+
+        channelJsonStr = redisClient.get(REDIS_KEY['channel_conf'], -1)
+        self.channelDict = json.loads(channelJsonStr)
+        print(self.channelDict)
 
 
     def start_requests(self):

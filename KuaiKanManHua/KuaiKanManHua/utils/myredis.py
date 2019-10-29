@@ -25,7 +25,7 @@ class RedisClient(object):
     
     def close(self):
         if self.client:
-            self.client.flushdb()
+            #self.client.flushdb()
             self.client.connection_pool.disconnect()
         self.client = None
 

@@ -7,7 +7,11 @@
 
 import time
 import redis
-from KuaiKanManHua.conf.configure import *
+import sys
+import os
+sys.path.append(os.path.abspath('..'))
+from conf.configure import *
+#from KuaiKanManHua.conf.configure import *
 
 
 class KuaikanmanhuaPipeline(object):
