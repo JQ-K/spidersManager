@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # db conf file path
-DB_CONF_DIR = "D:/py_workspace/spidersManager/conf"
+#DB_CONF_DIR = "D:/py_workspace/spidersManager/conf"
+DB_CONF_DIR = "/data/code/crawlab-master/spiders/conf"
 
 # user info save dir
 dir = "/data/code/crawlab-master/data/0_kuaikanmanhua/bbs_user_info/"

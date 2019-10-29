@@ -27,7 +27,8 @@ class UserItemPipeline(object):
 
     def process_item(self, item, spider):
         isSuccess = True
-        isSuccess = self.write_item_file(self.filePath, item) and isSuccess
+        print(item)
+        #isSuccess = self.write_item_file(self.filePath, item) and isSuccess
 
 
     def write_item_file(self, filePath, item):

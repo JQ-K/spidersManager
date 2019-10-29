@@ -83,6 +83,7 @@ class PostUserSpider(scrapy.Spider):
             item['pic_url'] = info[1]
             item['nickname'] = info[2]
             item['sign_text'] = info[3]
+            #print(item)
             yield item
 
         if -1 != since:
