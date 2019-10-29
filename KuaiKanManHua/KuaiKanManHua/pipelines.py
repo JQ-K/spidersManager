@@ -6,12 +6,9 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 import time
-import redis
-import sys
-import os
-sys.path.append(os.path.abspath('..'))
-from conf.configure import *
-#from KuaiKanManHua.conf.configure import *
+
+from KuaiKanManHua.conf.configure import *
+from KuaiKanManHua.utils.myredis import RedisClient
 
 
 class KuaikanmanhuaPipeline(object):
@@ -22,8 +19,7 @@ class KuaikanmanhuaPipeline(object):
 class UserItemPipeline(object):
     def __init__(self):
         # connect redis
-        self.pool = redis.ConnectionPool(host=redisHost, port=redisPort, db=redisDb)
-        self.r = redis.Redis(connection_pool=self.pool)
+        self.redisClient = RedisClient.from_settings(DB_CONF_DIR)
 
         today = time.strftime("%Y-%m-%d", time.localtime(time.time()))
         self.filePath = dir + today + ".txt"
@@ -32,7 +28,6 @@ class UserItemPipeline(object):
     def process_item(self, item, spider):
         isSuccess = True
         isSuccess = self.write_item_file(self.filePath, item) and isSuccess
-
 
 
     def write_item_file(self, filePath, item):

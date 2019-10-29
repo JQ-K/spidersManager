@@ -20,7 +20,6 @@ NEWSPIDER_MODULE = 'KuaiKanManHua.spiders'
 
 # Obey robots.txt rules
 #ROBOTSTXT_OBEY = True
-ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -65,9 +64,10 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'KuaiKanManHua.pipelines.KuaikanmanhuaPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    #'KuaiKanManHua.pipelines.KuaikanmanhuaPipeline': 300,
+    'KuaiKanManHua.pipelines.UserItemPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

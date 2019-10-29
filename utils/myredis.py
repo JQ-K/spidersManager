@@ -2,17 +2,16 @@
 wrapper base on redis-py client code
 """
 import redis
-import configparser
-import os
-
+import  configparser
+import  os,sys
 
 class RedisClient(object):
-
+    
     def __init__(self, host, port, db=0, default_expire_time=None):
         self.db = db
         self.host = host
         self.port = port
-        self.default_expire_time = default_expire_time
+        self.default_expire_time = default_expire_time 
         self.client = redis.Redis(host, port, db)
 
     # @classmethod
@@ -24,41 +23,43 @@ class RedisClient(object):
     #     return cls(host, port, default_expire_time, db)
 
     @classmethod
-    def from_settings(cls, conf_dir):
-        conf_path = os.path.join(conf_dir, 'dbconf.ini')
+    def from_settings(cls):
+        current_path = os.path.dirname(os.path.realpath(__file__))
+        parent_path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+        conf_path = os.path.join(parent_path, 'conf\dbconf.ini')
         conf = configparser.ConfigParser()
         conf.read(conf_path)
         host = conf.get('redis', 'host')
         port = conf.get('redis', 'port')
         db = conf.get('redis', 'db')
         return cls(host, port, db)
-
+        
     def __str__(self):
-        return "redis client, connect to [%s:%s], db:%s, expire:%s" % \
-               (self.host, self.port, self.db, self.default_expire_time)
-
+        return "redis client, connect to [%s:%s], db:%s, expire:%s"%\
+            (self.host, self.port, self.db, self.default_expire_time)
+    
     def close(self):
         if self.client:
-            # self.client.flushdb()
+            #self.client.flushdb()
             self.client.connection_pool.disconnect()
         self.client = None
 
     def open(self):
-        self.close()
-        self.client = redis.Redis(host=self.host,
-                                  port=self.port, db=self.db)
-
+        self.close()    
+        self.client = redis.Redis(host=self.host, 
+            port=self.port, db=self.db)
+    
     def ttl(self, key):
         return self.client.ttl(key)
-
+        
     def dbsize(self):
         self.client.dbsize()
-
+        
     def flushdb(self):
         self.client.flushdb()
 
     def expire(self, key, expire_time=None):
-        # -1: never expire
+        #-1: never expire
         if expire_time is None:
             expire_time = self.default_expire_time
 
@@ -71,28 +72,28 @@ class RedisClient(object):
         else:
             self.client.set(key, value)
 
-        if update_expire_time:
+        if update_expire_time: 
             self.expire(key, expire_time)
 
     def get(self, key, expire_time=None, update_expire_time=False):
         if update_expire_time:
             self.expire(key, expire_time)
         return self.client.get(key)
-
+    
     def exists(self, key):
         return self.client.exists(key)
 
-    # following is dictionary data manipulate interface
+    #following is dictionary data manipulate interface
     def hgetall(self, key, expire_time=None, update_expire_time=False):
         if update_expire_time:
             self.expire(key, expire_time)
         return self.client.hgetall(key)
-
+    
     def hget(self, key, field, expire_time=None, update_expire_time=False):
         if update_expire_time:
             self.expire(key, expire_time)
         return self.client.hget(key, field)
-
+    
     def hset(self, key, field, value, expire_time=None, update_expire_time=True):
         self.client.hset(key, field, value)
         if update_expire_time:

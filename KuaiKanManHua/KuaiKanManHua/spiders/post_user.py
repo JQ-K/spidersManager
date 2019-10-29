@@ -1,17 +1,11 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
-import redis
 import time
-import sys
-import os
 
-sys.path.append(os.path.abspath('..'))
-from items import UserItem
-from conf.configure import *
-from utils.myredis import RedisClient
-#from KuaiKanManHua.conf.configure import *
-#from KuaiKanManHua.items import UserItem
+from KuaiKanManHua.items import UserItem
+from KuaiKanManHua.conf.configure import *
+from KuaiKanManHua.utils.myredis import RedisClient
 
 
 class PostUserSpider(scrapy.Spider):
@@ -32,36 +26,31 @@ class PostUserSpider(scrapy.Spider):
     }
 
 
-    def __init__(self, feedType=8, targetID=14, sinceID=0, maxUrlNum=100, waitSeconds=1, *args, **kwargs):
-        super(PostUserSpider, self).__init__(*args, **kwargs)
-        self.params = {
-            'feedType': int(feedType),
-            'targetID': int(targetID),
-            'sinceID': int(sinceID),
-            'maxUrlNum': int(maxUrlNum),
-            'waitSeconds': int(waitSeconds),
-        }
+    def __init__(self):
         self.spiderUrlNums = 0
         # connect redis
-        #self.pool = redis.ConnectionPool(host=redisHost, port=redisPort, db=redisDb)
-        #self.r = redis.Redis(connection_pool=self.pool)
+        self.redisClient = RedisClient.from_settings(DB_CONF_DIR)
+        print(REDIS_KEY['channel_conf'])
 
-        self.redisClient = RedisClient(REDIS_CONF['host'], REDIS_CONF['port'], REDIS_CONF['db'])
-
-        channelJsonStr = redisClient.get(REDIS_KEY['channel_conf'], -1)
+        channelJsonStr = self.redisClient.get(REDIS_KEY['channel_conf'], -1)
         self.channelDict = json.loads(channelJsonStr)
         print(self.channelDict)
 
 
     def start_requests(self):
-        yield scrapy.Request(
-            self.startUrl.format(self.params['feedType'], self.params['sinceID'], self.params['targetID']),
-            callback=self.parsePageJson, method='GET', headers=self.headers)
+        for value in self.channelDict.values():
+            feedType = value['feedType']
+            targetID = value['targetID']
+            yield scrapy.Request(self.startUrl.format(feedType, 0, targetID),
+                                 callback=self.parsePageJson, method='GET', headers=self.headers,
+                                 meta={'feedType': feedType, 'targetID': targetID})
 
 
     def parsePageJson(self, response):
         if response.status != 200:
             return
+        feedType = response.meta['feedType']
+        targetID = response.meta['targetID']
         rltJson = json.loads(response.text)
         since = rltJson['data']['since']
         infoList = rltJson['data']['universalModels']
@@ -96,16 +85,17 @@ class PostUserSpider(scrapy.Spider):
             item['sign_text'] = info[3]
             yield item
 
-        if (-1 != since) and (self.spiderUrlNums < self.params['maxUrlNum']):
+        if -1 != since:
             self.spiderUrlNums += 1
             if self.spiderUrlNums % 100 == 0:
                 time.sleep(5)
             yield scrapy.Request(
-                self.startUrl.format(self.params['feedType'], since, self.params['targetID']),
-                callback=self.parsePageJson, method='GET', headers=self.headers)
+                self.startUrl.format(feedType, since, targetID),
+                callback=self.parsePageJson, method='GET', headers=self.headers,
+                meta={'feedType': feedType, 'targetID': targetID})
 
 
     def close(self):
-        self.pool.disconnect()
+        self.redisClient.close()
 
 
