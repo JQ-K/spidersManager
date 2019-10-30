@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58252e76-1a40-419f-9f30-7a2224ee9d7e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../RongCloudChannel/.idea/RongCloudChannel.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/KuaiKanManHua.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/KuaiKanManHua.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KuaiKanManHua/spiders/reply_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiKanManHua/spiders/reply_user.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,7 +16,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/BaiJiaHao.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -41,7 +56,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="15" />
     <option name="y" value="219" />
     <option name="width" value="1890" />
@@ -58,23 +73,17 @@
           <expand>
             <path>
               <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KuaiKanManHua" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KuaiKanManHua" type="462c0819:PsiDirectoryNode" />
-              <item name="KuaiKanManHua" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KuaiKanManHua" type="462c0819:PsiDirectoryNode" />
-              <item name="KuaiKanManHua" type="462c0819:PsiDirectoryNode" />
-              <item name="conf" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KuaiKanManHua" type="462c0819:PsiDirectoryNode" />
-              <item name="KuaiKanManHua" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
               <item name="spiders" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -86,7 +95,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/KuaiKanManHua/test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RongCloudChannel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -169,9 +178,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27402702" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17950754" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -246,16 +256,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/spiders/reply_user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="116" column="41" lean-forward="true" selection-start-line="116" selection-start-column="41" selection-end-line="116" selection-end-column="41" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/KuaiKanManHua/spiders/post_user.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
@@ -263,6 +263,23 @@
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/spiders/reply_user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="83" column="33" selection-start-line="83" selection-start-column="33" selection-end-line="83" selection-end-column="33" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/BaiJiaHao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
         </state>
       </provider>
     </entry>

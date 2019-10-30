@@ -78,8 +78,10 @@ class ReplyUserSpider(scrapy.Spider):
         id = response.meta['id']
         rltJson = json.loads(response.text)
         sinceID = rltJson['data']['since']
-        yield scrapy.Request(self.userContentUrl.format(id, sinceID),
-                             callback=self.parsePageJson, method='GET', headers=self.headers, meta={'id': id})
+        if sinceID != -1:
+            yield scrapy.Request(self.userContentUrl.format(id, sinceID),
+                                 callback=self.parsePageJson, method='GET', headers=self.headers,
+                                 meta={'id': id})
         postIdList = []
         commentSrcList = rltJson['data']['universalModels']
         for commentSrc in commentSrcList:
