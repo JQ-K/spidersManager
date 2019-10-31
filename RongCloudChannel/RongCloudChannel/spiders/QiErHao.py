@@ -8,6 +8,11 @@ from RongCloudChannel.items import ContentItem
 
 class QierhaoSpider(scrapy.Spider):
     name = 'QiErHao'
+    #contentListStartUrl = "https://om.qq.com/article/list?index=1&category=&search=&source=&startDate=&endDate=&num=10&relogin=1"
+    #contentListNextUrl = "https://om.qq.com/article/list?category=&search=&source=&startDate=&endDate=&num=10&index=1&refreshField=2019-10-27+16%3A56%3A01&relogin=1"
+    #articleDetailUrl = "https://om.qq.com/article/detailArticleAnalysis?articleId=20191031A0EJOU00&article_type=0&titleType=0"
+    #videoDetailUrl = "https://om.qq.com/article/singleVideoStatistic?articleId=k3008b0he8e"
+
     articleStatisticUrl = "https://om.qq.com/mstatistic/statistic/ArticleReal?page={}&num=8&relogin=1"
     videoStatisticUrl = "https://om.qq.com/mstatistic/VideoData/MediaVideoList?limit=8&page={}&fields=2%7C3&source=0&relogin=1"
 
