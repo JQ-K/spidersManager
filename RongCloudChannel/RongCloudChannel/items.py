@@ -20,6 +20,7 @@ class ContentItem(scrapy.Item):
     id = scrapy.Field()
     content_link = scrapy.Field() #内容链接
     publish_time = scrapy.Field() #发布时间
+    publish_status = scrapy.Field() #发布状态
     audit_result = scrapy.Field() #审核结果
     read_count = scrapy.Field() #阅读数
     #play_count = scrapy.Field() #播放数

@@ -68,6 +68,7 @@ class BaijiahaoSpider(scrapy.Spider):
             contentItem['id'] = contentInfo['id']
             contentItem['content_link'] = contentInfo['url']
             contentItem['publish_time'] = contentInfo['publish_time']
+            contentItem['publish_status'] = contentInfo['status']
             contentItem['audit_result'] = contentInfo['audit_msg']
             contentItem['read_count'] = contentInfo['read_amount']
             contentItem['comment_count'] = contentInfo['comment_amount']
