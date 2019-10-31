@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="58252e76-1a40-419f-9f30-7a2224ee9d7e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/items.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/pipelines.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/BaiJiaHao.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/BaiJiaHao.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/QiErHao.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/QiErHao.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="234">
-              <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+              <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -104,7 +102,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="57" />
     <option name="y" value="70" />
     <option name="width" value="1890" />
@@ -301,7 +299,7 @@
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21207307" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21207307" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -312,7 +310,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.27886322" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.25754884" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -497,7 +495,7 @@
     <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
-          <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
         </state>
       </provider>
     </entry>
