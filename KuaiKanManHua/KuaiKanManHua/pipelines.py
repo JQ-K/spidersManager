@@ -29,6 +29,7 @@ class UserItemPipeline(object):
         isSuccess = True
         print(item)
         #isSuccess = self.write_item_file(self.filePath, item) and isSuccess
+        return item
 
 
     def write_item_file(self, filePath, item):

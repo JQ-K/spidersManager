@@ -14,6 +14,9 @@ class RongcloudchannelItem(scrapy.Item):
     pass
 
 class ContentItem(scrapy.Item):
+    channel_name = scrapy.Field() #百家号、企鹅号。。。
+    record_class = scrapy.Field() #content_info
+    crawl_time = scrapy.Field() #采集时间
     id = scrapy.Field()
     content_link = scrapy.Field() #内容链接
     publish_time = scrapy.Field() #发布时间
@@ -30,6 +33,9 @@ class ContentItem(scrapy.Item):
 
 
 class ChannelItem(scrapy.Item):
+    channel_name = scrapy.Field() #百家号、企鹅号
+    record_class = scrapy.Field() #channel_info
+    crawl_time = scrapy.Field() #采集时间
     new_visit_count = scrapy.Field() #新增访问人数
     total_visit_count = scrapy.Field() #累计访问人数
     new_subscribe_count = scrapy.Field() #新增订阅人数
