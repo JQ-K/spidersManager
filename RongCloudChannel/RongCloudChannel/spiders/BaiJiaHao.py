@@ -4,7 +4,7 @@ import json
 import time
 
 from RongCloudChannel.items import ContentItem
-from RongCloudChannel.items import ChannelItem
+from RongCloudChannel.items import AccountItem
 
 class BaijiahaoSpider(scrapy.Spider):
     name = 'BaiJiaHao'
@@ -40,13 +40,14 @@ class BaijiahaoSpider(scrapy.Spider):
             print('get url error: ' + response.url)
             return
         rltJson = json.loads(response.text)
-        channelItem = ChannelItem()
-        channelItem['channel_name'] = "百家号"
-        channelItem['record_class'] = "channel_info"
-        channelItem['crawl_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        channelItem['new_fans_count'] = rltJson['data']['new_fans']['new_fans_count']
-        channelItem['cancel_fans_count'] = rltJson['data']['rm_fans']['rm_fans_count']
-        yield channelItem
+        accountItem = AccountItem()
+        accountItem['channel_id'] = "百家号"
+        accountItem['account_id'] = "13656689260"   #######test
+        accountItem['record_class'] = "channel_info"
+        accountItem['crawl_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        accountItem['new_fans_count'] = rltJson['data']['new_fans']['new_fans_count']
+        accountItem['cancel_fans_count'] = rltJson['data']['rm_fans']['rm_fans_count']
+        yield accountItem
 
     def parseContentPageJson(self, response):
         if response.status != 200:
@@ -62,7 +63,8 @@ class BaijiahaoSpider(scrapy.Spider):
         #print(len(contentList))
         for contentInfo in contentList:
             contentItem = ContentItem()
-            contentItem['channel_name'] = "百家号"
+            contentItem['channel_id'] = "百家号"
+            contentItem['account_id'] = "13656689260"  #######test
             contentItem['record_class'] = "content_info"
             contentItem['crawl_time'] = curTime
             contentItem['id'] = contentInfo['id']

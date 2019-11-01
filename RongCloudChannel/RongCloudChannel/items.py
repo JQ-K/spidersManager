@@ -14,7 +14,8 @@ class RongcloudchannelItem(scrapy.Item):
     pass
 
 class ContentItem(scrapy.Item):
-    channel_name = scrapy.Field() #百家号、企鹅号。。。
+    channel_id = scrapy.Field() #百家号、企鹅号。。。
+    account_id = scrapy.Field() #账号
     record_class = scrapy.Field() #content_info
     crawl_time = scrapy.Field() #采集时间
     id = scrapy.Field()
@@ -33,8 +34,9 @@ class ContentItem(scrapy.Item):
     finish_rate = scrapy.Field() #阅读/播放完成率，不抓
 
 
-class ChannelItem(scrapy.Item):
-    channel_name = scrapy.Field() #百家号、企鹅号
+class AccountItem(scrapy.Item):
+    channel_id = scrapy.Field() #百家号、企鹅号
+    account_id = scrapy.Field() #账号
     record_class = scrapy.Field() #channel_info
     crawl_time = scrapy.Field() #采集时间
     new_visit_count = scrapy.Field() #新增访问人数
