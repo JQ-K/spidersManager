@@ -16,4 +16,9 @@ class RongcloudchannelPipeline(object):
             f = open('D:/py_workspace/spidersManager/RongCloudChannel/RongCloudChannel/test/baijiahao.txt', "a+", encoding="utf-8")
             f.write(json.dumps(dict(item)) + '\n')
             f.close()'''
+
+        '''if item['channel_id'] == "企鹅号":
+                    f = open('D:/py_workspace/spidersManager/RongCloudChannel/RongCloudChannel/test/qierhao.txt', "a+", encoding="utf-8")
+                    f.write(json.dumps(dict(item)) + '\n')
+                    f.close()'''
         return item
