@@ -58,6 +58,7 @@ class QierhaoSpider(scrapy.Spider):
             contentItem['record_class'] = "content_info"
             contentItem['crawl_time'] = curTime
             contentItem['id'] = contentInfo['article_id']
+            contentItem['title'] = contentInfo['title']
             contentItem['content_link'] = contentInfo['url']
             contentItem['publish_time'] = contentInfo['pub_time']
             contentItem['comment_count'] = contentInfo['commentnum']

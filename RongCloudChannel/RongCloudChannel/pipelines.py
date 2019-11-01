@@ -6,8 +6,10 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 import json
+import request
 
 class RongcloudchannelPipeline(object):
+    api = "http://beta.rongcloud.zhanqi.tv/api/mcloud/stat/partner/sync_statistics"
     def __init__(self):
         pass
     def process_item(self, item, spider):
@@ -21,4 +23,6 @@ class RongcloudchannelPipeline(object):
                     f = open('D:/py_workspace/spidersManager/RongCloudChannel/RongCloudChannel/test/qierhao.txt', "a+", encoding="utf-8")
                     f.write(json.dumps(dict(item)) + '\n')
                     f.close()'''
+
+        #request.post(self.api, json=)
         return item

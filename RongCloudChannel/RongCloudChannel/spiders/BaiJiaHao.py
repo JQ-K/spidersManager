@@ -68,9 +68,9 @@ class BaijiahaoSpider(scrapy.Spider):
             contentItem['record_class'] = "content_info"
             contentItem['crawl_time'] = curTime
             contentItem['id'] = contentInfo['id']
+            contentItem['title'] = contentInfo['title']
             contentItem['content_link'] = contentInfo['url']
             contentItem['publish_time'] = contentInfo['publish_time']
-            contentItem['publish_status'] = contentInfo['status']
             contentItem['audit_result'] = contentInfo['audit_msg']
             contentItem['read_count'] = contentInfo['read_amount']
             contentItem['comment_count'] = contentInfo['comment_amount']
@@ -79,6 +79,11 @@ class BaijiahaoSpider(scrapy.Spider):
             contentItem['recommend_count'] = contentInfo['rec_amount']
             contentItem['like_count'] = contentInfo['like_amount']
             #print(contentItem)
+            status = contentInfo['status']
+            if status == 'publish':
+                contentItem['publish_status'] = 3
+            if status == 'rejected':
+                contentItem['publish_status'] = 2
             yield contentItem
 
         self.currentPage += 1
