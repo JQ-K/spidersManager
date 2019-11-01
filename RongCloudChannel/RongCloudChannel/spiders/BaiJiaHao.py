@@ -59,7 +59,7 @@ class BaijiahaoSpider(scrapy.Spider):
             self.beginFlag = False
 
         contentList = rltJson['data']['list']
-        curTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        curTime = int(time.time())
         #print(len(contentList))
         for contentInfo in contentList:
             contentItem = ContentItem()
