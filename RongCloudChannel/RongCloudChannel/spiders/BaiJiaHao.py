@@ -60,9 +60,7 @@ class BaijiahaoSpider(scrapy.Spider):
             self.beginFlag = False
 
         contentList = rltJson['data']['list']
-        #curTime = int(time.time())
         curTime = dateUtil.getCurDate()
-        #print(len(contentList))
         for contentInfo in contentList:
             contentItem = ContentItem()
             contentItem['channel_id'] = "百家号"
