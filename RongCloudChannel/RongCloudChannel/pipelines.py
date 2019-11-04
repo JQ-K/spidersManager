@@ -28,7 +28,7 @@ class RongcloudchannelPipeline(object):
         if item['record_class'] == 'channel_info':
             if item['channel_id'] == "百家号":
                 self.resultDict['code'] = item['channel_id']
-                self.resultDict['nfs'] = item['new_fans_count']
+                self.resultDict['nfs'] = item['new_subscribe_count']
                 self.resultDict['cfs'] = item['cancel_fans_count']
             if item['channel_id'] == "企鹅号":
                 self.resultDict['code'] = item['channel_id']
@@ -49,6 +49,16 @@ class RongcloudchannelPipeline(object):
                 tempDict['rc'] = item['recommend_count']
                 tempDict['dc'] = item['like_count']
                 self.listItem.append(tempDict)
+            if item['channel_id'] == "企鹅号":
+                tempDict = {}
+                tempDict['cn'] = item['channel_id']
+                tempDict['sa'] = item['crawl_time']
+                tempDict['tid'] = item['id']
+                tempDict['t'] = item['title']
+                tempDict['lk'] = item['content_link']
+                tempDict['pt'] = item['publish_time']
+                tempDict['vc'] = item['read_count']
+                tempDict['c'] = item['comment_count']
         return item
 
     def close_spider(self, spider):

@@ -50,7 +50,8 @@ class QierhaoSpider(scrapy.Spider):
             self.beginFlag = False
 
         contentList = rltJson['data']['articles']
-        curTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        #curTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        curTime = int(time.time())
         for contentInfo in contentList:
             contentItem = ContentItem()
             contentItem['channel_id'] = "企鹅号"

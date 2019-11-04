@@ -45,7 +45,7 @@ class BaijiahaoSpider(scrapy.Spider):
         accountItem['account_id'] = "13656689260"   #######test
         accountItem['record_class'] = "channel_info"
         accountItem['crawl_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        accountItem['new_fans_count'] = rltJson['data']['new_fans']['new_fans_count']
+        accountItem['new_subscribe_count'] = rltJson['data']['new_fans']['new_fans_count']
         accountItem['cancel_fans_count'] = rltJson['data']['rm_fans']['rm_fans_count']
         yield accountItem
 
