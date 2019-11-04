@@ -5,6 +5,7 @@ import time
 import math
 
 from RongCloudChannel.items import ContentItem
+from RongCloudChannel.utils import dateUtil
 
 
 class QierhaoSpider(scrapy.Spider):
@@ -51,7 +52,8 @@ class QierhaoSpider(scrapy.Spider):
 
         contentList = rltJson['data']['articles']
         #curTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        curTime = int(time.time())
+        #curTime = int(time.time())
+        curTime = dateUtil.getCurDate()
         for contentInfo in contentList:
             contentItem = ContentItem()
             contentItem['channel_id'] = "企鹅号"

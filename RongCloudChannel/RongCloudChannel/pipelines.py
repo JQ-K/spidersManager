@@ -62,7 +62,7 @@ class RongcloudchannelPipeline(object):
         return item
 
     def close_spider(self, spider):
-        self.resultDict['s'] = self.listItem
+        '''self.resultDict['s'] = self.listItem
         message = json.dumps(self.resultDict)
         print(message)
-        requests.post(self.api, message)
+        requests.post(self.api, message)'''

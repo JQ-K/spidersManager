@@ -5,6 +5,7 @@ import time
 
 from RongCloudChannel.items import ContentItem
 from RongCloudChannel.items import AccountItem
+from RongCloudChannel.utils import dateUtil
 
 class BaijiahaoSpider(scrapy.Spider):
     name = 'BaiJiaHao'
@@ -59,7 +60,8 @@ class BaijiahaoSpider(scrapy.Spider):
             self.beginFlag = False
 
         contentList = rltJson['data']['list']
-        curTime = int(time.time())
+        #curTime = int(time.time())
+        curTime = dateUtil.getCurDate()
         #print(len(contentList))
         for contentInfo in contentList:
             contentItem = ContentItem()
