@@ -44,55 +44,50 @@ class RongcloudchannelPipeline(object):
 
 
     def updateChannelInfo(self, item):
-        if item['channel_id'] == "百家号":
+        if 'channel_id' in item:
             self.resultDict['code'] = item['channel_id']
+        if 'new_visit_count' in item:
+            self.resultDict['ngc'] = item['new_visit_count']
+        if 'total_visit_count' in item:
+            self.resultDict['tgc'] = item['total_visit_count']
+        if 'new_subscribe_count' in item:
             self.resultDict['nfs'] = item['new_subscribe_count']
+        if 'total_subscribe_count' in item:
+            self.resultDict['fs'] = item['total_subscribe_count']
+        if 'cancel_fans_count' in item:
             self.resultDict['cfs'] = item['cancel_fans_count']
-        '''if item['channel_id'] == "企鹅号":
-            self.resultDict['code'] = item['channel_id']'''
 
 
     def updateContentInfo(self, item):
         tempDict = {}
-
-        if item['channel_id'] == "百家号":
+        if 'channel_id' in item:
             tempDict['cn'] = item['channel_id']
+        if 'crawl_time' in item:
             tempDict['sa'] = item['crawl_time']
+        if 'id' in item:
             tempDict['tid'] = item['id']
+        if 'title' in item:
             tempDict['t'] = item['title']
+        if 'content_link' in item:
             tempDict['lk'] = item['content_link']
+        if 'publish_time' in item:
             tempDict['pt'] = item['publish_time']
+        if 'publish_status' in item:
             tempDict['s'] = str(item['publish_status'])
+        if 'read_count' in item:
             tempDict['vc'] = item['read_count']
+        if 'comment_count' in item:
             tempDict['c'] = item['comment_count']
+        if 'share_count' in item:
             tempDict['fwd'] = item['share_count']
+        if 'collect_count' in item:
             tempDict['fav'] = item['collect_count']
+        if 'recommend_count' in item:
             tempDict['rc'] = item['recommend_count']
+        if 'like_count' in item:
             tempDict['dc'] = item['like_count']
-
-        if item['channel_id'] == "企鹅号":
-            tempDict['cn'] = item['channel_id']
-            tempDict['sa'] = item['crawl_time']
-            tempDict['tid'] = item['id']
-            tempDict['t'] = item['title']
-            tempDict['lk'] = item['content_link']
-            tempDict['pt'] = item['publish_time']
-            tempDict['vc'] = item['read_count']
-            tempDict['c'] = item['comment_count']
-
-        if item['channel_id'] == "趣头条":
-            tempDict['cn'] = item['channel_id']
-            tempDict['sa'] = item['crawl_time']
-            tempDict['tid'] = item['id']
-            tempDict['t'] = item['title']
-            tempDict['lk'] = item['content_link']
-            tempDict['pt'] = item['publish_time']
-            tempDict['s'] = str(item['publish_status'])
-            tempDict['vc'] = item['read_count']
-            tempDict['c'] = item['comment_count']
-            tempDict['fwd'] = item['share_count']
-            tempDict['fav'] = item['collect_count']
-            tempDict['rc'] = item['recommend_count']
+        if 'download_count' in item:
+            tempDict['dwn'] = item['download_count']
 
         self.listItem.append(tempDict)
 

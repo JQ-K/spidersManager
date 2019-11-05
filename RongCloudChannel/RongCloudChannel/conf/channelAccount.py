@@ -12,7 +12,7 @@ account = {
         "zjtmkj@8531.cn": "zswh2019",
     },
     "美拍": { #https://www.meipai.com/
-        "13918011686": "123456jj",
+        "13918011686": {"password": "123456jj", "userid": "1707115686"},
     },
     "人人": { #https://rr.tv/new/#/sign
         "15802103561": "P@ssword521",
