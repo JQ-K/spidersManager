@@ -48,8 +48,8 @@ class RongcloudchannelPipeline(object):
             self.resultDict['code'] = item['channel_id']
             self.resultDict['nfs'] = item['new_subscribe_count']
             self.resultDict['cfs'] = item['cancel_fans_count']
-        if item['channel_id'] == "企鹅号":
-            self.resultDict['code'] = item['channel_id']
+        '''if item['channel_id'] == "企鹅号":
+            self.resultDict['code'] = item['channel_id']'''
 
 
     def updateContentInfo(self, item):

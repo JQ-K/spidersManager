@@ -125,5 +125,21 @@ class QutoutiaoSpider(scrapy.Spider):
             contentItem['collect_count'] = contentInfo['fav_num']
             contentItem['recommend_count'] = contentInfo['rec_show_pv']
             status = int(contentInfo['status'])  # 趣头条：0-草稿；2-待审核；4-已发布；3-审核失败；5-回收站
-            ############....
-            
+
+            if status == 0:
+                contentItem['publish_status'] = 0
+            if status == 2:
+                contentItem['publish_status'] = 1
+            if status == 4:
+                contentItem['publish_status'] = 3
+            if status == 3:
+                contentItem['publish_status'] = 2
+            if status == 5:
+                contentItem['publish_status'] = 9
+            yield contentItem
+
+        self.videoCurrentPage += 1
+        if self.videoCurrentPage <= self.videoTotalPage:
+            yield scrapy.Request(self.videoUrl.format(self.videoCurrentPage, self.loginInfo['data']['token'], self.dtu),
+                                 method='GET', callback=self.parseVideoPageJson)
+
