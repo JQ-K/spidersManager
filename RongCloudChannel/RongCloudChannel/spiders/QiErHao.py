@@ -24,7 +24,8 @@ class QierhaoSpider(scrapy.Spider):
     }
     cookies = {
         'userid': '15485831',
-        'omaccesstoken': 'a738767a061f5fb8761e1ef534e23f0f72c19e040b5592a31047508627ff89b52255f0c248e1bf7c6f31631b0e54f32b8023d33cffad67887af524c1323b8f6d2fbe4a77a5399acbbd143eb5390eac30'
+        #'omaccesstoken': 'a738767a061f5fb8761e1ef534e23f0f72c19e040b5592a31047508627ff89b52255f0c248e1bf7c6f31631b0e54f32b8023d33cffad67887af524c1323b8f6d2fbe4a77a5399acbbd143eb5390eac30',
+        'omaccesstoken': '473ed3861a3b43bfe398a0be7d67f671799e7bb5b7f6af8bb0c72f0eff18f95ee22a2b0b4389ef09f5b28c912a065db7cf4fbc27d8ab84c078650e12f9821dcb144986b32e425618cf7aca2c920a9364',
     }
 
 
@@ -51,8 +52,6 @@ class QierhaoSpider(scrapy.Spider):
             self.beginFlag = False
 
         contentList = rltJson['data']['articles']
-        #curTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        #curTime = int(time.time())
         curTime = dateUtil.getCurDate()
         for contentInfo in contentList:
             contentItem = ContentItem()
