@@ -4,6 +4,7 @@ import scrapy
 
 class RenrenSpider(scrapy.Spider):
     name = 'RenRen'
+    channel_id = "人人"
     allowed_domains = ['www.baidu.com']
     start_urls = ['http://www.baidu.com/']
 

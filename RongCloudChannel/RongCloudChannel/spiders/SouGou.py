@@ -9,6 +9,7 @@ from RongCloudChannel.conf.channelAccount import *
 from RongCloudChannel.items import ContentItem
 from RongCloudChannel.items import AccountItem
 from RongCloudChannel.utils import dateUtil
+from RongCloudChannel.conf.contentStatusMapping import *
 
 class SougouSpider(scrapy.Spider):
     name = 'SouGou'
@@ -106,13 +107,13 @@ class SougouSpider(scrapy.Spider):
             contentItem['recommend_count'] = contentInfo['recommendedNum']
             status = int(contentInfo['status'])  # 搜狗：1-已发布；40-未通过；134-草稿
 
-            if status == 1:
+            contentItem['publish_status'] = publicContentStatus[channelContentStatus[self.channel_id][status]]
+            '''if status == 1:
                 contentItem['publish_status'] = 3
             if status == 40:
                 contentItem['publish_status'] = 2
             if status == 134:
-                contentItem['publish_status'] = 0
-            #print(contentItem)
+                contentItem['publish_status'] = 0'''
             yield contentItem
 
         self.articleCurrentPage += 1
