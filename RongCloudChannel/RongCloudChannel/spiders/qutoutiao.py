@@ -6,6 +6,7 @@ from scrapy.http import FormRequest
 from RongCloudChannel.conf.channelAccount import *
 from RongCloudChannel.items import ContentItem
 from RongCloudChannel.utils import dateUtil
+from RongCloudChannel.conf.contentStatusMapping import *
 
 
 class QutoutiaoSpider(scrapy.Spider):
@@ -80,7 +81,9 @@ class QutoutiaoSpider(scrapy.Spider):
             contentItem['recommend_count'] = contentInfo['rec_show_pv']
             status = int(contentInfo['status']) #趣头条：1-草稿；5-待审核；2-已发布；3-审核失败；4-回收站
 
-            if status == 1:
+            contentItem['publish_status'] = publicContentStatus[channelContentStatus[self.channel_id]['article'][status]]
+
+            '''if status == 1:
                 contentItem['publish_status'] = 0
             if status == 5:
                 contentItem['publish_status'] = 1
@@ -89,7 +92,7 @@ class QutoutiaoSpider(scrapy.Spider):
             if status == 3:
                 contentItem['publish_status'] = 2
             if status == 4:
-                contentItem['publish_status'] = 9
+                contentItem['publish_status'] = 9'''
             yield contentItem
 
         self.articleCurrentPage += 1
@@ -126,7 +129,11 @@ class QutoutiaoSpider(scrapy.Spider):
             contentItem['recommend_count'] = contentInfo['rec_show_pv']
             status = int(contentInfo['status'])  # 趣头条：0-草稿；2-待审核；4-已发布；3-审核失败；5-回收站
 
-            if status == 0:
+            #contentItem['publish_status'] = publicContentStatus[channelContentStatus[self.channel_id][status]]
+
+            contentItem['publish_status'] = publicContentStatus[channelContentStatus[self.channel_id]['video'][status]]
+
+            '''if status == 0:
                 contentItem['publish_status'] = 0
             if status == 2:
                 contentItem['publish_status'] = 1
@@ -135,7 +142,7 @@ class QutoutiaoSpider(scrapy.Spider):
             if status == 3:
                 contentItem['publish_status'] = 2
             if status == 5:
-                contentItem['publish_status'] = 9
+                contentItem['publish_status'] = 9'''
             yield contentItem
 
         self.videoCurrentPage += 1

@@ -6,6 +6,7 @@ import time
 from RongCloudChannel.items import ContentItem
 from RongCloudChannel.items import AccountItem
 from RongCloudChannel.utils import dateUtil
+from RongCloudChannel.conf.contentStatusMapping import *
 
 class BaijiahaoSpider(scrapy.Spider):
     name = 'BaiJiaHao'
@@ -78,12 +79,13 @@ class BaijiahaoSpider(scrapy.Spider):
             contentItem['collect_count'] = contentInfo['collection_amount']
             contentItem['recommend_count'] = contentInfo['rec_amount']
             contentItem['like_count'] = contentInfo['like_amount']
-            #print(contentItem)
             status = contentInfo['status']
-            if status == 'publish':
+
+            contentItem['publish_status'] = publicContentStatus[channelContentStatus[self.channel_id][status]]
+            '''if status == 'publish':
                 contentItem['publish_status'] = 3
             if status == 'rejected':
-                contentItem['publish_status'] = 2
+                contentItem['publish_status'] = 2'''
             yield contentItem
 
         self.currentPage += 1
