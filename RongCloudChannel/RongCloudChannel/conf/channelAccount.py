@@ -19,5 +19,12 @@ account = {
     },
     "搜狗": { #http://mp.sogou.com/
         "shanghaiceno@126.com": "rbe-JrWpY6",
+    },
+    "浙江新闻": { #http://mcn.8531.cn/
+        #"13034656447": "8531test",
+        "起航号官方运营号": "zjxw12345",
+    },
+    "一点资讯": {
+
     }
 }
