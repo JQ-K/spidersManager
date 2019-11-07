@@ -90,4 +90,4 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 
-HTTPERROR_ALLOWED_CODES = [400,]
+#HTTPERROR_ALLOWED_CODES = [400,]

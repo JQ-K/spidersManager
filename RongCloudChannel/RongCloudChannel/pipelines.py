@@ -8,12 +8,12 @@
 import json
 import requests
 
+from RongCloudChannel.conf.configure import *
+
 class RongcloudchannelPipeline(object):
 
-    api = "http://beta.rongcloud.zhanqi.tv/api/mcloud/stat/partner/sync_statistics"
-    headers = {
-        'content-type': 'application/json'
-    }
+    api = POST_CONF['url']
+    headers = POST_CONF['headers']
 
     def __init__(self):
         self.resultDict = {}
@@ -37,8 +37,7 @@ class RongcloudchannelPipeline(object):
 
 
     def writeItemToTxt(self, item):
-        f = open('D:/py_workspace/spidersManager/RongCloudChannel/RongCloudChannel/test/{}.txt'.format(item['channel_id']),
-                 "a+", encoding="utf-8")
+        f = open(ITEM_FILE_PATH + '{}.txt'.format(item['channel_id']), "a+", encoding="utf-8")
         f.write(json.dumps(dict(item)) + '\n')
         f.close()
 

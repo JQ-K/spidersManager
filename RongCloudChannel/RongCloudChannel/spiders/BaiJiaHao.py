@@ -10,6 +10,7 @@ from RongCloudChannel.conf.contentStatusMapping import *
 
 class BaijiahaoSpider(scrapy.Spider):
     name = 'BaiJiaHao'
+    channel_id = "百家号"
     contentStartUrl = "https://baijiahao.baidu.com/builder/article/lists?type=&collection=&pageSize=10&currentPage={}&search=&app_id=1639272210762362&dynamic=1"
     fansInfoUrl = "https://baijiahao.baidu.com/builder/author/statistic/getFansBasicInfo"
 
@@ -43,8 +44,8 @@ class BaijiahaoSpider(scrapy.Spider):
             return
         rltJson = json.loads(response.text)
         accountItem = AccountItem()
-        accountItem['channel_id'] = "百家号"
-        accountItem['account_id'] = "13656689260"   #######test
+        accountItem['channel_id'] = self.channel_id
+        #accountItem['account_id'] = "13656689260"   #######test
         accountItem['record_class'] = "channel_info"
         accountItem['crawl_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         accountItem['new_subscribe_count'] = rltJson['data']['new_fans']['new_fans_count']
@@ -64,8 +65,8 @@ class BaijiahaoSpider(scrapy.Spider):
         curTime = dateUtil.getCurDate()
         for contentInfo in contentList:
             contentItem = ContentItem()
-            contentItem['channel_id'] = "百家号"
-            contentItem['account_id'] = "13656689260"  #######test
+            contentItem['channel_id'] = self.channel_id
+            #contentItem['account_id'] = "13656689260"  #######test
             contentItem['record_class'] = "content_info"
             contentItem['crawl_time'] = curTime
             contentItem['id'] = contentInfo['id']

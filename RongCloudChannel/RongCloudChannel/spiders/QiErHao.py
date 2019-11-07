@@ -10,6 +10,7 @@ from RongCloudChannel.utils import dateUtil
 
 class QierhaoSpider(scrapy.Spider):
     name = 'QiErHao'
+    channel_id = '企鹅号'
     contentListStartUrl = "https://om.qq.com/article/list?index={}&category=&search=&source=&startDate=&endDate=&num=10&relogin=1"
     articleDetailUrl = "https://om.qq.com/mstatistic/statistic/SignalArticle?article={}&channel=0&titleType=0&relogin=1"
     videoDetailUrl = "https://om.qq.com/mstatistic/VideoData/VideoRealStatis?vid={}&fields=2%7C7&source=0&relogin=1"
@@ -55,8 +56,8 @@ class QierhaoSpider(scrapy.Spider):
         curTime = dateUtil.getCurDate()
         for contentInfo in contentList:
             contentItem = ContentItem()
-            contentItem['channel_id'] = "企鹅号"
-            contentItem['account_id'] = "2991941540"  #######test
+            contentItem['channel_id'] = self.channel_id
+            #contentItem['account_id'] = "2991941540"  #######test
             contentItem['record_class'] = "content_info"
             contentItem['crawl_time'] = curTime
             contentItem['id'] = contentInfo['article_id']
