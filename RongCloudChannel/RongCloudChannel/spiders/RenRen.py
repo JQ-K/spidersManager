@@ -31,7 +31,7 @@ class RenrenSpider(scrapy.Spider):
             return
         rltJson = json.loads(response.text)
         token = rltJson['data']['token']
-        print(token)
+        #print(token)
         yield scrapy.Request(self.videoUrl, method='GET', callback=self.parseVideoPageJson,
                              headers={'token':token})
 

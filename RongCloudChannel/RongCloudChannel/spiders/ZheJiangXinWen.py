@@ -128,7 +128,7 @@ class ZhejiangxinwenSpider(scrapy.Spider):
                                         'currPage': str(self.articleAnalysisCurPage), 'pageSize': '12'},
                               callback=self.parseArticleAnalysisPage, headers=self.headers, cookies=self.cookies)
         else:
-            print(self.articleAnalysisDict)
+            #print(self.articleAnalysisDict)
             yield FormRequest(self.fansAnalysisUrl, method='POST',
                               formdata={'days': '1', 'channelId': '1'}, callback=self.parseChannelPage,
                               headers=self.headers, cookies=self.cookies)

@@ -23,8 +23,8 @@ class RongcloudchannelPipeline(object):
 
 
     def process_item(self, item, spider):
-        print(json.dumps(dict(item)))
-        self.writeItemToTxt(item)
+        #print(json.dumps(dict(item)))
+        #self.writeItemToTxt(item)
 
         if item['record_class'] == 'channel_info':
             self.updateChannelInfo(item)
@@ -103,7 +103,7 @@ class RongcloudchannelPipeline(object):
             self.resultDict['appId'] = APP_ID
             self.resultDict['timestamp'] = curTimeStamp
             message = json.dumps(self.resultDict)
-            print(message)
+            #print(message)
             response = requests.post(self.api, message, headers=self.headers)
             print(response.text)
             self.listItem.clear()

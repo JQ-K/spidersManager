@@ -54,7 +54,7 @@ class SougouSpider(scrapy.Spider):
                     val = curElem[index+1:]
                     if key in self.cookies.keys():
                         self.cookies[key] = val
-        print(self.cookies)
+        #print(self.cookies)
 
         yield scrapy.Request(self.fansAnalysisUrl.format(dateUtil.getYesterday()),
                              method='GET', callback=self.parseFansAnalysisPageJson, cookies=self.cookies, headers=self.headers)
