@@ -6,9 +6,11 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 import json
+import time
 import requests
 
 from RongCloudChannel.conf.configure import *
+from RongCloudChannel.utils.pwdUtil import *
 
 class RongcloudchannelPipeline(object):
 
@@ -95,10 +97,15 @@ class RongcloudchannelPipeline(object):
         if len(self.listItem) > 0:
             if "code" not in self.resultDict:
                 self.resultDict['code'] = self.listItem[0]['cn']
+            curTimeStamp = str(int(time.time())*1000)
+            self.resultDict['k'] = md5(APP_ID + curTimeStamp + SECRET)
             self.resultDict['s'] = self.listItem
+            self.resultDict['appId'] = APP_ID
+            self.resultDict['timestamp'] = curTimeStamp
             message = json.dumps(self.resultDict)
             print(message)
-            requests.post(self.api, message, headers=self.headers)
+            response = requests.post(self.api, message, headers=self.headers)
+            print(response.text)
             self.listItem.clear()
 
 

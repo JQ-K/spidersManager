@@ -22,12 +22,12 @@ class ZhejiangxinwenSpider(scrapy.Spider):
     articleAnalysisDict = {}
 
     headers = {
-        'requestToken': '50650a2f-15b6-4fb4-be48-d059504a8026',
+        'requestToken': '5b425da2-9389-4c4c-9611-69c18b7f6527',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36',
     }
 
     cookies = {
-        'MCNWEBJSESSIONID': 'daf46877-8e63-4683-9ce1-3b724abd7fc4'
+        'MCNWEBJSESSIONID': 'f88f849e-d00a-4fb6-83c8-eb1fa156ee3d'
     }
 
     def __init__(self):
