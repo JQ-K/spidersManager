@@ -21,6 +21,7 @@ class RenrenSpider(scrapy.Spider):
     def start_requests(self):
         for user, password in account[self.channel_id].items():
             formData = {"mobile": user, "password": pwdUtil.md5(password)}
+            time.sleep(3)
             yield FormRequest(self.loginUrl, method='POST',
                               formdata=formData, callback=self.parseLoginPage)
 
@@ -32,6 +33,7 @@ class RenrenSpider(scrapy.Spider):
         rltJson = json.loads(response.text)
         token = rltJson['data']['token']
         #print(token)
+        time.sleep(5)
         yield scrapy.Request(self.videoUrl, method='GET', callback=self.parseVideoPageJson,
                              headers={'token':token})
 

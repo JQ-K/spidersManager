@@ -36,6 +36,7 @@ class SougouSpider(scrapy.Spider):
     def start_requests(self):
         for user, password in account[self.channel_id].items():
             formData = {"email": user, "pwd": password}
+            time.sleep(3)
             yield FormRequest(self.loginUrl, method='POST',
                               formdata=formData, callback=self.parseLoginPage)
 
@@ -55,10 +56,10 @@ class SougouSpider(scrapy.Spider):
                     if key in self.cookies.keys():
                         self.cookies[key] = val
         #print(self.cookies)
-
+        time.sleep(5)
         yield scrapy.Request(self.fansAnalysisUrl.format(dateUtil.getYesterday()),
                              method='GET', callback=self.parseFansAnalysisPageJson, cookies=self.cookies, headers=self.headers)
-
+        time.sleep(5)
         yield scrapy.Request(self.articleUrl.format(self.articleCurrentPage),
                              method='GET', callback=self.parseArticlePageJson, cookies=self.cookies, headers=self.headers)
 
@@ -118,6 +119,7 @@ class SougouSpider(scrapy.Spider):
 
         self.articleCurrentPage += 1
         if self.articleCurrentPage <= self.articleTotalPage:
+            time.sleep(5)
             yield scrapy.Request(self.articleUrl.format(self.articleCurrentPage),
                                  method='GET', callback=self.parseArticlePageJson, cookies=self.cookies,
                                  headers=self.headers)

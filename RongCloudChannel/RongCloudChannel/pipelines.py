@@ -24,7 +24,7 @@ class RongcloudchannelPipeline(object):
 
     def process_item(self, item, spider):
         #print(json.dumps(dict(item)))
-        #self.writeItemToTxt(item)
+        self.writeItemToTxt(item)
 
         if item['record_class'] == 'channel_info':
             self.updateChannelInfo(item)
@@ -48,15 +48,15 @@ class RongcloudchannelPipeline(object):
         if 'channel_id' in item:
             self.resultDict['code'] = item['channel_id']
         if 'new_visit_count' in item:
-            self.resultDict['ngc'] = item['new_visit_count']
+            self.resultDict['ngc'] = self.getIntValue(item['new_visit_count'])
         if 'total_visit_count' in item:
-            self.resultDict['tgc'] = item['total_visit_count']
+            self.resultDict['tgc'] = self.getIntValue(item['total_visit_count'])
         if 'new_subscribe_count' in item:
-            self.resultDict['nfs'] = item['new_subscribe_count']
+            self.resultDict['nfs'] = self.getIntValue(item['new_subscribe_count'])
         if 'total_subscribe_count' in item:
-            self.resultDict['fs'] = item['total_subscribe_count']
+            self.resultDict['fs'] = self.getIntValue(item['total_subscribe_count'])
         if 'cancel_fans_count' in item:
-            self.resultDict['cfs'] = item['cancel_fans_count']
+            self.resultDict['cfs'] = self.getIntValue(item['cancel_fans_count'])
 
 
     def updateContentInfo(self, item):
@@ -66,31 +66,39 @@ class RongcloudchannelPipeline(object):
         if 'crawl_time' in item:
             tempDict['sa'] = item['crawl_time']
         if 'id' in item:
-            tempDict['tid'] = item['id']
+            tempDict['tid'] = str(item['id'])
         if 'title' in item:
-            tempDict['t'] = item['title']
+            tempDict['t'] = str(item['title'])
         if 'content_link' in item:
-            tempDict['lk'] = item['content_link']
+            tempDict['lk'] = str(item['content_link'])
         if 'publish_time' in item:
-            tempDict['pt'] = item['publish_time']
+            tempDict['pt'] = str(item['publish_time'])
         if 'publish_status' in item:
             tempDict['s'] = str(item['publish_status'])
         if 'read_count' in item:
-            tempDict['vc'] = item['read_count']
+            tempDict['vc'] = self.getIntValue(item['read_count'])
         if 'comment_count' in item:
-            tempDict['c'] = item['comment_count']
+            tempDict['c'] = self.getIntValue(item['comment_count'])
         if 'share_count' in item:
-            tempDict['fwd'] = item['share_count']
+            tempDict['fwd'] = self.getIntValue(item['share_count'])
         if 'collect_count' in item:
-            tempDict['fav'] = item['collect_count']
+            tempDict['fav'] = self.getIntValue(item['collect_count'])
         if 'recommend_count' in item:
-            tempDict['rc'] = item['recommend_count']
+            tempDict['rc'] = self.getIntValue(item['recommend_count'])
         if 'like_count' in item:
-            tempDict['dc'] = item['like_count']
+            tempDict['dc'] = self.getIntValue(item['like_count'])
         if 'download_count' in item:
-            tempDict['dwn'] = item['download_count']
+            tempDict['dwn'] = self.getIntValue(item['download_count'])
 
         self.listItem.append(tempDict)
+
+
+    def getIntValue(self, val):
+        try:
+            rlt = int(val)
+        except:
+            rlt = 0
+        return rlt
 
 
     def postItems(self):

@@ -23,6 +23,7 @@ class MeipaiSpider(scrapy.Spider):
 
     def start_requests(self):
         for curDict in account[self.channel_id].values():
+            time.sleep(3)
             yield scrapy.Request(self.videoListUrl.format(curDict['userid']), method='GET', callback=self.parseVideoList)
             #yield scrapy.Request(self.videoListUrl.format(self.user_id), method='GET', callback=self.parseVideoList)
 
@@ -37,6 +38,7 @@ class MeipaiSpider(scrapy.Spider):
         #print(uploadDateList)
         for videoHref, uploadDate in zip(videoHrefList, uploadDateList):
             #print(self.host + videoHref)
+            time.sleep(5)
             yield scrapy.Request(self.host + videoHref, method='GET',
                                  callback=self.parseVideoInfo, headers=self.headers, meta={'uploadDate': uploadDate})
 
@@ -44,6 +46,7 @@ class MeipaiSpider(scrapy.Spider):
         #print(nextPageHrefList)
 
         if len(nextPageHrefList) == 1:
+            time.sleep(5)
             yield scrapy.Request(self.host + nextPageHrefList[0],
                                  method='GET', callback=self.parseVideoList)
 

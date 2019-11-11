@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
+import time
 
 from scrapy.http import FormRequest
 from RongCloudChannel.conf.channelAccount import *
@@ -29,6 +30,7 @@ class QutoutiaoSpider(scrapy.Spider):
 
     def start_requests(self):
         for user, password in account['趣头条'].items():
+            time.sleep(3)
             yield FormRequest(self.loginUrl, method='POST',
                               formdata={"email": user,
                                         "password": password,
@@ -48,8 +50,10 @@ class QutoutiaoSpider(scrapy.Spider):
         if self.loginInfo['code'] != 0:
             print("登录失败：" + response.text)
             return
+        time.sleep(5)
         yield scrapy.Request(self.articleUrl.format(self.articleCurrentPage, self.loginInfo['data']['token'], self.dtu),
                              method='GET', callback=self.parseArticlePageJson)
+        time.sleep(5)
         yield scrapy.Request(self.videoUrl.format(self.videoCurrentPage, self.loginInfo['data']['token'], self.dtu),
                              method='GET', callback=self.parseVideoPageJson)
 
@@ -62,7 +66,6 @@ class QutoutiaoSpider(scrapy.Spider):
         if self.articleBeginFlag:
             self.articleTotalPage = rltJson['data']['total_page']
             self.articleBeginFlag = False
-
         contentList = rltJson['data']['data']
         curTime = dateUtil.getCurDate()
         for contentInfo in contentList:
@@ -80,23 +83,12 @@ class QutoutiaoSpider(scrapy.Spider):
             contentItem['collect_count'] = contentInfo['fav_num']
             contentItem['recommend_count'] = contentInfo['rec_show_pv']
             status = int(contentInfo['status']) #趣头条：1-草稿；5-待审核；2-已发布；3-审核失败；4-回收站
-
             contentItem['publish_status'] = publicContentStatus[channelContentStatus[self.channel_id]['article'][status]]
-
-            '''if status == 1:
-                contentItem['publish_status'] = 0
-            if status == 5:
-                contentItem['publish_status'] = 1
-            if status == 2:
-                contentItem['publish_status'] = 3
-            if status == 3:
-                contentItem['publish_status'] = 2
-            if status == 4:
-                contentItem['publish_status'] = 9'''
             yield contentItem
 
         self.articleCurrentPage += 1
         if self.articleCurrentPage <= self.articleTotalPage:
+            time.sleep(5)
             yield scrapy.Request(
                 self.articleUrl.format(self.articleCurrentPage, self.loginInfo['data']['token'], self.dtu),
                 method='GET', callback=self.parseArticlePageJson)
@@ -128,25 +120,12 @@ class QutoutiaoSpider(scrapy.Spider):
             contentItem['collect_count'] = contentInfo['fav_num']
             contentItem['recommend_count'] = contentInfo['rec_show_pv']
             status = int(contentInfo['status'])  # 趣头条：0-草稿；2-待审核；4-已发布；3-审核失败；5-回收站
-
-            #contentItem['publish_status'] = publicContentStatus[channelContentStatus[self.channel_id][status]]
-
             contentItem['publish_status'] = publicContentStatus[channelContentStatus[self.channel_id]['video'][status]]
-
-            '''if status == 0:
-                contentItem['publish_status'] = 0
-            if status == 2:
-                contentItem['publish_status'] = 1
-            if status == 4:
-                contentItem['publish_status'] = 3
-            if status == 3:
-                contentItem['publish_status'] = 2
-            if status == 5:
-                contentItem['publish_status'] = 9'''
             yield contentItem
 
         self.videoCurrentPage += 1
         if self.videoCurrentPage <= self.videoTotalPage:
+            time.sleep(5)
             yield scrapy.Request(self.videoUrl.format(self.videoCurrentPage, self.loginInfo['data']['token'], self.dtu),
                                  method='GET', callback=self.parseVideoPageJson)
 
