@@ -24,7 +24,7 @@ class RongcloudchannelPipeline(object):
 
     def process_item(self, item, spider):
         #print(json.dumps(dict(item)))
-        self.writeItemToTxt(item)
+        #self.writeItemToTxt(item)
 
         if item['record_class'] == 'channel_info':
             self.updateChannelInfo(item)
