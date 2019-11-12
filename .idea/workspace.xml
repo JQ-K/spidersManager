@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1bd3280-c370-4360-91a8-4400a688f9ac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/KuaiKanManHua/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiKanManHua/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/dbconf.ini" beforeDir="false" afterPath="$PROJECT_DIR$/conf/dbconf.ini" afterDir="false" />
-    </list>
+    <list default="true" id="b1bd3280-c370-4360-91a8-4400a688f9ac" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,17 +9,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/conf/dbconf.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -44,9 +31,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="636" />
-    <option name="y" value="141" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-399" />
+    <option name="y" value="121" />
     <option name="width" value="1440" />
     <option name="height" value="822" />
   </component>
@@ -63,11 +50,6 @@
             <path>
               <item name="spidersManager" type="b2602c69:ProjectViewProjectNode" />
               <item name="spidersManager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spidersManager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spidersManager" type="462c0819:PsiDirectoryNode" />
-              <item name="conf" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="spidersManager" type="b2602c69:ProjectViewProjectNode" />
@@ -146,7 +128,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25019857" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -231,8 +212,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/conf/dbconf.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+        <state relative-caret-position="252">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>

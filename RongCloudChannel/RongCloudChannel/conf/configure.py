@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 POST_CONF = {
-    'url': 'http://beta.rongcloud.zhanqi.tv/api/mcloud/stat/partner/sync_statistics',
+    #'url': 'http://beta.rongcloud.zhanqi.tv/api/mcloud/stat/partner/sync_statistics',
+    'url': 'https://www.tianshucloud.cn/api/mcloud/stat/partner/sync_statistics',
     'headers': {
         'content-type': 'application/json'
     },

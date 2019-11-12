@@ -6,6 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="scrapyplus" />
     <orderEntry type="module" module-name="RongCloudChannel" />
+    <orderEntry type="module" module-name="CrackCaptcha" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Twisted Trial" />

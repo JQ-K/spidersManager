@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../CrackCaptcha/.idea/CrackCaptcha.iml" filepath="$PROJECT_DIR$/../../CrackCaptcha/.idea/CrackCaptcha.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/KuaiKanManHua.iml" filepath="$PROJECT_DIR$/.idea/KuaiKanManHua.iml" />
       <module fileurl="file://$PROJECT_DIR$/../RongCloudChannel/.idea/RongCloudChannel.iml" filepath="$PROJECT_DIR$/../RongCloudChannel/.idea/RongCloudChannel.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" filepath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" />
