@@ -1,31 +1,56 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import time
+import json
 
-from RongCloudChannel.conf.channelAccount import *
+from scrapy.http import FormRequest
 from RongCloudChannel.items import ContentItem
 from RongCloudChannel.utils import dateUtil
+from RongCloudChannel.utils.mysqlUtil import MysqlClient
+from RongCloudChannel.conf.configure import *
 
 
 class MeipaiSpider(scrapy.Spider):
     name = 'MeiPai'
     channel_id = "美拍"
 
-    user_id = "1038308437"
-
     host = "https://www.meipai.com"
     videoListUrl = "https://www.meipai.com/user/{}"
+    loginUrl = "https://account.meitu.com/oauth/access_token.json"
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36',
     }
 
+    def __init__(self):
+        self.mysqlClient = MysqlClient.from_settings(DB_CONF_DIR)
+        self.channelIdList = self.mysqlClient.getChannelIdList(TB_AUTH_NAME, self.channel_id)
+
 
     def start_requests(self):
-        for curDict in account[self.channel_id].values():
+        for channelId in self.channelIdList:
+            userAndPwd = self.mysqlClient.getUserAndPwdByChannelId(TB_AUTH_NAME, channelId)
+            if userAndPwd is None:
+                continue
+            formdata = {"client_id": "1189857310",
+                        "password": userAndPwd[1],
+                        "phone": userAndPwd[0],
+                        "phone_cc": "86",
+                        "grant_type": "phone"}
             time.sleep(3)
-            yield scrapy.Request(self.videoListUrl.format(curDict['userid']), method='GET', callback=self.parseVideoList)
-            #yield scrapy.Request(self.videoListUrl.format(self.user_id), method='GET', callback=self.parseVideoList)
+            yield FormRequest(self.loginUrl, method='POST',
+                              formdata=formdata,
+                              callback=self.parseLoginPage)
+
+
+    def parseLoginPage(self, response):
+        if response.status != 200:
+            print('get url error: ' + response.url)
+            return
+        rltJson = json.loads(response.text)
+        userId = str(rltJson['response']['user']['id'])
+        yield scrapy.Request(self.videoListUrl.format(userId),
+                             method='GET', callback=self.parseVideoList)
 
 
     def parseVideoList(self, response):
@@ -33,17 +58,13 @@ class MeipaiSpider(scrapy.Spider):
             print('get url error: ' + response.url)
             return
         videoHrefList = response.xpath('//a[@itemprop="description"]/@href').extract()
-        #print(videoHrefList)
         uploadDateList = response.xpath('//meta[@itemprop="uploadDate"]/@content').extract()
-        #print(uploadDateList)
         for videoHref, uploadDate in zip(videoHrefList, uploadDateList):
-            #print(self.host + videoHref)
             time.sleep(5)
             yield scrapy.Request(self.host + videoHref, method='GET',
                                  callback=self.parseVideoInfo, headers=self.headers, meta={'uploadDate': uploadDate})
 
         nextPageHrefList = response.xpath('//a[@class="paging-next dbl"]/@href').extract()
-        #print(nextPageHrefList)
 
         if len(nextPageHrefList) == 1:
             time.sleep(5)
@@ -126,12 +147,9 @@ class MeipaiSpider(scrapy.Spider):
         contentItem['comment_count'] = comment_count
         contentItem['share_count'] = share_count
         contentItem['like_count'] = like_count
-
         yield contentItem
 
 
-
-
-
-
+    def close(self):
+        self.mysqlClient.close()
 

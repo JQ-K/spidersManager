@@ -8,6 +8,9 @@ POST_CONF = {
     },
 }
 
+DB_CONF_DIR = "/data/code/crawlab-master/spiders/conf"
+
+TB_AUTH_NAME = "mcloud_channel_auth"
 
 ITEM_FILE_PATH = 'D:/py_workspace/spidersManager/RongCloudChannel/RongCloudChannel/test/'
 

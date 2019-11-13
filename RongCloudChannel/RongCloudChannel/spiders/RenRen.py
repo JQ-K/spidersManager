@@ -4,26 +4,35 @@ import json
 import time
 
 from scrapy.http import FormRequest
-from RongCloudChannel.conf.channelAccount import *
 from RongCloudChannel.items import ContentItem
 from RongCloudChannel.utils import dateUtil
 from RongCloudChannel.utils import pwdUtil
+from RongCloudChannel.utils.mysqlUtil import MysqlClient
+from RongCloudChannel.conf.configure import *
 
 
 class RenrenSpider(scrapy.Spider):
     name = 'RenRen'
-    channel_id = "人人"
+    channel_id = "人人视频"
 
     loginUrl = "https://ugc-api.rr.tv/user/login"
     videoUrl = "https://ugc-api.rr.tv/video/list"
 
 
+    def __init__(self):
+        self.mysqlClient = MysqlClient.from_settings(DB_CONF_DIR)
+        self.channelIdList = self.mysqlClient.getChannelIdList(TB_AUTH_NAME, self.channel_id)
+
+
     def start_requests(self):
-        for user, password in account[self.channel_id].items():
-            formData = {"mobile": user, "password": pwdUtil.md5(password)}
+        for channelId in self.channelIdList:
+            userAndPwd = self.mysqlClient.getUserAndPwdByChannelId(TB_AUTH_NAME, channelId)
+            if userAndPwd is None:
+                continue
+            formdata = {"mobile": userAndPwd[0], "password": pwdUtil.md5(userAndPwd[1])}
             time.sleep(3)
             yield FormRequest(self.loginUrl, method='POST',
-                              formdata=formData, callback=self.parseLoginPage)
+                              formdata=formdata, callback=self.parseLoginPage, meta={'formdata': formdata})
 
 
     def parseLoginPage(self, response):
@@ -31,11 +40,15 @@ class RenrenSpider(scrapy.Spider):
             print('get url error: ' + response.url)
             return
         rltJson = json.loads(response.text)
-        token = rltJson['data']['token']
-        #print(token)
+        try:
+            token = rltJson['data']['token']
+        except:
+            print("登录失败：" + response.text)
+            print(response.meta['formdata'])
+            return
         time.sleep(5)
         yield scrapy.Request(self.videoUrl, method='GET', callback=self.parseVideoPageJson,
-                             headers={'token':token})
+                             headers={'token': token})
 
 
     def parseVideoPageJson(self, response):
@@ -60,3 +73,6 @@ class RenrenSpider(scrapy.Spider):
             contentItem['like_count'] = contentInfo['likeCount']
             yield contentItem
 
+
+    def close(self):
+        self.mysqlClient.close()

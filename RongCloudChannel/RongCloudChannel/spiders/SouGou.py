@@ -5,15 +5,16 @@ import math
 import time
 
 from scrapy.http import FormRequest
-from RongCloudChannel.conf.channelAccount import *
 from RongCloudChannel.items import ContentItem
 from RongCloudChannel.items import AccountItem
 from RongCloudChannel.utils import dateUtil
 from RongCloudChannel.conf.contentStatusMapping import *
+from RongCloudChannel.utils.mysqlUtil import MysqlClient
+from RongCloudChannel.conf.configure import *
 
 class SougouSpider(scrapy.Spider):
     name = 'SouGou'
-    channel_id = "搜狗"
+    channel_id = "搜狗号"
 
     loginUrl = "http://mp.sogou.com/api/login"
     articleUrl = "http://mp.sogou.com/api/{}/articles?status="
@@ -28,22 +29,26 @@ class SougouSpider(scrapy.Spider):
     }
 
     def __init__(self):
-        self.articleCurrentPage = 1
-        self.articleTotalPage = 1
-        self.articleBeginFlag = True
+        self.mysqlClient = MysqlClient.from_settings(DB_CONF_DIR)
+        self.channelIdList = self.mysqlClient.getChannelIdList(TB_AUTH_NAME, self.channel_id)
 
 
     def start_requests(self):
-        for user, password in account[self.channel_id].items():
-            formData = {"email": user, "pwd": password}
+        for channelId in self.channelIdList:
+            userAndPwd = self.mysqlClient.getUserAndPwdByChannelId(TB_AUTH_NAME, channelId)
+            if userAndPwd is None:
+                continue
+            formdata = {"email": userAndPwd[0], "pwd": userAndPwd[1]}
             time.sleep(3)
             yield FormRequest(self.loginUrl, method='POST',
-                              formdata=formData, callback=self.parseLoginPage)
+                              formdata=formdata, callback=self.parseLoginPage,
+                              meta={'formdata': formdata})
 
 
     def parseLoginPage(self, response):
         headers = response.headers
         set_cookie = headers.getlist('Set-Cookie')
+        rlt_cookie = {}
 
         for tempCookie in set_cookie:
             tempStr = tempCookie.decode('utf-8').split(';')
@@ -54,14 +59,15 @@ class SougouSpider(scrapy.Spider):
                     key = curElem[0:index]
                     val = curElem[index+1:]
                     if key in self.cookies.keys():
-                        self.cookies[key] = val
-        #print(self.cookies)
+                        #self.cookies[key] = val
+                        rlt_cookie[key] = val
         time.sleep(5)
         yield scrapy.Request(self.fansAnalysisUrl.format(dateUtil.getYesterday()),
-                             method='GET', callback=self.parseFansAnalysisPageJson, cookies=self.cookies, headers=self.headers)
+                             method='GET', callback=self.parseFansAnalysisPageJson, cookies=rlt_cookie, headers=self.headers)
         time.sleep(5)
-        yield scrapy.Request(self.articleUrl.format(self.articleCurrentPage),
-                             method='GET', callback=self.parseArticlePageJson, cookies=self.cookies, headers=self.headers)
+        yield scrapy.Request(self.articleUrl.format(1),
+                             method='GET', callback=self.parseArticlePageJson, cookies=rlt_cookie, headers=self.headers,
+                             meta={'cookie': rlt_cookie, 'currentPage': 1, 'totalPage': 1, 'beginFlag': True})
 
 
     def parseFansAnalysisPageJson(self, response):
@@ -84,11 +90,15 @@ class SougouSpider(scrapy.Spider):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
+        cookie = response.meta['cookie']
+        currentPage = response.meta['currentPage']
+        totalPage = response.meta['totalPage']
+        beginFlag = response.meta['beginFlag']
         rltJson = json.loads(response.text)
-        if self.articleBeginFlag:
+        if beginFlag:
             total = int(rltJson['total'])
-            self.articleTotalPage = math.ceil(total/10)
-            self.articleBeginFlag = False
+            totalPage = math.ceil(total/10)
+            beginFlag = False
 
         contentList = rltJson['list']
         curTime = dateUtil.getCurDate()
@@ -109,20 +119,19 @@ class SougouSpider(scrapy.Spider):
             status = int(contentInfo['status'])  # 搜狗：1-已发布；40-未通过；134-草稿
 
             contentItem['publish_status'] = publicContentStatus[channelContentStatus[self.channel_id][status]]
-            '''if status == 1:
-                contentItem['publish_status'] = 3
-            if status == 40:
-                contentItem['publish_status'] = 2
-            if status == 134:
-                contentItem['publish_status'] = 0'''
             yield contentItem
 
-        self.articleCurrentPage += 1
-        if self.articleCurrentPage <= self.articleTotalPage:
+        currentPage += 1
+        if currentPage <= totalPage:
             time.sleep(5)
-            yield scrapy.Request(self.articleUrl.format(self.articleCurrentPage),
-                                 method='GET', callback=self.parseArticlePageJson, cookies=self.cookies,
-                                 headers=self.headers)
+            yield scrapy.Request(self.articleUrl.format(currentPage),
+                                 method='GET', callback=self.parseArticlePageJson,
+                                 headers=self.headers, cookies=cookie,
+                                 meta={'cookie': cookie, 'currentPage': currentPage, 'totalPage': totalPage, 'beginFlag': beginFlag})
+
+
+    def close(self):
+        self.mysqlClient.close()
 
 
 
