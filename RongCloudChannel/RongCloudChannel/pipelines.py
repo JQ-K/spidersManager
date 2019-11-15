@@ -120,7 +120,7 @@ class RongcloudchannelPipeline(object):
             message = json.dumps(self.resultDict)
             #print(message)
             response = requests.post(self.api, message, headers=self.headers)
-            print(response.text)
+            #print(response.text)
             self.listItem.clear()
 
 
