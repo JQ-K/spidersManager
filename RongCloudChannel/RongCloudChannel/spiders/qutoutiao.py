@@ -7,8 +7,7 @@ from scrapy.http import FormRequest
 from RongCloudChannel.items import ContentItem
 from RongCloudChannel.utils import dateUtil
 from RongCloudChannel.conf.contentStatusMapping import *
-from RongCloudChannel.utils.mysqlUtil import MysqlClient
-from RongCloudChannel.conf.configure import *
+from RongCloudChannel.utils.accountUtil import *
 
 
 class QutoutiaoSpider(scrapy.Spider):
@@ -20,27 +19,21 @@ class QutoutiaoSpider(scrapy.Spider):
     videoUrl = "https://mpapi.qutoutiao.net/video/getList?page={}&isMotherMember=false&token={}&dtu={}"
 
     def __init__(self):
-        self.mysqlClient = MysqlClient.from_settings(DB_CONF_DIR)
-        self.channelIdList = self.mysqlClient.getChannelIdList(TB_AUTH_NAME, self.channel_id)
+        self.accountDict = getAllAccountByChannel(self.channel_id)
 
 
     def start_requests(self):
-        for channelId in self.channelIdList:
-            userAndPwd = self.mysqlClient.getUserAndPwdByChannelId(TB_AUTH_NAME, channelId)
-            if userAndPwd is None:
-                continue
+        for user, password in self.accountDict.items():
             time.sleep(3)
-            user = userAndPwd[0]
-            if user in ['11', '1111']:
-                continue
-            formdata = {"password": userAndPwd[1], "is_secret": "0", "dtu": self.dtu,}
+            formdata = {"password": password, "is_secret": "0", "dtu": self.dtu, }
             if user.find("@") > 0:
                 formdata["email"] = user
             else:
                 formdata["telephone"] = user
-            print(formdata)
+                formdata["source"] = "1"
             yield FormRequest(self.loginUrl, method='POST',
-                              formdata=formdata, callback=self.parseLoginPage, meta={'formdata': formdata})
+                              formdata=formdata, callback=self.parseLoginPage,
+                              meta={'formdata': formdata, 'account': user})
 
 
     def parseLoginPage(self, response):
@@ -49,20 +42,22 @@ class QutoutiaoSpider(scrapy.Spider):
             print("登录失败：" + response.text)
             print(response.meta['formdata'])
             return
+        account = response.meta['account']
         time.sleep(5)
         yield scrapy.Request(self.articleUrl.format(1, loginInfo['data']['token'], self.dtu),
                              method='GET', callback=self.parseArticlePageJson,
-                             meta={'token': loginInfo['data']['token'], 'currentPage': 1, 'totalPage': 1, 'beginFlag': True})
+                             meta={'token': loginInfo['data']['token'], 'currentPage': 1, 'totalPage': 1, 'beginFlag': True, 'account': account})
         time.sleep(5)
         yield scrapy.Request(self.videoUrl.format(1, loginInfo['data']['token'], self.dtu),
                              method='GET', callback=self.parseVideoPageJson,
-                             meta={'token': loginInfo['data']['token'], 'currentPage': 1, 'totalPage': 1, 'beginFlag': True})
+                             meta={'token': loginInfo['data']['token'], 'currentPage': 1, 'totalPage': 1, 'beginFlag': True, 'account': account})
 
 
     def parseArticlePageJson(self, response):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
+        account = response.meta['account']
         token = response.meta['token']
         currentPage = response.meta['currentPage']
         totalPage = response.meta['totalPage']
@@ -77,6 +72,7 @@ class QutoutiaoSpider(scrapy.Spider):
         for contentInfo in contentList:
             contentItem = ContentItem()
             contentItem['channel_id'] = self.channel_id
+            contentItem['account_id'] = account
             contentItem['record_class'] = "content_info"
             contentItem['crawl_time'] = curTime
             contentItem['id'] = contentInfo['id']
@@ -98,13 +94,14 @@ class QutoutiaoSpider(scrapy.Spider):
             yield scrapy.Request(
                 self.articleUrl.format(currentPage, token, self.dtu),
                 method='GET', callback=self.parseArticlePageJson,
-                meta={'token': token, 'currentPage': currentPage, 'totalPage': totalPage, 'beginFlag': beginFlag})
+                meta={'token': token, 'currentPage': currentPage, 'totalPage': totalPage, 'beginFlag': beginFlag, 'account': account})
 
 
     def parseVideoPageJson(self, response):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
+        account = response.meta['account']
         token = response.meta['token']
         currentPage = response.meta['currentPage']
         totalPage = response.meta['totalPage']
@@ -119,6 +116,7 @@ class QutoutiaoSpider(scrapy.Spider):
         for contentInfo in contentList:
             contentItem = ContentItem()
             contentItem['channel_id'] = self.channel_id
+            contentItem['account_id'] = account
             contentItem['record_class'] = "content_info"
             contentItem['crawl_time'] = curTime
             contentItem['id'] = contentInfo['id']
@@ -139,8 +137,4 @@ class QutoutiaoSpider(scrapy.Spider):
             time.sleep(5)
             yield scrapy.Request(self.videoUrl.format(currentPage, token, self.dtu),
                                  method='GET', callback=self.parseVideoPageJson,
-                                 meta={'token': token, 'currentPage': currentPage, 'totalPage': totalPage, 'beginFlag': beginFlag})
-
-
-    def close(self):
-        self.mysqlClient.close()
+                                 meta={'token': token, 'currentPage': currentPage, 'totalPage': totalPage, 'beginFlag': beginFlag, 'account': account})

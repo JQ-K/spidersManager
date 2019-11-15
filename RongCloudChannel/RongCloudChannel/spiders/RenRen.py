@@ -7,8 +7,7 @@ from scrapy.http import FormRequest
 from RongCloudChannel.items import ContentItem
 from RongCloudChannel.utils import dateUtil
 from RongCloudChannel.utils import pwdUtil
-from RongCloudChannel.utils.mysqlUtil import MysqlClient
-from RongCloudChannel.conf.configure import *
+from RongCloudChannel.utils.accountUtil import *
 
 
 class RenrenSpider(scrapy.Spider):
@@ -20,25 +19,23 @@ class RenrenSpider(scrapy.Spider):
 
 
     def __init__(self):
-        self.mysqlClient = MysqlClient.from_settings(DB_CONF_DIR)
-        self.channelIdList = self.mysqlClient.getChannelIdList(TB_AUTH_NAME, self.channel_id)
+        self.accountDict = getAllAccountByChannel(self.channel_id)
 
 
     def start_requests(self):
-        for channelId in self.channelIdList:
-            userAndPwd = self.mysqlClient.getUserAndPwdByChannelId(TB_AUTH_NAME, channelId)
-            if userAndPwd is None:
-                continue
-            formdata = {"mobile": userAndPwd[0], "password": pwdUtil.md5(userAndPwd[1])}
+        for user, password in self.accountDict.items():
+            formdata = {"mobile": user, "password": pwdUtil.md5(password)}
             time.sleep(3)
             yield FormRequest(self.loginUrl, method='POST',
-                              formdata=formdata, callback=self.parseLoginPage, meta={'formdata': formdata})
+                              formdata=formdata, callback=self.parseLoginPage,
+                              meta={'formdata': formdata, 'account': user})
 
 
     def parseLoginPage(self, response):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
+        account = response.meta['account']
         rltJson = json.loads(response.text)
         try:
             token = rltJson['data']['token']
@@ -48,13 +45,15 @@ class RenrenSpider(scrapy.Spider):
             return
         time.sleep(5)
         yield scrapy.Request(self.videoUrl, method='GET', callback=self.parseVideoPageJson,
-                             headers={'token': token})
+                             headers={'token': token},
+                             meta={'account': account})
 
 
     def parseVideoPageJson(self, response):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
+        account = response.meta['account']
         rltJson = json.loads(response.text)
 
         contentList = rltJson['data']
@@ -62,6 +61,7 @@ class RenrenSpider(scrapy.Spider):
         for contentInfo in contentList:
             contentItem = ContentItem()
             contentItem['channel_id'] = self.channel_id
+            contentItem['account_id'] = account
             contentItem['record_class'] = "content_info"
             contentItem['crawl_time'] = curTime
             contentItem['id'] = contentInfo['id']
@@ -73,6 +73,3 @@ class RenrenSpider(scrapy.Spider):
             contentItem['like_count'] = contentInfo['likeCount']
             yield contentItem
 
-
-    def close(self):
-        self.mysqlClient.close()

@@ -9,8 +9,8 @@ from RongCloudChannel.items import ContentItem
 from RongCloudChannel.items import AccountItem
 from RongCloudChannel.utils import dateUtil
 from RongCloudChannel.conf.contentStatusMapping import *
-from RongCloudChannel.utils.mysqlUtil import MysqlClient
-from RongCloudChannel.conf.configure import *
+from RongCloudChannel.utils.accountUtil import *
+
 
 class SougouSpider(scrapy.Spider):
     name = 'SouGou'
@@ -29,23 +29,23 @@ class SougouSpider(scrapy.Spider):
     }
 
     def __init__(self):
-        self.mysqlClient = MysqlClient.from_settings(DB_CONF_DIR)
-        self.channelIdList = self.mysqlClient.getChannelIdList(TB_AUTH_NAME, self.channel_id)
+        self.accountDict = getAllAccountByChannel(self.channel_id)
 
 
     def start_requests(self):
-        for channelId in self.channelIdList:
-            userAndPwd = self.mysqlClient.getUserAndPwdByChannelId(TB_AUTH_NAME, channelId)
-            if userAndPwd is None:
-                continue
-            formdata = {"email": userAndPwd[0], "pwd": userAndPwd[1]}
+        for user, password in self.accountDict.items():
+            formdata = {"email": user, "pwd": password}
             time.sleep(3)
             yield FormRequest(self.loginUrl, method='POST',
                               formdata=formdata, callback=self.parseLoginPage,
-                              meta={'formdata': formdata})
+                              meta={'formdata': formdata, 'account': user})
 
 
     def parseLoginPage(self, response):
+        if response.status != 200:
+            print('get url error: ' + response.url)
+            return
+        account = response.meta['account']
         headers = response.headers
         set_cookie = headers.getlist('Set-Cookie')
         rlt_cookie = {}
@@ -59,24 +59,27 @@ class SougouSpider(scrapy.Spider):
                     key = curElem[0:index]
                     val = curElem[index+1:]
                     if key in self.cookies.keys():
-                        #self.cookies[key] = val
                         rlt_cookie[key] = val
         time.sleep(5)
         yield scrapy.Request(self.fansAnalysisUrl.format(dateUtil.getYesterday()),
-                             method='GET', callback=self.parseFansAnalysisPageJson, cookies=rlt_cookie, headers=self.headers)
+                             method='GET', callback=self.parseFansAnalysisPageJson,
+                             cookies=rlt_cookie, headers=self.headers, meta={'account': account})
         time.sleep(5)
         yield scrapy.Request(self.articleUrl.format(1),
-                             method='GET', callback=self.parseArticlePageJson, cookies=rlt_cookie, headers=self.headers,
-                             meta={'cookie': rlt_cookie, 'currentPage': 1, 'totalPage': 1, 'beginFlag': True})
+                             method='GET', callback=self.parseArticlePageJson,
+                             cookies=rlt_cookie, headers=self.headers,
+                             meta={'cookie': rlt_cookie, 'currentPage': 1, 'totalPage': 1, 'beginFlag': True, 'account': account})
 
 
     def parseFansAnalysisPageJson(self, response):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
+        account = response.meta['account']
         rltJson = json.loads(response.text)
         accountItem = AccountItem()
         accountItem['channel_id'] = self.channel_id
+        accountItem['account_id'] = account
         accountItem['record_class'] = "channel_info"
         accountItem['crawl_time'] = dateUtil.getCurDate()
         accountItem['new_visit_count'] = rltJson['access']
@@ -90,6 +93,7 @@ class SougouSpider(scrapy.Spider):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
+        account = response.meta['account']
         cookie = response.meta['cookie']
         currentPage = response.meta['currentPage']
         totalPage = response.meta['totalPage']
@@ -105,6 +109,7 @@ class SougouSpider(scrapy.Spider):
         for contentInfo in contentList:
             contentItem = ContentItem()
             contentItem['channel_id'] = self.channel_id
+            contentItem['account_id'] = account
             contentItem['record_class'] = "content_info"
             contentItem['crawl_time'] = curTime
             contentItem['id'] = contentInfo['id']
@@ -127,12 +132,6 @@ class SougouSpider(scrapy.Spider):
             yield scrapy.Request(self.articleUrl.format(currentPage),
                                  method='GET', callback=self.parseArticlePageJson,
                                  headers=self.headers, cookies=cookie,
-                                 meta={'cookie': cookie, 'currentPage': currentPage, 'totalPage': totalPage, 'beginFlag': beginFlag})
-
-
-    def close(self):
-        self.mysqlClient.close()
-
-
+                                 meta={'cookie': cookie, 'currentPage': currentPage, 'totalPage': totalPage, 'beginFlag': beginFlag, 'account': account})
 
 

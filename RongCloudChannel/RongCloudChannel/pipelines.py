@@ -20,11 +20,18 @@ class RongcloudchannelPipeline(object):
     def __init__(self):
         self.resultDict = {}
         self.listItem = []
+        self.accountStaticDict = {}
 
 
     def process_item(self, item, spider):
         #print(json.dumps(dict(item)))
         #self.writeItemToTxt(item)
+
+        account = item['account_id']
+        if account in self.accountStaticDict:
+            self.accountStaticDict[account] += 1
+        else:
+            self.accountStaticDict[account] = 1
 
         if item['record_class'] == 'channel_info':
             self.updateChannelInfo(item)
@@ -119,3 +126,6 @@ class RongcloudchannelPipeline(object):
 
     def close_spider(self, spider):
         self.postItems()
+
+        print('此次爬虫抓取统计结果:')
+        print(self.accountStaticDict)

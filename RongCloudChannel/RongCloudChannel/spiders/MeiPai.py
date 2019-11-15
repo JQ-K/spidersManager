@@ -6,8 +6,7 @@ import json
 from scrapy.http import FormRequest
 from RongCloudChannel.items import ContentItem
 from RongCloudChannel.utils import dateUtil
-from RongCloudChannel.utils.mysqlUtil import MysqlClient
-from RongCloudChannel.conf.configure import *
+from RongCloudChannel.utils.accountUtil import *
 
 
 class MeipaiSpider(scrapy.Spider):
@@ -23,59 +22,64 @@ class MeipaiSpider(scrapy.Spider):
     }
 
     def __init__(self):
-        self.mysqlClient = MysqlClient.from_settings(DB_CONF_DIR)
-        self.channelIdList = self.mysqlClient.getChannelIdList(TB_AUTH_NAME, self.channel_id)
-
+        self.accountDict = getAllAccountByChannel(self.channel_id)
 
     def start_requests(self):
-        for channelId in self.channelIdList:
-            userAndPwd = self.mysqlClient.getUserAndPwdByChannelId(TB_AUTH_NAME, channelId)
-            if userAndPwd is None:
-                continue
+        for user, password in self.accountDict.items():
             formdata = {"client_id": "1189857310",
-                        "password": userAndPwd[1],
-                        "phone": userAndPwd[0],
+                        "password": password,
+                        "phone": user,
                         "phone_cc": "86",
                         "grant_type": "phone"}
             time.sleep(3)
             yield FormRequest(self.loginUrl, method='POST',
                               formdata=formdata,
-                              callback=self.parseLoginPage)
+                              callback=self.parseLoginPage,
+                              meta={'formdata': formdata, 'account': user})
 
 
     def parseLoginPage(self, response):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
-        rltJson = json.loads(response.text)
-        userId = str(rltJson['response']['user']['id'])
+        try:
+            rltJson = json.loads(response.text)
+            userId = str(rltJson['response']['user']['id'])
+        except:
+            print('登录失败:' + response.text)
+            print(response.meta['formdata'])
+            return
+        account = response.meta['account']
         yield scrapy.Request(self.videoListUrl.format(userId),
-                             method='GET', callback=self.parseVideoList)
+                             method='GET', callback=self.parseVideoList, meta={'account': account})
 
 
     def parseVideoList(self, response):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
+        account = response.meta['account']
         videoHrefList = response.xpath('//a[@itemprop="description"]/@href').extract()
         uploadDateList = response.xpath('//meta[@itemprop="uploadDate"]/@content').extract()
         for videoHref, uploadDate in zip(videoHrefList, uploadDateList):
             time.sleep(5)
             yield scrapy.Request(self.host + videoHref, method='GET',
-                                 callback=self.parseVideoInfo, headers=self.headers, meta={'uploadDate': uploadDate})
+                                 callback=self.parseVideoInfo, headers=self.headers,
+                                 meta={'uploadDate': uploadDate, 'account': account})
 
         nextPageHrefList = response.xpath('//a[@class="paging-next dbl"]/@href').extract()
 
         if len(nextPageHrefList) == 1:
             time.sleep(5)
             yield scrapy.Request(self.host + nextPageHrefList[0],
-                                 method='GET', callback=self.parseVideoList)
+                                 method='GET', callback=self.parseVideoList, meta={'account': account})
 
 
     def parseVideoInfo(self, response):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
+        account = response.meta['account']
         url = response.url
         id = url.split("/")[-1]
         uploadDate = response.meta['uploadDate']
@@ -137,6 +141,7 @@ class MeipaiSpider(scrapy.Spider):
         curTime = dateUtil.getCurDate()
         contentItem = ContentItem()
         contentItem['channel_id'] = self.channel_id
+        contentItem['account_id'] = account
         contentItem['record_class'] = "content_info"
         contentItem['crawl_time'] = curTime
         contentItem['id'] = id
@@ -148,8 +153,3 @@ class MeipaiSpider(scrapy.Spider):
         contentItem['share_count'] = share_count
         contentItem['like_count'] = like_count
         yield contentItem
-
-
-    def close(self):
-        self.mysqlClient.close()
-
