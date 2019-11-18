@@ -20,9 +20,9 @@ class SougouSpider(scrapy.Spider):
     articleUrl = "http://mp.sogou.com/api/{}/articles?status="
     fansAnalysisUrl = "http://mp.sogou.com/api/statistics/fans-analysis/{}"
 
-    headers = {
+    '''headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36',
-    }
+    }'''
     cookies = {
         "mp.sid": "",
         "mp.sid.sig": "",
@@ -63,11 +63,14 @@ class SougouSpider(scrapy.Spider):
         time.sleep(5)
         yield scrapy.Request(self.fansAnalysisUrl.format(dateUtil.getYesterday()),
                              method='GET', callback=self.parseFansAnalysisPageJson,
-                             cookies=rlt_cookie, headers=self.headers, meta={'account': account})
+                             cookies=rlt_cookie,
+                             #headers=self.headers,
+                             meta={'account': account})
         time.sleep(5)
         yield scrapy.Request(self.articleUrl.format(1),
                              method='GET', callback=self.parseArticlePageJson,
-                             cookies=rlt_cookie, headers=self.headers,
+                             cookies=rlt_cookie,
+                             #headers=self.headers,
                              meta={'cookie': rlt_cookie, 'currentPage': 1, 'totalPage': 1, 'beginFlag': True, 'account': account})
 
 
@@ -131,7 +134,8 @@ class SougouSpider(scrapy.Spider):
             time.sleep(5)
             yield scrapy.Request(self.articleUrl.format(currentPage),
                                  method='GET', callback=self.parseArticlePageJson,
-                                 headers=self.headers, cookies=cookie,
+                                 #headers=self.headers,
+                                 cookies=cookie,
                                  meta={'cookie': cookie, 'currentPage': currentPage, 'totalPage': totalPage, 'beginFlag': beginFlag, 'account': account})
 
 

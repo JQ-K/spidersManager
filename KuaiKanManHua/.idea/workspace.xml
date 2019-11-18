@@ -6,9 +6,11 @@
       <change beforePath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/conf/contentStatusMapping.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/conf/contentStatusMapping.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/pipelines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/middlewares.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/MeiPai.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/MeiPai.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/SouGou.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/SouGou.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,21 +19,30 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/conf/channelAccount.py">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="11" column="35" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="35" />
+            <state relative-caret-position="273">
+              <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/conf/contentStatusMapping.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="29" column="22" lean-forward="true" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+            <state relative-caret-position="1890">
+              <caret line="90" selection-start-line="90" selection-end-line="90" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/QuTouTiao.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="6" column="46" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -50,7 +61,6 @@
       <find>listDict</find>
       <find>new_fans_count</find>
       <find>publish_time</find>
-      <find>headers</find>
       <find>COOKIE</find>
       <find>api</find>
       <find>百家号</find>
@@ -68,6 +78,8 @@
       <find>account_id</find>
       <find>yield</find>
       <find>LOG</find>
+      <find>User-Agent</find>
+      <find>headers</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -101,19 +113,20 @@
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/captchaTest.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/testQuTouTiao.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/mysqlUtil.py" />
-        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py" />
-        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/MeiPai.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/QuTouTiao.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/RenRen.py" />
-        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/SouGou.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/conf/configure.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/pipelines.py" />
-        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/conf/contentStatusMapping.py" />
+        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py" />
+        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/middlewares.py" />
+        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/MeiPai.py" />
+        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/SouGou.py" />
+        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-399" />
     <option name="y" value="120" />
     <option name="width" value="1440" />
@@ -141,7 +154,13 @@
               <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
               <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
               <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
-              <item name="conf" type="462c0819:PsiDirectoryNode" />
+              <item name="spiders" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -304,7 +323,7 @@
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2915012" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24543288" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -315,7 +334,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.06394316" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.06394316" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -335,13 +354,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/conf/configure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" lean-forward="true" selection-start-column="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python/Python36/Lib/site-packages/scrapy/http/request/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111">
@@ -349,21 +361,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/old-qierhao.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="78" column="70" lean-forward="true" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/搜狗.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/middlewares.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1776" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/old-qierhao.py" />
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/搜狗.txt" />
     <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/YiDianZiXun.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -515,16 +514,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/BaiJiaHao.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1638">
-          <caret selection-end-column="23" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python/Python36/Lib/site-packages/pymysql/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2016">
@@ -541,16 +530,6 @@
           <caret line="184" column="30" lean-forward="true" selection-start-line="183" selection-start-column="4" selection-end-line="184" selection-end-column="30" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../spiders/web-news/scrapyplus/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-420">
-          <caret line="55" column="33" lean-forward="true" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
-          <folding>
-            <element signature="e#194#205#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -609,16 +588,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/testQuTouTiao.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="11" column="78" selection-start-line="11" selection-start-column="78" selection-end-line="11" selection-end-column="78" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/testQuTouTiao.py" />
     <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/pwdUtil.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -646,94 +616,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/RenRen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-126">
-          <caret line="12" column="34" lean-forward="true" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/SouGou.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/MeiPai.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-          <folding>
-            <element signature="e#24#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/conf/configure.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="5" column="16" lean-forward="true" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../spiders/web-news/scrapyplus/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="127" column="21" lean-forward="true" selection-start-line="127" selection-start-column="21" selection-end-line="127" selection-end-column="21" />
-          <folding>
-            <element signature="e#24#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/QuTouTiao.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="130" column="57" selection-start-line="130" selection-start-column="57" selection-end-line="130" selection-end-column="57" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="30" column="44" lean-forward="true" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="92" column="21" lean-forward="true" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2146">
-          <caret line="123" column="33" lean-forward="true" selection-start-line="123" selection-start-column="33" selection-end-line="123" selection-end-column="33" />
-          <folding>
-            <element signature="e#195#206#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -746,8 +632,121 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/conf/contentStatusMapping.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="29" column="22" lean-forward="true" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+        <state relative-caret-position="273">
+          <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../spiders/web-news/scrapyplus/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="813">
+          <caret line="191" column="24" lean-forward="true" selection-start-line="191" selection-start-column="24" selection-end-line="191" selection-end-column="24" />
+          <folding>
+            <element signature="e#24#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../spiders/web-news/scrapyplus/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="55" column="33" lean-forward="true" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+          <folding>
+            <element signature="e#194#205#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../spiders/web-news/scrapyplus/middlewares.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-945" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/BaiJiaHao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-252">
+          <caret selection-end-column="23" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/middlewares.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-924">
+          <caret line="4" column="23" lean-forward="true" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+          <folding>
+            <element signature="e#170#196#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/MeiPai.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1">
+          <caret line="60" column="42" lean-forward="true" selection-start-line="60" selection-start-column="42" selection-end-line="60" selection-end-column="42" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="30" column="44" lean-forward="true" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/RenRen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="48" column="55" lean-forward="true" selection-start-line="48" selection-start-column="55" selection-end-line="48" selection-end-column="55" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/SouGou.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2583">
+          <caret line="123" column="33" lean-forward="true" selection-start-line="123" selection-start-column="33" selection-end-line="123" selection-end-column="33" />
+          <folding>
+            <element signature="e#195#206#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1890">
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/QuTouTiao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="46" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
         </state>
       </provider>
     </entry>

@@ -17,9 +17,9 @@ class MeipaiSpider(scrapy.Spider):
     videoListUrl = "https://www.meipai.com/user/{}"
     loginUrl = "https://account.meitu.com/oauth/access_token.json"
 
-    headers = {
+    '''headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36',
-    }
+    }'''
 
     def __init__(self):
         self.accountDict = getAllAccountByChannel(self.channel_id)
@@ -64,7 +64,8 @@ class MeipaiSpider(scrapy.Spider):
         for videoHref, uploadDate in zip(videoHrefList, uploadDateList):
             time.sleep(5)
             yield scrapy.Request(self.host + videoHref, method='GET',
-                                 callback=self.parseVideoInfo, headers=self.headers,
+                                 callback=self.parseVideoInfo,
+                                 #headers=self.headers,
                                  meta={'uploadDate': uploadDate, 'account': account})
 
         nextPageHrefList = response.xpath('//a[@class="paging-next dbl"]/@href').extract()

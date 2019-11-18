@@ -7,6 +7,9 @@
 
 from scrapy import signals
 
+import random
+from RongCloudChannel.settings import UA_POOL
+
 
 class RongcloudchannelSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -78,6 +81,7 @@ class RongcloudchannelDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+        request.headers['User-Agent'] = random.choice(UA_POOL)
         return None
 
     def process_response(self, request, response, spider):
