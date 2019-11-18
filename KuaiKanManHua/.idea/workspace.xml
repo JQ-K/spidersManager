@@ -5,11 +5,6 @@
       <change beforePath="$PROJECT_DIR$/../../CrackCaptcha/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../CrackCaptcha/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/middlewares.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/MeiPai.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/MeiPai.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/SouGou.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/SouGou.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,26 +18,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+            <state relative-caret-position="240">
+              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+              <folding>
+                <element signature="e#24#33#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py">
+        <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1890">
-              <caret line="90" selection-start-line="90" selection-end-line="90" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/QuTouTiao.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="6" column="46" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
+            <state relative-caret-position="189">
+              <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,7 +94,6 @@
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/pwdUtil.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/BaiJiaHao.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/QiErHao.py" />
-        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/test.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/ZheJiangXinWen.py" />
         <option value="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" />
         <option value="$PROJECT_DIR$/../../CrackCaptcha/main.py" />
@@ -122,6 +113,7 @@
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/middlewares.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/MeiPai.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/SouGou.py" />
+        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/test.py" />
         <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py" />
       </list>
     </option>
@@ -149,12 +141,6 @@
               <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
               <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
               <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
-              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
-              <item name="spiders" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
@@ -190,7 +176,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.captchaTest">
+  <component name="RunManager" selected="Python.test">
     <configuration name="captchaTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RongCloudChannel" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -233,27 +219,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="preprocess" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="CrackCaptcha" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../CrackCaptcha" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CrackCaptcha" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -267,6 +232,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../CrackCaptcha/test/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RongCloudChannel" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -298,11 +284,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.captchaTest" />
         <item itemvalue="Python.test1" />
         <item itemvalue="Python.test (1)" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.preprocess" />
       </list>
     </recent_temporary>
   </component>
@@ -320,21 +306,21 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24543288" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1898332" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26110125" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26110125" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39964476" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.06394316" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.06394316" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -396,16 +382,6 @@
           <caret line="46" column="25" lean-forward="true" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
           <folding>
             <element signature="e#65#74#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -521,9 +497,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/testMysql.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../spiders/web-news/scrapyplus/spiders/CrawlWebSpider.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
@@ -565,26 +538,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-150">
           <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/test1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="38" lean-forward="true" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/captchaTest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <element signature="e#25#63#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -692,13 +645,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="30" column="44" lean-forward="true" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/RenRen.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
@@ -729,24 +675,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py">
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/QuTouTiao.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+        <state relative-caret-position="21">
+          <caret line="6" column="46" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="30" column="44" lean-forward="true" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/captchaTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+          <folding>
+            <element signature="e#25#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/testMysql.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/test1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="5" column="38" lean-forward="true" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/test/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
+        <state relative-caret-position="184">
+          <caret line="131" lean-forward="true" selection-start-line="131" selection-end-line="131" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/QuTouTiao.py">
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/accountUtil.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="46" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
+        <state relative-caret-position="240">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
