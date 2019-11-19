@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import json
 
+from KOL.items import KuaiShouUserIterm;
 
 class KuaishouSpider(scrapy.Spider):
     name = 'kuaishou'
@@ -39,5 +41,18 @@ class KuaishouSpider(scrapy.Spider):
 
 
     def parseListUrl(self, response):
-        print(response.text)
+        #print(response.text)
+        if response.status != 200:
+            print('get url error: ' + response.url)
+            return
+        rltJson = json.loads(response.text)
+        videoList = rltJson['feeds']
+        for videoInfo in videoList:
+            userItem = KuaiShouUserIterm()
+            #userItem['kwaiId'] = videoInfo['kwaiId']
+            userItem['user_id'] = videoInfo['user_id']
+            userItem['user_name'] = videoInfo['user_name']
+            userItem['user_sex'] = videoInfo['user_sex']
+            yield userItem
+
 

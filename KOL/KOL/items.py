@@ -14,7 +14,7 @@ class KolItem(scrapy.Item):
     pass
 
 class KuaiShouUserIterm(scrapy.Item):
-    kuaiId = scrapy.Field() #快手号
+    kwaiId = scrapy.Field() #快手号
     user_id = scrapy.Field() #快手id
     user_name = scrapy.Field() #昵称
     user_sex = scrapy.Field() #性别

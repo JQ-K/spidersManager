@@ -9,3 +9,9 @@
 class KolPipeline(object):
     def process_item(self, item, spider):
         return item
+
+
+class KuaiShouUserPipeline(object):
+    def process_item(self, item, spider):
+        print(item)
+        return item
