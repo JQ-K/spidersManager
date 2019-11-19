@@ -40,36 +40,6 @@ class ReplyUserSpider(scrapy.Spider):
             id_str = id.decode('utf-8')
             yield scrapy.Request(self.userContentUrl.format(id_str, sinceID),
                                  callback=self.parsePageJson, method='GET', headers=self.headers, meta={'id': id_str})
-            while sinceID != -1:
-
-                url = "https://social.kkmh.com/v1/graph/users/%s/posts?limit=20&since=%d" % (id_str, sinceID)
-                '''try:
-                    sinceID, postIdList = getPageJson(url)
-                    # print(sinceID)
-                    # print(postIdList)
-                except:
-                    print("get first url error...")
-                    sinceID = -1
-                    break
-
-                for postId in postIdList:
-                    commentSinceID = 0
-                    while commentSinceID != -1:
-                        commentUrl = "https://social.kkmh.com/v1/graph/posts/%s/comments/v5?filter=1&limit=10&since=%d" % (
-                        postId, commentSinceID)
-                        try:
-                            commentSinceID, userInfoList = getCommentJson(commentUrl)
-                            # print(commentSinceID)
-                            # print(userInfoList)
-                        except:
-                            print("get second url error...")
-                            commentSinceID = -1
-                            break
-                        for info in userInfoList:
-                            id = info[0]  # int
-                            avatar_url = info[1]
-                            nickname = info[2]
-                            intro = info[3]'''
 
 
     def parsePageJson(self, response):
@@ -82,7 +52,7 @@ class ReplyUserSpider(scrapy.Spider):
             yield scrapy.Request(self.userContentUrl.format(id, sinceID),
                                  callback=self.parsePageJson, method='GET', headers=self.headers,
                                  meta={'id': id})
-        postIdList = []
+        #postIdList = []
         commentSrcList = rltJson['data']['universalModels']
         for commentSrc in commentSrcList:
             try:
@@ -100,7 +70,7 @@ class ReplyUserSpider(scrapy.Spider):
         postId = response.meta['postId']
         rltJson = json.loads(response.text)
         sinceID = rltJson['data']['since']
-        rltUserInfoList = []
+        #rltUserInfoList = []
         commentList = rltJson['data']['commentList']
         for commentInfo in commentList:
             try:
@@ -115,5 +85,8 @@ class ReplyUserSpider(scrapy.Spider):
             item['sign_text'] = user['intro'].strip().replace('\t', '').replace('\n', '').replace('\r', '')
             yield item
 
+        if sinceID != -1:
+            yield scrapy.Request(self.userCommentUrl.format(postId, sinceID),
+                                 callback=self.parsePageJson, method='GET', headers=self.headers,
+                                 meta={'postId': postId})
 
-        return (sinceID, rltUserInfoList)
