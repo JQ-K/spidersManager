@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
+import time
 
 from KOL.items import KuaiShouUserIterm;
 
 class KuaishouSpider(scrapy.Spider):
     name = 'kuaishou'
-    #host = "https://apinew.gifshow.com"
+
     listUrl = "https://apinew.gifshow.com/" \
               "rest/n/feed/hot?" \
               "extId=89314196caa21dc7b9e11b9f483754ec&" \
@@ -40,7 +41,6 @@ class KuaishouSpider(scrapy.Spider):
               "kuaishou.api_st=Cg9rdWFpc2hvdS5hcGkuc3QSoAEi6ieXaXEajKxOBAI5uqprumkDesnyBN_eVTY7wN5B1dUFs-jECeFTz-YILxOncjYR3dTAaOgwwxzz0CxyKj6QTfFwF9rdy-e_B3BqHBhkereZhy9TMuebj0wELxlUZTDeQN8-JP1P42dVlJaNMnBt1FguPKHYfk1bJ0IHdtYsRY2FSfQTNuXotRk9Mogfv_BnQgIHCc0eZRV5KDgJWSRJGhJDuMiqtgZPubHrzEMdgDufEMEiIBLMIJkt0X0A-met9wYLP-xEmSaRD9S-lWPTAvBjxImjKAUwAQ&language=zh-Hans-CN%3Bq%3D1&pv=1&sig=6cb58cb420cd91af04350ce45ba9a04c&token=58cc04a5b35d446c9d16e65e991214e7-1577168521&" \
               "user={}"
 
-
     headers = {
         'Host': 'apinew.gifshow.com',
         'Accept': 'application/json',
@@ -54,7 +54,8 @@ class KuaishouSpider(scrapy.Spider):
     }
 
     def start_requests(self):
-        yield scrapy.Request(self.listUrl, headers=self.headers, method='POST', callback=self.parseListUrl)
+        yield scrapy.Request(self.listUrl, headers=self.headers, method='POST',
+                             callback=self.parseListUrl)
 
 
     def parseListUrl(self, response):
@@ -65,17 +66,22 @@ class KuaishouSpider(scrapy.Spider):
         rltJson = json.loads(response.text)
         videoList = rltJson['feeds']
         for videoInfo in videoList:
-            userItem = KuaiShouUserIterm()
-            #userItem['kwaiId'] = videoInfo['kwaiId']
+            '''userItem = KuaiShouUserIterm()
             userItem['user_id'] = videoInfo['user_id']  #此处只取user_id即可
             userItem['user_name'] = videoInfo['user_name']
             userItem['user_sex'] = videoInfo['user_sex']
-            yield userItem
+            yield userItem'''
+            user_id = videoInfo['user_id']
+            time.sleep(1)
+            yield scrapy.Request(self.userUrl.format(user_id), headers=self.headers, method='POST',
+                                 callback=self.parseUserInfoUrl)
+
 
 
     def parseUserInfoUrl(self, response):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
+        print(response.text)
 
 
