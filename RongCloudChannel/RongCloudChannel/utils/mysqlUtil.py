@@ -39,8 +39,10 @@ class MysqlClient(object):
 
 
     def getChannelIdList(self, channelName):
-        #sql = "select distinct channel_id from {} where channel_info_name='{}'".format(tableName, channelName)
-        sql = "SELECT distinct channel_id FROM mcloud_channel c LEFT JOIN mcloud_channel_auth a ON c.id=a.channel_id WHERE c.type = (SELECT id FROM mcloud_channel_info WHERE NAME='{}') AND c.status!=-2 AND a.auth_name='{}账号'".format(channelName, channelName)
+        #sql = "SELECT distinct channel_id FROM mcloud_channel c LEFT JOIN mcloud_channel_auth a ON c.id=a.channel_id WHERE c.type = (SELECT id FROM mcloud_channel_info WHERE NAME='{}') AND c.status!=-2 AND a.auth_name='{}账号'".format(channelName, channelName)
+        #####test
+        sql = "SELECT distinct channel_id FROM mcloud_channel c LEFT JOIN mcloud_channel_auth a ON c.id=a.channel_id WHERE c.type = (SELECT id FROM mcloud_channel_info WHERE NAME='{}') AND c.status!=-2 AND c.login_status!=-1 AND a.auth_name='{}账号'".format(channelName, channelName)
+
         rltList = []
         try:
             cursor = self.conn.cursor()

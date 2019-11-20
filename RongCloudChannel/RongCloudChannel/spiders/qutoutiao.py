@@ -38,11 +38,14 @@ class QutoutiaoSpider(scrapy.Spider):
 
     def parseLoginPage(self, response):
         loginInfo = json.loads(response.text)
+        account = response.meta['account']
         if loginInfo['code'] != 0:
             print("登录失败：" + response.text)
             print(response.meta['formdata'])
+            ####test
+            if isErrorAccount(self.channel_id, response.text):
+                postLoginErrorAccount(self.channel_id, account)
             return
-        account = response.meta['account']
         time.sleep(5)
         yield scrapy.Request(self.articleUrl.format(1, loginInfo['data']['token'], self.dtu),
                              method='GET', callback=self.parseArticlePageJson,
