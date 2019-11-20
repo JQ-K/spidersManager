@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import time
-import json
 
 from scrapy.http import FormRequest
 from RongCloudChannel.items import ContentItem
@@ -24,6 +22,7 @@ class MeipaiSpider(scrapy.Spider):
     def __init__(self):
         self.accountDict = getAllAccountByChannel(self.channel_id)
 
+
     def start_requests(self):
         for user, password in self.accountDict.items():
             formdata = {"client_id": "1189857310",
@@ -42,14 +41,17 @@ class MeipaiSpider(scrapy.Spider):
         if response.status != 200:
             print('get url error: ' + response.url)
             return
+        account = response.meta['account']
         try:
             rltJson = json.loads(response.text)
             userId = str(rltJson['response']['user']['id'])
         except:
             print('登录失败:' + response.text)
             print(response.meta['formdata'])
+            ####test
+            if isErrorAccount(self.channel_id, response.text):
+                postLoginErrorAccount(self.channel_id, account)
             return
-        account = response.meta['account']
         yield scrapy.Request(self.videoListUrl.format(userId),
                              method='GET', callback=self.parseVideoList, meta={'account': account})
 
@@ -105,7 +107,6 @@ class MeipaiSpider(scrapy.Spider):
             temp_publish_time = temp_publish_time.replace("今天", "")
             temp_time = temp_publish_time.split(" ")[-1]
             publish_time = uploadDate + " " + temp_time
-
 
         playCountList = response.xpath('//div[@class="detail-location"]/text()').extract()
         play_count = 0
