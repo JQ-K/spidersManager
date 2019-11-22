@@ -8,6 +8,8 @@
     <orderEntry type="module" module-name="RongCloudChannel" />
     <orderEntry type="module" module-name="CrackCaptcha" />
     <orderEntry type="module" module-name="KOL" />
+    <orderEntry type="module" module-name="KOL" />
+    <orderEntry type="module" module-name="ZJRB" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Twisted Trial" />
