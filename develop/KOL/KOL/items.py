@@ -18,7 +18,7 @@ class KuaiShouUserIterm(scrapy.Item):
     kwaiId = scrapy.Field() #快手号
     user_id = scrapy.Field() #快手id，原始数据为int
     user_name = scrapy.Field() #昵称
-    user_sex = scrapy.Field() #性别
+    user_sex = scrapy.Field() #性别，F-女
     user_text = scrapy.Field() #简介
     head_url = scrapy.Field() #头像地址
     cityCode = scrapy.Field() #邮编
@@ -31,11 +31,14 @@ class KuaiShouUserIterm(scrapy.Item):
     follow = scrapy.Field() #int 关注数
     like = scrapy.Field() #int
     monent = scrapy.Field() #int 动态数
-    phote = scrapy.Field() #int 作品数
-    phote_private = scrapy.Field() #int
-    phote_public = scrapy.Field() #int
+    photo = scrapy.Field() #int 作品数
+    photo_private = scrapy.Field() #int
+    photo_public = scrapy.Field() #int
+
+    user_info_json = scrapy.Field()
 
     product_count = scrapy.Field() #int 快手小店商品数量
+
 
 
 class KuaiShouShopProductItem(scrapy.Item):
