@@ -3,13 +3,11 @@ import scrapy
 import json
 import time
 
-from KOL.items import KuaiShouUserIterm;
+from KOL.items import KuaiShouUserIterm
 from KOL.utils.signatureUtil import *
 
 class KuaishouSpider(scrapy.Spider):
     name = 'kuaishou'
-
-    testUserUrl = "https://api.gifshow.com/rest/n/user/profile/v2?mod=OPPO(OPPO%20R11)&lon=120.174975&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270968&ver=5.2&user=737297724&client_key=3c2cd3f3&os=android&sig=a6c962b318939cf43a39655e332f2cf9"
 
     listPreUrl = "https://api.gifshow.com/rest/n/feed/hot?"
     listMainUrl = "mod=OPPO(OPPO%20R11)&lon=120.174975&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270968&ver=5.2&type=7&page={}&coldStart=false&count=20&pv=false&id=6&refreshTimes=2&pcursor=&client_key=3c2cd3f3&os=android"
@@ -36,8 +34,6 @@ class KuaishouSpider(scrapy.Spider):
 
 
     def start_requests(self):
-        '''yield scrapy.Request(self.testUserUrl, method='POST',  # headers=self.headers,
-                             callback=self.parseUserInfoUrl)'''
         curPage = 1
         totalPage = 1
         while curPage <= totalPage:
@@ -83,27 +79,56 @@ class KuaishouSpider(scrapy.Spider):
             print('get interface error: ' + response.text)
             return
         userInfo = rltJson['userProfile']
+        self.getUserInfoItem(userInfo)
+
+
+    def getUserInfoItem(self, userInfo):
         userItem = KuaiShouUserIterm()
-        #userItem['kwaiId'] =
-        userItem['user_id'] = userInfo['profile']['user_id']
-        userItem['user_name'] = userInfo['profile']['user_name']
-        userItem['user_sex'] = userInfo['profile']['user_sex']
-        userItem['user_text'] = userInfo['profile']['user_text']
-        userItem['head_url'] = userInfo['profile']['headurl']
-        userItem['cityCode'] = userInfo['cityCode']
-        userItem['cityName'] = userInfo['cityName']
-        userItem['constellation'] = userInfo['constellation']
-        userItem['article_public'] = userInfo['ownerCount']['article_public']
-        userItem['collect'] = userInfo['ownerCount']['collect']
-        userItem['fan'] = userInfo['ownerCount']['fan']
-        userItem['follow'] = userInfo['ownerCount']['follow']
-        userItem['like'] = userInfo['ownerCount']['like']
-        userInfo['monent'] = userInfo['ownerCount']['moment']
-        userInfo['photo'] = userInfo['ownerCount']['photo']
-        userItem['photo_private'] = userInfo['ownerCount']['photo_private']
-        userItem['photo_public'] = userInfo['ownerCount']['photo_public']
+        if 'profile' in userInfo:
+            userProfile = userInfo['profile']
+            if 'kwaiId' in userProfile:
+                userItem['kwaiId'] = userProfile['kwaiId']
+            if 'user_id' in userProfile:
+                userItem['user_id'] = userProfile['user_id']
+            if 'user_name' in userProfile:
+                userItem['user_name'] = userProfile['user_name']
+            if 'user_sex' in userProfile:
+                userItem['user_sex'] = userProfile['user_sex']
+            if 'user_text' in userProfile:
+                userItem['user_text'] = userProfile['user_text']
+            if 'headurl' in userProfile:
+                userItem['head_url'] = userProfile['headurl']
+
+        if 'cityCode' in userInfo:
+            userItem['cityCode'] = userInfo['cityCode']
+        if 'cityName' in userInfo:
+            userItem['cityName'] = userInfo['cityName']
+        if 'constellation' in userInfo:
+            userItem['constellation'] = userInfo['constellation']
+
+        if 'ownerCount' in userInfo:
+            ownerCount = userInfo['ownerCount']
+            if 'article_public' in ownerCount:
+                userItem['article_public'] = ownerCount['article_public']
+            if 'collect' in ownerCount:
+                userItem['collect'] = ownerCount['collect']
+            if 'fan' in ownerCount:
+                userItem['fan'] = ownerCount['fan']
+            if 'follow' in ownerCount:
+                userItem['follow'] = ownerCount['follow']
+            if 'like' in ownerCount:
+                userItem['like'] = ownerCount['like']
+            if 'moment' in ownerCount:
+                userInfo['moment'] = ownerCount['moment']
+            if 'photo' in ownerCount:
+                userInfo['photo'] = ownerCount['photo']
+            if 'photo_private' in ownerCount:
+                userItem['photo_private'] = ownerCount['photo_private']
+            if 'photo_public' in ownerCount:
+                userItem['photo_public'] = ownerCount['photo_public']
         #userItem['user_info_json'] = userInfo
         print(userItem)
+
 
 
 

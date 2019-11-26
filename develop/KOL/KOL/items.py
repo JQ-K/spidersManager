@@ -15,10 +15,10 @@ class KolItem(scrapy.Item):
 
 
 class KuaiShouUserIterm(scrapy.Item):
-    kwaiId = scrapy.Field() #快手号
+    kwaiId = scrapy.Field() #快手号，需要用户自己设置，如果用户没设置，就没有这个字段
     user_id = scrapy.Field() #快手id，原始数据为int
     user_name = scrapy.Field() #昵称
-    user_sex = scrapy.Field() #性别，F-女
+    user_sex = scrapy.Field() #性别，F-女,M-男
     user_text = scrapy.Field() #简介
     head_url = scrapy.Field() #头像地址
     cityCode = scrapy.Field() #邮编
@@ -30,7 +30,7 @@ class KuaiShouUserIterm(scrapy.Item):
     fan = scrapy.Field() #int 粉丝数
     follow = scrapy.Field() #int 关注数
     like = scrapy.Field() #int
-    monent = scrapy.Field() #int 动态数
+    moment = scrapy.Field() #int 动态数
     photo = scrapy.Field() #int 作品数
     photo_private = scrapy.Field() #int
     photo_public = scrapy.Field() #int

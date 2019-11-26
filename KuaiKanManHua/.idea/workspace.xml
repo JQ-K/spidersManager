@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/../../CrackCaptcha/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../CrackCaptcha/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL/items.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,11 +17,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/items.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="247">
+              <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -122,9 +133,9 @@
         <option value="$PROJECT_DIR$/../develop/ZJRB/ZJRB/settings.py" />
         <option value="$PROJECT_DIR$/../develop/ZJRB/ZJRB/spiders/TransmitContent.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/test/test.py" />
-        <option value="$PROJECT_DIR$/../develop/KOL/KOL/items.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/utils/signatureUtil.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/settings.py" />
+        <option value="$PROJECT_DIR$/../develop/KOL/KOL/items.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py" />
       </list>
     </option>
@@ -141,7 +152,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -154,10 +164,17 @@
               <item name="KOL" type="462c0819:PsiDirectoryNode" />
               <item name="KOL" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KOL" type="462c0819:PsiDirectoryNode" />
+              <item name="KOL" type="462c0819:PsiDirectoryNode" />
+              <item name="spiders" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -325,7 +342,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.77264655" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.14920071" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -690,15 +707,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/items.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+        <state relative-caret-position="346">
+          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="247">
+          <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
