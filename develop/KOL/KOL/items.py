@@ -37,9 +37,6 @@ class KuaiShouUserIterm(scrapy.Item):
 
     user_info_json = scrapy.Field()
 
-    product_count = scrapy.Field() #int 快手小店商品数量
-
-
 
 class KuaiShouShopProductItem(scrapy.Item):
     user_id = scrapy.Field() #快手id
@@ -56,3 +53,16 @@ class KuaiShouShopProductItem(scrapy.Item):
     updatetime = scrapy.Field() #13位时间戳
     volume = scrapy.Field() #int
 
+
+class KuaiShouShopInfoItem(scrapy.Item):
+    user_id = scrapy.Field()  #快手id
+    #product_count = scrapy.Field()  #int 快手小店商品数量
+    containTaoBao = scrapy.Field() #bool
+    shopLogisticsScore = scrapy.Field() #double
+    shopLogisticsScoreLevel = scrapy.Field() #double
+    shopQualityScore = scrapy.Field() #double 商品质量
+    shopQualityScoreLevel = scrapy.Field() #double
+    shopServiceScore = scrapy.Field() #double 服务态度
+    shopServiceScoreLevel = scrapy.Field() #double
+    totalOrderPayCount = scrapy.Field() #int
+    validCommentCount = scrapy.Field() #int
