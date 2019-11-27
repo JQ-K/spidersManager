@@ -5,6 +5,9 @@
       <change beforePath="$PROJECT_DIR$/../../CrackCaptcha/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../CrackCaptcha/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishoushop.py" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishoushop.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,7 +16,32 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="15" column="74" lean-forward="true" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
+              <folding>
+                <element signature="e#24#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishoushop.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="15" column="16" lean-forward="true" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+              <folding>
+                <element signature="e#24#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -107,15 +135,15 @@
         <option value="$PROJECT_DIR$/../develop/ZJRB/ZJRB/spiders/TransmitContent.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/test/test.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/utils/signatureUtil.py" />
-        <option value="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/middlewares.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/items.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/settings.py" />
+        <option value="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishoushop.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="795" />
     <option name="y" value="333" />
     <option name="width" value="1440" />
@@ -303,9 +331,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26926133" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18030183" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -316,7 +345,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.1793961" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.40142095" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -336,7 +365,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../KOL/KOL/pipelines.py" />
     <entry file="file://$PROJECT_DIR$/../KOL/KOL/settings.py" />
     <entry file="file://$PROJECT_DIR$/../KOL/KOL/spiders/kuaishou.py" />
     <entry file="file://$PROJECT_DIR$/../KOL/KOL/items.py" />
@@ -617,13 +645,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/test/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/signatureUtil.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -672,26 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishoushop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2829">
-          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1413">
-          <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/items.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
@@ -701,8 +702,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+        <state relative-caret-position="-2192">
+          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/test/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/spiders/post_user.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="74" lean-forward="true" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishoushop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="16" lean-forward="true" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

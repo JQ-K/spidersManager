@@ -9,9 +9,11 @@ from KOL.utils.signatureUtil import *
 class KuaishouSpider(scrapy.Spider):
     name = 'kuaishou'
 
+    #首页的url由：listPreUrl + listMainUrl + sigPart 拼接而成，其中listMainUrl进行签名计算
     listPreUrl = "https://api.gifshow.com/rest/n/feed/hot?"
     listMainUrl = "mod=OPPO(OPPO%20R11)&lon=120.174975&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270968&ver=5.2&type=7&page={}&coldStart=false&count=20&pv=false&id=6&refreshTimes=2&pcursor=&client_key=3c2cd3f3&os=android"
 
+    #用户信息的url由：userPreUrl + userMainUrl + sigPart 拼接而成，其中userMainUrl进行签名计算
     userPreUrl = "https://api.gifshow.com/rest/n/user/profile/v2?"
     userMainUrl = "mod=OPPO(OPPO%20R11)&lon=120.174975&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270968&ver=5.2&user={}&client_key=3c2cd3f3&os=android"
 

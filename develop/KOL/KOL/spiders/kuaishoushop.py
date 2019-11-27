@@ -11,7 +11,9 @@ class KuaishoushopSpider(scrapy.Spider):
     user_id = '8290094'
     #user_id = '2'
 
+    #快手小店评分url
     shopScoreUrl = "https://www.kwaishop.com/rest/app/grocery/ks/shop/score?sellerId={}"
+    #快手小店商品列表url
     productUrl = "https://www.kwaishop.com/rest/app/grocery/product/self/midPage/list"
 
     def start_requests(self):
