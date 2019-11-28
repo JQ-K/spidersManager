@@ -23,6 +23,7 @@ NEWSPIDER_MODULE = 'KOL.spiders'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
+#CONCURRENT_REQUESTS = 2
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -126,4 +127,4 @@ UA_POOL= [
     'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 UBrowser/4.0.3214.0 Safari/537.36'
 ]
 
-LOG_LEVEL = 'WARNING'
+LOG_LEVEL = 'ERROR'
