@@ -9,8 +9,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from KOL.utils.signatureUtil import *
 from KOL.utils.parsepage import *
 
-class Kuaishou1Spider(scrapy.Spider):
-    name = 'kuaishou1'
+class KuaishouwebSpider(scrapy.Spider):
+    name = 'kuaishouweb'
 
     #首页的url由：listPreUrl + listMainUrl + sigPart 拼接而成，其中listMainUrl进行签名计算
     listPreUrl = "https://api.gifshow.com/rest/n/feed/hot?"
@@ -18,7 +18,7 @@ class Kuaishou1Spider(scrapy.Spider):
     sigPart = "&sig={}"
 
     def __init__(self, totalPage=1, *args, **kwargs):
-        super(Kuaishou1Spider, self).__init__(*args, **kwargs)
+        super(KuaishouwebSpider, self).__init__(*args, **kwargs)
         self.totalPage = int(totalPage)
         self.sigUtil = signatureUtil()
 

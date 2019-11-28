@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8cf3ca34-eadf-4736-ba86-9813cd9acf3a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../RongCloudChannel/.idea/RongCloudChannel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../RongCloudChannel/.idea/RongCloudChannel.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/KOL.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/KOL.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/KOL/pipelines.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/KOL/settings.py" afterDir="false" />
-    </list>
+    <list default="true" id="8cf3ca34-eadf-4736-ba86-9813cd9acf3a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,32 +10,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KOL/spiders/kuaishou.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="74" column="30" lean-forward="true" selection-start-line="74" selection-start-column="30" selection-end-line="74" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KOL/utils/parsepage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="128" column="12" selection-start-line="128" selection-start-column="12" selection-end-line="128" selection-end-column="12" />
-              <folding>
-                <element signature="e#67#76#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/KOL/utils/signatureUtil.py">
+        <entry file="file://$PROJECT_DIR$/KOL/spiders/kuaishou_web.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="53" column="249" selection-start-line="53" selection-start-column="249" selection-end-line="53" selection-end-column="249" />
+            <state relative-caret-position="342">
+              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -72,10 +41,11 @@
         <option value="$PROJECT_DIR$/KOL/settings.py" />
         <option value="$PROJECT_DIR$/KOL/spiders/kuaishou.py" />
         <option value="$PROJECT_DIR$/KOL/utils/signatureUtil.py" />
+        <option value="$PROJECT_DIR$/KOL/spiders/kuaishou_web.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="3" />
     <option name="y" value="34" />
     <option name="width" value="1440" />
@@ -107,33 +77,6 @@
               <item name="KOL" type="462c0819:PsiDirectoryNode" />
               <item name="KOL" type="462c0819:PsiDirectoryNode" />
               <item name="spiders" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="KOL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KOL" type="462c0819:PsiDirectoryNode" />
-              <item name="KOL" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="KOL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kolpjt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="KOL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kolpjt" type="462c0819:PsiDirectoryNode" />
-              <item name="kolpjt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="KOL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kolpjt" type="462c0819:PsiDirectoryNode" />
-              <item name="kolpjt" type="462c0819:PsiDirectoryNode" />
-              <item name="spiders" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="KOL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kolpjt" type="462c0819:PsiDirectoryNode" />
-              <item name="kolpjt" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -209,12 +152,12 @@
     <frame x="3" y="34" width="1440" height="821" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14235377" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21916842" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32921812" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32921812" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -309,13 +252,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KOL/spiders/kuaishou1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../kolpjt/kolpjt/spiders/kuaishou.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -343,7 +279,21 @@
     <entry file="file://$PROJECT_DIR$/KOL/utils/signatureUtil.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
-          <caret line="53" column="249" selection-start-line="53" selection-start-column="249" selection-end-line="53" selection-end-column="249" />
+          <caret line="53" column="298" lean-forward="true" selection-start-line="53" selection-start-column="298" selection-end-line="53" selection-end-column="298" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KOL/spiders/kuaishou1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="931">
+          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KOL/spiders/kuaishou_web.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
         </state>
       </provider>
     </entry>
