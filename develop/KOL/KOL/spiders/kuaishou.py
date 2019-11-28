@@ -17,6 +17,10 @@ class KuaishouSpider(scrapy.Spider):
     userPreUrl = "https://api.gifshow.com/rest/n/user/profile/v2?"
     userMainUrl = "mod=OPPO(OPPO%20R11)&lon=120.174975&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270968&ver=5.2&user={}&client_key=3c2cd3f3&os=android"
 
+    #用户作品列表页url由：photoPreUrl + photoMainUrl + sigPart拼接而成，其中photoMainUrl进行签名计算
+    photoPreUrl = "http://api.gifshow.com/rest/n/feed/profile2?"
+    photoMainUrl = "mod=OPPO(OPPO%20R11)&lon=120.174975&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270968&ver=5.2&token=&user_id={}&lang=zh&count=30&privacy=public&referer=ks%3A%2F%2Fprofile%2F605395700%2F5221360837644739313%2F1_a%2F2000005775957550673_h495%2F8&client_key=3c2cd3f3&os=android"
+
     sigPart = "&sig={}"
 
     headers = {
@@ -31,9 +35,10 @@ class KuaishouSpider(scrapy.Spider):
     }
 
 
-    def __init__(self, totalPage=1, *args, **kwargs):
-        super(KuaishouSpider, self).__init__(*args, **kwargs)
-        self.totalPage = int(totalPage)
+    def __init__(self):
+        #super(KuaishouSpider, self).__init__(*args, **kwargs)
+        #self.totalPage = int(totalPage)
+        self.totalPage = 1
         self.sigUtil = signatureUtil()
 
 
@@ -131,8 +136,8 @@ class KuaishouSpider(scrapy.Spider):
             if 'photo_public' in ownerCount:
                 userItem['photo_public'] = ownerCount['photo_public']
         #userItem['user_info_json'] = userInfo
-        #print(userItem)
-        yield userItem
+        print(userItem)
+        #yield userItem
 
 
 
