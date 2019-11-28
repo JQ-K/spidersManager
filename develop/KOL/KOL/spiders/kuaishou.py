@@ -31,14 +31,16 @@ class KuaishouSpider(scrapy.Spider):
     }
 
 
-    def __init__(self):
+    def __init__(self, totalPage=1, *args, **kwargs):
+        super(KuaishouSpider, self).__init__(*args, **kwargs)
+        self.totalPage = int(totalPage)
         self.sigUtil = signatureUtil()
 
 
     def start_requests(self):
         curPage = 1
-        totalPage = 1
-        while curPage <= totalPage:
+        self.totalPage = 1
+        while curPage <= self.totalPage:
             tempUrl = self.listMainUrl.format(curPage)
             curPage += 1
             sig = self.sigUtil.getSig(tempUrl)
@@ -55,18 +57,18 @@ class KuaishouSpider(scrapy.Spider):
             return
         rltJson = json.loads(response.text)
         if rltJson['result'] != 1:
-            print('get interface error: ' + response.text)
+            print('get list interface error: ' + response.text)
             return
         videoList = rltJson['feeds']
         for videoInfo in videoList:
             user_id = videoInfo['user_id']
-            print(user_id)
+            #print(user_id)
             tempUrl = self.userMainUrl.format(user_id)
             sig = self.sigUtil.getSig(tempUrl)
             userUrl = self.userPreUrl + tempUrl + self.sigPart.format(sig)
             time.sleep(1)
-            print('userUrl:')
-            print(userUrl)
+            #print('userUrl:')
+            #print(userUrl)
             yield scrapy.Request(userUrl, method='POST', #headers=self.headers,
                                  callback=self.parseUserInfoUrl)
 
@@ -78,7 +80,7 @@ class KuaishouSpider(scrapy.Spider):
             return
         rltJson = json.loads(response.text)
         if rltJson['result'] != 1:
-            print('get interface error: ' + response.text)
+            print('get user interface error: ' + response.text)
             return
         userInfo = rltJson['userProfile']
         self.getUserInfoItem(userInfo)
@@ -129,7 +131,8 @@ class KuaishouSpider(scrapy.Spider):
             if 'photo_public' in ownerCount:
                 userItem['photo_public'] = ownerCount['photo_public']
         #userItem['user_info_json'] = userInfo
-        print(userItem)
+        #print(userItem)
+        yield userItem
 
 
 

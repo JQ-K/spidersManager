@@ -5,6 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
+import json
 
 class KolPipeline(object):
     def process_item(self, item, spider):
@@ -13,5 +14,5 @@ class KolPipeline(object):
 
 class KuaiShouUserPipeline(object):
     def process_item(self, item, spider):
-        print(item)
+        print(json.dumps(dict(item)))
         return item
