@@ -73,7 +73,7 @@ class KuaishouSpider(scrapy.Spider):
             userUrl = self.userPreUrl + tempUrl + self.sigPart.format(sig)
             time.sleep(1)
             #print('userUrl:')
-            #print(userUrl)
+            print(userUrl)
             yield scrapy.Request(userUrl, method='POST', #headers=self.headers,
                                  callback=self.parseUserInfoUrl)
 

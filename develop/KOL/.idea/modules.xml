@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/KOL.iml" filepath="$PROJECT_DIR$/.idea/KOL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../RongCloudChannel/.idea/RongCloudChannel.iml" filepath="$PROJECT_DIR$/../../RongCloudChannel/.idea/RongCloudChannel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../kolpjt/.idea/kolpjt.iml" filepath="$PROJECT_DIR$/../../../kolpjt/.idea/kolpjt.iml" />
     </modules>
   </component>
 </project>
