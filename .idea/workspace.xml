@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1bd3280-c370-4360-91a8-4400a688f9ac" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/develop/KOL/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/develop/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/.idea/KOL.iml" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/.idea/KOL.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/KOL/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/KOL/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/KOL/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/KOL/items.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/KOL/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/KOL/middlewares.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/KOL/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/KOL/pipelines.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/KOL/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/KOL/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/KOL/spiders/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/KOL/spiders/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/KOL/spiders/kuaishou.py" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/KOL/spiders/kuaishou.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOL/scrapy.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/develop/KOL/scrapy.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,49 +13,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/conf/dbconf.ini">
+        <entry file="file://$PROJECT_DIR$/develop/KOL/KOL/spiders/kuaishou.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+            <state relative-caret-position="198">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RongCloudChannel/RongCloudChannel/utils/mysqlUtil.py">
+        <entry file="file://C:/Python36/Lib/site-packages/scrapy/http/request/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KuaiKanManHua/KuaiKanManHua/utils/myredis.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KuaiKanManHua/KuaiKanManHua/spiders/post_user.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
-              <folding>
-                <element signature="e#24#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KuaiKanManHua/KuaiKanManHua/conf/configure.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+            <state relative-caret-position="242">
+              <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -111,6 +67,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -127,13 +84,18 @@
               <item name="spidersManager" type="b2602c69:ProjectViewProjectNode" />
               <item name="spidersManager" type="462c0819:PsiDirectoryNode" />
               <item name="develop" type="462c0819:PsiDirectoryNode" />
+              <item name="ContentAudit" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spidersManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spidersManager" type="462c0819:PsiDirectoryNode" />
+              <item name="develop" type="462c0819:PsiDirectoryNode" />
               <item name="KOL" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -143,6 +105,9 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\project\spidersManager\develop" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -203,7 +168,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18745036" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1604448" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -272,8 +237,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/conf/dbconf.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+        <state relative-caret-position="242">
+          <caret line="11" column="13" lean-forward="true" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -305,6 +270,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/develop/KOL/KOL/spiders/kuaishou.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python36/Lib/site-packages/scrapy/http/request/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
         </state>
       </provider>
     </entry>
