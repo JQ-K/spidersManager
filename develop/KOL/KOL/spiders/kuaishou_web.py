@@ -39,6 +39,7 @@ class KuaishouwebSpider(scrapy.Spider):
             curPage += 1
             sig = self.sigUtil.getSig(tempUrl)
             listUrl = self.listPreUrl + tempUrl + self.sigPart.format(sig)
+            time.sleep(3)
             yield scrapy.Request(listUrl, method='POST',
                                  callback=self.parseListUrl)
 
@@ -57,9 +58,8 @@ class KuaishouwebSpider(scrapy.Spider):
             user_id = videoInfo['user_id']
             #判断user_id是否存在redis
             if self.redisClient.sismember(self.redis_id_set_name, user_id):
+                print('user_id exists: ' + str(user_id))
                 continue
-            self.redisClient.sadd(self.redis_id_set_name, user_id)
-
             share_info = videoInfo["share_info"]
             userId = re.findall("userId=([0-9a-z]+)&", share_info)[0]
             userItem = KuaiShouUserIterm()
@@ -71,6 +71,8 @@ class KuaishouwebSpider(scrapy.Spider):
                 self.getUserInfoByWeb(url, userItem)
             except:
                 continue
+            self.redisClient.sadd(self.redis_id_set_name, user_id)
+            print('get one item')
             yield userItem
 
 
@@ -94,9 +96,9 @@ class KuaishouwebSpider(scrapy.Spider):
         sex = decrypt_str(re.search('"sex"\s*:\s*"(.*?)"', r.text).group(1), mapping)
         constellation = decrypt_str(re.search('"constellation"\s*:\s*"(.*?)"', r.text).group(1), mapping)
         cityName = decrypt_str(re.search('"cityName"\s*:\s*"(.*?)"', r.text).group(1), mapping)
-        print(userId)
+        '''print(userId)
         print(fan, follow, photo, liked, open, private, kwaiId, eid, userId, profile, name, description, sex,
-              constellation, cityName)
+              constellation, cityName)'''
         userItem['kwaiId'] = kwaiId
         userItem['user_name'] = name
         userItem['user_sex'] = sex

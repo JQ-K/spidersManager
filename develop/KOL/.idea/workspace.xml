@@ -1,7 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8cf3ca34-eadf-4736-ba86-9813cd9acf3a" name="Default Changelist" comment="" />
+    <list default="true" id="8cf3ca34-eadf-4736-ba86-9813cd9acf3a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../AUTHORS.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CONTRIBUTING.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Dockerfile.gpu" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../HISTORY.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../MANIFEST.in" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../README.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../README_Korean.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../README_Simplified_Chinese.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/authors.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/conf.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/contributing.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/face_recognition.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/history.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/index.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/installation.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/make.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/modules.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/readme.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docs/usage.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/alex-lacamoire.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/benchmark.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/biden.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/blur_faces_on_webcam.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/digital_makeup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/face_distance.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/face_recognition_knn.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/facerec_from_video_file.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/facerec_from_webcam.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/facerec_from_webcam_faster.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/facerec_from_webcam_multiprocessing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/facerec_on_raspberry_pi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/facerec_on_raspberry_pi_Simplified_Chinese.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/find_faces_in_batches.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/find_faces_in_picture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/find_faces_in_picture_cnn.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/find_facial_features_in_picture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/hamilton_clip.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/identify_and_draw_boxes_on_faces.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/ipynb_examples/track_faces_on_video_realtime.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/test/alex_lacamoire1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/test/johnsnow_test1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/test/kit_with_rose.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/test/obama1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/test/obama_and_biden.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/train/alex_lacamoire/img1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/train/biden/biden.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/train/biden/biden2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/train/kit_harington/john1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/train/kit_harington/john2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/train/obama/obama.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/train/obama/obama2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/train/rose_leslie/img1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/knn_examples/train/rose_leslie/img2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/lin-manuel-miranda.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/obama-1080p.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/obama-240p.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/obama-480p.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/obama-720p.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/obama.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/obama2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/obama_small.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/recognize_faces_in_pictures.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/short_hamilton_clip.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/two_people.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/web_service_example.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examples/web_service_example_Simplified_Chinese.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../face_recognition/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../face_recognition/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../face_recognition/face_detection_cli.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../face_recognition/face_recognition_cli.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../requirements_dev.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../requirements_docs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../setup.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/KOL.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/KOL.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../tests/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../tests/test_face_recognition.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../tests/test_images/32bit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../tests/test_images/biden.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../tests/test_images/obama.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../tests/test_images/obama2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../tests/test_images/obama3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../tests/test_images/obama_partial_face.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../tests/test_images/obama_partial_face2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../tox.ini" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -9,12 +104,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/KOL/spiders/kuaishou_web.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+            <state relative-caret-position="445">
+              <caret line="41" column="25" lean-forward="true" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -46,8 +141,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="3" />
-    <option name="y" value="34" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="821" />
   </component>
@@ -59,7 +153,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -82,6 +175,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -149,7 +243,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="3" y="34" width="1440" height="821" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="821" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21916842" />
@@ -175,9 +269,7 @@
     <entry file="file://$PROJECT_DIR$/../../RongCloudChannel/RongCloudChannel/utils/pwdUtil.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/KOL/utils/MysqlClient.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/KOL/utils/MysqlClient.py" />
     <entry file="file://$PROJECT_DIR$/../../RongCloudChannel/RongCloudChannel/utils/mysqlUtil.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -283,17 +375,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KOL/spiders/kuaishou1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="931">
-          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/KOL/spiders/kuaishou1.py" />
     <entry file="file://$PROJECT_DIR$/KOL/spiders/kuaishou_web.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        <state relative-caret-position="445">
+          <caret line="41" column="25" lean-forward="true" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
         </state>
       </provider>
     </entry>
