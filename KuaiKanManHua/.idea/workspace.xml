@@ -5,13 +5,10 @@
       <change beforePath="$PROJECT_DIR$/../../CrackCaptcha/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../CrackCaptcha/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL/items.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL/pipelines.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou_web.py" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou_web.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL/test/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL/test/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL/utils/mysqlUtil.py" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL/utils/mysqlUtil.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../develop/KOL/document/快手字段.docx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +17,71 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/myredis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="369">
+              <caret line="123" column="48" lean-forward="true" selection-start-line="123" selection-start-column="48" selection-end-line="123" selection-end-column="48" />
+              <folding>
+                <element signature="e#45#57#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/pipelines.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="118">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+              <folding>
+                <element signature="e#195#206#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/mysqlUtil.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="819">
+              <caret line="41" column="45" lean-forward="true" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou_web.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="34" column="27" lean-forward="true" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
+              <folding>
+                <element signature="e#65#78#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/parsepage.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1052">
+              <caret line="81" column="4" selection-start-line="81" selection-start-column="4" selection-end-line="81" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/items.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="447">
+              <caret line="42" column="43" lean-forward="true" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -59,6 +120,7 @@
       <find>print</find>
       <find>user_id</find>
       <find>sis</find>
+      <find>totalPage</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -119,9 +181,9 @@
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/test/test.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/items.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/utils/myredis.py" />
-        <option value="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou_web.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/pipelines.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/utils/mysqlUtil.py" />
+        <option value="$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou_web.py" />
       </list>
     </option>
   </component>
@@ -344,7 +406,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13423352" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.120730735" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -355,7 +417,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.19005328" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3268206" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -661,20 +723,6 @@
     <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/dateUtil.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/parsepage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="74" column="4" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-227">
-          <caret line="42" column="43" lean-forward="true" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/mysqlUtil.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -693,39 +741,12 @@
     <entry file="file://$PROJECT_DIR$/KuaiKanManHua/pipelines.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="19" column="112" selection-start-line="19" selection-start-column="112" selection-end-line="19" selection-end-column="112" />
-          <folding>
-            <element signature="e#195#206#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/mysqlUtil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="24" column="48" lean-forward="true" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/test/getUserId.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="17" column="42" lean-forward="true" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou_web.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="26" column="53" lean-forward="true" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
-          <folding>
-            <element signature="e#65#78#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -749,12 +770,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="42" column="43" lean-forward="true" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/myredis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
+        <state relative-caret-position="369">
           <caret line="123" column="48" lean-forward="true" selection-start-line="123" selection-start-column="48" selection-end-line="123" selection-end-column="48" />
           <folding>
             <element signature="e#45#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/mysqlUtil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="819">
+          <caret line="41" column="45" lean-forward="true" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="e#195#206#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/parsepage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1052">
+          <caret line="81" column="4" selection-start-line="81" selection-start-column="4" selection-end-line="81" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou_web.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="34" column="27" lean-forward="true" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
+          <folding>
+            <element signature="e#65#78#0" expanded="true" />
           </folding>
         </state>
       </provider>

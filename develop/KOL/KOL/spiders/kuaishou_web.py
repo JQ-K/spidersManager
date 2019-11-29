@@ -21,7 +21,7 @@ class KuaishouwebSpider(scrapy.Spider):
 
     redis_id_set_name = "KuaiShouUserId"
 
-    redisClient = RedisClient('10.8.26.105', 6379, 1)
+    redisClient = RedisClient('10.8.26.26', 6379, 1)
 
 
     def __init__(self, totalPage=1, *args, **kwargs):
@@ -32,7 +32,7 @@ class KuaishouwebSpider(scrapy.Spider):
 
     def start_requests(self):
         curPage = 1
-        self.totalPage = 5
+        #self.totalPage = 5
         while curPage <= self.totalPage:
             tempUrl = self.listMainUrl.format(curPage)
             curPage += 1
