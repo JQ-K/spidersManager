@@ -21,7 +21,8 @@ class KuaishouwebSpider(scrapy.Spider):
 
     redis_id_set_name = "KuaiShouUserId"
 
-    redisClient = RedisClient('10.8.26.26', 6379, 1)
+    redisClient = RedisClient('10.8.26.105', 6379, 1)
+    #redisClient = RedisClient('10.8.26.26', 6379, 1)
 
 
     def __init__(self, totalPage=1, *args, **kwargs):

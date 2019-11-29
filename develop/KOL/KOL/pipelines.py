@@ -17,8 +17,8 @@ class KolPipeline(object):
 class KuaiShouUserPipeline(object):
 
     def __init__(self):
-        #self.mysqlClient = MysqlClient(host='10.8.26.106', user='scrapy', password='Scrapy_123', database='test_kuaishou')
-        self.mysqlClient = MysqlClient(host='10.8.26.23', user='hive', password='Hive_123', database='test_kuaishou')
+        self.mysqlClient = MysqlClient(host='10.8.26.106', user='scrapy', password='Scrapy_123', database='test_kuaishou')
+        #self.mysqlClient = MysqlClient(host='10.8.26.23', user='hive', password='Hive_123', database='test_kuaishou')
 
 
     def process_item(self, item, spider):
