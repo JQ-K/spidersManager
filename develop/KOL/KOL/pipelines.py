@@ -17,13 +17,14 @@ class KolPipeline(object):
 class KuaiShouUserPipeline(object):
 
     def __init__(self):
-        #self.mysqlClient = MysqlClient(host='10.8.26.106', user='', password='', database='kuaishou')
+        self.mysqlClient = MysqlClient(host='10.8.26.106', user='scrapy', password='Scrapy_123', database='test_kuaishou')
         pass
 
     def process_item(self, item, spider):
-        print(json.dumps(dict(item)))
+        #print(json.dumps(dict(item)))
+        self.mysqlClient.insertOneUserInfoRecord(item)
         return item
 
     def close_spider(self, spider):
-        #self.mysqlClient.close()
+        self.mysqlClient.close()
         pass

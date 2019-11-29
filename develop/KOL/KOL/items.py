@@ -17,6 +17,7 @@ class KolItem(scrapy.Item):
 class KuaiShouUserIterm(scrapy.Item):
     kwaiId = scrapy.Field() #快手号，需要用户自己设置，如果用户没设置，就没有这个字段
     user_id = scrapy.Field() #快手id，原始数据为int
+    userId = scrapy.Field() #字符串，用于用户信息web页面定位
     user_name = scrapy.Field() #昵称
     user_sex = scrapy.Field() #性别，F-女,M-男
     user_text = scrapy.Field() #简介
@@ -35,6 +36,7 @@ class KuaiShouUserIterm(scrapy.Item):
     photo_private = scrapy.Field() #int
     photo_public = scrapy.Field() #int
 
+    update_time = scrapy.Field() #10位时间戳
     user_info_json = scrapy.Field()
 
 

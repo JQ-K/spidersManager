@@ -22,8 +22,17 @@ class MysqlClient(object):
         return cls(host, user, password, database)
 
 
-    def insertOneUserInfoRecord(self, tableName, userDict):
-        pass
+    def insertOneUserInfoRecord(self, userItem):
+        sql = "insert into user_info (kwaiId, user_id, userId, user_name, user_sex, user_text, head_url, cityName, constellation, fan, follow, liked, photo, update_time) " \
+              "values ({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})"\
+            .format((str(userItem['kwaiId']), int(userItem['user_id']), str(userItem['userId']), userItem['user_name'], userItem['user_sex'], userItem['user_text'], userItem['head_url'], userItem['cityName'], userItem['constellation'], str(userItem['fan']), str(userItem['follow']), str(userItem['like']), str(userItem['photo']), userItem['update_time']))
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql)
+            self.conn.commit()
+        except Exception as e:
+            raise e
+        cursor.close()
 
 
     def close(self):
