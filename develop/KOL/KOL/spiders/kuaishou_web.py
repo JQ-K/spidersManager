@@ -33,7 +33,6 @@ class KuaishouwebSpider(scrapy.Spider):
 
     def start_requests(self):
         curPage = 1
-        #self.totalPage = 5
         while curPage <= self.totalPage:
             tempUrl = self.listMainUrl.format(curPage)
             curPage += 1
@@ -69,7 +68,9 @@ class KuaishouwebSpider(scrapy.Spider):
             time.sleep(1)
             try:
                 self.getUserInfoByWeb(url, userItem)
-            except:
+            except Exception as e:
+                print('parse page error')
+                print(e.args)
                 continue
             self.redisClient.sadd(self.redis_id_set_name, user_id)
             print('get one item')
