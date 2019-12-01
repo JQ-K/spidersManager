@@ -15,6 +15,8 @@ class GraphqlSpider(scrapy.Spider):
     #redisClient = RedisClient('10.8.26.105', 6379, 1)
     redisClient = RedisClient('10.8.26.26', 6379, 1)
 
+    filePath = "/Users/macbookpro/PycharmProjects/spidersManager/develop/KOL/test/gameUser.txt"
+
     url = "https://live.kuaishou.com/graphql"
 
     headers = {
@@ -24,10 +26,10 @@ class GraphqlSpider(scrapy.Spider):
     bodyJson = {
         "operationName": "videoFeedsQuery",
         "variables": {
-            "count": 10,
+            "count": 200,
             "pcursor": "0"
         },
-        "query": "fragment VideoMainInfo on VideoFeed {\n  photoId\n  caption\n  thumbnailUrl\n  poster\n  viewCount\n  likeCount\n  commentCount\n  timestamp\n  workType\n  type\n  useVideoPlayer\n  imgUrls\n  imgSizes\n  magicFace\n  musicName\n  location\n  liked\n  onlyFollowerCanComment\n  width\n  height\n  expTag\n  __typename\n}\n\nquery videoFeedsQuery($pcursor: String, $count: Int) {\n  videoFeeds(pcursor: $pcursor, count: $count) {\n    list {\n      user {\n        id\n        eid\n        profile\n        name\n        __typename\n      }\n      ...VideoMainInfo\n      __typename\n    }\n    pcursor\n    __typename\n  }\n}\n"
+        "query": "fragment VideoMainInfo on VideoFeed {\n  photoId\n  caption\n  thumbnailUrl\n  poster\n  viewCount\n  likeCount\n  commentCount\n  timestamp\n  workType\n  type\n  useVideoPlayer\n  imgUrls\n  imgSizes\n  magicFace\n  musicName\n  location\n  liked\n  onlyFollowerCanComment\n  width\n  height\n  expTag\n  __typename\n}\n\nquery videoFeedsQuery($pcursor: String, $count: Int) {\n  videoFeeds(pcursor: $pcursor, count: $count) {\n    list {\n      user {\n        id\n        eid\n        profile\n        name\n        kwaiId\n    __typename\n      }\n      ...VideoMainInfo\n      __typename\n    }\n    pcursor\n    __typename\n  }\n}\n"
     }
 
 
@@ -38,16 +40,16 @@ class GraphqlSpider(scrapy.Spider):
 
     def start_requests(self):
         curPage = 1
-        while True:
-            time.sleep(3)
-            if curPage > self.totalPage:
-                break
+        while curPage <= self.totalPage:
             curPage += 1
+            time.sleep(3)
             yield scrapy.Request(self.url, headers=self.headers, body=json.dumps(self.bodyJson),
                                  method='POST', callback=self.parseGraphql)
 
 
     def parseGraphql(self, response):
+
+        f = open(self.filePath, "a+", encoding='utf-8')
         #print(response.text)
         if response.status != 200:
             print('get url error: ' + response.url)
@@ -56,27 +58,33 @@ class GraphqlSpider(scrapy.Spider):
         userList = rltJson['data']['videoFeeds']['list']
         for user in userList:
             id = user['user']['id']
-            print(id)
+            #print(id)
             if self.redisClient.sismember(self.redis_id_set_name, id):
                 print('id exists: ' + str(id))
                 continue
             userItem = KuaiShouUserIterm()
             userItem['user_id'] = -1
             userItem['userId'] = id
-            url = 'https://live.kuaishou.com/profile/{}'.format(id)
+            userItem['kwaiId'] = user['user']['kwaiId']
+            userItem['head_url'] = user['user']['profile']
+            userItem['user_name'] = user['user']['name']
+            '''url = 'https://live.kuaishou.com/profile/{}'.format(id)
             time.sleep(1)
-            self.getUserInfoByWeb(url, userItem)
-            '''try:
+            try:
                 self.getUserInfoByWeb(url, userItem)
             except:
                 print('get user info error:' + str(id))
                 continue'''
             self.redisClient.sadd(self.redis_id_set_name, id)
             print('get one item:' + str(id))
-            yield userItem
+            rltStr = userItem['userId'] + '\t' + userItem['kwaiId'] + '\t' + userItem['head_url'] + '\t' + userItem['user_name']
+            f.write(rltStr + '\n')
+            #yield userItem
+            #print(userItem)
+        f.close()
 
 
-    def getUserInfoByWeb(self, url, userItem):
+    '''def getUserInfoByWeb(self, url, userItem):
         r = get_kuai_page(url)
         print(r.text)
         mapping = get_mapping(r.text)
@@ -97,9 +105,7 @@ class GraphqlSpider(scrapy.Spider):
         sex = decrypt_str(re.search('"sex"\s*:\s*"(.*?)"', r.text).group(1), mapping)
         constellation = decrypt_str(re.search('"constellation"\s*:\s*"(.*?)"', r.text).group(1), mapping)
         cityName = decrypt_str(re.search('"cityName"\s*:\s*"(.*?)"', r.text).group(1), mapping)
-        '''print(userId)
-        print(fan, follow, photo, liked, open, private, kwaiId, eid, userId, profile, name, description, sex,
-              constellation, cityName)'''
+        
         userItem['kwaiId'] = kwaiId
         userItem['user_name'] = name
         userItem['user_sex'] = sex
@@ -117,7 +123,7 @@ class GraphqlSpider(scrapy.Spider):
         userItem['photo'] = photo
         #userItem['photo_private'] =
         #userItem['photo_public'] =
-        userItem['update_time'] = int(time.time())
+        userItem['update_time'] = int(time.time())'''
 
 
     def close(self):

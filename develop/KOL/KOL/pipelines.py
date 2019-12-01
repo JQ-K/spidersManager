@@ -21,6 +21,7 @@ class KuaiShouUserPipeline(object):
         #self.mysqlClient = MysqlClient(host='10.8.26.23', user='hive', password='Hive_123', database='test_kuaishou')
 
 
+
     def process_item(self, item, spider):
         #print(json.dumps(dict(item)))
         self.mysqlClient.insertOneUserInfoRecord(item)
@@ -28,4 +29,4 @@ class KuaiShouUserPipeline(object):
 
     def close_spider(self, spider):
         self.mysqlClient.close()
-        pass
+
