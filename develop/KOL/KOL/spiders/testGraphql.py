@@ -2,6 +2,7 @@
 import scrapy
 import json
 import time
+from random import choice
 
 from KOL.configure.graphqlQuery import *
 from KOL.utils.myredis import RedisClient
@@ -30,16 +31,38 @@ class TestgraphqlSpider(scrapy.Spider):
         'content-type': 'application/json',
     }'''
 
-    cookies = {
-        'did': 'web_398544336a2a4c89bafe36006a1c399d'
-    }
+    didList = ['web_d54ea5e1190a41e481809b9cd17f92aa', 'web_5a63ef3c91c34b8e853c91b68d92208b']
 
-    def __init__(self):
-        self.idSet = self.redisClient.smembers(self.redis_id_set_name)
+    '''cookies = {
+        #'did': 'web_398544336a2a4c89bafe36006a1c399d',
+        #'did': 'web_d54ea5e1190a41e481809b9cd17f92aa',
+    }'''
+
+    def __init__(self, userId='xiena666', *args, **kwargs):
+        super(TestgraphqlSpider, self).__init__(*args, **kwargs)
+        #self.idSet = self.redisClient.smembers(self.redis_id_set_name)
+        self.userId = userId
+
+
+    def getCookie(self):
+        tempCookie = {}
+        tempCookie['did'] = choice(self.didList)
+        return tempCookie
 
 
     def start_requests(self):
-        for id in self.idSet:
+        id = self.userId
+        print("cur id:")
+        print(id)
+        feedQuery = publicFeedsQuery
+        feedQuery['variables']['principalId'] = id
+        feedQuery['variables']['pcursor'] = '0'
+        time.sleep(3)
+        yield scrapy.Request(self.url, headers=self.headers, body=json.dumps(feedQuery),
+                             method='POST', callback=self.parsePublicFeeds, meta={'bodyJson': feedQuery},
+                             cookies=self.getCookie()
+                             )
+        '''for id in self.idSet:
             print("cur id:")
             print(id)
             feedQuery = publicFeedsQuery
@@ -48,8 +71,8 @@ class TestgraphqlSpider(scrapy.Spider):
             time.sleep(3)
             yield scrapy.Request(self.url, headers=self.headers, body=json.dumps(feedQuery),
                                  method='POST', callback=self.parsePublicFeeds, meta={'bodyJson': feedQuery},
-                                 cookies=self.cookies
-                                 )
+                                 cookies=self.getCookie()
+                                 )'''
 
 
     def parsePublicFeeds(self, response):
@@ -77,14 +100,14 @@ class TestgraphqlSpider(scrapy.Spider):
             time.sleep(2)
             yield scrapy.Request(self.url, headers=self.headers, body=json.dumps(commentQuery),
                                  method='POST', callback=self.parseCommentByPhotoId, meta={'bodyJson': commentQuery},
-                                 cookies=self.cookies
+                                 cookies=self.getCookie()
                                  )
         if pcursor != 'no_more':
             feedQuery['variables']['pcursor'] = pcursor
             time.sleep(2)
             yield scrapy.Request(self.url, headers=self.headers, body=json.dumps(feedQuery),
                                  method='POST', callback=self.parsePublicFeeds, meta={'bodyJson': feedQuery},
-                                 cookies=self.cookies
+                                 cookies=self.getCookie()
                                  )
 
 
@@ -134,7 +157,7 @@ class TestgraphqlSpider(scrapy.Spider):
             time.sleep(2)
             yield scrapy.Request(self.url, headers=self.headers, body=json.dumps(commentQuery),
                                  method='POST', callback=self.parseCommentByPhotoId, meta={'bodyJson': commentQuery},
-                                 cookies=self.cookies
+                                 cookies=self.getCookie()
                                  )
 
 
