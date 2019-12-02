@@ -6,8 +6,11 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 import json
-from KOL.utils.mysqlUtil import MysqlClient
+
+from KOL.utils.mysql import MysqlClient
+
 from KOL.items import *
+
 
 
 class KolPipeline(object):
