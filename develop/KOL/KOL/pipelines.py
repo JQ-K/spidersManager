@@ -7,6 +7,7 @@
 
 import json
 from KOL.utils.mysqlUtil import MysqlClient
+from KOL.items import *
 
 
 class KolPipeline(object):
@@ -23,8 +24,10 @@ class KuaiShouUserPipeline(object):
 
 
     def process_item(self, item, spider):
-        #print(json.dumps(dict(item)))
-        self.mysqlClient.insertOneUserInfoRecord(item)
+        if 'kwaiId' in item:
+            self.mysqlClient.insertOneUserInfoRecord(item)
+        if 'authorId' in item:
+            self.mysqlClient.insertOneCommentUserInfoRecord(item)
         return item
 
     def close_spider(self, spider):

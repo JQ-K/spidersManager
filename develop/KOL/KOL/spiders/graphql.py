@@ -15,7 +15,8 @@ class GraphqlSpider(scrapy.Spider):
     #redisClient = RedisClient('10.8.26.105', 6379, 1)
     redisClient = RedisClient('10.8.26.26', 6379, 1)
 
-    filePath = "/Users/macbookpro/PycharmProjects/spidersManager/develop/KOL/test/gameUser.txt"
+    #filePath = "/Users/macbookpro/PycharmProjects/spidersManager/develop/KOL/test/gameUser.txt"
+    filePath = "D:/py_workspace/spidersManager/develop/KOL/test/gameUser.txt"
 
     url = "https://live.kuaishou.com/graphql"
 

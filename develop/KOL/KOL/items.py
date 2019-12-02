@@ -68,3 +68,10 @@ class KuaiShouShopInfoItem(scrapy.Item):
     shopServiceScoreLevel = scrapy.Field() #double
     totalOrderPayCount = scrapy.Field() #int
     validCommentCount = scrapy.Field() #int
+
+
+class TestCommentUserItem(scrapy.Item):
+    authorId = scrapy.Field()
+    authorName = scrapy.Field()
+    headurl = scrapy.Field()
+    authorEid = scrapy.Field()
