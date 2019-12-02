@@ -105,9 +105,8 @@ def get_mapping(page):
 
 
 def get_kuai_page(url):
-    headers = {
+    '''headers = {
         "Host": "live.kuaishou.com",
-        "Connection": "keep-alive",
         "Cache-Control": "max-age=0",
         "Upgrade-Insecure-Requests": "1",
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36",
@@ -119,7 +118,18 @@ def get_kuai_page(url):
         "Accept-Encoding": "gzip, deflate, br",
         "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
         "Cookie": "did=web_d54ea5e1190a41e481809b9cd17f92aa; didv=1574056613000; Hm_lvt_86a27b7db2c5c0ae37fee4a8a35033ee=1574131630; clientid=3; client_key=65890b29; kuaishou.live.bfb1s=3e261140b0cf7444a0ba411c6f227d88"
+    }'''
+
+    headers = {
+        "connection": "close",
+        "Host": "live.kuaishou.com",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+        'Cookie': 'client_key=65890b29; clientid=3; did=web_54091ed760f84f168198018254a24fec; kuaishou.live.bfb1s=3e261140b0cf7444a0ba411c6f227d88; Hm_lvt_86a27b7db2c5c0ae37fee4a8a35033ee=1570965929; didv=1570965928000'
     }
+
     r = requests.get(url, headers=headers, verify=False)
     return r
 

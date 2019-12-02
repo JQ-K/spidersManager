@@ -49,6 +49,22 @@ class MysqlClient(object):
         cursor.close()
 
 
+    def insertOneCommentUserInfoRecord(self, userItem):
+        sql = "insert into comment_user_info " \
+              "(authorId, authorName, headurl, authorEid) " \
+              "values ({}, '{}', '{}', '{}')"\
+            .format(int(userItem['authorId']), userItem['authorName'], userItem['headurl'], userItem['authorEid'])
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql)
+            self.conn.commit()
+        except Exception as e:
+            print('insert to mysql error')
+            print(userItem)
+            raise e
+        cursor.close()
+
+
     def close(self):
         try:
             self.conn.close()

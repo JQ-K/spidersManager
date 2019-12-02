@@ -66,21 +66,23 @@ class KuaishouwebSpider(scrapy.Spider):
             userItem['user_id'] = user_id
             userItem['userId'] = userId
             url = 'https://live.kuaishou.com/profile/{}'.format(userId)
-            time.sleep(1)
+            time.sleep(2)
             try:
                 self.getUserInfoByWeb(url, userItem)
             except Exception as e:
                 print('parse page error')
-                print(e.args)
+                raise e
                 continue
             self.redisClient.sadd(self.redis_id_set_name, user_id)
-            print('get one item')
+            print('get one new item: ' + str(userId))
             yield userItem
 
 
     def getUserInfoByWeb(self, url, userItem):
         r = get_kuai_page(url)
         mapping = get_mapping(r.text)
+
+        #print(r.text)
 
         # 解析页面
         fan = decrypt_str(re.search('"fan"\s*:\s*"(.*?)"', r.text).group(1), mapping)
@@ -98,9 +100,9 @@ class KuaishouwebSpider(scrapy.Spider):
         sex = decrypt_str(re.search('"sex"\s*:\s*"(.*?)"', r.text).group(1), mapping)
         constellation = decrypt_str(re.search('"constellation"\s*:\s*"(.*?)"', r.text).group(1), mapping)
         cityName = decrypt_str(re.search('"cityName"\s*:\s*"(.*?)"', r.text).group(1), mapping)
-        '''print(userId)
-        print(fan, follow, photo, liked, open, private, kwaiId, eid, userId, profile, name, description, sex,
-              constellation, cityName)'''
+        #print(userId)
+        #print(fan, follow, photo, liked, open, private, kwaiId, eid, userId, profile, name, description, sex,
+        #      constellation, cityName)
         userItem['kwaiId'] = kwaiId
         userItem['user_name'] = name
         userItem['user_sex'] = sex
