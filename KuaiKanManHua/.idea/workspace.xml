@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58252e76-1a40-419f-9f30-7a2224ee9d7e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../CrackCaptcha/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../CrackCaptcha/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../spiders/.idea/scrapyplus.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL/items.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../develop/KOL/KOL/spiders/testGraphql.py" beforeDir="false" afterPath="$PROJECT_DIR$/../develop/KOL/KOL/spiders/testGraphql.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../develop/KOL/KOL/utils/.idea/utils.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,75 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/configure/graphqlQuery.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="693">
-              <caret line="33" column="17" lean-forward="true" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/testGraphql.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/parsepage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
-              <caret line="84" column="30" lean-forward="true" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
-              <folding>
-                <element signature="e#67#76#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/testUserInfoGraphql.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/items.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="693">
-              <caret line="33" column="42" lean-forward="true" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou_web.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="47">
-              <caret line="80" column="46" lean-forward="true" selection-start-line="80" selection-start-column="46" selection-end-line="80" selection-end-column="46" />
-              <folding>
-                <element signature="e#65#78#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/mysql.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-199" />
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -136,7 +65,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/ZheJiangXinWen.py" />
         <option value="$PROJECT_DIR$/../../CrackCaptcha/preprocess.py" />
         <option value="$PROJECT_DIR$/../../CrackCaptcha/main.py" />
         <option value="$PROJECT_DIR$/../../CrackCaptcha/test/test.py" />
@@ -187,10 +115,11 @@
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/items.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/spiders/testUserInfoGraphql.py" />
         <option value="$PROJECT_DIR$/../develop/KOL/KOL/spiders/testGraphql.py" />
+        <option value="$PROJECT_DIR$/../develop/KOL/KOL/utils/didUtil.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="231" />
     <option name="y" value="258" />
     <option name="width" value="1440" />
@@ -219,18 +148,6 @@
               <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
               <item name="KOL" type="462c0819:PsiDirectoryNode" />
               <item name="KOL" type="462c0819:PsiDirectoryNode" />
-              <item name="configure" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KOL" type="462c0819:PsiDirectoryNode" />
-              <item name="KOL" type="462c0819:PsiDirectoryNode" />
-              <item name="spiders" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KOL" type="462c0819:PsiDirectoryNode" />
-              <item name="KOL" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -241,7 +158,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../develop/KOL/KOL/utils" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../develop/KOL" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -262,7 +179,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test (1)">
+  <component name="RunManager" selected="Python.didUtil">
+    <configuration name="didUtil" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="KOL" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Python\Python36\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../develop/KOL/KOL/utils" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../develop/KOL/KOL/utils/didUtil.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="getUserId" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="KOL" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -326,27 +264,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="ZJRB" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../develop/ZJRB/ZJRB/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../develop/ZJRB/ZJRB/test/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ZJRB" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -370,11 +287,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.didUtil" />
         <item itemvalue="Python.test (1)" />
         <item itemvalue="Python.signatureUtil" />
         <item itemvalue="Python.getUserId" />
         <item itemvalue="Python.test2" />
-        <item itemvalue="Python.test (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -392,7 +309,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24861" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -425,11 +342,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../spiders/app_video/test/testDouyin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../spiders/app_video/test/test.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -468,16 +380,7 @@
         <state relative-caret-position="-1356" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/SouGou.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/SouGou.py" />
     <entry file="file://C:/Python/Python36/Lib/site-packages/selenium/webdriver/chrome/webdriver.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
@@ -505,26 +408,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/MeiPai.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="54" column="24" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/RenRen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="48" column="55" lean-forward="true" selection-start-line="48" selection-start-column="55" selection-end-line="48" selection-end-column="55" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/MeiPai.py" />
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/spiders/RenRen.py" />
     <entry file="file://C:/Python/Python36/Lib/site-packages/requests/api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-12">
@@ -563,37 +448,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/pwdUtil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="24" lean-forward="true" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/middlewares.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1743">
-          <caret line="83" column="62" lean-forward="true" selection-start-line="83" selection-start-column="62" selection-end-line="83" selection-end-column="62" />
-          <folding>
-            <element signature="e#170#196#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="30" column="44" lean-forward="true" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="92" column="21" lean-forward="true" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/pwdUtil.py" />
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/middlewares.py" />
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/items.py" />
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/settings.py" />
     <entry file="file://C:/Python/Python36/Lib/site-packages/scrapy/http/request/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
@@ -611,11 +469,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1645" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/settings.py" />
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/test/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -633,27 +487,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/dateUtil.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/mysqlUtil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="56" column="22" lean-forward="true" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
-          <folding>
-            <element signature="e#25#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/utils/myredis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/dateUtil.py" />
+    <entry file="file://$PROJECT_DIR$/../RongCloudChannel/RongCloudChannel/utils/mysqlUtil.py" />
+    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/utils/myredis.py" />
+    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/pipelines.py" />
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/test/getUserId.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -664,13 +501,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/spiders/post_user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1676">
-          <caret line="99" column="4" lean-forward="true" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/spiders/post_user.py" />
     <entry file="file://$PROJECT_DIR$/../../spiders/app_video/test/kuaikanmanhua_bbs_user_info.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
@@ -735,23 +566,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/spiders/reply_user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-177">
-          <caret line="33" column="68" lean-forward="true" selection-start-line="33" selection-start-column="68" selection-end-line="33" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/mysqlUtil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1094">
-          <caret line="57" column="39" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
-          <folding>
-            <element signature="e#25#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/KuaiKanManHua/spiders/reply_user.py" />
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/mysqlUtil.py" />
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -760,21 +576,6 @@
             <element signature="e#195#206#0" expanded="true" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou_web.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="80" column="46" lean-forward="true" selection-start-line="80" selection-start-column="46" selection-end-line="80" selection-end-column="46" />
-          <folding>
-            <element signature="e#65#78#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/mysql.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-199" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/configure/graphqlQuery.py">
@@ -801,17 +602,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/testUserInfoGraphql.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/items.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="693">
           <caret line="33" column="42" lean-forward="true" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/kuaishou_web.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47">
+          <caret line="80" column="46" lean-forward="true" selection-start-line="80" selection-start-column="46" selection-end-line="80" selection-end-column="46" />
+          <folding>
+            <element signature="e#65#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/mysql.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/spiders/testUserInfoGraphql.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/KOL/KOL/utils/didUtil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
         </state>
       </provider>
     </entry>
