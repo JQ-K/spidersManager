@@ -31,12 +31,10 @@ class TestgraphqlSpider(scrapy.Spider):
         'content-type': 'application/json',
     }'''
 
-    didList = ['web_d54ea5e1190a41e481809b9cd17f92aa', 'web_5a63ef3c91c34b8e853c91b68d92208b']
+    didList = ['web_398544336a2a4c89bafe36006a1c399d',
+               'web_d54ea5e1190a41e481809b9cd17f92aa',
+               'web_5a63ef3c91c34b8e853c91b68d92208b',]
 
-    '''cookies = {
-        #'did': 'web_398544336a2a4c89bafe36006a1c399d',
-        #'did': 'web_d54ea5e1190a41e481809b9cd17f92aa',
-    }'''
 
     def __init__(self, userId='xiena666', *args, **kwargs):
         super(TestgraphqlSpider, self).__init__(*args, **kwargs)
