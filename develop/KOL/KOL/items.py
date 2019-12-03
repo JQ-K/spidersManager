@@ -26,15 +26,15 @@ class KuaiShouUserIterm(scrapy.Item):
     cityName = scrapy.Field() #城市
     constellation = scrapy.Field() #星座
 
-    article_public = scrapy.Field() #int
-    collect = scrapy.Field() #int
-    fan = scrapy.Field() #int 粉丝数
-    follow = scrapy.Field() #int 关注数
-    like = scrapy.Field() #int
-    moment = scrapy.Field() #int 动态数
-    photo = scrapy.Field() #int 作品数
-    photo_private = scrapy.Field() #int
-    photo_public = scrapy.Field() #int
+    article_public = scrapy.Field() #int，改成str
+    collect = scrapy.Field() #int，改成str
+    fan = scrapy.Field() #int 粉丝数，改成str
+    follow = scrapy.Field() #int 关注数，改成str
+    like = scrapy.Field() #int，改成str
+    moment = scrapy.Field() #int 动态数，改成str
+    photo = scrapy.Field() #int 作品数，改成str
+    photo_private = scrapy.Field() #int，改成str
+    photo_public = scrapy.Field() #int，改成str
 
     update_time = scrapy.Field() #10位时间戳
     user_info_json = scrapy.Field()
