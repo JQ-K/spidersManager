@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../develop/KOL/.idea/KOL.iml" filepath="$PROJECT_DIR$/../develop/KOL/.idea/KOL.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/KuaiKanManHua.iml" filepath="$PROJECT_DIR$/.idea/KuaiKanManHua.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../develop/RongCloudChannel/.idea/RongCloudChannel.iml" filepath="$PROJECT_DIR$/../develop/RongCloudChannel/.idea/RongCloudChannel.iml" />
     </modules>
   </component>
 </project>

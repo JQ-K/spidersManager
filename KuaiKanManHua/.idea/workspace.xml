@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58252e76-1a40-419f-9f30-7a2224ee9d7e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../develop/KOL/KOL/utils/.idea/utils.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/KuaiKanManHua.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/KuaiKanManHua.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,7 +13,24 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../develop/RongCloudChannel/RongCloudChannel/utils/mysqlUtil.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../develop/RongCloudChannel/RongCloudChannel/spiders/BaiJiaHao.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-124" />
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -131,34 +149,34 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KOL" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KOL" type="462c0819:PsiDirectoryNode" />
-              <item name="KOL" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="KuaiKanManHua" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KOL" type="462c0819:PsiDirectoryNode" />
-              <item name="KOL" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../develop/KOL" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../develop/RongCloudChannel" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -309,9 +327,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24861" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1731533" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -342,19 +360,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../spiders/app_video/test/test.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../spiders/app_video/test/sendUrlToRedis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-146" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../spiders/app_video/test/kuaikanmanhua_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1771" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../spiders/app_video/test/kuaikanmanhua_bbs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1766">
@@ -638,6 +643,21 @@
         <state relative-caret-position="336">
           <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/RongCloudChannel/RongCloudChannel/spiders/new 3">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/RongCloudChannel/RongCloudChannel/utils/mysqlUtil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../develop/RongCloudChannel/RongCloudChannel/spiders/BaiJiaHao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-124" />
       </provider>
     </entry>
   </component>
