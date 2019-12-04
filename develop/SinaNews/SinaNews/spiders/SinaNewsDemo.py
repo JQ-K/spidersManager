@@ -4,6 +4,7 @@ import  os
 import  sys
 
 from  SinaNews.items import SinanewsItem
+from scrapy_redis import  *
 
 class SinanewsdemoSpider(scrapy.Spider):
     name = 'SinaNewsDemo'
