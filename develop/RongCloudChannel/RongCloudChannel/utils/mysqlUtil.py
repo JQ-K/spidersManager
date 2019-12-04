@@ -94,6 +94,24 @@ class MysqlClient(object):
         return id
 
 
+    def getTargetIdDictByChannelName(self, channelName):
+        sql = "select target_id, type from mcloud_dispatch_task WHERE channel_info_name='{}' AND STATUS=8 and target_id is not null".format(channelName)
+        rltDict = {}
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql)
+            results = cursor.fetchall()
+            for row in results:
+                target_id = row[0]
+                type = row[1]
+                rltDict[target_id] = type
+        except Exception as e:
+            rltDict = {}
+            raise e
+        cursor.close()
+        return rltDict
+
+
     def close(self):
         try:
             self.conn.close()

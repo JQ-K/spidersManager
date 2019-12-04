@@ -6,7 +6,8 @@ POST_CONF = {
     'headers': {
         'content-type': 'application/json',
     },
-    'login_error_api': 'http://beta.rongcloud.zhanqi.tv/api/mcloud/stat/partner/change_login',
+    'login_error_api': 'http://beta.rongcloud.zhanqi.tv/api/mcloud/stat/partner/change_login',  #beta
+    #'login_error_api': 'https://www.tianshucloud.cn/api/mcloud/stat/partner/change_login',     #正式
 }
 
 DB_CONF_DIR = "/data/code/crawlab-master/spiders/conf"     #beta
