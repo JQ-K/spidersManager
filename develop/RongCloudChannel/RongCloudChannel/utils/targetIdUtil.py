@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from RongCloudChannel.utils.mysqlUtil import MysqlClient
+from RongCloudChannel.conf.configure import *
 
 
 def getAllTargetIdByChannel(channelName):
