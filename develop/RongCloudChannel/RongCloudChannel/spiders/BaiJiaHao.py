@@ -13,13 +13,13 @@ class BaijiahaoSpider(scrapy.Spider):
     channel_id = '百家号'
 
     #视频:type=h
-    vid = '16335743810432281251'
+    #vid = '16335743810432281251'
     videoUrl = "https://haokan.baidu.com/v?vid={}"
     videoAuthorUrl = "https://haokan.baidu.com/videoui/api/videoauthor?vid={}"
     videoCommentUrl = "https://haokan.baidu.com/videoui/api/commentget?url_key={}"
 
     #文章:type=t  文章没有作者信息
-    tid = '1637929714955564586'
+    #tid = '1637929714955564586'
     articalUrl = "http://baijiahao.baidu.com/builder/preview/s?id={}"
     articalCommentUrl = "https://mbd.baidu.com/po/api/comment/getInfo.json?comType=baidumedia&tid={}"
 
