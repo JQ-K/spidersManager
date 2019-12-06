@@ -12,35 +12,33 @@ import requests
 from RongCloudChannel.conf.configure import *
 from RongCloudChannel.utils.pwdUtil import *
 
+
 class RongcloudchannelPipeline(object):
 
     api = POST_CONF['url']
     headers = POST_CONF['headers']
 
     def __init__(self):
-        self.resultDict = {}
-        self.listItem = []
+        self.totalDict = {}
         self.accountStaticDict = {}
 
 
     def process_item(self, item, spider):
         #print(json.dumps(dict(item)))
         #self.writeItemToTxt(item)
-
-        account = item['account_id']
-        if account in self.accountStaticDict:
-            self.accountStaticDict[account] += 1
-        else:
-            self.accountStaticDict[account] = 1
+        if 'account_id' in item:
+            if item['record_class'] == 'content_info':
+                account = item['account_id']
+                if account in self.accountStaticDict:
+                    self.accountStaticDict[account] += 1
+                else:
+                    self.accountStaticDict[account] = 1
 
         if item['record_class'] == 'channel_info':
             self.updateChannelInfo(item)
 
         if item['record_class'] == 'content_info':
             self.updateContentInfo(item)
-
-        if len(self.listItem) == 10:
-            self.postItems()
 
         return item
 
@@ -52,18 +50,23 @@ class RongcloudchannelPipeline(object):
 
 
     def updateChannelInfo(self, item):
+        account = item['account_id']
+        if account not in self.totalDict:
+            self.totalDict[account] = {}
+            self.totalDict[account]['s'] = []
+
         if 'channel_id' in item:
-            self.resultDict['code'] = item['channel_id']
+            self.totalDict[account]['code'] = item['channel_id']
         if 'new_visit_count' in item:
-            self.resultDict['ngc'] = self.getIntValue(item['new_visit_count'])
+            self.totalDict[account]['ngc'] = self.getIntValue(item['new_visit_count'])
         if 'total_visit_count' in item:
-            self.resultDict['tgc'] = self.getIntValue(item['total_visit_count'])
+            self.totalDict[account]['tgc'] = self.getIntValue(item['total_visit_count'])
         if 'new_subscribe_count' in item:
-            self.resultDict['nfs'] = self.getIntValue(item['new_subscribe_count'])
+            self.totalDict[account]['nfs'] = self.getIntValue(item['new_subscribe_count'])
         if 'total_subscribe_count' in item:
-            self.resultDict['fs'] = self.getIntValue(item['total_subscribe_count'])
+            self.totalDict[account]['fs'] = self.getIntValue(item['total_subscribe_count'])
         if 'cancel_fans_count' in item:
-            self.resultDict['cfs'] = self.getIntValue(item['cancel_fans_count'])
+            self.totalDict[account]['cfs'] = self.getIntValue(item['cancel_fans_count'])
 
 
     def updateContentInfo(self, item):
@@ -97,7 +100,28 @@ class RongcloudchannelPipeline(object):
         if 'download_count' in item:
             tempDict['dwn'] = self.getIntValue(item['download_count'])
 
-        self.listItem.append(tempDict)
+        account = item['account_id']
+        if account not in self.totalDict:
+            self.totalDict[account] = {}
+            self.totalDict[account]['s'] = []
+            tempChannelId = item['channel_id']
+            self.totalDict[account]['code'] = tempChannelId
+        self.totalDict[account]['s'].append(tempDict)
+
+        if len(self.totalDict[account]['s']) == 10:
+            self.postItems(account)
+
+
+    def postItems(self, account):
+        curTimeStamp = str(int(time.time()) * 1000)
+        self.totalDict[account]['k'] = md5(APP_ID + curTimeStamp + SECRET)
+        self.totalDict[account]['appId'] = APP_ID
+        self.totalDict[account]['timestamp'] = curTimeStamp
+        message = json.dumps(self.totalDict[account])
+        #print(message)
+        response = requests.post(self.api, message, headers=self.headers)
+        #print(response.text)
+        self.totalDict[account]['s'].clear()
 
 
     def getIntValue(self, val):
@@ -108,24 +132,9 @@ class RongcloudchannelPipeline(object):
         return rlt
 
 
-    def postItems(self):
-        if len(self.listItem) > 0:
-            if "code" not in self.resultDict:
-                self.resultDict['code'] = self.listItem[0]['cn']
-            curTimeStamp = str(int(time.time())*1000)
-            self.resultDict['k'] = md5(APP_ID + curTimeStamp + SECRET)
-            self.resultDict['s'] = self.listItem
-            self.resultDict['appId'] = APP_ID
-            self.resultDict['timestamp'] = curTimeStamp
-            message = json.dumps(self.resultDict)
-            #print(message)
-            response = requests.post(self.api, message, headers=self.headers)
-            #print(response.text)
-            self.listItem.clear()
-
-
     def close_spider(self, spider):
-        self.postItems()
+        for account in self.totalDict.keys():
+            self.postItems(account)
 
         print('此次爬虫抓取统计结果:')
         print(self.accountStaticDict)

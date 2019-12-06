@@ -55,6 +55,10 @@ class KuaiShouShopProductItem(scrapy.Item):
     updatetime = scrapy.Field() #13位时间戳
     volume = scrapy.Field() #int
 
+    itemFrom = scrapy.Field() #商品来源，如淘宝等
+    saleCount = scrapy.Field() #卖出数量
+
+
 
 class KuaiShouShopInfoItem(scrapy.Item):
     user_id = scrapy.Field()  #快手id
