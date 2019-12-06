@@ -56,8 +56,12 @@ class TestgraphqlSpider(scrapy.Spider):
         feedQuery['variables']['principalId'] = id
         feedQuery['variables']['pcursor'] = '0'
         time.sleep(3)
-        yield scrapy.Request(self.url, headers=self.headers, body=json.dumps(feedQuery),
-                             method='POST', callback=self.parsePublicFeeds, meta={'bodyJson': feedQuery},
+        yield scrapy.Request(self.url,
+                             headers=self.headers,
+                             body=json.dumps(feedQuery),
+                             method='POST',
+                             callback=self.parsePublicFeeds,
+                             meta={'bodyJson': feedQuery},
                              cookies=self.getCookie()
                              )
         '''for id in self.idSet:
