@@ -8,7 +8,7 @@ import random
 
 from scrapy import signals
 
-from kolpjt.utils.ua import UAPOOL
+from ProxyIP.utils.useragent import UAPOOL
 
 
 class ProxyipSpiderMiddleware(object):
