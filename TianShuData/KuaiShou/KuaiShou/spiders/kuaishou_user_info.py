@@ -9,3 +9,6 @@ class KuaishouUserInfoSpider(scrapy.Spider):
 
     def parse(self, response):
         pass
+
+
+

@@ -4,8 +4,11 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+import random
 
 from scrapy import signals
+
+from kolpjt.utils.ua import UAPOOL
 
 
 class ProxyipSpiderMiddleware(object):
@@ -78,6 +81,9 @@ class ProxyipDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+        thisua=random.choice(UAPOOL)
+        spider.logger.info('user-agent:{}'.format(thisua))
+        request.headers.setdefault('user_agent',thisua)
         return None
 
     def process_response(self, request, response, spider):

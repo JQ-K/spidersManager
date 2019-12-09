@@ -13,6 +13,25 @@ class KuaishouItem(scrapy.Item):
     # name = scrapy.Field()
     pass
 
+class KuxuanKolUserItem(scrapy.Item):
+    # define the fields for your item here like:
+    name = scrapy.Field()
+    id = scrapy.Field()
+    user_id = scrapy.Field()
+    kwaiId = scrapy.Field()
+    cityName = scrapy.Field()
+    fan = scrapy.Field()
+    headurl = scrapy.Field()
+    ku_value = scrapy.Field()
+    photo = scrapy.Field()
+    user_name = scrapy.Field()
+    user_sex = scrapy.Field()
+    user_text = scrapy.Field()
+    avg_view_count = scrapy.Field()
+    avg_like_count = scrapy.Field()
+    avg_comment_count = scrapy.Field()
+    categorys = scrapy.Field()
+
 class KuaiShouUserIterm(scrapy.Item):
     kwaiId = scrapy.Field() #快手号，需要用户自己设置，如果用户没设置，就没有这个字段
     user_id = scrapy.Field() #快手id，原始数据为int

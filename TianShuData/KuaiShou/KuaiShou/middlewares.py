@@ -9,7 +9,7 @@ from scrapy import signals
 
 
 import random
-from KuaiShou.settings import UA_POOL
+from KuaiShou.utils.useragent import UAPOOL
 
 class KuaishouSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -81,6 +81,9 @@ class KuaishouDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+        thisua=random.choice(UAPOOL)
+        spider.logger.info('user-agent:{}'.format(thisua))
+        request.headers.setdefault('user_agent',thisua)
         return None
 
     def process_response(self, request, response, spider):
