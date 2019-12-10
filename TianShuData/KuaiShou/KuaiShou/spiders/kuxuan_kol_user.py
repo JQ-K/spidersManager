@@ -9,6 +9,9 @@ from KuaiShou.items import KuxuanKolUserItem
 
 class KuxuanKolUserSpider(scrapy.Spider):
     name = 'kuxuan_kol_user'
+    custom_settings = {'ITEM_PIPELINES': {
+        'KuaiShou.pipelines.KuaishouPipeline': 700
+    }}
     allowed_domains = ['dataapi.kuxuan-inc.com']
     start_urls = ['http://dataapi.kuxuan-inc.com/api/kwaiUser/index?sort_type=2&page=1']
 
@@ -17,7 +20,6 @@ class KuxuanKolUserSpider(scrapy.Spider):
         if rsp_json['errno'] != '0':
             logger.error('API response error: %s' % response.text)
             return
-
         if int(rsp_json['rst']['pageInfo']['page']) < 5:  # int(rsp_json['rst']['pageInfo']['pages']):
             time.sleep(random.randint(3, 7))
             page_url = 'http://dataapi.kuxuan-inc.com/api/kwaiUser/index?sort_type=2&page={}'.format(
