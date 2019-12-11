@@ -93,9 +93,9 @@ DOWNLOADER_MIDDLEWARES = {
 LOG_LEVEL = 'INFO'
 
 # kafka 相关信息及配置
-HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
-# TOPIC = 'tianshu_kuaikan'
-TOPIC = 'zhanqi_Test'
+KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
+# TOPIC = 'tianshu_kuaishou'
+KAFKA_TOPIC = 'tianshu_test'
 # 设置TOPIC是否从头消费
 RESET_OFFSET_ON_START = True
 
@@ -128,3 +128,8 @@ PHOTO_COMMENT_QUERY = {
     },
     "query": "query commentListQuery($photoId: String, $page: Int, $pcursor: String, $count: Int) {\n  shortVideoCommentList(photoId: $photoId, page: $page, pcursor: $pcursor, count: $count) {\n    commentCount\n    realCommentCount\n    pcursor\n    commentList {\n      commentId\n      authorId\n      authorName\n      content\n      headurl\n      timestamp\n      authorEid\n      status\n      subCommentCount\n      subCommentsPcursor\n      likedCount\n      liked\n      subComments {\n        commentId\n        authorId\n        authorName\n        content\n        headurl\n        timestamp\n        authorEid\n        status\n        replyToUserName\n        replyTo\n        replyToEid\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
 }
+
+# REDIS配置信息
+REDIS_HOST = 'zqhd5'
+REDIS_PORT = 6379
+REDIS_DID_NAME = 'tianshu_did'

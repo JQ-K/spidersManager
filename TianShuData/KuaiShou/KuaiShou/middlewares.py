@@ -6,10 +6,12 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-
+from redis import Redis
 
 import random
 from KuaiShou.utils.useragent import UAPOOL
+from KuaiShou.settings import REDIS_HOST, REDIS_PORT, REDIS_DID_NAME
+
 
 class KuaishouSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -81,9 +83,19 @@ class KuaishouDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
-        thisua=random.choice(UAPOOL)
+        thisua = random.choice(UAPOOL)
         spider.logger.info('user-agent:{}'.format(thisua))
-        request.headers.setdefault('user_agent',thisua)
+        request.headers.setdefault('user_agent', thisua)
+        # 获取cookie时候，不能设定cookie值，不然就一样了
+        if spider.name == 'kuaishou_cookie_info':
+            return None
+        # 两种方式，一种是设置headers，一个是直接设置cookies
+        # request.headers.setdefault('Cookie','did=web_d54ea5e1190a41e481809b9cd17f92aa')
+        cookies = self.conn.srandmember(REDIS_DID_NAME, 1)[0]
+        spider.logger.info('cookies:{}'.format(cookies))
+        cookies_dict = eval(cookies)
+        for key, value in cookies_dict.items():
+            request.cookies.setdefault(key, value)
         return None
 
     def process_response(self, request, response, spider):
@@ -106,4 +118,5 @@ class KuaishouDownloaderMiddleware(object):
         pass
 
     def spider_opened(self, spider):
+        self.conn = Redis(host=REDIS_HOST, port=REDIS_PORT)
         spider.logger.info('Spider opened: %s' % spider.name)

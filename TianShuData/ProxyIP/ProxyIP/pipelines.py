@@ -5,28 +5,22 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
-import json, sys
-from pykafka import KafkaClient
-from ProxyIP.ProxyIP.settings import HOSTS,TOPIC
+from redis import Redis
+from ProxyIP.settings import REDIS_PORT,REDIS_HOST,REDIS_DID_NAME
 
 
 
 class ProxyipPipeline(object):
 
-    def __init__(self):
-        client = KafkaClient(hosts=HOSTS)
-        topic = client.topics[TOPIC]
-        self.producer = topic.get_producer()
-        self.producer.start()
+    def open_spider(self, spider):
+        self.conn = Redis(host=REDIS_HOST, port=REDIS_PORT)
+        spider.logger.info('RedisConn:host = %s,port = %s' % (REDIS_HOST, REDIS_PORT))
 
     def process_item(self, item, spider):
-        msg = json.dumps(str(item).replace('\n', '').replace(' ', '')).encode('utf-8')
-        self.producer.produce(msg)
+        msg = str(item).replace('\n', '').encode('utf-8')
+        spider.logger.info('Msg sadd redis[%s]: %s' % (REDIS_HOST, msg))
+        # self.conn.sadd(REDIS_DID_NAME,msg)
         return item
-
-
-    def close_spider(self, spider):
-        self.producer.stop()
 
 
 

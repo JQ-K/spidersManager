@@ -91,6 +91,9 @@ ITEM_PIPELINES = {
 
 
 # LOG_LEVEL = 'ERROR'
-HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
-# TOPIC = 'tianshu_kuaikan'
+
+# REDIS配置信息
+REDIS_HOST = 'zqhd5'
+REDIS_PORT = 6379
+REDIS_DID_NAME = 'tianshu_did'
 TOPIC = 'zhanqi_Test'

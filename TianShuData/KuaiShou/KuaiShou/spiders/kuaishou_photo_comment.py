@@ -5,22 +5,23 @@ import json
 from pykafka import KafkaClient
 from loguru import logger
 
-from KuaiShou.settings import HOSTS, TOPIC, RESET_OFFSET_ON_START, PHOTO_COMMENT_QUERY
+from KuaiShou.settings import KAFKA_HOSTS, KAFKA_TOPIC, RESET_OFFSET_ON_START, PHOTO_COMMENT_QUERY
 from KuaiShou.items import KuaishouPhotoCommentInfoIterm
 
 
 class KuaishouPhotoCommentSpider(scrapy.Spider):
     name = 'kuaishou_photo_comment'
     custom_settings = {'ITEM_PIPELINES': {
-        'KuaiShou.pipelines.KuaishouPipeline': 700
+        'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
     allowed_domains = ['live.kuaishou.com/graphql']
+
     # start_urls = ['http://live.kuaishou.com/graphql/']
 
     def start_requests(self):
         # 配置kafka连接信息
-        client = KafkaClient(hosts=HOSTS)
-        topic = client.topics[TOPIC]
+        client = KafkaClient(hosts=KAFKA_HOSTS)
+        topic = client.topics[KAFKA_TOPIC]
         # 配置kafka消费信息
         consumer = topic.get_simple_consumer(
             consumer_group=self.name,
@@ -42,8 +43,9 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
                 self.kuaikan_url = 'https://live.kuaishou.com/graphql'
                 self.headers = {'content-type': 'application/json'}
                 yield scrapy.Request(self.kuaikan_url, headers=self.headers, body=json.dumps(self.photo_comment_query),
-                                     method='POST', callback=self.parse_photo_comment, meta={'bodyJson': self.photo_comment_query},
-                                     cookies={'did':'web_d54ea5e1190a41e481809b9cd17f92aa'}
+                                     method='POST', callback=self.parse_photo_comment,
+                                     meta={'bodyJson': self.photo_comment_query},
+                                     cookies={'did': 'web_d54ea5e1190a41e481809b9cd17f92aa'}
                                      )
             except Exception as e:
                 logger.warning('Kafka message structure cannot be resolved :{}'.format(e))
@@ -55,7 +57,10 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
 
         short_video_comment_list = rsp_json['data']['shortVideoCommentList']
         if short_video_comment_list == None:
+            # 删掉did库中的失效did
+            # ...待开发
             logger.warning('UserPhotoQuery failed, principalId:{}'.format(photo_id))
+            return
 
         for photo_comment_info in short_video_comment_list['commentList'][1:2]:
             kuaishou_photo_comment_info_iterm = KuaishouPhotoCommentInfoIterm()
@@ -68,6 +73,7 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
             return
         self.photo_comment_query['variables']['pcursor'] = pcursor
         yield scrapy.Request(self.kuaikan_url, headers=self.headers, body=json.dumps(self.photo_comment_query),
-                             method='POST', callback=self.parse_photo_comment, meta={'bodyJson': self.photo_comment_query},
+                             method='POST', callback=self.parse_photo_comment,
+                             meta={'bodyJson': self.photo_comment_query},
                              cookies={'did': 'web_d54ea5e1190a41e481809b9cd17f92aa'}
                              )

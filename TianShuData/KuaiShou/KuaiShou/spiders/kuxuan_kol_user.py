@@ -10,7 +10,7 @@ from KuaiShou.items import KuxuanKolUserItem
 class KuxuanKolUserSpider(scrapy.Spider):
     name = 'kuxuan_kol_user'
     custom_settings = {'ITEM_PIPELINES': {
-        'KuaiShou.pipelines.KuaishouPipeline': 700
+        'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
     allowed_domains = ['dataapi.kuxuan-inc.com']
     start_urls = ['http://dataapi.kuxuan-inc.com/api/kwaiUser/index?sort_type=2&page=1']
