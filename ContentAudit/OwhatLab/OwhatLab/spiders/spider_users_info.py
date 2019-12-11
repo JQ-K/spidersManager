@@ -81,7 +81,7 @@ class SpiderUsersInfoSpider(scrapy.Spider):
             while curPage > 0 and self.flag1 == 1 and curPage < 81:
                 # print('curPage:', curPage)
                 print('用户信息抓取：正在抓取itemIndex={}，频道={}，第{}页内容...'.format(itemIndex, columnid, curPage))
-                if itemIndex == 2:
+                if itemIndex == '2':
                     tempUrl = apiv.format(cmd_m, cmd_s, itemIndex, columnid, curPage)
                 else:
                     tempUrl = apiv.format(cmd_m, cmd_s, columnid, itemIndex, curPage)
