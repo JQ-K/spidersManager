@@ -121,7 +121,11 @@ class RongcloudchannelPipeline(object):
         #print(message)
         response = requests.post(self.api, message, headers=self.headers)
         #print(response.text)
-        self.totalDict[account]['s'].clear()
+        if self.isRightResponse(response):
+            self.totalDict[account]['s'].clear()
+        else:
+            print('bad post:' + message)
+            print('bad resp:' + response.text)
 
 
     def getIntValue(self, val):
@@ -130,6 +134,16 @@ class RongcloudchannelPipeline(object):
         except:
             rlt = 0
         return rlt
+
+
+    def isRightResponse(self, response):
+        rltJson = json.loads(response.text)
+        if 'code' in rltJson:
+            if rltJson['code'] == 0:
+                return True
+            else:
+                return False
+        return False
 
 
     def close_spider(self, spider):

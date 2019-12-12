@@ -68,5 +68,10 @@ def isErrorAccount(channelName, text):
             if textJson['code'] == -105:
                 flag = True
 
+    if channelName == '一点资讯':
+        if 'errorCode' in textJson:
+            if textJson['errorCode'] == 299:
+                flag = True
+
     return flag
 
