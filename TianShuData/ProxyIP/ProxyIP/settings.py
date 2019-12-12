@@ -91,3 +91,6 @@ ITEM_PIPELINES = {
 
 
 # LOG_LEVEL = 'ERROR'
+HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
+# TOPIC = 'tianshu_kuaikan'
+TOPIC = 'zhanqi_Test'

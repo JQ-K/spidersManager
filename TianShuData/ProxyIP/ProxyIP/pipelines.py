@@ -7,7 +7,7 @@
 
 import json, sys
 from pykafka import KafkaClient
-from ProxyIP.configs.kafkainfo import HOSTS,TOPIC
+from ProxyIP.ProxyIP.settings import HOSTS,TOPIC
 
 
 
