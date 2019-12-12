@@ -7,8 +7,7 @@
 import random
 
 from scrapy import signals
-
-from ProxyIP.utils.useragent import UAPOOL
+from scrapy.utils.project import get_project_settings
 
 
 class ProxyipSpiderMiddleware(object):
@@ -81,9 +80,9 @@ class ProxyipDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
-        thisua=random.choice(UAPOOL)
+        thisua = random.choice(self.uapool)
         spider.logger.info('user-agent:{}'.format(thisua))
-        request.headers.setdefault('user_agent',thisua)
+        request.headers.setdefault('user_agent', thisua)
         return None
 
     def process_response(self, request, response, spider):
@@ -106,4 +105,6 @@ class ProxyipDownloaderMiddleware(object):
         pass
 
     def spider_opened(self, spider):
+        settings = get_project_settings()
+        self.uapool = settings.get('UAPOOL')
         spider.logger.info('Spider opened: %s' % spider.name)

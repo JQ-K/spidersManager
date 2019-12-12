@@ -6,7 +6,7 @@ import sys,os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 import urllib,random
 
-from ProxyIP.utils.ua import UAPOOL
+from ProxyIP.utils.useragent import UAPOOL
 
 def ProxyAuthentication(url,port_ip):
     try:
