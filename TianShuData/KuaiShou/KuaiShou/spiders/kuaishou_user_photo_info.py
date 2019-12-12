@@ -4,6 +4,7 @@ import json
 
 from pykafka import KafkaClient
 from loguru import logger
+from scrapy.utils.project import get_project_settings
 
 from KuaiShou.settings import KAFKA_HOSTS, KAFKA_TOPIC, RESET_OFFSET_ON_START, USER_PHOTO_QUERY
 from KuaiShou.items import KuaishouUserPhotoInfoIterm
@@ -14,18 +15,22 @@ class KuaishouUserPhotoSpider(scrapy.Spider):
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
+    settings = get_project_settings()
     allowed_domains = ['live.kuaishou.com/graphql']
-
     # start_urls = ['http://live.kuaishou.com/graphql/']
 
     def start_requests(self):
         # 配置kafka连接信息
-        client = KafkaClient(hosts=KAFKA_HOSTS)
-        topic = client.topics[KAFKA_TOPIC]
+        kafka_hosts = self.settings.get('KAFKA_HOSTS')
+        kafka_topic = self.settings.get('KAFKA_TOPIC')
+        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
+        self.user_photo_query = self.settings.get('USER_PHOTO_QUERY')
+        client = KafkaClient(hosts=kafka_hosts)
+        topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_simple_consumer(
             consumer_group=self.name,
-            reset_offset_on_start=RESET_OFFSET_ON_START
+            reset_offset_on_start=reset_offset_on_start
         )
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
@@ -38,7 +43,6 @@ class KuaishouUserPhotoSpider(scrapy.Spider):
                 if msg_value_dict['name'] != 'kuxuan_kol_user':
                     continue
                 self.kwai_id = msg_value_dict['kwaiId']
-                self.user_photo_query = USER_PHOTO_QUERY
                 self.user_photo_query['variables']['principalId'] = self.kwai_id
                 self.kuaikan_url = 'https://live.kuaishou.com/graphql'
                 self.headers = {'content-type': 'application/json'}

@@ -4,8 +4,8 @@ import json
 
 from pykafka import KafkaClient
 from loguru import logger
+from scrapy.utils.project import get_project_settings
 
-from KuaiShou.settings import KAFKA_HOSTS, KAFKA_TOPIC, RESET_OFFSET_ON_START, PHOTO_COMMENT_QUERY
 from KuaiShou.items import KuaishouPhotoCommentInfoIterm
 
 
@@ -14,18 +14,22 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
+    settings = get_project_settings()
     allowed_domains = ['live.kuaishou.com/graphql']
-
     # start_urls = ['http://live.kuaishou.com/graphql/']
 
     def start_requests(self):
         # 配置kafka连接信息
-        client = KafkaClient(hosts=KAFKA_HOSTS)
-        topic = client.topics[KAFKA_TOPIC]
+        kafka_hosts = self.settings.get('KAFKA_HOSTS')
+        kafka_topic = self.settings.get('KAFKA_TOPIC')
+        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
+        self.photo_comment_query = self.settings.get('PHOTO_COMMENT_QUERY')
+        client = KafkaClient(hosts=kafka_hosts)
+        topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_simple_consumer(
             consumer_group=self.name,
-            reset_offset_on_start=RESET_OFFSET_ON_START
+            reset_offset_on_start=reset_offset_on_start
         )
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
@@ -38,7 +42,6 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
                 if msg_value_dict['name'] != 'kuaishou_user_photo_info':
                     continue
                 photo_id = msg_value_dict['user_photo_info']['photoId']
-                self.photo_comment_query = PHOTO_COMMENT_QUERY
                 self.photo_comment_query['variables']['photoId'] = photo_id
                 self.kuaikan_url = 'https://live.kuaishou.com/graphql'
                 self.headers = {'content-type': 'application/json'}
@@ -62,7 +65,7 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
             logger.warning('UserPhotoQuery failed, principalId:{}'.format(photo_id))
             return
 
-        for photo_comment_info in short_video_comment_list['commentList'][1:2]:
+        for photo_comment_info in short_video_comment_list['commentList']:
             kuaishou_photo_comment_info_iterm = KuaishouPhotoCommentInfoIterm()
             kuaishou_photo_comment_info_iterm['name'] = self.name
             kuaishou_photo_comment_info_iterm['photo_id'] = photo_id

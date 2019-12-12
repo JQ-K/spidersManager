@@ -1,24 +1,27 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from lxml import etree
+from loguru import logger
+from scrapy.utils.project import get_project_settings
+
 from ProxyIP.utils.proxy import *
-from ProxyIP.settings import AUTH_URLS_INFO, SPIDER_PAGE_START, SPIDER_PAGE_END
 from ProxyIP.items import FreeProxyIPItem
 import time
 
 
-
-
 class KuaidailiFreeSpider(scrapy.Spider):
     name = 'kuaidaili_free'
+    settings = get_project_settings()
+    spider_page_start = settings.get('SPIDER_PAGE_START')
+    spider_page_end = settings.get('SPIDER_PAGE_END')
+    auth_urls_info = settings.get('AUTH_URLS_INFO')
     allowed_domains = ['www.kuaidaili.com']
-    start_urls = ['https://www.kuaidaili.com/free/inha/{}/'.format(page) for page in range(SPIDER_PAGE_START, SPIDER_PAGE_END)]
+    start_urls = ['https://www.kuaidaili.com/free/inha/{}/'.format(page) for page in
+                  range(spider_page_start, spider_page_end)]
 
-
-    def __init__(self,resp_speed_limit=3,ip_type='HTTP'):
-        self.resp_speed_limit=resp_speed_limit
-        self.ip_type=ip_type
-
+    def __init__(self, resp_speed_limit=3, ip_type='HTTP'):
+        self.resp_speed_limit = resp_speed_limit
+        self.ip_type = ip_type
 
     def start_requests(self):
         for start_url in self.start_urls:
@@ -26,12 +29,11 @@ class KuaidailiFreeSpider(scrapy.Spider):
             yield scrapy.Request(start_url,
                                  callback=self.parse, dont_filter=True)
 
-
     def parse(self, response):
         resp_txt = response.text
         html = etree.HTML(resp_txt)
         tbody_trs = html.xpath(('//*[@id="list"]/table/tbody/tr'))[1::]
-        for auth_url_info in AUTH_URLS_INFO:
+        for auth_url_info in self.auth_urls_info:
             proxy_ips = []
             proxy_ip_item = FreeProxyIPItem()
             proxy_ip_item['name'] = self.name
@@ -54,6 +56,6 @@ class KuaidailiFreeSpider(scrapy.Spider):
                         continue
                     proxy_ips.append(proxy_ip)
                 except Exception as e:
-                    print(u'警告：解析失败！错误提示:{}'.format(e))
+                    logger.warning('警告：解析失败！错误提示:{}'.format(e))
             proxy_ip_item['proxyip_list'] = proxy_ips
             yield proxy_ip_item

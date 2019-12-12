@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from ProxyIP.utils.useragent import UAPOOL
 
 # Scrapy settings for ProxyIP project
 #
@@ -22,7 +23,7 @@ NEWSPIDER_MODULE = 'ProxyIP.spiders'
 # ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay

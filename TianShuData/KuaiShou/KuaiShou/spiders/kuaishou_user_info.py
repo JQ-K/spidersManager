@@ -5,9 +5,8 @@ import json
 from pykafka import KafkaClient
 from loguru import logger
 from redis import Redis
+from scrapy.utils.project import get_project_settings
 
-from KuaiShou.settings import KAFKA_HOSTS, KAFKA_TOPIC, RESET_OFFSET_ON_START, USER_INFO_QUERY, REDIS_HOST, REDIS_PORT, \
-    REDIS_DID_NAME
 from KuaiShou.items import KuaishouUserInfoIterm
 
 
@@ -16,19 +15,27 @@ class KuaishouUserInfoSpider(scrapy.Spider):
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
+    settings = get_project_settings()
     allowed_domains = ['live.kuaishou.com/graphql']
     # start_urls = ['http://live.kuaishou.com/graphql/']
     # 连接redis
-    conn = Redis(host=REDIS_HOST, port=REDIS_PORT)
+    redis_host = settings.get('REDIS_HOST')
+    redis_port = settings.get('REDIS_PORT')
+
+    conn = Redis(host=redis_host, port=redis_port)
 
     def start_requests(self):
         # 配置kafka连接信息
-        client = KafkaClient(hosts=KAFKA_HOSTS)
-        topic = client.topics[KAFKA_TOPIC]
+        kafka_hosts = self.settings.get('KAFKA_HOSTS')
+        kafka_topic = self.settings.get('KAFKA_TOPIC')
+        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
+        user_info_query = self.settings.get('USER_INFO_QUERY')
+        client = KafkaClient(hosts=kafka_hosts)
+        topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_simple_consumer(
             consumer_group=self.name,
-            reset_offset_on_start=RESET_OFFSET_ON_START
+            reset_offset_on_start=reset_offset_on_start
         )
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
@@ -41,7 +48,6 @@ class KuaishouUserInfoSpider(scrapy.Spider):
                 if msg_value_dict['name'] != 'kuxuan_kol_user':
                     continue
                 kwai_id = msg_value_dict['kwaiId']
-                user_info_query = USER_INFO_QUERY
                 user_info_query['variables']['principalId'] = kwai_id
                 kuaikan_url = 'https://live.kuaishou.com/graphql'
                 headers = {'content-type': 'application/json'}
@@ -66,7 +72,8 @@ class KuaishouUserInfoSpider(scrapy.Spider):
                 kuaishou_cookie_info[key.replace('.', '_')] = value
             logger.info(response.headers.getlist('Set-Cookie'))
             logger.info('RedisDid srem invaild did:{}'.format(str(kuaishou_cookie_info)))
-            # self.conn.srem(REDIS_DID_NAME,str(kuaishou_cookie_info))
+            # redis_did_name = self.settings.get('REDIS_DID_NAME')
+            # self.conn.srem(redis_did_name,str(kuaishou_cookie_info))
             body_json = response.meta['bodyJson']
             principal_id = body_json['variables']['principalId']
             logger.warning('UserInfoQuery failed, principalId:{}'.format(principal_id))

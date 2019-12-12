@@ -2,8 +2,9 @@
 import scrapy
 import time, random
 
+from scrapy.utils.project import get_project_settings
+
 from KuaiShou.items import KuaishouCookieInfoItem
-from KuaiShou.settings import SPIDER_COOKIE_CNT
 
 
 class KuaishouCookieInfoSpider(scrapy.Spider):
@@ -11,13 +12,14 @@ class KuaishouCookieInfoSpider(scrapy.Spider):
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouRedisPipeline': 700
     }}
+    settings = get_project_settings()
     allowed_domains = ['live.kuaishou.com']
-
     # start_urls = ['http://live.kuaishou.com/']
 
     def start_requests(self):
         i = 0
-        while i < SPIDER_COOKIE_CNT:
+        spider_cookie_cnt = self.settings.get('SPIDER_COOKIE_CNT')
+        while i < spider_cookie_cnt:
             i += 1
             time.sleep(random.randint(1, 3))
             start_url = 'https://live.kuaishou.com'
