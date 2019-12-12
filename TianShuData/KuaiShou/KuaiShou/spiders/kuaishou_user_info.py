@@ -55,6 +55,9 @@ class KuaishouUserInfoSpider(scrapy.Spider):
         rsp_json = json.loads(response.text)
         user_info = rsp_json['data']['userInfo']
         if user_info == None:
+            logger.warning('UserInfoQuery failed, error:{}'.format(str(rsp_json).replace('\n','')))
+            return
+        if user_info['id'] == None:
             # 删掉did库中的失效did
             kuaishou_cookie_info = {}
             for cookie in response.headers.getlist('Set-Cookie'):
@@ -64,11 +67,10 @@ class KuaishouUserInfoSpider(scrapy.Spider):
             logger.info(response.headers.getlist('Set-Cookie'))
             logger.info('RedisDid srem invaild did:{}'.format(str(kuaishou_cookie_info)))
             # self.conn.srem(REDIS_DID_NAME,str(kuaishou_cookie_info))
-
             body_json = response.meta['bodyJson']
             principal_id = body_json['variables']['principalId']
             logger.warning('UserInfoQuery failed, principalId:{}'.format(principal_id))
-            yield
+            return
 
         kuaishou_user_info_iterm = KuaishouUserInfoIterm()
         kuaishou_user_info_iterm['name'] = self.name

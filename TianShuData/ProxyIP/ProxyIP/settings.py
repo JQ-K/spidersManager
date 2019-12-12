@@ -27,7 +27,7 @@ NEWSPIDER_MODULE = 'ProxyIP.spiders'
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -95,5 +95,11 @@ ITEM_PIPELINES = {
 # REDIS配置信息
 REDIS_HOST = 'zqhd5'
 REDIS_PORT = 6379
-REDIS_DID_NAME = 'tianshu_did'
-TOPIC = 'zhanqi_Test'
+REDIS_PROXYIP_BASENAME = 'tianshu_proxyip'
+
+# 免费IP认证网站
+AUTH_URLS_INFO = [{'name':"kuaishou","url":"https://live.kuaishou.com"}]
+
+# 翻页数
+SPIDER_PAGE_START = 1
+SPIDER_PAGE_END = 10

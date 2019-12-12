@@ -6,7 +6,7 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 from redis import Redis
-from ProxyIP.settings import REDIS_PORT,REDIS_HOST,REDIS_DID_NAME
+from ProxyIP.settings import REDIS_PORT,REDIS_HOST,REDIS_PROXYIP_BASENAME
 
 
 
@@ -17,9 +17,11 @@ class ProxyipPipeline(object):
         spider.logger.info('RedisConn:host = %s,port = %s' % (REDIS_HOST, REDIS_PORT))
 
     def process_item(self, item, spider):
-        msg = str(item).replace('\n', '').encode('utf-8')
-        spider.logger.info('Msg sadd redis[%s]: %s' % (REDIS_HOST, msg))
-        # self.conn.sadd(REDIS_DID_NAME,msg)
+        redis_name = '{}_{}'.format(REDIS_PROXYIP_BASENAME, item['url_name'])
+        for proxyip in item['proxyip_list']:
+            msg = str(proxyip)
+            spider.logger.info('Msg sadd redis[%s]: %s' % (redis_name, msg))
+            self.conn.sadd(redis_name,msg)
         return item
 
 

@@ -46,5 +46,5 @@ class KuaishouRedisPipeline(object):
     def process_item(self, item, spider):
         msg = str(item).replace('\n', '').encode('utf-8')
         spider.logger.info('Msg sadd redis[%s]: %s' % (REDIS_HOST, msg))
-        # self.conn.sadd(REDIS_DID_NAME,msg)
+        self.conn.sadd(REDIS_DID_NAME,msg)
         return item

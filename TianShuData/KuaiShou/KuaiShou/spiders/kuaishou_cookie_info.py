@@ -20,7 +20,7 @@ class KuaishouCookieInfoSpider(scrapy.Spider):
         while i < SPIDER_COOKIE_CNT:
             i += 1
             time.sleep(random.randint(1, 3))
-            start_url = 'https://live.kuaishou.com/v/hot/'
+            start_url = 'https://live.kuaishou.com'
             headers = {
                 "Host": "live.kuaishou.com",
                 "Connection": "keep-alive",

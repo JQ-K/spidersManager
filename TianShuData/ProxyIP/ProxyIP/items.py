@@ -17,5 +17,5 @@ class ProxyipItem(scrapy.Item):
 class FreeProxyIPItem(scrapy.Item):
     name = scrapy.Field()
     url = scrapy.Field()
-    source = scrapy.Field()
-    proxyip = scrapy.Field()
+    url_name = scrapy.Field()
+    proxyip_list = scrapy.Field()
