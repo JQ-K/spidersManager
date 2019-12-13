@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import json
+import json,re
 from lxml import etree
 from loguru import logger
 from scrapy.utils.project import get_project_settings
@@ -18,10 +18,6 @@ class KuaidailiFreeSpider(scrapy.Spider):
     allowed_domains = ['www.kuaidaili.com']
     start_urls = ['https://www.kuaidaili.com/free/inha/{}/'.format(page) for page in
                   range(spider_page_start, spider_page_end)]
-
-    def __init__(self, resp_speed_limit=3, ip_type='HTTP'):
-        self.resp_speed_limit = resp_speed_limit
-        self.ip_type = ip_type
 
     def start_requests(self):
         for start_url in self.start_urls:
@@ -45,12 +41,10 @@ class KuaidailiFreeSpider(scrapy.Spider):
                     ip_types = tbody_tr.xpath('td')[3].text.replace(' ', '').replace('\r\n', '')
                     resp_speed = float(tbody_tr.xpath('td')[5].text.replace(' ', '').replace('\r\n', '')[:-1])
                     update_time = tbody_tr.xpath('td')[6].text.replace('\r\n', '')
-
-                    if self.ip_type not in ip_types:
+                    url_type = re.findall('(http|https)://.*?',auth_url_info['url'])[0].lower()
+                    if url_type == 'https' and 'https' not in ip_types:
                         continue
-                    if resp_speed > self.resp_speed_limit:
-                        continue
-                    proxy = '{}://{}:{}'.format(self.ip_type.lower(),ip,port)
+                    proxy = '{}://{}:{}'.format(url_type,ip,port)
                     headers = {'content-type': 'application/json'}
                     yield scrapy.Request(auth_url_info['url'], headers=headers, body=json.dumps(auth_url_info['body']),
                                          method='POST', callback=self.auth_proxyip,

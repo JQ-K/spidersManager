@@ -8,14 +8,14 @@ from scrapy.utils.project import get_project_settings
 from ProxyIP.items import FreeProxyIPItem
 
 
-class Ip3366FreeSpider(scrapy.Spider):
-    name = 'ip3366_free'
+class QydailiFreeSpider(scrapy.Spider):
+    name = 'qydaili_free'
+    allowed_domains = ['www.qydaili.com']
     settings = get_project_settings()
     spider_page_start = settings.get('SPIDER_PAGE_START')
     spider_page_end = settings.get('SPIDER_PAGE_END')
     auth_urls_info = settings.get('AUTH_URLS_INFO')
-    allowed_domains = ['www.ip3366.net']
-    start_urls = ['http://www.ip3366.net/free/?stype=1&page={}'.format(page) for page in
+    start_urls = ['https://www.qydaili.com/free/?action=china&page={}'.format(page) for page in
                   range(spider_page_start, spider_page_end)]
 
     def start_requests(self):
@@ -26,36 +26,35 @@ class Ip3366FreeSpider(scrapy.Spider):
     def parse(self, response):
         resp_txt = response.text
         html = etree.HTML(resp_txt)
-        tbody_trs = html.xpath(('//*[@id="list"]/table/tbody/tr'))
+        result_trs = html.xpath('//tr')
         for auth_url_info in self.auth_urls_info:
             self.proxy_ip_item = FreeProxyIPItem()
             self.proxy_ip_item['name'] = self.name
             self.proxy_ip_item['url'] = auth_url_info['url']
             self.proxy_ip_item['url_name'] = auth_url_info['name']
-            for tbody_tr in tbody_trs:
-
+            for result_tr in result_trs[1:]:
                 try:
-                    ip = tbody_tr.xpath('td')[0].text.replace(' ', '').replace('\r\n', '')
-                    port = tbody_tr.xpath('td')[1].text.replace(' ', '').replace('\r\n', '')
-                    ip_types = tbody_tr.xpath('td')[3].text.replace(' ', '').replace('\r\n', '')
-                    resp_speed = float(tbody_tr.xpath('td')[5].text.replace(' ', '').replace('\r\n', '')[:-1])
-                    update_time = tbody_tr.xpath('td')[6].text.replace('\r\n', '')
-                    url_type = re.findall('(http|https)://.*?',auth_url_info['url'])[0].lower()
+                    ip = result_tr[0].text
+                    port = result_tr[1].text
+                    ip_types_list = re.findall('([http|https]+)',result_tr[3].text.lower())
+                    if ip_types_list == [] or 'http' in ip_types_list:
+                       ip_types = 'http'
+                    if 'https' in ip_types_list:
+                        ip_types = 'https'
+                    url_type = re.findall('(http|https)://.*?', auth_url_info['url'])[0].lower()
                     if url_type == 'https' and 'https' not in ip_types:
                         continue
-                    proxy = '{}://{}:{}'.format(url_type,ip,port)
+                    proxy = '{}://{}:{}'.format(url_type, ip, port)
                     headers = {'content-type': 'application/json'}
                     yield scrapy.Request(auth_url_info['url'], headers=headers, body=json.dumps(auth_url_info['body']),
                                          method='POST', callback=self.auth_proxyip,
-                                         meta={'bodyJson': auth_url_info['body'],'proxy':proxy},
+                                         meta={'bodyJson': auth_url_info['body'], 'proxy': proxy},
                                          dont_filter=True
                                          )
                 except Exception as e:
                     logger.warning('警告：解析失败！错误提示:{}'.format(e))
 
-    def auth_proxyip(self,response):
+    def auth_proxyip(self, response):
         self.proxy_ip_item['proxy'] = response.meta['proxy']
         logger.info(response.meta['proxy'])
         yield self.proxy_ip_item
-
-
