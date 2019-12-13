@@ -13,6 +13,7 @@ class KuaishouItem(scrapy.Item):
     # name = scrapy.Field()
     pass
 
+
 class KuxuanKolUserItem(scrapy.Item):
     # define the fields for your item here like:
     name = scrapy.Field()
@@ -32,21 +33,26 @@ class KuxuanKolUserItem(scrapy.Item):
     avg_comment_count = scrapy.Field()
     categorys = scrapy.Field()
 
+
 class KuaishouCookieInfoItem(scrapy.Item):
     name = scrapy.Field()
+    # operation_type = scrapy.Field
     kuaishou_live_bfb1s = scrapy.Field()
     clientid = scrapy.Field()
     did = scrapy.Field()
     client_key = scrapy.Field()
     didv = scrapy.Field()
 
+
 class KuaishouUserInfoIterm(scrapy.Item):
     name = scrapy.Field()
     user_info = scrapy.Field()
 
+
 class KuaishouUserPhotoInfoIterm(scrapy.Item):
     name = scrapy.Field()
     user_photo_info = scrapy.Field()
+
 
 class KuaishouPhotoCommentInfoIterm(scrapy.Item):
     name = scrapy.Field()

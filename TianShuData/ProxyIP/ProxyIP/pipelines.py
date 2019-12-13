@@ -5,31 +5,24 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
-import json, sys
-from pykafka import KafkaClient
-from ProxyIP.ProxyIP.settings import HOSTS,TOPIC
-
+from redis import Redis
+from scrapy.utils.project import get_project_settings
 
 
 class ProxyipPipeline(object):
 
-    def __init__(self):
-        client = KafkaClient(hosts=HOSTS)
-        topic = client.topics[TOPIC]
-        self.producer = topic.get_producer()
-        self.producer.start()
+    def open_spider(self, spider):
+        settings = get_project_settings()
+        self.redis_host = settings.get('REDIS_HOST')
+        self.redis_port = settings.get('REDIS_PORT')
+        self.redis_proxyip_basename = settings.get('REDIS_PROXYIP_BASENAME')
+        self.expire_time = settings.get('REDIS_EXPIRE_TEIME')
+        self.conn = Redis(host=self.redis_host, port=self.redis_port)
+        spider.logger.info('RedisConn:host = %s,port = %s' % (self.redis_host, self.redis_port))
 
     def process_item(self, item, spider):
-        msg = json.dumps(str(item).replace('\n', '').replace(' ', '')).encode('utf-8')
-        self.producer.produce(msg)
+        redis_name = '{}_{}'.format(self.redis_proxyip_basename, item['url_name'])
+        msg = item['proxy']
+        spider.logger.info('Msg sadd redis[%s]: %s' % (redis_name, msg))
+        self.conn.sadd(redis_name, msg)
         return item
-
-
-    def close_spider(self, spider):
-        self.producer.stop()
-
-
-
-
-
-
