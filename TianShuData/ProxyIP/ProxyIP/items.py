@@ -18,4 +18,4 @@ class FreeProxyIPItem(scrapy.Item):
     name = scrapy.Field()
     url = scrapy.Field()
     url_name = scrapy.Field()
-    proxyip_list = scrapy.Field()
+    proxy = scrapy.Field()

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import json
 from lxml import etree
 from loguru import logger
 from scrapy.utils.project import get_project_settings
 
-from ProxyIP.utils.proxy import *
 from ProxyIP.items import FreeProxyIPItem
 import time
 
@@ -34,11 +34,10 @@ class KuaidailiFreeSpider(scrapy.Spider):
         html = etree.HTML(resp_txt)
         tbody_trs = html.xpath(('//*[@id="list"]/table/tbody/tr'))[1::]
         for auth_url_info in self.auth_urls_info:
-            proxy_ips = []
-            proxy_ip_item = FreeProxyIPItem()
-            proxy_ip_item['name'] = self.name
-            proxy_ip_item['url'] = auth_url_info['url']
-            proxy_ip_item['url_name'] = auth_url_info['name']
+            self.proxy_ip_item = FreeProxyIPItem()
+            self.proxy_ip_item['name'] = self.name
+            self.proxy_ip_item['url'] = auth_url_info['url']
+            self.proxy_ip_item['url_name'] = auth_url_info['name']
             for tbody_tr in tbody_trs:
                 try:
                     ip = tbody_tr.xpath('td')[0].text.replace(' ', '').replace('\r\n', '')
@@ -51,11 +50,19 @@ class KuaidailiFreeSpider(scrapy.Spider):
                         continue
                     if resp_speed > self.resp_speed_limit:
                         continue
-                    proxy_ip = {self.ip_type: '{}:{}'.format(ip, port)}
-                    if ProxyAuthentication(auth_url_info['url'], proxy_ip) == None:
-                        continue
-                    proxy_ips.append(proxy_ip)
+                    proxy = '{}://{}:{}'.format(self.ip_type.lower(),ip,port)
+                    headers = {'content-type': 'application/json'}
+                    yield scrapy.Request(auth_url_info['url'], headers=headers, body=json.dumps(auth_url_info['body']),
+                                         method='POST', callback=self.auth_proxyip,
+                                         meta={'bodyJson': auth_url_info['body'],'proxy':proxy},
+                                         dont_filter=True
+                                         )
                 except Exception as e:
                     logger.warning('警告：解析失败！错误提示:{}'.format(e))
-            proxy_ip_item['proxyip_list'] = proxy_ips
-            yield proxy_ip_item
+
+    def auth_proxyip(self,response):
+        self.proxy_ip_item['proxy'] = response.meta['proxy']
+        logger.info(response.meta['proxy'])
+        yield self.proxy_ip_item
+
+

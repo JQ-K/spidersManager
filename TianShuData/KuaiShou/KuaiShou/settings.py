@@ -22,7 +22,7 @@ NEWSPIDER_MODULE = 'KuaiShou.spiders'
 # ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-# CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -93,6 +93,11 @@ DOWNLOADER_MIDDLEWARES = {
 # log
 LOG_LEVEL = 'INFO'
 
+# 超时时间
+RETRY_ENABLED = True
+RETRY_TIMES = 1
+DOWNLOAD_TIMEOUT = 5
+
 # kafka 相关信息及配置
 KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
 # TOPIC = 'tianshu_kuaishou'
@@ -104,14 +109,14 @@ RESET_OFFSET_ON_START = True
 SPIDER_COOKIE_CNT = 100
 
 # 设置抓取酷炫的页数，<=0代表代表所有页面
-SPIDER_KUXUAN_PAGE_LIMIT = 5
+SPIDER_KUXUAN_PAGE_LIMIT = 1
 SPIDER_KUXUAN_SORT_TYPE = 2
 
 # graphql
 USER_INFO_QUERY = {
     "operationName": "userInfoQuery",
     "variables": {
-        "principalId": "{%s}"
+        "principalId": "3xjcyhicecuz54q"
     },
     "query": "query userInfoQuery($principalId: String) {\n  userInfo(principalId: $principalId) {\n    id\n    principalId\n    kwaiId\n    eid\n    userId\n    profile\n    name\n    description\n    sex\n    constellation\n    cityName\n    living\n    watchingCount\n    isNew\n    privacy\n    feeds {\n      eid\n      photoId\n      thumbnailUrl\n      timestamp\n      __typename\n    }\n    verifiedStatus {\n      verified\n      description\n      type\n      new\n      __typename\n    }\n    countsInfo {\n      fan\n      follow\n      photo\n      liked\n      open\n      playback\n      private\n      __typename\n    }\n    bannedStatus {\n      banned\n      defriend\n      isolate\n      socialBanned\n      __typename\n    }\n    __typename\n  }\n}\n"
 }
@@ -159,4 +164,7 @@ SEARCH_DETAIL_QUERY = {
 REDIS_HOST = 'zqhd5'
 REDIS_PORT = 6379
 REDIS_DID_NAME = 'tianshu_did'
+REDIS_DID_EXPIRE_TEIME = 86400
+REDIS_PROXYIP_NAME = 'tianshu_proxyip_kuaishou'
+REDIS_DID_EXPIRE_TEIME = 86400
 

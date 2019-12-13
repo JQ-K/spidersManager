@@ -88,12 +88,18 @@ class KuaishouDownloaderMiddleware(object):
         if spider.name == 'kuaishou_cookie_info':
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
-        # request.headers.setdefault('Cookie','did=web_d54ea5e1190a41e481809b9cd17f92aa')
-        cookies = self.conn.srandmember(self.redis_did_name, 1)[0]
-        spider.logger.info('cookies:{}'.format(cookies))
-        cookies_dict = eval(cookies)
-        for key, value in cookies_dict.items():
-            request.cookies.setdefault(key, value)
+        request.headers.setdefault('Cookie','did=web_d54ea5e1190a41e481809b9cd17f92aa')
+        # cookies = self.conn.srandmember(self.redis_did_name, 1)[0]
+        # spider.logger.info('cookies:{}'.format(cookies))
+        # cookies_dict = eval(cookies)
+        # for key, value in cookies_dict.items():
+        #     request.cookies.setdefault(key, value)
+        # 设置代理IP
+        proxyip_dict = eval(self.conn.srandmember(self.redis_proxyip_name, 1)[0])
+        proxyip_type, proxyip_value = list(proxyip_dict.items())[0]
+        proxy = "{}://{}".format(proxyip_type.lower(),proxyip_value)
+        spider.logger.info('proxy:{}'.format(proxy))
+        request.meta['proxy'] = 'http://117.88.176.82:3000'
         return None
 
     def process_response(self, request, response, spider):
@@ -121,5 +127,6 @@ class KuaishouDownloaderMiddleware(object):
         self.redis_host = settings.get('REDIS_HOST')
         self.redis_port = settings.get('REDIS_PORT')
         self.redis_did_name = settings.get('REDIS_DID_NAME')
+        self.redis_proxyip_name = settings.get('REDIS_PROXYIP_NAME')
         self.conn = Redis(host=self.redis_host, port=self.redis_port)
         spider.logger.info('Spider opened: %s' % spider.name)

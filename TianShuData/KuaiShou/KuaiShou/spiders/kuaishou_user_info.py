@@ -16,7 +16,7 @@ class KuaishouUserInfoSpider(scrapy.Spider):
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
     settings = get_project_settings()
-    allowed_domains = ['live.kuaishou.com/graphql']
+    # allowed_domains = ['live.kuaishou.com/graphql']
     # start_urls = ['http://live.kuaishou.com/graphql/']
     # 连接redis
     redis_host = settings.get('REDIS_HOST')
@@ -29,7 +29,9 @@ class KuaishouUserInfoSpider(scrapy.Spider):
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
         kafka_topic = self.settings.get('KAFKA_TOPIC')
         reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
+        # user_info_query = self.settings.get('SENSITIVE_USER_INFO_QUERY')
         user_info_query = self.settings.get('USER_INFO_QUERY')
+        logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic))
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
@@ -49,11 +51,14 @@ class KuaishouUserInfoSpider(scrapy.Spider):
                     continue
                 kwai_id = msg_value_dict['kwaiId']
                 user_info_query['variables']['principalId'] = kwai_id
-                kuaikan_url = 'https://live.kuaishou.com/graphql'
+                kuaikan_url = 'http://live.kuaishou.com/graphql'
                 headers = {'content-type': 'application/json'}
+                # logger.info('kafka message:{}'.format(msg_value))
                 yield scrapy.Request(kuaikan_url, headers=headers, body=json.dumps(user_info_query),
-                                     method='POST', callback=self.parse_user_info, meta={'bodyJson': user_info_query}
+                                     method='POST', callback=self.parse_user_info, meta={'bodyJson': user_info_query},
+                                     dont_filter=True
                                      )
+                # return
             except Exception as e:
                 logger.warning('Kafka message structure cannot be resolved :{}'.format(e))
 
@@ -61,7 +66,7 @@ class KuaishouUserInfoSpider(scrapy.Spider):
         rsp_json = json.loads(response.text)
         user_info = rsp_json['data']['userInfo']
         if user_info == None:
-            logger.warning('UserInfoQuery failed, error:{}'.format(str(rsp_json).replace('\n','')))
+            logger.warning('UserInfoQuery failed, error:{}'.format(str(rsp_json).replace('\n', '')))
             return
         if user_info['id'] == None:
             # 删掉did库中的失效did
@@ -82,4 +87,4 @@ class KuaishouUserInfoSpider(scrapy.Spider):
         kuaishou_user_info_iterm = KuaishouUserInfoIterm()
         kuaishou_user_info_iterm['name'] = self.name
         kuaishou_user_info_iterm['user_info'] = user_info
-        yield kuaishou_user_info_iterm
+        return kuaishou_user_info_iterm

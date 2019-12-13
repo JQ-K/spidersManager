@@ -44,6 +44,7 @@ class KuaishouRedisPipeline(object):
         settings = get_project_settings()
         self.redis_host = settings.get('REDIS_HOST')
         self.redis_port = settings.get('REDIS_PORT')
+        self.redis_did_expire_time = settings.get('REDIS_DID_EXPIRE_TIME')
         self.redis_did_name = settings.get('REDIS_DID_NAME')
         self.conn = Redis(host=self.redis_host, port=self.redis_port)
         spider.logger.info('RedisConn:host = %s,port = %s' % (self.redis_host, self.redis_port))
@@ -52,4 +53,5 @@ class KuaishouRedisPipeline(object):
         msg = str(item).replace('\n', '').encode('utf-8')
         spider.logger.info('Msg sadd redis[%s]: %s' % (self.REDIS_HOST, msg))
         self.conn.sadd(self.redis_did_name,msg)
+        self.conn.expire(self.redis_did_name,self.redis_did_expire_time)
         return item
