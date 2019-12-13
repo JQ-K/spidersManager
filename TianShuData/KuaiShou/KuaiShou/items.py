@@ -20,6 +20,7 @@ class KuxuanKolUserItem(scrapy.Item):
     id = scrapy.Field()
     user_id = scrapy.Field()
     kwaiId = scrapy.Field()
+    principalId = scrapy.Field()
     cityName = scrapy.Field()
     fan = scrapy.Field()
     headurl = scrapy.Field()
