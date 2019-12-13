@@ -11,38 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/GongZhongHao.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="56" column="25" lean-forward="true" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
-              <folding>
-                <element signature="e#24#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/RongCloudChannel/conf/configure.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RongCloudChannel/items.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="24" column="4" lean-forward="true" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -67,6 +36,9 @@
         <option value="$PROJECT_DIR$/RongCloudChannel/spiders/YiDianZiXun.py" />
         <option value="$PROJECT_DIR$/RongCloudChannel/spiders/WangYiHao.py" />
         <option value="$PROJECT_DIR$/RongCloudChannel/spiders/GongZhongHao.py" />
+        <option value="$PROJECT_DIR$/RongCloudChannel/test/GongZhongHaoWeb.py" />
+        <option value="$PROJECT_DIR$/RongCloudChannel/spiders/YouKu.py" />
+        <option value="$PROJECT_DIR$/RongCloudChannel/spiders/RenMinHao.py" />
         <option value="$PROJECT_DIR$/RongCloudChannel/conf/configure.py" />
       </list>
     </option>
@@ -100,6 +72,12 @@
               <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
               <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
               <item name="conf" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RongCloudChannel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
+              <item name="RongCloudChannel" type="462c0819:PsiDirectoryNode" />
+              <item name="spiders" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -255,9 +233,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17633042" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20413026" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -268,7 +245,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.23978686" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.12966253" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -296,28 +273,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RongCloudChannel/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2394">
-          <caret line="114" column="33" selection-start-line="114" selection-start-column="33" selection-end-line="114" selection-end-column="33" />
-          <folding>
-            <element signature="e#195#206#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/qutoutiao.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/QiErHao.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="40" column="44" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RongCloudChannel/test/YiDianZiXun.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -427,26 +384,6 @@
     <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/spiders/kuaishou_user_photo.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/spiders/kuaishou_user_info.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/spiders/kuaishou_photo_comment.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/WangYiHao.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="43" lean-forward="true" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/SouGou.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1029">
@@ -457,10 +394,131 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/spiders/kuaishou_cookie_info.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/spiders/kuaishou_user_info.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-875">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/spiders/kuaishou_user_photo_info.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/spiders/kuxuan_kol_user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-413" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-56" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/GongZhongHao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="56" column="25" selection-end-line="58" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RongCloudChannel/test/GongZhongHaoWeb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1218">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/utils/parsepage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2786" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/utils/useragent.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/utils/signatureUtil.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/spiders/kuaishou_photo_comment.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/KuaiShou/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="108" column="29" lean-forward="true" selection-start-line="108" selection-start-column="29" selection-end-line="108" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RongCloudChannel/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-84">
+          <caret line="114" column="33" selection-start-line="114" selection-start-column="33" selection-end-line="114" selection-end-column="33" />
+          <folding>
+            <element signature="e#195#206#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/GongZhongHaoApp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/WeiBo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
+        <state relative-caret-position="1579">
           <caret line="85" column="78" lean-forward="true" selection-start-line="85" selection-start-column="78" selection-end-line="85" selection-end-column="78" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/QiErHao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/YouKu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/RenMinHao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/WangYiHao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="89" column="39" lean-forward="true" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
@@ -469,25 +527,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RongCloudChannel/items.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="24" column="4" lean-forward="true" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RongCloudChannel/spiders/GongZhongHao.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="56" column="25" lean-forward="true" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="178">
+          <caret line="27" column="41" lean-forward="true" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RongCloudChannel/conf/configure.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="98">
+          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
         </state>
       </provider>
     </entry>
