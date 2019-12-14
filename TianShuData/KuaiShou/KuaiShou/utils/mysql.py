@@ -77,6 +77,7 @@ class MySQLClient:
         _values = ",".join(["%s" for i in range(len(columns))])
         _sql = "".join([_prefix, "(", _fields, ") VALUES (", _values, ")"])
         _params = [data[key] for key in columns]
+        self.conn.ping(True)
         return self.cur.execute(_sql, tuple(_params))
 
     def update(self, tbname, data, condition):
@@ -89,6 +90,7 @@ class MySQLClient:
         for key in data.keys():
             _fields.append("`%s` = '%s'" % (key, data[key]))
         _sql = " ".join([_prefix, ','.join(_fields), 'WHERE', condition_str])
+        self.conn.ping(True)
         return self.cur.execute(_sql)
 
     def delete(self, tbname, condition):
@@ -98,15 +100,17 @@ class MySQLClient:
         condition_str = condition_str[:-5]
         _prefix = "".join(['DELETE FROM  `', tbname, '`', ' WHERE '])
         _sql = "".join([_prefix, condition_str])
+        self.conn.ping(True)
         return self.cur.execute(_sql)
 
     def select(self, tbname, condition):
         condition_str = ''
         for key, value in condition.items():
-            condition_str += ' {} = "{}" AND '.format(key, value)
+            condition_str += ' {} = {} AND '.format(key, value)
         condition_str = condition_str[:-5]
         _prefix = "".join(['SELECT * FROM  `', tbname, '`', ' WHERE '])
         _sql = "".join([_prefix, condition_str])
+        self.conn.ping(True)
         return self.cur.execute(_sql)
 
     def getLastInsertId(self):

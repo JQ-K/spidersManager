@@ -96,7 +96,7 @@ ITEM_PIPELINES = {
 REDIS_HOST = 'zqhd5'
 REDIS_PORT = 6379
 REDIS_PROXYIP_BASENAME = 'tianshu_proxyip'
-REDIS_EXPIRE_TEIME = 172800
+REDIS_PROXYIP_EXPIRE_TIME = 172800
 
 # 免费IP认证网站
 AUTH_URLS_INFO = [{'name': "kuaishou", "url": "http://live.kuaishou.com/graphql",

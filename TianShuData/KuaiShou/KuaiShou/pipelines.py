@@ -91,6 +91,7 @@ class KuaishouUserSeedsMySQLPipeline(object):
             spider.logger.info('Msg insert mysql[%s]: %s' % (self.mysql_host, str(msg)))
             return item
         self.mysql_client.update(self.mysql_kuaishou_user_seeds_tablename,msg, {"userId": msg['userId']})
+        self.mysql_client.commit()
         spider.logger.info('Msg update mysql[%s]: %s' % (self.mysql_host, str(msg)))
         return item
 

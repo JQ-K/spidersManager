@@ -16,7 +16,7 @@ class ProxyipPipeline(object):
         self.redis_host = settings.get('REDIS_HOST')
         self.redis_port = settings.get('REDIS_PORT')
         self.redis_proxyip_basename = settings.get('REDIS_PROXYIP_BASENAME')
-        self.expire_time = settings.get('REDIS_EXPIRE_TEIME')
+        self.redis_proxyip_expire_time = settings.get('REDIS_PROXYIP_EXPIRE_TIME')
         self.conn = Redis(host=self.redis_host, port=self.redis_port)
         spider.logger.info('RedisConn:host = %s,port = %s' % (self.redis_host, self.redis_port))
 

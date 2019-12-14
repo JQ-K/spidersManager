@@ -51,10 +51,10 @@ class KuaishouUserInfoSpider(scrapy.Spider):
                     continue
                 kwai_id = msg_value_dict['kwaiId']
                 user_info_query['variables']['principalId'] = kwai_id
-                kuaikan_url = 'http://live.kuaishou.com/graphql'
+                kuaishou_url = 'http://live.kuaishou.com/graphql'
                 headers = {'content-type': 'application/json'}
                 # logger.info('kafka message:{}'.format(msg_value))
-                yield scrapy.Request(kuaikan_url, headers=headers, body=json.dumps(user_info_query),
+                yield scrapy.Request(kuaishou_url, headers=headers, body=json.dumps(user_info_query),
                                      method='POST', callback=self.parse_user_info, meta={'bodyJson': user_info_query},
                                      dont_filter=True
                                      )

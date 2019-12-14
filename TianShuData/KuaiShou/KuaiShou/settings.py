@@ -153,11 +153,20 @@ SEARCH_DETAIL_QUERY = {
     "variables": {
         "key": "1",
         "type": "author",
-        "page": 2,
+        "page": 1,
         "lssid": "null",
         "ussid": "null"
     },
     "query": "query SearchDetailQuery($key: String, $type: String, $page: Int, $lssid: String, $ussid: String) {\n  searchDetail(key: $key, type: $type, page: $page, lssid: $lssid, ussid: $ussid) {\n    ... on SearchCategoryList {\n      type\n      list {\n        id\n        categoryId\n        title\n        src\n        roomNumber\n        __typename\n      }\n      __typename\n    }\n    ... on SearchUserList {\n      type\n      ussid\n      list {\n        id\n        name\n        living\n        profile\n        sex\n        description\n        countsInfo {\n          fan\n          follow\n          photo\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    ... on SearchLivestreamList {\n      type\n      lssid\n      list {\n        user {\n          id\n          profile\n          name\n          __typename\n        }\n        watchingCount\n        src\n        title\n        gameId\n        gameName\n        categoryId\n        liveStreamId\n        playUrls {\n          quality\n          url\n          __typename\n        }\n        quality\n        gameInfo {\n          category\n          name\n          pubgSurvival\n          type\n          kingHero\n          __typename\n        }\n        redPack\n        liveGuess\n        expTag\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
+}
+
+SEARCH_OVERVIEW_QUERY = {
+	"operationName": "SearchOverviewQuery",
+	"variables": {
+		"keyword": "866",
+		"ussid": "null"
+	},
+	"query": "query SearchOverviewQuery($keyword: String, $ussid: String) {\n  searchOverview(keyword: $keyword, ussid: $ussid) {\n    list {\n      ... on SearchCategoryList {\n        type\n        list {\n          id\n          categoryId\n          title\n          src\n          roomNumber\n          __typename\n        }\n        __typename\n      }\n      ... on SearchUserList {\n        type\n        ussid\n        list {\n          id\n          name\n          living\n          profile\n          sex\n          description\n          countsInfo {\n            fan\n            follow\n            photo\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      ... on SearchLivestreamList {\n        type\n        lssid\n        list {\n          user {\n            id\n            profile\n            name\n            __typename\n          }\n          watchingCount\n          src\n          title\n          gameId\n          gameName\n          categoryId\n          liveStreamId\n          playUrls {\n            quality\n            url\n            __typename\n          }\n          quality\n          gameInfo {\n            category\n            name\n            pubgSurvival\n            type\n            kingHero\n            __typename\n          }\n          redPack\n          liveGuess\n          expTag\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
 }
 
 # REDIS配置信息

@@ -10,6 +10,7 @@ from redis import Redis
 from scrapy.utils.project import get_project_settings
 
 import random
+import time
 
 class KuaishouSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -95,9 +96,13 @@ class KuaishouDownloaderMiddleware(object):
         for key, value in cookies_dict.items():
             request.cookies.setdefault(key, value)
         # 设置代理IP
-        proxy = self.conn.srandmember(self.redis_proxyip_name, 1)[0].decode()
+        proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        while proxy_list == []:
+            time.sleep(60)
+            spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+        proxy = proxy_list[0].decode()
         spider.logger.info('proxy:{}'.format(proxy))
-        # request.meta['proxy'] = proxy
+        request.meta['proxy'] = proxy
         return None
 
     def process_response(self, request, response, spider):
@@ -117,7 +122,21 @@ class KuaishouDownloaderMiddleware(object):
         # - return None: continue processing this exception
         # - return a Response object: stops process_exception() chain
         # - return a Request object: stops process_exception() chain
-        pass
+        # 处理请求超时的proxy:删除代理池中无效proxy，更新请求中的proxy
+        spider.logger.warn('Request error : %s ' % exception)
+        if 'Connection' in str(exception):
+            invaild_proxy = request.meta['proxy']
+            spider.logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
+            self.conn.srem(self.redis_proxyip_name, invaild_proxy)
+            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+            while proxy_list == []:
+                time.sleep(60)
+                spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+            proxy = proxy_list[0].decode()
+            spider.logger.info('proxy:{}'.format(proxy))
+            request.meta['proxy'] = proxy
+            spider.logger.info('Update proxy : %s ' % proxy)
+        return request
 
     def spider_opened(self, spider):
         settings = get_project_settings()
