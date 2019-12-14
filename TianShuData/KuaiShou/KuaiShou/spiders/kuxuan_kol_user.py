@@ -15,7 +15,7 @@ class KuxuanKolUserSpider(scrapy.Spider):
     """
     name = 'kuxuan_kol_user'
     custom_settings = {'ITEM_PIPELINES': {
-        # 'KuaiShou.pipelines.KuaishouKafkaPipeline': 701,
+        'KuaiShou.pipelines.KuaishouKafkaPipeline': 701,
         'KuaiShou.pipelines.KuaishouUserSeedsMySQLPipeline': 700
     }}
     settings = get_project_settings()
@@ -76,12 +76,16 @@ class KuxuanKolUserSpider(scrapy.Spider):
             if search_overview_author_list == []:continue
             for search_overview_author in search_overview_author_list:
                 # 判断搜索的结果是否匹配
-                if kuxuan_kol_user_item['user_name'] != search_overview_author['name'] and kuxuan_kol_user_item['kwaiId'] != search_overview_author['id']:
-                    kuxuan_kol_user_item['principalId'] = kuxuan_kol_user_item['kwaiId']
+                if kuxuan_kol_user_item['user_name'] != search_overview_author['name'] or kuxuan_kol_user_item['kwaiId'] != search_overview_author['id']:
+                    continue
                 kuxuan_kol_user_item['principalId'] = search_overview_author['id']
+
         # 处理 kwaiId 为空的情况
         if kuxuan_kol_user_item['kwaiId'] == '':
             kuxuan_kol_user_item['kwaiId'] = kuxuan_kol_user_item['user_id']
+        # 第二次处理 principalId
+        if 'principalId' not in  list(kuxuan_kol_user_item.keys()):
+            kuxuan_kol_user_item['principalId'] = kuxuan_kol_user_item['kwaiId']
         logger.info('kuxuan kol user item: %s' % str(kuxuan_kol_user_item))
         yield kuxuan_kol_user_item
 

@@ -10,7 +10,6 @@ class KuaishouTestSpider(scrapy.Spider):
     # allowed_domains = ['dataapi.kuxuan-inc.com']
     start_urls = ['http://live.kuaishou.com/graphql']
     Settings = get_project_settings().get('SEARCH_OVERVIEW_QUERY')
-    print(Settings)
 
     def start_requests(self):
         search_overview_query = self.settings.get('SEARCH_OVERVIEW_QUERY')

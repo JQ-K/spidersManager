@@ -100,16 +100,16 @@ DOWNLOAD_TIMEOUT = 5
 
 # kafka 相关信息及配置
 KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
-# TOPIC = 'tianshu_kuaishou'
+# KAFKA_TOPIC = 'tianshu_kuaishou'
 KAFKA_TOPIC = 'tianshu_test'
 # 设置TOPIC是否从头消费
 RESET_OFFSET_ON_START = True
 
 # spider cookie value num
-SPIDER_COOKIE_CNT = 10
+SPIDER_COOKIE_CNT = 500
 
 # 设置抓取酷炫的页数，<=0代表代表所有页面
-SPIDER_KUXUAN_PAGE_LIMIT = 1
+SPIDER_KUXUAN_PAGE_LIMIT = 1000
 SPIDER_KUXUAN_SORT_TYPE = 2
 
 # graphql

@@ -90,7 +90,12 @@ class KuaishouDownloaderMiddleware(object):
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
         # request.headers.setdefault('Cookie','did=web_d54ea5e1190a41e481809b9cd17f92aa')
-        cookies = self.conn.srandmember(self.redis_did_name, 1)[0].decode()
+        cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+        while cookies_list == []:
+            spider.logger.warn('Did Pool is null, Plase add did !')
+            time.sleep(60)
+            cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+        cookies=cookies_list[0].decode()
         spider.logger.info('cookies:{}'.format(cookies))
         cookies_dict = eval(cookies)
         for key, value in cookies_dict.items():
@@ -98,8 +103,9 @@ class KuaishouDownloaderMiddleware(object):
         # 设置代理IP
         proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
         while proxy_list == []:
-            time.sleep(60)
             spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+            time.sleep(60)
+            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
         proxy = proxy_list[0].decode()
         spider.logger.info('proxy:{}'.format(proxy))
         request.meta['proxy'] = proxy
@@ -124,7 +130,7 @@ class KuaishouDownloaderMiddleware(object):
         # - return a Request object: stops process_exception() chain
         # 处理请求超时的proxy:删除代理池中无效proxy，更新请求中的proxy
         spider.logger.warn('Request error : %s ' % exception)
-        if 'Connection' in str(exception):
+        if 'connection' in str(exception).lower():
             invaild_proxy = request.meta['proxy']
             spider.logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
             self.conn.srem(self.redis_proxyip_name, invaild_proxy)
@@ -133,7 +139,6 @@ class KuaishouDownloaderMiddleware(object):
                 time.sleep(60)
                 spider.logger.warn('Proxy Pool is null, Plase add proxy !')
             proxy = proxy_list[0].decode()
-            spider.logger.info('proxy:{}'.format(proxy))
             request.meta['proxy'] = proxy
             spider.logger.info('Update proxy : %s ' % proxy)
         return request
