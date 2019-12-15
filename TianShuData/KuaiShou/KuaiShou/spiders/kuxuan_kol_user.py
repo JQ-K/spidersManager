@@ -45,10 +45,13 @@ class KuxuanKolUserSpider(scrapy.Spider):
                 logger.error('scrapy.Request.errback: %s' % e)
         data = rsp_json['rst']['data']
         for user_dict in data:
+            kuxuan_kol_user_item = KuxuanKolUserItem()
             kuxuan_kol_user_dic = {}
             kuxuan_kol_user_dic['name'] = self.name
             for key, value in user_dict.items():
                 kuxuan_kol_user_dic[key] = value
+                kuxuan_kol_user_item[key] = value 
+            yield kuxuan_kol_user_item
             # 查询principalId、处理kwaiId(为空的情况)
             # kuaishou_url = 'http://live.kuaishou.com/graphql'
             # search_overview_query = self.settings.get('SEARCH_OVERVIEW_QUERY')
@@ -61,10 +64,6 @@ class KuxuanKolUserSpider(scrapy.Spider):
             #                      meta={'bodyJson': search_overview_query, 'kuxuan_kol_user_dic': kuxuan_kol_user_dic},
             #                      callback=self.parse_search_overview, dont_filter=True
             #                      )
-        kuxuan_kol_user_item = KuxuanKolUserItem()
-        for key, value in kuxuan_kol_user_dic.items():
-            kuxuan_kol_user_item[key] = value
-        yield kuxuan_kol_user_item
 
     # def parse_search_overview(self, response):
     #     """
