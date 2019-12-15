@@ -21,7 +21,7 @@ class KuxuanKolUserSpider(scrapy.Spider):
     settings = get_project_settings()
     # allowed_domains = ['dataapi.kuxuan-inc.com']
     sort_type = settings.get('SPIDER_KUXUAN_SORT_TYPE')
-    start_urls = ['http://dataapi.kuxuan-inc.com/api/kwaiUser/index?sort_type={}&page=111'.format(sort_type)]
+    start_urls = ['http://dataapi.kuxuan-inc.com/api/kwaiUser/index?sort_type={}&page=1001'.format(sort_type)]
 
     def parse(self, response):
         rsp_json = json.loads(response.text)

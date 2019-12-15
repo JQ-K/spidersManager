@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import json,re
+import json, re
 from lxml import etree
 from loguru import logger
 from scrapy.utils.project import get_project_settings
@@ -17,7 +17,8 @@ class KuaidailiFreeSpider(scrapy.Spider):
     auth_urls_info = settings.get('AUTH_URLS_INFO')
     allowed_domains = ['www.kuaidaili.com']
     start_urls = ['https://www.kuaidaili.com/free/intr/{}/'.format(page) for page in
-                  range(spider_page_start, spider_page_end)]
+                  range(spider_page_start, spider_page_end)] + ['https://www.kuaidaili.com/free/intr/{}/'.format(page)
+                                                                for page in range(spider_page_start, spider_page_end)]
 
     def start_requests(self):
         for start_url in self.start_urls:
@@ -41,22 +42,20 @@ class KuaidailiFreeSpider(scrapy.Spider):
                     ip_types = tbody_tr.xpath('td')[3].text.replace(' ', '').replace('\r\n', '')
                     resp_speed = float(tbody_tr.xpath('td')[5].text.replace(' ', '').replace('\r\n', '')[:-1])
                     update_time = tbody_tr.xpath('td')[6].text.replace('\r\n', '')
-                    url_type = re.findall('(http|https)://.*?',auth_url_info['url'])[0].lower()
+                    url_type = re.findall('(http|https)://.*?', auth_url_info['url'])[0].lower()
                     if url_type == 'https' and 'https' not in ip_types:
                         continue
-                    proxy = '{}://{}:{}'.format(url_type,ip,port)
+                    proxy = '{}://{}:{}'.format(url_type, ip, port)
                     headers = {'content-type': 'application/json'}
                     yield scrapy.Request(auth_url_info['url'], headers=headers, body=json.dumps(auth_url_info['body']),
                                          method='POST', callback=self.auth_proxyip,
-                                         meta={'bodyJson': auth_url_info['body'],'proxy':proxy},
+                                         meta={'bodyJson': auth_url_info['body'], 'proxy': proxy},
                                          dont_filter=True
                                          )
                 except Exception as e:
                     logger.warning('警告：解析失败！错误提示:{}'.format(e))
 
-    def auth_proxyip(self,response):
+    def auth_proxyip(self, response):
         self.proxy_ip_item['proxy'] = response.meta['proxy']
         logger.info(response.meta['proxy'])
         yield self.proxy_ip_item
-
-
