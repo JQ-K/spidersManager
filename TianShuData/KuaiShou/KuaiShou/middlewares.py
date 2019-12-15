@@ -86,7 +86,7 @@ class KuaishouDownloaderMiddleware(object):
         spider.logger.info('user-agent:{}'.format(thisua))
         request.headers.setdefault('user_agent', thisua)
         # 获取cookie时候，不能设定cookie值，不然就一样了
-        if spider.name == 'kuaishou_cookie_info':
+        if spider.name in ['kuaishou_cookie_info','kuxuan_kol_user']:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
         # request.headers.setdefault('Cookie','did=web_d54ea5e1190a41e481809b9cd17f92aa')

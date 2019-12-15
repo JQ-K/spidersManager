@@ -22,7 +22,7 @@ NEWSPIDER_MODULE = 'ProxyIP.spiders'
 # ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 16
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -105,7 +105,7 @@ AUTH_URLS_INFO = [{'name': "kuaishou", "url": "http://live.kuaishou.com/graphql"
 
 # 翻页数
 SPIDER_PAGE_START = 1
-SPIDER_PAGE_END = 20
+SPIDER_PAGE_END = 50
 
 # 超时时间
 # RETRY_ENABLED = True

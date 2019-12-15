@@ -3,6 +3,7 @@ import scrapy
 import time, random
 
 from scrapy.utils.project import get_project_settings
+from loguru import logger
 
 from KuaiShou.items import KuaishouCookieInfoItem
 

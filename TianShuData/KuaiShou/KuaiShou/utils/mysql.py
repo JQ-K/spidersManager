@@ -3,6 +3,7 @@
 __author__ = 'lish'
 
 import pymysql
+
 from loguru import logger
 
 OperationalError = pymysql.OperationalError
@@ -26,9 +27,9 @@ class MySQLClient:
                 try:
                     self.conn.select_db(dbname)
                 except pymysql.Error as e:
-                    print("Mysql Error %d: %s" % (e.args[0], e.args[1]))
+                    logger.error("Mysql Error %d: %s" % (e.args[0], e.args[1]))
         except pymysql.Error as e:
-            print("Mysql Error %d: %s" % (e.args[0], e.args[1]))
+            logger.error("Mysql Error %d: %s" % (e.args[0], e.args[1]))
 
     # def __del__(self):
     #     self.close()
@@ -37,14 +38,14 @@ class MySQLClient:
         try:
             self.conn.select_db(db)
         except pymysql.Error as e:
-            print("Mysql Error %d: %s" % (e.args[0], e.args[1]))
+            logger.error("Mysql Error %d: %s" % (e.args[0], e.args[1]))
 
     def query(self, sql):
         try:
             n = self.cur.execute(sql)
             return n
         except pymysql.Error as e:
-            print("Mysql Error:%s\nSQL:%s" % (e, sql))
+            logger.error("Mysql Error:%s\nSQL:%s" % (e, sql))
             return 0
 
     def queryMany(self, sql, args):
@@ -52,7 +53,7 @@ class MySQLClient:
             n = self.cur.executemany(sql, args)
             return n
         except pymysql.Error as e:
-            print("Mysql Error:%s\nSQL:%s" % (e, sql))
+            logger.error("Mysql Error:%s\nSQL:%s" % (e, sql))
             return 0
 
     def fetchRow(self):

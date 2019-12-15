@@ -16,7 +16,7 @@ class KuaidailiFreeSpider(scrapy.Spider):
     spider_page_end = settings.get('SPIDER_PAGE_END')
     auth_urls_info = settings.get('AUTH_URLS_INFO')
     allowed_domains = ['www.kuaidaili.com']
-    start_urls = ['https://www.kuaidaili.com/free/inha/{}/'.format(page) for page in
+    start_urls = ['https://www.kuaidaili.com/free/intr/{}/'.format(page) for page in
                   range(spider_page_start, spider_page_end)]
 
     def start_requests(self):
