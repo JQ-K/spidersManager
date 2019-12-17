@@ -4,10 +4,15 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+import datetime
 
 from pykafka import KafkaClient
 from redis import Redis
 from scrapy.utils.project import get_project_settings
+
+from KuaiShou.utils.mysql import MySQLClient
+from KuaiShou.utils.spiderplan import SeedsFansPlan
+
 
 class KuaishouKafkaPipeline(object):
 
@@ -51,7 +56,50 @@ class KuaishouRedisPipeline(object):
 
     def process_item(self, item, spider):
         msg = str(item).replace('\n', '').encode('utf-8')
-        spider.logger.info('Msg sadd redis[%s]: %s' % (self.REDIS_HOST, msg))
-        self.conn.sadd(self.redis_did_name,msg)
-        self.conn.expire(self.redis_did_name,self.redis_did_expire_time)
+        spider.logger.info('Msg sadd redis[%s]: %s' % (self.redis_host, msg))
+        self.conn.sadd(self.redis_did_name, msg)
+        self.conn.expire(self.redis_did_name, self.redis_did_expire_time)
         return item
+
+
+class KuaishouUserSeedsMySQLPipeline(object):
+
+    def open_spider(self, spider):
+        settings = get_project_settings()
+        self.mysql_host = settings.get('MYSQL_HOST')
+        self.mysql_user = settings.get('MYSQL_USER')
+        self.mysql_password = settings.get('MYSQL_PASSWORD')
+        self.mysql_database = settings.get('MYSQL_DATABASE')
+        self.mysql_kuaishou_user_seeds_tablename = settings.get('MYSQL_KUAISHOU_USER_SEEDS_TABLENAME')
+        spider.logger.info(
+            'MySQLConn:host = %s,user = %s,db = %s' % (self.mysql_host, self.mysql_user, self.mysql_database))
+        self.mysql_client = MySQLClient(host=self.mysql_host, user=self.mysql_user, password=self.mysql_password,
+                                        dbname=self.mysql_database)
+
+    def process_item(self, item, spider):
+        msg = {}
+        msg['userId'] = item['user_id']
+        msg['kwaiId'] = item['kwaiId']
+        if msg['kwaiId'] == '':
+            msg['kwaiId'] = item['user_id']
+        msg['principalId'] = item['kwaiId']
+        if 'principalId' in list(item.keys()):
+            msg['principalId'] = item['principalId']
+        msg['next_scheduling_date'] = SeedsFansPlan(item['fan'])
+        msg['status'] = 1
+        msg['pre_scheduling_date'] = datetime.datetime.now().strftime("%Y-%m-%d")
+        select_res = self.mysql_client.select(self.mysql_kuaishou_user_seeds_tablename, {"userId": msg['userId']})
+        if select_res == 0:
+            self.mysql_client.insert(self.mysql_kuaishou_user_seeds_tablename,msg)
+            self.mysql_client.commit()
+            spider.logger.info('Msg insert mysql[%s]: %s' % (self.mysql_host, str(msg)))
+            return item
+        self.mysql_client.update(self.mysql_kuaishou_user_seeds_tablename,msg, {"userId": msg['userId']})
+        self.mysql_client.commit()
+        spider.logger.info('Msg update mysql[%s]: %s' % (self.mysql_host, str(msg)))
+        return item
+
+    def close_spider(self, spider):
+        # self.mysql_client.commit()
+        self.mysql_client.close()
+        spider.logger.info('Mysql[%s] Conn closed!' % (self.mysql_host))

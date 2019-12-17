@@ -22,12 +22,12 @@ NEWSPIDER_MODULE = 'KuaiShou.spiders'
 # ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 1
+CONCURRENT_REQUESTS = 16
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
@@ -93,23 +93,23 @@ DOWNLOADER_MIDDLEWARES = {
 # log
 LOG_LEVEL = 'INFO'
 
-# 超时时间
+# 超时时间,超时尝试时间
 RETRY_ENABLED = True
 RETRY_TIMES = 1
 DOWNLOAD_TIMEOUT = 5
 
 # kafka 相关信息及配置
 KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
-# TOPIC = 'tianshu_kuaishou'
+# KAFKA_TOPIC = 'tianshu_kuaishou'
 KAFKA_TOPIC = 'tianshu_test'
 # 设置TOPIC是否从头消费
 RESET_OFFSET_ON_START = True
 
 # spider cookie value num
-SPIDER_COOKIE_CNT = 100
+SPIDER_COOKIE_CNT = 10
 
 # 设置抓取酷炫的页数，<=0代表代表所有页面
-SPIDER_KUXUAN_PAGE_LIMIT = 1
+SPIDER_KUXUAN_PAGE_LIMIT = 11741
 SPIDER_KUXUAN_SORT_TYPE = 2
 
 # graphql
@@ -153,18 +153,33 @@ SEARCH_DETAIL_QUERY = {
     "variables": {
         "key": "1",
         "type": "author",
-        "page": 2,
+        "page": 1,
         "lssid": "null",
         "ussid": "null"
     },
     "query": "query SearchDetailQuery($key: String, $type: String, $page: Int, $lssid: String, $ussid: String) {\n  searchDetail(key: $key, type: $type, page: $page, lssid: $lssid, ussid: $ussid) {\n    ... on SearchCategoryList {\n      type\n      list {\n        id\n        categoryId\n        title\n        src\n        roomNumber\n        __typename\n      }\n      __typename\n    }\n    ... on SearchUserList {\n      type\n      ussid\n      list {\n        id\n        name\n        living\n        profile\n        sex\n        description\n        countsInfo {\n          fan\n          follow\n          photo\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    ... on SearchLivestreamList {\n      type\n      lssid\n      list {\n        user {\n          id\n          profile\n          name\n          __typename\n        }\n        watchingCount\n        src\n        title\n        gameId\n        gameName\n        categoryId\n        liveStreamId\n        playUrls {\n          quality\n          url\n          __typename\n        }\n        quality\n        gameInfo {\n          category\n          name\n          pubgSurvival\n          type\n          kingHero\n          __typename\n        }\n        redPack\n        liveGuess\n        expTag\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
 }
 
+SEARCH_OVERVIEW_QUERY = {
+	"operationName": "SearchOverviewQuery",
+	"variables": {
+		"keyword": "866",
+		"ussid": "null"
+	},
+	"query": "query SearchOverviewQuery($keyword: String, $ussid: String) {\n  searchOverview(keyword: $keyword, ussid: $ussid) {\n    list {\n      ... on SearchCategoryList {\n        type\n        list {\n          id\n          categoryId\n          title\n          src\n          roomNumber\n          __typename\n        }\n        __typename\n      }\n      ... on SearchUserList {\n        type\n        ussid\n        list {\n          id\n          name\n          living\n          profile\n          sex\n          description\n          countsInfo {\n            fan\n            follow\n            photo\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      ... on SearchLivestreamList {\n        type\n        lssid\n        list {\n          user {\n            id\n            profile\n            name\n            __typename\n          }\n          watchingCount\n          src\n          title\n          gameId\n          gameName\n          categoryId\n          liveStreamId\n          playUrls {\n            quality\n            url\n            __typename\n          }\n          quality\n          gameInfo {\n            category\n            name\n            pubgSurvival\n            type\n            kingHero\n            __typename\n          }\n          redPack\n          liveGuess\n          expTag\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
+}
+
 # REDIS配置信息
 REDIS_HOST = 'zqhd5'
 REDIS_PORT = 6379
 REDIS_DID_NAME = 'tianshu_did'
-REDIS_DID_EXPIRE_TEIME = 86400
+REDIS_DID_EXPIRE_TIME = 86400
 REDIS_PROXYIP_NAME = 'tianshu_proxyip_kuaishou'
-REDIS_DID_EXPIRE_TEIME = 86400
+REDIS_PROXYIP_EXPIRE_TIME = 86400
 
+# MySQL配置信息
+MYSQL_HOST = 'zqhd3'
+MYSQL_USER = 'tianshu'
+MYSQL_PASSWORD = 'Tianshu_123'
+MYSQL_DATABASE = 'tianshuData'
+MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'

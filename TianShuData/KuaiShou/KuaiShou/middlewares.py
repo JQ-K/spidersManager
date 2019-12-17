@@ -10,6 +10,7 @@ from redis import Redis
 from scrapy.utils.project import get_project_settings
 
 import random
+import time
 
 class KuaishouSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -85,21 +86,29 @@ class KuaishouDownloaderMiddleware(object):
         spider.logger.info('user-agent:{}'.format(thisua))
         request.headers.setdefault('user_agent', thisua)
         # 获取cookie时候，不能设定cookie值，不然就一样了
-        if spider.name == 'kuaishou_cookie_info':
+        if spider.name in ['kuaishou_cookie_info','kuxuan_kol_user']:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
-        request.headers.setdefault('Cookie','did=web_d54ea5e1190a41e481809b9cd17f92aa')
-        # cookies = self.conn.srandmember(self.redis_did_name, 1)[0]
-        # spider.logger.info('cookies:{}'.format(cookies))
-        # cookies_dict = eval(cookies)
-        # for key, value in cookies_dict.items():
-        #     request.cookies.setdefault(key, value)
+        # request.headers.setdefault('Cookie','did=web_d54ea5e1190a41e481809b9cd17f92aa')
+        cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+        while cookies_list == []:
+            spider.logger.warn('Did Pool is null, Plase add did !')
+            time.sleep(60)
+            cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+        cookies=cookies_list[0].decode()
+        spider.logger.info('cookies:{}'.format(cookies))
+        cookies_dict = eval(cookies)
+        for key, value in cookies_dict.items():
+            request.cookies.setdefault(key, value)
         # 设置代理IP
-        proxyip_dict = eval(self.conn.srandmember(self.redis_proxyip_name, 1)[0])
-        proxyip_type, proxyip_value = list(proxyip_dict.items())[0]
-        proxy = "{}://{}".format(proxyip_type.lower(),proxyip_value)
+        proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        while proxy_list == []:
+            spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+            time.sleep(60)
+            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        proxy = proxy_list[0].decode()
         spider.logger.info('proxy:{}'.format(proxy))
-        request.meta['proxy'] = 'http://117.88.176.82:3000'
+        request.meta['proxy'] = proxy
         return None
 
     def process_response(self, request, response, spider):
@@ -119,7 +128,20 @@ class KuaishouDownloaderMiddleware(object):
         # - return None: continue processing this exception
         # - return a Response object: stops process_exception() chain
         # - return a Request object: stops process_exception() chain
-        pass
+        # 处理请求超时的proxy:删除代理池中无效proxy，更新请求中的proxy
+        spider.logger.warn('Request error : %s ' % exception)
+        if 'connection' in str(exception).lower():
+            invaild_proxy = request.meta['proxy']
+            spider.logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
+            self.conn.srem(self.redis_proxyip_name, invaild_proxy)
+            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+            while proxy_list == []:
+                time.sleep(60)
+                spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+            proxy = proxy_list[0].decode()
+            request.meta['proxy'] = proxy
+            spider.logger.info('Update proxy : %s ' % proxy)
+        return request
 
     def spider_opened(self, spider):
         settings = get_project_settings()
