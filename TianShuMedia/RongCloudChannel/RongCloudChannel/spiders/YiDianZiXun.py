@@ -32,12 +32,15 @@ class YidianzixunSpider(scrapy.Spider):
 
 
     def start_requests(self):
-        for user, password in self.accountDict.items():
+        for user, passwordAndId in self.accountDict.items():
+            password, curId = passwordAndId
             formdata = {"username": user, "password": password}
             time.sleep(3)
             yield FormRequest(self.loginUrl, method='POST',
                               formdata=formdata, callback=self.parseLoginPage,
-                              meta={'formdata': formdata, 'account': user})
+                              meta={'formdata': formdata,
+                                    'account': user,
+                                    'curId': curId})
 
 
     def parseLoginPage(self, response):
@@ -45,6 +48,7 @@ class YidianzixunSpider(scrapy.Spider):
             print('get url error: ' + response.url)
             return
         account = response.meta['account']
+        curId = response.meta['curId']
         rltJson = json.loads(response.text)
         try:
             cookieStr = rltJson['cookie']
@@ -60,7 +64,8 @@ class YidianzixunSpider(scrapy.Spider):
             print(response.meta['formdata'])
             ####test
             if isErrorAccount(self.channel_id, response.text):
-                postLoginErrorAccount(self.channel_id, account)
+                #postLoginErrorAccount(self.channel_id, account)
+                postLoginErrorAccount(curId)
             return
         time.sleep(2)
         yield scrapy.Request(self.fanUrl, method='GET', callback=self.parseFansPage,

@@ -81,7 +81,7 @@ class MysqlClient(object):
         return (userName, passWord)
 
 
-    def getChannelIdByUserName(self, tableName, channelName, userName):
+    '''def getChannelIdByUserName(self, tableName, channelName, userName):
         sql = "select distinct channel_id from {} where channel_info_name = '{}' and auth_name = '{}账号' and auth_value = '{}'".format(tableName, channelName, channelName, userName)
         try:
             cursor = self.conn.cursor()
@@ -91,7 +91,7 @@ class MysqlClient(object):
             cursor.close()
             return None
         cursor.close()
-        return id
+        return id'''
 
 
     def getTargetIdDictByChannelName(self, channelName):

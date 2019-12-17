@@ -23,7 +23,8 @@ class QutoutiaoSpider(scrapy.Spider):
 
 
     def start_requests(self):
-        for user, password in self.accountDict.items():
+        for user, passwordAndId in self.accountDict.items():
+            password, curId = passwordAndId
             time.sleep(3)
             formdata = {"password": password, "is_secret": "0", "dtu": self.dtu, }
             if user.find("@") > 0:
@@ -33,18 +34,22 @@ class QutoutiaoSpider(scrapy.Spider):
                 formdata["source"] = "1"
             yield FormRequest(self.loginUrl, method='POST',
                               formdata=formdata, callback=self.parseLoginPage,
-                              meta={'formdata': formdata, 'account': user})
+                              meta={'formdata': formdata,
+                                    'account': user,
+                                    'curId': curId})
 
 
     def parseLoginPage(self, response):
         loginInfo = json.loads(response.text)
         account = response.meta['account']
+        curId = response.meta['curId']
         if loginInfo['code'] != 0:
             print("登录失败：" + response.text)
             print(response.meta['formdata'])
             ####test
             if isErrorAccount(self.channel_id, response.text):
-                postLoginErrorAccount(self.channel_id, account)
+                #postLoginErrorAccount(self.channel_id, account)
+                postLoginErrorAccount(curId)
             return
         time.sleep(5)
         yield scrapy.Request(self.articleUrl.format(1, loginInfo['data']['token'], self.dtu),
@@ -81,7 +86,9 @@ class QutoutiaoSpider(scrapy.Spider):
             contentItem['id'] = contentInfo['id']
             contentItem['title'] = contentInfo['title']
             contentItem['content_link'] = contentInfo['url']
-            contentItem['publish_time'] = contentInfo['publish_time']
+            pubTime = contentInfo['publish_time']
+            if self.isValidPubTime(pubTime):
+                contentItem['publish_time'] = pubTime
             contentItem['read_count'] = contentInfo['pv']
             contentItem['comment_count'] = contentInfo['comment_num']
             contentItem['share_count'] = contentInfo['share_num']
@@ -125,7 +132,9 @@ class QutoutiaoSpider(scrapy.Spider):
             contentItem['id'] = contentInfo['id']
             contentItem['title'] = contentInfo['title']
             contentItem['content_link'] = contentInfo['url']
-            contentItem['publish_time'] = contentInfo['update_at']
+            pubTime = contentInfo['update_at']
+            if self.isValidPubTime(pubTime):
+                contentItem['publish_time'] = pubTime
             contentItem['read_count'] = contentInfo['pv']
             contentItem['comment_count'] = contentInfo['comment_num']
             contentItem['share_count'] = contentInfo['share_num']
@@ -141,3 +150,11 @@ class QutoutiaoSpider(scrapy.Spider):
             yield scrapy.Request(self.videoUrl.format(currentPage, token, self.dtu),
                                  method='GET', callback=self.parseVideoPageJson,
                                  meta={'token': token, 'currentPage': currentPage, 'totalPage': totalPage, 'beginFlag': beginFlag, 'account': account})
+
+
+    def isValidPubTime(self, pubTime):
+        if pubTime is None:
+            return False
+        if pubTime.startswith("0000"):
+            return False
+        return True

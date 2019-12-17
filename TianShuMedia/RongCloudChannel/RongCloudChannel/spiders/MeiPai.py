@@ -24,7 +24,8 @@ class MeipaiSpider(scrapy.Spider):
 
 
     def start_requests(self):
-        for user, password in self.accountDict.items():
+        for user, passwordAndId in self.accountDict.items():
+            password, curId = passwordAndId
             formdata = {"client_id": "1189857310",
                         "password": password,
                         "phone": user,
@@ -34,7 +35,9 @@ class MeipaiSpider(scrapy.Spider):
             yield FormRequest(self.loginUrl, method='POST',
                               formdata=formdata,
                               callback=self.parseLoginPage,
-                              meta={'formdata': formdata, 'account': user})
+                              meta={'formdata': formdata,
+                                    'account': user,
+                                    'curId': curId})
 
 
     def parseLoginPage(self, response):
@@ -42,6 +45,7 @@ class MeipaiSpider(scrapy.Spider):
             print('get url error: ' + response.url)
             return
         account = response.meta['account']
+        curId = response.meta['curId']
         try:
             rltJson = json.loads(response.text)
             userId = str(rltJson['response']['user']['id'])
@@ -50,7 +54,8 @@ class MeipaiSpider(scrapy.Spider):
             print(response.meta['formdata'])
             ####test
             if isErrorAccount(self.channel_id, response.text):
-                postLoginErrorAccount(self.channel_id, account)
+                #postLoginErrorAccount(self.channel_id, account)
+                postLoginErrorAccount(curId)
             return
         yield scrapy.Request(self.videoListUrl.format(userId),
                              method='GET', callback=self.parseVideoList, meta={'account': account})

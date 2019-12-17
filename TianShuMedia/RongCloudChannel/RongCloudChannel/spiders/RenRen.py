@@ -23,12 +23,15 @@ class RenrenSpider(scrapy.Spider):
 
 
     def start_requests(self):
-        for user, password in self.accountDict.items():
+        for user, passwordAndId in self.accountDict.items():
+            password, curId = passwordAndId
             formdata = {"mobile": user, "password": pwdUtil.md5(password)}
             time.sleep(3)
             yield FormRequest(self.loginUrl, method='POST',
                               formdata=formdata, callback=self.parseLoginPage,
-                              meta={'formdata': formdata, 'account': user})
+                              meta={'formdata': formdata,
+                                    'account': user,
+                                    'curId': curId})
 
 
     def parseLoginPage(self, response):
@@ -36,6 +39,7 @@ class RenrenSpider(scrapy.Spider):
             print('get url error: ' + response.url)
             return
         account = response.meta['account']
+        curId = response.meta['curId']
         rltJson = json.loads(response.text)
         try:
             token = rltJson['data']['token']
