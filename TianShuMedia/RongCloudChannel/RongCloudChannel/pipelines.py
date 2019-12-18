@@ -146,6 +146,10 @@ class RongcloudchannelPipeline(object):
         return False
 
 
+    def writeItemToMysql(self, item):
+        pass
+
+
     def close_spider(self, spider):
         for account in self.totalDict.keys():
             self.postItems(account)
