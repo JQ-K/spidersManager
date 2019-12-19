@@ -10,14 +10,14 @@ class MysqlClient(object):
         self.conn = pymysql.connect(host=host, user=user, password=password, database=database)
 
     @classmethod
-    def from_settings(cls, conf_dir):
+    def from_settings(cls, conf_dir, session_name='mysql'):
         conf_path = os.path.join(conf_dir, 'dbconf.ini')
         conf = configparser.ConfigParser()
         conf.read(conf_path)
-        host = conf.get('mysql', 'host')
-        user = conf.get('mysql', 'user')
-        password = conf.get('mysql', 'password')
-        database = conf.get('mysql', 'database')
+        host = conf.get(session_name, 'host')
+        user = conf.get(session_name, 'user')
+        password = conf.get(session_name, 'password')
+        database = conf.get(session_name, 'database')
         return cls(host, user, password, database)
 
 
@@ -110,6 +110,20 @@ class MysqlClient(object):
             raise e
         cursor.close()
         return rltDict
+
+
+    def insertOneRecord(self, saveDict, tbName):
+        keyList = list(saveDict.keys())
+        decorateKeyList = ["%(" + elem + ")s" for elem in keyList]
+        sql = "insert into {} ({}) values ({})".format(tbName, ",".join(keyList), ",".join(decorateKeyList))
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql, saveDict)
+            self.conn.commit()
+        except Exception as e:
+            self.conn.rollback()
+            raise e
+        cursor.close()
 
 
     def close(self):

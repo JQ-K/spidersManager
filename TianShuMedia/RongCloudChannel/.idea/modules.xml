@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../../TianShuData/KuaiShou/.idea/KuaiShou.iml" filepath="$PROJECT_DIR$/../../TianShuData/KuaiShou/.idea/KuaiShou.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../TianShuData/ProxyIP/.idea/ProxyIP.iml" filepath="$PROJECT_DIR$/../../TianShuData/ProxyIP/.idea/ProxyIP.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/RongCloudChannel.iml" filepath="$PROJECT_DIR$/.idea/RongCloudChannel.iml" />
     </modules>
   </component>
