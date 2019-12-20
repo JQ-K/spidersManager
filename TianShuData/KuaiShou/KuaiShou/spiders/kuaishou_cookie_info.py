@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import time, random
+import time, random, json
 
 from scrapy.utils.project import get_project_settings
 from loguru import logger
 
 from KuaiShou.items import KuaishouCookieInfoItem
+from KuaiShou.utils.did import RegisterCookie
+
 
 
 class KuaishouCookieInfoSpider(scrapy.Spider):
@@ -14,7 +16,7 @@ class KuaishouCookieInfoSpider(scrapy.Spider):
         'KuaiShou.pipelines.KuaishouRedisPipeline': 700
     }}
     settings = get_project_settings()
-    allowed_domains = ['live.kuaishou.com']
+    # allowed_domains = ['live.kuaishou.com']
     # start_urls = ['http://live.kuaishou.com/']
 
     def start_requests(self):
@@ -23,25 +25,24 @@ class KuaishouCookieInfoSpider(scrapy.Spider):
         while i < spider_cookie_cnt:
             i += 1
             time.sleep(random.randint(1, 3))
-            start_url = 'https://live.kuaishou.com'
-            headers = {
-                "Host": "live.kuaishou.com",
-                "Connection": "keep-alive",
-                "Cache-Control": "max-age=0",
-                "Upgrade-Insecure-Requests": "1",
-                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36",
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
-                "Accept-Encoding": "gzip, deflate, br",
-                "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8"
-            }
-            yield scrapy.Request(start_url, headers=headers, callback=self.parse_cookie, dont_filter=True)
-
-    def parse_cookie(self, response):
+            kuaishou_url = 'http://live.kuaishou.com/graphql'
+            search_hot_query = self.settings.get('SEARCH_HOT_QUERY')
+            headers = {'content-type': 'application/json'}
+            logger.info(search_hot_query)
+            yield scrapy.Request(kuaishou_url, headers=headers, body=json.dumps(search_hot_query),
+                                 method='POST',
+                                 meta={'bodyJson': search_hot_query},
+                                 callback=self.parse_produce_cookie, dont_filter=True
+                                 )
+    def parse_produce_cookie(self, response):
         kuaishou_cookie_info_item = KuaishouCookieInfoItem()
-        kuaishou_cookie_info_item['name'] = self.name
-        # kuaishou_cookie_info_item['operation_type'] = 'sadd'
+        cookies = ''
         for cookie in response.headers.getlist('Set-Cookie'):
             cookie_str = cookie.decode().split(';')[0]
             key, value = cookie_str.split('=')
-            kuaishou_cookie_info_item[key.replace('.', '_')] = value
-        yield kuaishou_cookie_info_item
+            cookies += '{}={}; '.format(key,value)
+            kuaishou_cookie_info_item[key.replace('.','_')] = value
+        if RegisterCookie(cookies):
+            logger.info(kuaishou_cookie_info_item)
+            yield kuaishou_cookie_info_item
+            time.sleep(random.randint(30, 60))

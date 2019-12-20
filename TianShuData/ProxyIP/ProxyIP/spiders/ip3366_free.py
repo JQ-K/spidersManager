@@ -26,7 +26,7 @@ class Ip3366FreeSpider(scrapy.Spider):
     def parse(self, response):
         resp_txt = response.text
         html = etree.HTML(resp_txt)
-        tbody_trs = html.xpath(('//*[@id="list"]/table/tbody/tr'))
+        tbody_trs = html.xpath('//*[@id="list"]/table/tbody/tr')
         for auth_url_info in self.auth_urls_info:
             self.proxy_ip_item = FreeProxyIPItem()
             self.proxy_ip_item['name'] = self.name

@@ -85,8 +85,12 @@ class KuaishouUserSeedsMySQLPipeline(object):
         msg['principalId'] = item['kwaiId']
         if 'principalId' in list(item.keys()):
             msg['principalId'] = item['principalId']
-        msg['next_scheduling_date'] = SeedsFansPlan(item['fan'])
         msg['status'] = 1
+        # 粉丝数为False，即更新种子库 principalId，更新后我们按照100W的粉丝数给其初始化下次抓取时间
+        if item['fan']:
+            msg['next_scheduling_date'] = SeedsFansPlan(item['fan'])
+        else:
+            msg['next_scheduling_date'] = SeedsFansPlan('100w')
         msg['pre_scheduling_date'] = datetime.datetime.now().strftime("%Y-%m-%d")
         select_res = self.mysql_client.select(self.mysql_kuaishou_user_seeds_tablename, {"userId": msg['userId']})
         if select_res == 0:
@@ -100,6 +104,5 @@ class KuaishouUserSeedsMySQLPipeline(object):
         return item
 
     def close_spider(self, spider):
-        # self.mysql_client.commit()
         self.mysql_client.close()
         spider.logger.info('Mysql[%s] Conn closed!' % (self.mysql_host))

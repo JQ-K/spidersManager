@@ -86,29 +86,33 @@ class KuaishouDownloaderMiddleware(object):
         spider.logger.info('user-agent:{}'.format(thisua))
         request.headers.setdefault('user_agent', thisua)
         # 获取cookie时候，不能设定cookie值，不然就一样了
-        if spider.name in ['kuaishou_cookie_info','kuxuan_kol_user']:
+        # 酷炫拿种子，不走代理，不需要cookie
+        if spider.name =='kuxuan_kol_user':
             return None
-        # 两种方式，一种是设置headers，一个是直接设置cookies
-        # request.headers.setdefault('Cookie','did=web_d54ea5e1190a41e481809b9cd17f92aa')
-        cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-        while cookies_list == []:
-            spider.logger.warn('Did Pool is null, Plase add did !')
-            time.sleep(60)
-            cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-        cookies=cookies_list[0].decode()
-        spider.logger.info('cookies:{}'.format(cookies))
-        cookies_dict = eval(cookies)
-        for key, value in cookies_dict.items():
-            request.cookies.setdefault(key, value)
         # 设置代理IP
-        proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-        while proxy_list == []:
-            spider.logger.warn('Proxy Pool is null, Plase add proxy !')
-            time.sleep(60)
-            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-        proxy = proxy_list[0].decode()
-        spider.logger.info('proxy:{}'.format(proxy))
-        request.meta['proxy'] = proxy
+        # proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        # while proxy_list == []:
+        #     spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+        #     time.sleep(60)
+        #     proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        # proxy = proxy_list[0].decode()
+        # spider.logger.info('proxy:{}'.format(proxy))
+        # request.meta['proxy'] = proxy
+        # # 获取cookie不能设置cookie，不然cookie就都是设定的了
+        # if spider.name =='kuaishou_cookie_info':
+        #     return None
+        # 两种方式，一种是设置headers，一个是直接设置cookies
+        # request.headers.setdefault('Cookie','did=web_64df7f99083a4f12b47b7b96e1c11a32')
+        # cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+        # while cookies_list == []:
+        #     spider.logger.warn('Did Pool is null, Plase add did !')
+        #     time.sleep(60)
+        #     cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+        # cookies=cookies_list[0].decode()
+        # spider.logger.info('cookies:{}'.format(cookies))
+        # cookies_dict = eval(cookies)
+        # for key, value in cookies_dict.items():
+        #     request.cookies.setdefault(key, value)
         return None
 
     def process_response(self, request, response, spider):
