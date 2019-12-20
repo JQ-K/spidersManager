@@ -115,7 +115,7 @@ class MysqlClient(object):
     def insertOneRecord(self, saveDict, tbName):
         keyList = list(saveDict.keys())
         decorateKeyList = ["%(" + elem + ")s" for elem in keyList]
-        sql = "insert into {} ({}) values ({})".format(tbName, ",".join(keyList), ",".join(decorateKeyList))
+        sql = "replace into {} ({}) values ({})".format(tbName, ",".join(keyList), ",".join(decorateKeyList))
         try:
             cursor = self.conn.cursor()
             cursor.execute(sql, saveDict)

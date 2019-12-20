@@ -60,6 +60,12 @@ class WeiboSpider(scrapy.Spider):
         contentItem['title'] = title
         contentItem['content_link'] = content_link
 
+        idx = content_link.rfind("id=")
+        if idx < 0:
+            contentItem['id'] = content_link
+        else:
+            contentItem['id'] = content_link[idx + 3:]
+
         publish_time = ""
         pubTimeList = response.xpath('//span[@class="time"]/text()').extract()
         if len(pubTimeList) == 1:
