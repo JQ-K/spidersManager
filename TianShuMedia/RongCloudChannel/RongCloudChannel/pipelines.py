@@ -8,7 +8,7 @@
 import json
 import time
 import requests
-
+from requests.adapters import HTTPAdapter
 from RongCloudChannel.conf.configure import *
 from RongCloudChannel.utils.pwdUtil import *
 from RongCloudChannel.utils.mysqlUtil import MysqlClient
@@ -172,7 +172,11 @@ class RongcloudchannelPipeline(object):
         self.totalDict[account]['timestamp'] = curTimeStamp
         message = json.dumps(self.totalDict[account])
         #print(message)
-        response = requests.post(self.api, message, headers=self.headers)
+        ss = requests.Session()
+        # 重试次数为3
+        ss.mount('http://', HTTPAdapter(max_retries=3))
+        ss.mount('https://', HTTPAdapter(max_retries=3))
+        response = ss.post(self.api, message, headers=self.headers)
         #print(response.text)
         if self.isRightResponse(response):
             self.totalDict[account]['s'].clear()
