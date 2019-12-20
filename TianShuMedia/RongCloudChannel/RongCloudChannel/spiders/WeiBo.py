@@ -7,16 +7,22 @@ import re
 from RongCloudChannel.utils.targetIdUtil import *
 from RongCloudChannel.items import *
 from RongCloudChannel.utils import dateUtil
+import browsercookie
+import requests
 
 
 class WeiboSpider(scrapy.Spider):
     name = 'WeiBo'
     channel_id = '微博'
 
-    cookies = {
-        "SUB": "_2A25w6dWBDeRhGeFN6VcS8CbMwzqIHXVTn0BJrDV8PUNbmtBeLXWhkW9NQEWMQC6XHmRc3jq7eKYF5PW4VLhZojzd",
-    }
-
+    # cookies = {
+    #     "SUB": "_2A25w6dWBDeRhGeFN6VcS8CbMwzqIHXVTn0BJrDV8PUNbmtBeLXWhkW9NQEWMQC6XHmRc3jq7eKYF5PW4VLhZojzd",
+    # }
+    cookies={}
+    chrome_cookies = browsercookie.chrome()
+    cookies_dict = requests.utils.dict_from_cookiejar(chrome_cookies)
+    cookies["SUB"]=cookies_dict["SUB"]
+    print("cookies",cookies)
 
     def __init__(self):
         self.targetDict = getAllTargetIdByChannel(self.channel_id)
