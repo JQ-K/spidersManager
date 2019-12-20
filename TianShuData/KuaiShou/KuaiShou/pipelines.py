@@ -78,7 +78,7 @@ class KuaishouUserSeedsMySQLPipeline(object):
 
     def process_item(self, item, spider):
         msg = {}
-        msg['userId'] = item['user_id']
+        msg['userId'] = item['userId']
         msg['kwaiId'] = item['kwaiId']
         if msg['kwaiId'] == '':
             msg['kwaiId'] = item['user_id']
@@ -87,10 +87,7 @@ class KuaishouUserSeedsMySQLPipeline(object):
             msg['principalId'] = item['principalId']
         msg['status'] = 1
         # 粉丝数为False，即更新种子库 principalId，更新后我们按照100W的粉丝数给其初始化下次抓取时间
-        if item['fan']:
-            msg['next_scheduling_date'] = SeedsFansPlan(item['fan'])
-        else:
-            msg['next_scheduling_date'] = SeedsFansPlan('100w')
+        msg['next_scheduling_date'] = SeedsFansPlan(item['fan'])
         msg['pre_scheduling_date'] = datetime.datetime.now().strftime("%Y-%m-%d")
         select_res = self.mysql_client.select(self.mysql_kuaishou_user_seeds_tablename, {"userId": msg['userId']})
         if select_res == 0:

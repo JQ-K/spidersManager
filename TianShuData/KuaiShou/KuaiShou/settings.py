@@ -28,7 +28,7 @@ CONCURRENT_REQUESTS = 3
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = random.randint(2,5)
+DOWNLOAD_DELAY = random.randint(2, 5)
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
@@ -91,7 +91,7 @@ DOWNLOADER_MIDDLEWARES = {
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-HTTPERROR_ALLOWED_CODES = [500,400]
+HTTPERROR_ALLOWED_CODES = [500, 400]
 # log
 LOG_LEVEL = 'INFO'
 
@@ -163,23 +163,28 @@ SEARCH_DETAIL_QUERY = {
 }
 
 SEARCH_OVERVIEW_QUERY = {
-	"operationName": "SearchOverviewQuery",
-	"variables": {
-		"keyword": "683611285",
-		"ussid": "null"
-	},
-	"query": "query SearchOverviewQuery($keyword: String, $ussid: String) {\n  searchOverview(keyword: $keyword, ussid: $ussid) {\n    list {\n      ... on SearchCategoryList {\n        type\n        list {\n          id\n          categoryId\n          title\n          src\n          roomNumber\n          __typename\n        }\n        __typename\n      }\n      ... on SearchUserList {\n        type\n        ussid\n        list {\n          id\n          name\n          living\n          profile\n          sex\n          description\n          countsInfo {\n            fan\n            follow\n            photo\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      ... on SearchLivestreamList {\n        type\n        lssid\n        list {\n          user {\n            id\n            profile\n            name\n            __typename\n          }\n          watchingCount\n          src\n          title\n          gameId\n          gameName\n          categoryId\n          liveStreamId\n          playUrls {\n            quality\n            url\n            __typename\n          }\n          quality\n          gameInfo {\n            category\n            name\n            pubgSurvival\n            type\n            kingHero\n            __typename\n          }\n          redPack\n          liveGuess\n          expTag\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
+    "operationName": "SearchOverviewQuery",
+    "variables": {
+        "keyword": "7778",
+        "ussid": "null"
+    },
+    "query": "query SearchOverviewQuery($keyword: String, $ussid: String) {\n  pcSearchOverview(keyword: $keyword, ussid: $ussid) {\n    list {\n      ... on SearchCategoryList {\n        type\n        list {\n          categoryId\n          categoryAbbr\n          title\n          src\n          __typename\n        }\n        __typename\n      }\n      ... on SearchUserList {\n        type\n        ussid\n        list {\n          id\n          name\n          living\n          avatar\n          sex\n          description\n          counts {\n            fan\n            follow\n            photo\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      ... on SearchLivestreamList {\n        type\n        lssid\n        list {\n          user {\n            id\n            avatar\n            name\n            __typename\n          }\n          poster\n          coverUrl\n          caption\n          id\n          playUrls {\n            quality\n            url\n            __typename\n          }\n          quality\n          gameInfo {\n            category\n            name\n            pubgSurvival\n            type\n            kingHero\n            __typename\n          }\n          hasRedPack\n          liveGuess\n          expTag\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
 }
 
 SEARCH_HOT_QUERY = {
-	"operationName": "searchHotQuery",
-	"variables": {
-		"limit": 5
-	},
-	"query": "query searchHotQuery($limit: Int) {\n  searchHot(limit: $limit) {\n    hotWords\n    __typename\n  }\n}\n"
+    "operationName": "searchHotQuery",
+    "variables": {
+        "limit": 5
+    },
+    "query": "query searchHotQuery($limit: Int) {\n  searchHot(limit: $limit) {\n    hotWords\n    __typename\n  }\n}\n"
 }
 
-
+KUAISHOU_LIVE_WEB_ST = {
+    'clientid':'3',
+    'client_key':'65890b29',
+    'userId':'1537755176',
+    'kuaishou.live.web_st': 'ChRrdWFpc2hvdS5saXZlLndlYi5zdBKgAYNLMQueFOkqhzap2O99rABfV8-TeVuL_ZOtaUG2qyTi-Ubt2xsvLp3Tt0GbtBH_3ZilUYU2IihY2w3A0E3B8XFspbCcIDxoBNVmvfwgkjj6H1tO_GsRFqIKeYsMBiHmybn15JRxsFwC_1MGhT-aDoGq6Kok94fK5lUVkUAoX5YVvFe9-FyvFULL0eKlsJ_UESGpo-3qP51CfIrYGcZk_nwaErZBy_JDfEY0lUogcFFbVS54zCIgWrVJJHePCiItLG3K5ml577Sk2HWwk2FxvVEMq2OS5JcoBTAB'
+}
 
 # REDIS配置信息
 REDIS_HOST = 'zqhd5'

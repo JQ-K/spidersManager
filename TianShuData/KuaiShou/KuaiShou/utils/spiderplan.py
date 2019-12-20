@@ -3,6 +3,7 @@
 __author__ = 'lish'
 import re
 import datetime
+from loguru import logger
 
 
 def SeedsFansPlan(value):
@@ -15,6 +16,8 @@ def SeedsFansPlan(value):
     """
     # 计算粉丝数
     fan_value, fan_unit = re.findall('([0-9\.]+)([a-zA-Z]{0,3})', value)[0]
+    if fan_value == '.':
+        fan_value = 100
     if fan_unit == '':
         fan_num = int(fan_value)
     elif fan_unit.lower() == 'k':

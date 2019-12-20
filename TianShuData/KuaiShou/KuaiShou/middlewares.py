@@ -89,7 +89,7 @@ class KuaishouDownloaderMiddleware(object):
         # 酷炫拿种子，不走代理，不需要cookie
         if spider.name =='kuxuan_kol_user':
             return None
-        # 设置代理IP
+        # # 设置代理IP
         # proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
         # while proxy_list == []:
         #     spider.logger.warn('Proxy Pool is null, Plase add proxy !')
@@ -98,21 +98,27 @@ class KuaishouDownloaderMiddleware(object):
         # proxy = proxy_list[0].decode()
         # spider.logger.info('proxy:{}'.format(proxy))
         # request.meta['proxy'] = proxy
-        # # 获取cookie不能设置cookie，不然cookie就都是设定的了
-        # if spider.name =='kuaishou_cookie_info':
-        #     return None
+        # 获取cookie不能设置cookie，不然cookie就都是设定的了
+        if spider.name in ['kuaishou_cookie_info','kuaishou_register_did']:
+            return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
-        # request.headers.setdefault('Cookie','did=web_64df7f99083a4f12b47b7b96e1c11a32')
-        # cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-        # while cookies_list == []:
-        #     spider.logger.warn('Did Pool is null, Plase add did !')
-        #     time.sleep(60)
-        #     cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-        # cookies=cookies_list[0].decode()
-        # spider.logger.info('cookies:{}'.format(cookies))
-        # cookies_dict = eval(cookies)
-        # for key, value in cookies_dict.items():
-        #     request.cookies.setdefault(key, value)
+        #
+        cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+        while cookies_list == []:
+            spider.logger.warn('Did Pool is null, Plase add did !')
+            time.sleep(60)
+            cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+        cookies=cookies_list[0].decode()
+
+        cookies_dict = eval(cookies)
+        cookies_str = ''
+        for key, value in cookies_dict.items():
+            cookies_str += '{}={}; '.format(key,value)
+        # 对于用户隐私数据需要带上这个
+        for key, value in self.kuaishou_live_web_st.items():
+            cookies_str += '{}={}; '.format(key,value)
+        # spider.logger.info('Cookie:{}'.format(cookies_str[:-2] ))
+        request.headers.setdefault('Cookie', cookies_str[:-2])
         return None
 
     def process_response(self, request, response, spider):
@@ -149,6 +155,7 @@ class KuaishouDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         settings = get_project_settings()
+        self.kuaishou_live_web_st = settings.get('KUAISHOU_LIVE_WEB_ST')
         self.uapool = settings.get('UAPOOL')
         self.redis_host = settings.get('REDIS_HOST')
         self.redis_port = settings.get('REDIS_PORT')

@@ -48,5 +48,6 @@ class KuxuanKolUserSpider(scrapy.Spider):
             kuxuan_kol_user_item = KuxuanKolUserItem()
             kuxuan_kol_user_item['name'] = self.name
             for key, value in user_dict.items():
+                if key == 'user_id':key='userId'
                 kuxuan_kol_user_item[key] = value 
             yield kuxuan_kol_user_item

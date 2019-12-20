@@ -32,7 +32,7 @@ class KuaishouUserInfoSpider(scrapy.Spider):
         kafka_topic = self.settings.get('KAFKA_TOPIC')
         reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
         # user_info_query = self.settings.get('SENSITIVE_USER_INFO_QUERY')
-        user_info_query = self.settings.get('USER_INFO_QUERY')
+        user_info_query = self.settings.get('SENSITIVE_USER_INFO_QUERY')
         logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic))
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
@@ -68,29 +68,37 @@ class KuaishouUserInfoSpider(scrapy.Spider):
 
     def parse_user_info(self, response):
         logger.info(response.text)
-        # rsp_json = json.loads(response.text)
-        # user_info = rsp_json['data']['userInfo']
-        # if user_info == None:
-        #     logger.warning('UserInfoQuery failed, error:{}'.format(str(rsp_json).replace('\n', '')))
-        #     return
-        # if user_info['id'] == None:
-        #     # 删掉did库中的失效did
-        #     kuaishou_cookie_info = {}
-        #     for cookie in response.headers.getlist('Set-Cookie'):
-        #         cookie_str = cookie.decode().split(';')[0]
-        #         key, value = cookie_str.split('=')
-        #         kuaishou_cookie_info[key.replace('.', '_')] = value
-        #     logger.info(response.headers.getlist('Set-Cookie'))
-        #     logger.info('RedisDid srem invaild did:{}'.format(str(kuaishou_cookie_info)))
-        #     self.conn.srem(self.redis_did_name, str(kuaishou_cookie_info).encode('utf-8'))
-        #
-        #
-        #     body_json = response.meta['bodyJson']
-        #     principal_id = body_json['variables']['principalId']
-        #     logger.warning('UserInfoQuery failed, principalId:{}'.format(principal_id))
-        #     return
-        #
-        # kuaishou_user_info_iterm = KuaishouUserInfoIterm()
-        # kuaishou_user_info_iterm['name'] = self.name
-        # kuaishou_user_info_iterm['user_info'] = user_info
-        # return kuaishou_user_info_iterm
+        rsp_json = json.loads(response.text)
+        user_info = rsp_json['data']['sensitiveUserInfo']
+        if user_info == None:
+            logger.warning('SensitivUserInfoQuery failed, error:{}'.format(str(rsp_json).replace('\n', '')))
+            yield
+        if user_info['kwaiId'] == None:
+            # 删掉did库中的失效did
+            kuaishou_cookie_info = {}
+            for cookie in response.headers.getlist('Set-Cookie'):
+                cookie_str = cookie.decode().split(';')[0]
+                key, value = cookie_str.split('=')
+                kuaishou_cookie_info[key.replace('.', '_')] = value
+            logger.info(response.headers.getlist('Set-Cookie'))
+            logger.info('RedisDid srem invaild did:{}'.format(str(kuaishou_cookie_info)))
+            self.conn.srem(self.redis_did_name, str(kuaishou_cookie_info).encode('utf-8'))
+
+            body_json = response.meta['bodyJson']
+            principal_id = body_json['variables']['principalId']
+            logger.warning('SensitivUserInfoQuery failed, principalId:{}'.format(principal_id))
+            yield
+        kuaishou_user_info_iterm = KuaishouUserInfoIterm()
+        kuaishou_user_info_iterm['name'] = self.name
+        kuaishou_user_info_iterm['userId'] = user_info['userId']
+        kuaishou_user_info_iterm['kwaiId'] = user_info['kwaiId']
+        kuaishou_user_info_iterm['principalId'] = response.meta['bodyJson']['variables']['principalId']
+        kuaishou_user_info_iterm['constellation'] = user_info['constellation']
+        kuaishou_user_info_iterm['cityName'] = user_info['cityName']
+        kuaishou_user_info_iterm['fan'] = user_info['countsInfo']['fan']
+        kuaishou_user_info_iterm['follow'] = user_info['countsInfo']['fan']
+        kuaishou_user_info_iterm['photo'] = user_info['countsInfo']['fan']
+        kuaishou_user_info_iterm['liked'] = user_info['countsInfo']['fan']
+        kuaishou_user_info_iterm['open'] = user_info['countsInfo']['fan']
+        kuaishou_user_info_iterm['playback'] = user_info['countsInfo']['fan']
+        yield kuaishou_user_info_iterm

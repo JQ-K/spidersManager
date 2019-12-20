@@ -18,7 +18,7 @@ class KuxuanKolUserItem(scrapy.Item):
     # define the fields for your item here like:
     name = scrapy.Field()
     id = scrapy.Field()
-    user_id = scrapy.Field()
+    userId = scrapy.Field()
     kwaiId = scrapy.Field()
     principalId = scrapy.Field()
     cityName = scrapy.Field()
@@ -47,7 +47,17 @@ class KuaishouCookieInfoItem(scrapy.Item):
 
 class KuaishouUserInfoIterm(scrapy.Item):
     name = scrapy.Field()
-    user_info = scrapy.Field()
+    userId = scrapy.Field()
+    kwaiId = scrapy.Field()
+    principalId = scrapy.Field()
+    constellation  = scrapy.Field()
+    cityName = scrapy.Field()
+    fan = scrapy.Field()
+    follow = scrapy.Field()
+    photo = scrapy.Field()
+    liked = scrapy.Field()
+    open = scrapy.Field()
+    playback = scrapy.Field()
 
 
 class KuaishouUserPhotoInfoIterm(scrapy.Item):
