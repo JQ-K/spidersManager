@@ -58,6 +58,10 @@ class KuaishouUserInfoIterm(scrapy.Item):
     liked = scrapy.Field()
     open = scrapy.Field()
     playback = scrapy.Field()
+    nickname = scrapy.Field()
+    avatar = scrapy.Field()
+    sex = scrapy.Field()
+    description = scrapy.Field()
 
 
 class KuaishouUserPhotoInfoIterm(scrapy.Item):

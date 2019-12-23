@@ -90,14 +90,14 @@ class KuaishouDownloaderMiddleware(object):
         if spider.name =='kuxuan_kol_user':
             return None
         # # 设置代理IP
-        proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-        while proxy_list == []:
-            spider.logger.warn('Proxy Pool is null, Plase add proxy !')
-            time.sleep(60)
-            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-        proxy = proxy_list[0].decode()
-        spider.logger.info('proxy:{}'.format(proxy))
-        request.meta['proxy'] = proxy
+        # proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        # while proxy_list == []:
+        #     spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+        #     time.sleep(60)
+        #     proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        # proxy = proxy_list[0].decode()
+        # spider.logger.info('proxy:{}'.format(proxy))
+        # request.meta['proxy'] = proxy
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
         if spider.name in ['kuaishou_cookie_info','kuaishou_register_did']:
             return None
@@ -109,15 +109,15 @@ class KuaishouDownloaderMiddleware(object):
             time.sleep(60)
             cookies_list = self.conn.srandmember(self.redis_did_name, 1)
         cookies=cookies_list[0].decode()
-
         cookies_dict = eval(cookies)
         cookies_str = ''
         for key, value in cookies_dict.items():
             cookies_str += '{}={}; '.format(key,value)
-        # 对于用户隐私数据需要带上这个
-        for key, value in self.kuaishou_live_web_st.items():
-            cookies_str += '{}={}; '.format(key,value)
-        # spider.logger.info('Cookie:{}'.format(cookies_str[:-2] ))
+        # 对于用户隐私数据需要带上这个,这里主要是 kuaishou_user_info和kuaishou_search_principalid两个spides用到
+        if spider.name in ['kuaishou_search_principalid','kuaishou_user_info']:
+            for key, value in self.kuaishou_live_web_st.items():
+                cookies_str += '{}={}; '.format(key,value)
+        spider.logger.info('Cookie:{}'.format(cookies_str[:-2] ))
         request.headers.setdefault('Cookie', cookies_str[:-2])
         return None
 
@@ -139,18 +139,18 @@ class KuaishouDownloaderMiddleware(object):
         # - return a Response object: stops process_exception() chain
         # - return a Request object: stops process_exception() chain
         # 处理请求超时的proxy:删除代理池中无效proxy，更新请求中的proxy
-        spider.logger.warn('Request error : %s ' % exception)
-        if 'connection' in str(exception).lower():
-            invaild_proxy = request.meta['proxy']
-            spider.logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
-            self.conn.srem(self.redis_proxyip_name, invaild_proxy)
-            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-            while proxy_list == []:
-                time.sleep(60)
-                spider.logger.warn('Proxy Pool is null, Plase add proxy !')
-            proxy = proxy_list[0].decode()
-            request.meta['proxy'] = proxy
-            spider.logger.info('Update proxy : %s ' % proxy)
+        # spider.logger.warn('Request error : %s ' % exception)
+        # if 'connection' in str(exception).lower():
+        #     invaild_proxy = request.meta['proxy']
+        #     spider.logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
+        #     self.conn.srem(self.redis_proxyip_name, invaild_proxy)
+        #     proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        #     while proxy_list == []:
+        #         time.sleep(60)
+        #         spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+        #     proxy = proxy_list[0].decode()
+        #     request.meta['proxy'] = proxy
+        #     spider.logger.info('Update proxy : %s ' % proxy)
         return request
 
     def spider_opened(self, spider):

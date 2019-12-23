@@ -2,16 +2,14 @@
 import scrapy
 import json
 
-from loguru import logger
 from scrapy.utils.project import get_project_settings
 from pykafka import KafkaClient
 from loguru import logger
 
 from KuaiShou.items import KuaishouUserInfoIterm
-from KuaiShou.utils.did import RegisterCookie
 
 class KuaishouSearchUserSpider(scrapy.Spider):
-    name = 'kuaishou_search_user'
+    name = 'kuaishou_search_principalid'
     # allowed_domains = ['live.kuaishou.com/graphql']
     # start_urls = ['http://live.kuaishou.com/graphql/']
 
@@ -67,7 +65,11 @@ class KuaishouSearchUserSpider(scrapy.Spider):
     def parse_search_overview(self, response):
         rsp_search_overview_json = json.loads(response.text)
         logger.info(rsp_search_overview_json)
-        search_overview_list = rsp_search_overview_json['data']['pcSearchOverview']['list']
+        pc_search_overview = rsp_search_overview_json['data']['pcSearchOverview']
+        if pc_search_overview == None:
+            logger.warning('pcSearchOverview failed, result is None')
+            return
+        search_overview_list = pc_search_overview['list']
         for search_overview in search_overview_list:
             if search_overview['type'] != 'authors':
                 continue
@@ -100,9 +102,9 @@ class KuaishouSearchUserSpider(scrapy.Spider):
         kuaishou_user_info_iterm['constellation'] = user_info['constellation']
         kuaishou_user_info_iterm['cityName'] = user_info['cityName']
         kuaishou_user_info_iterm['fan'] = user_info['countsInfo']['fan']
-        kuaishou_user_info_iterm['follow'] = user_info['countsInfo']['fan']
-        kuaishou_user_info_iterm['photo'] = user_info['countsInfo']['fan']
-        kuaishou_user_info_iterm['liked'] = user_info['countsInfo']['fan']
-        kuaishou_user_info_iterm['open'] = user_info['countsInfo']['fan']
-        kuaishou_user_info_iterm['playback'] = user_info['countsInfo']['fan']
+        kuaishou_user_info_iterm['follow'] = user_info['countsInfo']['follow']
+        kuaishou_user_info_iterm['photo'] = user_info['countsInfo']['photo']
+        kuaishou_user_info_iterm['liked'] = user_info['countsInfo']['liked']
+        kuaishou_user_info_iterm['open'] = user_info['countsInfo']['open']
+        kuaishou_user_info_iterm['playback'] = user_info['countsInfo']['playback']
         yield kuaishou_user_info_iterm

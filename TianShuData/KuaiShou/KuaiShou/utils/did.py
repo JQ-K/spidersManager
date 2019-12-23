@@ -183,7 +183,7 @@ def RegisterCookie(cookies):
 
 
 if __name__ == '__main__':
-    cookie = "did=web_0f30e5c64bc340eab383e0f329f51417; didv=1576751319000; kuaishou.live.bfb1s=3e261140b0cf7444a0ba411c6f227d88"
+    cookie = "did=web_94be0eafe9294373803600a07f300cf2; didv=577071729000; kuaishou.live.bfb1s=3e261140b0cf7444a0ba411c6f227d88"
     RegisterCookie(cookie)
 
 

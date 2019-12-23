@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import scrapy
-
-from loguru import logger
 import re,time
 import json, random
+
+from scrapy.utils.project import get_project_settings
+from loguru import logger
 
 from KuaiShou.utils import ProduceRandomStr
 from KuaiShou.items import KuaishouCookieInfoItem
@@ -12,15 +13,21 @@ from KuaiShou.items import KuaishouCookieInfoItem
 class KuaishouRegisterDidSpider(scrapy.Spider):
     name = 'kuaishou_register_did'
     # allowed_domains = ['live.kuaishou.com/graphql']
-    # start_urls = ['http://live.kuaishou.com/graphql/']
+    # start_urls = ['https://live.kuaishou.com/graphql/']
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouRedisPipeline': 700
     }}
     headers = {}
+    settings = get_project_settings()
 
     def start_requests(self):
         start_url = 'https://live.kuaishou.com/v/hot/'
-        yield scrapy.Request(start_url, method='GET', callback=self.produce_did)
+        i = 0
+        spider_cookie_cnt = self.settings.get('SPIDER_COOKIE_CNT')
+        while i < spider_cookie_cnt:
+            i += 1
+            time.sleep(random.randint(10, 30))
+            yield scrapy.Request(start_url, method='GET', callback=self.produce_did, dont_filter=True)
 
     def produce_did(self, response):
         referer = response.url
