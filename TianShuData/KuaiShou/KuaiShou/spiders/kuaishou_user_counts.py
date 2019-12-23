@@ -76,7 +76,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
                 logger.info('Search userinfo reslut: {}'.format(str(author_info)))
                 kuaishou_user_info_iterm = KuaishouUserInfoIterm()
                 kuaishou_user_info_iterm['name'] = self.name
-                kuaishou_user_info_iterm['kwaiId'] = author_info['id']
+                kuaishou_user_info_iterm['principalId'] = author_info['id']
                 kuaishou_user_info_iterm['nickname'] = author_info['name']
                 kuaishou_user_info_iterm['avatar'] = author_info['avatar']
                 kuaishou_user_info_iterm['sex'] = author_info['sex']

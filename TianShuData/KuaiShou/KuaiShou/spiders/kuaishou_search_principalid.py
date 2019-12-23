@@ -73,16 +73,22 @@ class KuaishouSearchUserSpider(scrapy.Spider):
         for search_overview in search_overview_list:
             if search_overview['type'] != 'authors':
                 continue
+            author_info_dict = {}
             for  author_info in search_overview['list']:
-                principal_id = author_info['id']
+                author_info_dict['principalId'] = author_info['id']
+                author_info_dict['nickname'] = author_info['name']
+                author_info_dict['avatar'] = author_info['avatar']
+                author_info_dict['sex'] = author_info['sex']
+                author_info_dict['description'] = author_info['description']
+
                 kuaishou_url = 'http://live.kuaishou.com/graphql'
                 user_info_query = self.settings.get('SENSITIVE_USER_INFO_QUERY')
                 headers = {'content-type': 'application/json'}
-                user_info_query['variables']['principalId'] = principal_id
+                user_info_query['variables']['principalId'] = author_info_dict['principalId']
                 logger.info(user_info_query)
                 yield scrapy.Request(kuaishou_url, headers=headers, body=json.dumps(user_info_query),
                                      method='POST',
-                                     meta={'bodyJson': user_info_query},
+                                     meta={'bodyJson': user_info_query,'author_info_dict':author_info_dict},
                                      callback=self.parse_search_user_info, dont_filter=True
                                      )
 
@@ -98,7 +104,11 @@ class KuaishouSearchUserSpider(scrapy.Spider):
         kuaishou_user_info_iterm['name'] = self.name
         kuaishou_user_info_iterm['userId'] = user_info['userId']
         kuaishou_user_info_iterm['kwaiId'] = user_info['kwaiId']
-        kuaishou_user_info_iterm['principalId'] = response.meta['bodyJson']['variables']['principalId']
+        kuaishou_user_info_iterm['principalId'] = response.meta['author_info_dict']['principalId']
+        kuaishou_user_info_iterm['nickname'] = response.meta['author_info_dict']['nickname']
+        kuaishou_user_info_iterm['avatar'] = response.meta['author_info_dict']['avatar']
+        kuaishou_user_info_iterm['sex'] = response.meta['author_info_dict']['sex']
+        kuaishou_user_info_iterm['description'] = response.meta['author_info_dict']['description']
         kuaishou_user_info_iterm['constellation'] = user_info['constellation']
         kuaishou_user_info_iterm['cityName'] = user_info['cityName']
         kuaishou_user_info_iterm['fan'] = user_info['countsInfo']['fan']
