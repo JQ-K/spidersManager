@@ -15,7 +15,7 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
     settings = get_project_settings()
-    allowed_domains = ['live.kuaishou.com/graphql']
+    # allowed_domains = ['live.kuaishou.com/graphql']
     # start_urls = ['http://live.kuaishou.com/graphql/']
 
     def start_requests(self):
@@ -47,8 +47,7 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
                 self.headers = {'content-type': 'application/json'}
                 yield scrapy.Request(self.kuaikan_url, headers=self.headers, body=json.dumps(self.photo_comment_query),
                                      method='POST', callback=self.parse_photo_comment,
-                                     meta={'bodyJson': self.photo_comment_query},
-                                     cookies={'did': 'web_d54ea5e1190a41e481809b9cd17f92aa'}
+                                     meta={'bodyJson': self.photo_comment_query}
                                      )
             except Exception as e:
                 logger.warning('Kafka message structure cannot be resolved :{}'.format(e))
@@ -77,6 +76,5 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
         self.photo_comment_query['variables']['pcursor'] = pcursor
         yield scrapy.Request(self.kuaikan_url, headers=self.headers, body=json.dumps(self.photo_comment_query),
                              method='POST', callback=self.parse_photo_comment,
-                             meta={'bodyJson': self.photo_comment_query},
-                             cookies={'did': 'web_d54ea5e1190a41e481809b9cd17f92aa'}
+                             meta={'bodyJson': self.photo_comment_query}
                              )

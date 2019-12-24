@@ -183,7 +183,7 @@ KUAISHOU_LIVE_WEB_ST = {
     'clientid':'3',
     'client_key':'65890b29',
     'userId':'1537755176',
-    'kuaishou.live.web_st': 'ChRrdWFpc2hvdS5saXZlLndlYi5zdBKgAfXS227KWlVDrYPfJjOKEMS8rtef9YdV4O_oyDq57KO6_y-5XgVwl36I8_icN_VpW2PsuVYpkEg2Pj7wWnFpB-IKUHzwZeY1O6yNz9VpxKG6KRLfbXZQfBM3-bA82f229bKNCYHirvP7Bp-UZFzgNNtExgK2L7iBPJ9ULG4DBrLdt381KkAjj8_dCWrXMfhDNzatK60iwW8LgqFjK305BcMaEm-zwBmcbUA4lm5ejQnh9kVjySIgv_BSocys9O0_R_HQzFMyZpuuDIB0sXYOeD2XmXrEzFgoBTAB'
+    'kuaishou.live.web_st': 'ChRrdWFpc2hvdS5saXZlLndlYi5zdBKgAfT_JK7WvXLx-x_LLIkGHzTiT4r8yNUMA7lNOCI3qWWqBpeHLw8VYDSHzq-hdCnMFjOCgkqa8WrjRsIHHmimku6cGkIaJ61uHfRLvcApWDi9GJ0HswNqLDVZGWtjVyRAUtlG71qHFiNfAd0qIbmO7vTzK5e0DdEiB2entMKc3RbAwBrJ7mYH_GAFQJ1KnvCKssqQ_V9B0wkL8QUkPPZsTIIaEurKvNghXkU0vIm_W_UXPUfuwSIgEAETj6-LhuO6bkDoV0fa5HT_O07vMxZf7CNXF39W7bgoBTAB'
 }
 
 # REDIS配置信息

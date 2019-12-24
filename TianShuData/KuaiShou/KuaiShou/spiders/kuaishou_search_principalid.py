@@ -57,7 +57,7 @@ class KuaishouSearchUserSpider(scrapy.Spider):
                                      meta={'bodyJson': search_overview_query, 'msg_value_dict': msg_value_dict},
                                      callback=self.parse_search_overview, dont_filter=True
                                      )
-                break
+                # break
             except Exception as e:
                 logger.warning('Kafka message[{}] structure cannot be resolved :{}'.format(str(msg_value_dict),e))
 
@@ -80,7 +80,9 @@ class KuaishouSearchUserSpider(scrapy.Spider):
                 author_info_dict['avatar'] = author_info['avatar']
                 author_info_dict['sex'] = author_info['sex']
                 author_info_dict['description'] = author_info['description']
-
+                author_info_dict['fan'] = author_info['counts']['fan']
+                author_info_dict['follow'] = author_info['counts']['follow']
+                author_info_dict['photo'] = author_info['counts']['photo']
                 kuaishou_url = 'http://live.kuaishou.com/graphql'
                 user_info_query = self.settings.get('SENSITIVE_USER_INFO_QUERY')
                 headers = {'content-type': 'application/json'}
@@ -111,9 +113,9 @@ class KuaishouSearchUserSpider(scrapy.Spider):
         kuaishou_user_info_iterm['description'] = response.meta['author_info_dict']['description']
         kuaishou_user_info_iterm['constellation'] = user_info['constellation']
         kuaishou_user_info_iterm['cityName'] = user_info['cityName']
-        kuaishou_user_info_iterm['fan'] = user_info['countsInfo']['fan']
-        kuaishou_user_info_iterm['follow'] = user_info['countsInfo']['follow']
-        kuaishou_user_info_iterm['photo'] = user_info['countsInfo']['photo']
+        kuaishou_user_info_iterm['fan'] = response.meta['author_info_dict']['fan']
+        kuaishou_user_info_iterm['follow'] = response.meta['author_info_dict']['follow']
+        kuaishou_user_info_iterm['photo'] = response.meta['author_info_dict']['photo']
         kuaishou_user_info_iterm['liked'] = user_info['countsInfo']['liked']
         kuaishou_user_info_iterm['open'] = user_info['countsInfo']['open']
         kuaishou_user_info_iterm['playback'] = user_info['countsInfo']['playback']

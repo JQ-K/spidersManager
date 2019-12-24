@@ -6,8 +6,10 @@ __author__ = 'lish'
 import os
 import requests
 import re
-import json
 from fontTools.ttLib import TTFont
+from requests.exceptions import RequestException
+
+requests.packages.urllib3.disable_warnings()
 
 font_map = {
     (0, 0, 0, 0): ' ',
@@ -104,46 +106,28 @@ def get_mapping(page):
         return mapping
 
 
-def get_kuai_page(url):
-    '''headers = {
-        "Host": "live.kuaishou.com",
-        "Cache-Control": "max-age=0",
-        "Upgrade-Insecure-Requests": "1",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36",
-        "Sec-Fetch-User": "?1",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
-        "Sec-Fetch-Site": "same-origin",
-        "Sec-Fetch-Mode": "navigate",
-        "Referer": "https://live.kuaishou.com/",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-        "Cookie": "did=web_d54ea5e1190a41e481809b9cd17f92aa; didv=1574056613000; Hm_lvt_86a27b7db2c5c0ae37fee4a8a35033ee=1574131630; clientid=3; client_key=65890b29; kuaishou.live.bfb1s=3e261140b0cf7444a0ba411c6f227d88"
-    }'''
-
+def kuaishou_decoder(url, str):
     headers = {
-        "connection": "close",
         "Host": "live.kuaishou.com",
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
         "Accept-Encoding": "gzip, deflate, br",
         "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-        'Cookie': 'client_key=65890b29; clientid=3; did=web_54091ed760f84f168198018254a24fec; kuaishou.live.bfb1s=3e261140b0cf7444a0ba411c6f227d88; Hm_lvt_86a27b7db2c5c0ae37fee4a8a35033ee=1570965929; didv=1570965928000'
+        'Cookie': 'did=web_d54ea5e1190a41e481809b9cd17f92aa; didv=1574056613000; clientid=3; client_key=65890b29; kuaishou.live.bfb1s=477cb0011daca84b36b3a4676857e5a1; userId=1537755176; kuaishou.live.web_st=ChRrdWFpc2hvdS5saXZlLndlYi5zdBKgAaJugToRJTLfgDSM4JY6TDGIWXSFgsXYAL5vUVlgROHXOQqR0N9chBkFZKS-MFT2fgRLcWwmlgQj3-8aT8aISBY2UR_qdAiOzsG8SRvm2xtiNZd3gAPJSG-ssufpJMhRAQSIFeWDwVse84Rt6fHslyIGYge6ZCwWz-5Y9V014ABmcnrMGJ-t6IlMcEQP-fNt9xif434leuOV4AlQKuDbj8YaEhrHsWfESUHgv806qk-5eqStgCIg1w7uEFYlp5iQsH8xqegbYkRyGuuUAn0JV7PksrO2Z34oBTAB; kuaishou.live.web_ph=6fd3b324201a7554fd20880da29ade8d1458; userId=1537755176'
     }
 
     r = requests.get(url, headers=headers, verify=False)
-    return r
-
-
-if __name__ == '__main__':
-    url = 'https://live.kuaishou.com/profile/h952814899'
-    r = get_page(url)
-    for i in range(5):
+    for i in range(3):
         try:
             mapping = get_mapping(r.text)
             break
         except:
             pass
-    # print(r.text)
-    raw_s = re.search('"fan"\s*:\s*"(.*?)"', r.text).group(1)
-    print(raw_s)
-    print(decrypt_str(raw_s, mapping))
+    return decrypt_str(str, mapping)
+
+if __name__ == '__main__':
+    url = 'https://live.kuaishou.com/profile/h952814899'
+    res = kuaishou_decoder(url,'뷝껚.뾮w')
+
+
+

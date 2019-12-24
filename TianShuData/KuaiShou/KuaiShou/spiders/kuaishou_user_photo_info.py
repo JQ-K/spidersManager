@@ -6,7 +6,6 @@ from pykafka import KafkaClient
 from loguru import logger
 from scrapy.utils.project import get_project_settings
 
-from KuaiShou.settings import KAFKA_HOSTS, KAFKA_TOPIC, RESET_OFFSET_ON_START, USER_PHOTO_QUERY
 from KuaiShou.items import KuaishouUserPhotoInfoIterm
 
 
@@ -16,7 +15,7 @@ class KuaishouUserPhotoSpider(scrapy.Spider):
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
     settings = get_project_settings()
-    allowed_domains = ['live.kuaishou.com/graphql']
+    # allowed_domains = ['live.kuaishou.com/graphql']
     # start_urls = ['http://live.kuaishou.com/graphql/']
 
     def start_requests(self):
@@ -40,16 +39,15 @@ class KuaishouUserPhotoSpider(scrapy.Spider):
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
                 msg_value_dict = eval(msg_value)
-                if msg_value_dict['name'] != 'kuxuan_kol_user':
+                if msg_value_dict['name'] != 'kuanshou_kol_seeds':
                     continue
-                self.kwai_id = msg_value_dict['kwaiId']
-                self.user_photo_query['variables']['principalId'] = self.kwai_id
+                self.principal_id = msg_value_dict['principalId']
+                self.user_photo_query['variables']['principalId'] = self.principal_id
                 self.kuaikan_url = 'https://live.kuaishou.com/graphql'
                 self.headers = {'content-type': 'application/json'}
                 yield scrapy.Request(self.kuaikan_url, headers=self.headers, body=json.dumps(self.user_photo_query),
                                      method='POST', callback=self.parse_user_photo,
-                                     meta={'bodyJson': self.user_photo_query},
-                                     cookies={'did': 'web_d54ea5e1190a41e481809b9cd17f92aa'}
+                                     meta={'bodyJson': self.user_photo_query}
                                      )
             except Exception as e:
                 logger.warning('Kafka message structure cannot be resolved :{}'.format(e))
@@ -74,6 +72,5 @@ class KuaishouUserPhotoSpider(scrapy.Spider):
             return
         self.user_photo_query['variables']['pcursor'] = pcursor
         yield scrapy.Request(self.kuaikan_url, headers=self.headers, body=json.dumps(self.user_photo_query),
-                             method='POST', callback=self.parse_user_photo, meta={'bodyJson': self.user_photo_query},
-                             cookies={'did': 'web_d54ea5e1190a41e481809b9cd17f92aa'}
+                             method='POST', callback=self.parse_user_photo, meta={'bodyJson': self.user_photo_query}
                              )
