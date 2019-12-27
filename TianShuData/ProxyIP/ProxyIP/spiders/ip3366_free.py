@@ -33,17 +33,17 @@ class Ip3366FreeSpider(scrapy.Spider):
             self.proxy_ip_item['url'] = auth_url_info['url']
             self.proxy_ip_item['url_name'] = auth_url_info['name']
             for tbody_tr in tbody_trs:
-
                 try:
                     ip = tbody_tr.xpath('td')[0].text.replace(' ', '').replace('\r\n', '')
                     port = tbody_tr.xpath('td')[1].text.replace(' ', '').replace('\r\n', '')
-                    ip_types = tbody_tr.xpath('td')[3].text.replace(' ', '').replace('\r\n', '')
+                    ip_types = tbody_tr.xpath('td')[3].text.replace(' ', '').replace('\r\n', '').lower()
                     resp_speed = float(tbody_tr.xpath('td')[5].text.replace(' ', '').replace('\r\n', '')[:-1])
                     update_time = tbody_tr.xpath('td')[6].text.replace('\r\n', '')
                     url_type = re.findall('(http|https)://.*?',auth_url_info['url'])[0].lower()
                     if url_type == 'https' and 'https' not in ip_types:
                         continue
                     proxy = '{}://{}:{}'.format(url_type,ip,port)
+                    logger.info('CHECK PROXY:{}'.format(proxy))
                     headers = {'content-type': 'application/json'}
                     yield scrapy.Request(auth_url_info['url'], headers=headers, body=json.dumps(auth_url_info['body']),
                                          method='POST', callback=self.auth_proxyip,

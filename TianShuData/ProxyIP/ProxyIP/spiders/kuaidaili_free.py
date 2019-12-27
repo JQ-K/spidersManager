@@ -39,7 +39,7 @@ class KuaidailiFreeSpider(scrapy.Spider):
                 try:
                     ip = tbody_tr.xpath('td')[0].text.replace(' ', '').replace('\r\n', '')
                     port = tbody_tr.xpath('td')[1].text.replace(' ', '').replace('\r\n', '')
-                    ip_types = tbody_tr.xpath('td')[3].text.replace(' ', '').replace('\r\n', '')
+                    ip_types = tbody_tr.xpath('td')[3].text.replace(' ', '').replace('\r\n', '').lower()
                     resp_speed = float(tbody_tr.xpath('td')[5].text.replace(' ', '').replace('\r\n', '')[:-1])
                     update_time = tbody_tr.xpath('td')[6].text.replace('\r\n', '')
                     url_type = re.findall('(http|https)://.*?', auth_url_info['url'])[0].lower()

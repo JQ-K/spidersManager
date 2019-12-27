@@ -105,7 +105,7 @@ AUTH_URLS_INFO = [{'name': "kuaishou", "url": "https://live.kuaishou.com/graphql
 
 # 翻页数
 SPIDER_PAGE_START = 1
-SPIDER_PAGE_END = 50
+SPIDER_PAGE_END = 30
 
 # 超时时间
 # RETRY_ENABLED = True
