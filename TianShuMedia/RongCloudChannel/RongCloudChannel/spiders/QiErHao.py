@@ -18,9 +18,9 @@ class QierhaoSpider(scrapy.Spider):
 
 
     def __init__(self):
-        #self.targetDict = getAllTargetIdByChannel(self.channel_id)
-        self.targetDict = {'20191118V0OC25': 'h',
-                           '20191118A0DUG6': 't',}
+        self.targetDict = getAllTargetIdByChannel(self.channel_id)
+        '''self.targetDict = {'20191118V0OC25': 'h',
+                           '20191118A0DUG6': 't',}'''
 
 
     def start_requests(self):

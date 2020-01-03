@@ -88,6 +88,12 @@ class KuaishouShopProductItem(scrapy.Item):
     productInfo = scrapy.Field()
 
 
+class KuaishouShopProductDetailItem(scrapy.Item):
+    spider_name = scrapy.Field()
+    productId = scrapy.Field()
+    productDetail = scrapy.Field()
+
+
 ### old
 # class KuaiShouUserIterm(scrapy.Item):
 #     kwaiId = scrapy.Field() #快手号，需要用户自己设置，如果用户没设置，就没有这个字段
