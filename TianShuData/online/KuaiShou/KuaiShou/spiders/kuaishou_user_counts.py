@@ -22,15 +22,14 @@ class KuaishouUserCountsSpider(scrapy.Spider):
         # 配置kafka连接信息
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
         kafka_topic = self.settings.get('KAFKA_TOPIC')
-        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
-        search_overview_query = self.settings.get('SEARCH_OVERVIEW_QUERY')
         logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic))
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
-        consumer = topic.get_simple_consumer(
+        consumer = topic.get_balanced_consumer(
             consumer_group=self.name,
-            reset_offset_on_start=False
+            managed=True,
+            auto_commit_enable=True
         )
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
@@ -42,28 +41,26 @@ class KuaishouUserCountsSpider(scrapy.Spider):
                 msg_value_dict = eval(msg_value)
                 if 'name' not in list(msg_value_dict.keys()):
                     continue
-                if msg_value_dict['name'] != 'kuanshou_user_seeds':
+                if msg_value_dict['name'] != 'kuaishou_user_seeds':
                     continue
                 user_id = msg_value_dict['userId']
                 # 查询principalId、处理kwaiId(为空的情况)
-                kuaishou_url = 'https://live.kuaishou.com/m_graphql'
+                kuaishou_url = 'http://live.kuaishou.com/m_graphql'
                 search_overview_query = self.settings.get('SEARCH_OVERVIEW_QUERY')
                 headers = {'content-type': 'application/json'}
                 search_overview_query['variables']['keyword'] = '{}'.format(user_id)
-                logger.info(search_overview_query)
                 yield scrapy.Request(kuaishou_url, headers=headers, body=json.dumps(search_overview_query),
                                      method='POST',
                                      meta={'bodyJson': search_overview_query, 'msg_value_dict': msg_value_dict},
                                      callback=self.parse_search_overview, dont_filter=True
                                      )
-                break
             except Exception as e:
                 logger.warning('Kafka message[{}] structure cannot be resolved :{}'.format(str(msg_value_dict),e))
 
 
     def parse_search_overview(self, response):
         rsp_search_overview_json = json.loads(response.text)
-        # logger.info(rsp_search_overview_json)
+        logger.info(rsp_search_overview_json)
         pc_search_overview = rsp_search_overview_json['data']['pcSearchOverview']
         if pc_search_overview == None:
             logger.warning('pcSearchOverview failed, result is None')
@@ -75,7 +72,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
             for  author_info in search_overview['list']:
                 logger.info('Search userinfo reslut: {}'.format(str(author_info)))
                 kuaishou_user_info_iterm = KuaishouUserInfoIterm()
-                kuaishou_user_info_iterm['name'] = self.name
+                kuaishou_user_info_iterm['spider_name'] = self.name
                 kuaishou_user_info_iterm['principalId'] = author_info['id']
                 kuaishou_user_info_iterm['nickname'] = author_info['name']
                 kuaishou_user_info_iterm['avatar'] = author_info['avatar']

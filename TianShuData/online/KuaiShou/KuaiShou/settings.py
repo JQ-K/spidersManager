@@ -100,20 +100,6 @@ RETRY_ENABLED = True
 RETRY_TIMES = 1
 DOWNLOAD_TIMEOUT = 5
 
-# kafka 相关信息及配置
-KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
-# KAFKA_TOPIC = 'tianshu_kuaishou'
-KAFKA_TOPIC = 'zhanqi_Test'
-# 设置TOPIC是否从头消费
-RESET_OFFSET_ON_START = True
-
-# spider cookie value num
-SPIDER_COOKIE_CNT = 10
-
-# 设置抓取酷炫的页数，<=0代表代表所有页面
-SPIDER_KUXUAN_PAGE_LIMIT = 7000
-SPIDER_KUXUAN_SORT_TYPE = 2
-
 # graphql
 USER_INFO_QUERY = {
     "operationName": "userInfoQuery",
@@ -165,8 +151,8 @@ SEARCH_DETAIL_QUERY = {
 SEARCH_OVERVIEW_QUERY = {
     "operationName": "SearchOverviewQuery",
     "variables": {
-        "keyword": "7778",
-        "ussid": "null"
+        "keyword": "500730148",
+        "ussid": ""
     },
     "query": "query SearchOverviewQuery($keyword: String, $ussid: String) {\n  pcSearchOverview(keyword: $keyword, ussid: $ussid) {\n    list {\n      ... on SearchCategoryList {\n        type\n        list {\n          categoryId\n          categoryAbbr\n          title\n          src\n          __typename\n        }\n        __typename\n      }\n      ... on SearchUserList {\n        type\n        ussid\n        list {\n          id\n          name\n          living\n          avatar\n          sex\n          description\n          counts {\n            fan\n            follow\n            photo\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      ... on SearchLivestreamList {\n        type\n        lssid\n        list {\n          user {\n            id\n            avatar\n            name\n            __typename\n          }\n          poster\n          coverUrl\n          caption\n          id\n          playUrls {\n            quality\n            url\n            __typename\n          }\n          quality\n          gameInfo {\n            category\n            name\n            pubgSurvival\n            type\n            kingHero\n            __typename\n          }\n          hasRedPack\n          liveGuess\n          expTag\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
 }
@@ -190,7 +176,6 @@ KUAISHOU_LIVE_WEB_ST = {
 REDIS_HOST = 'zqhd5'
 REDIS_PORT = 6379
 REDIS_DID_NAME = 'tianshu_did'
-REDIS_DID_EXPIRE_TIME = 3600
 REDIS_PROXYIP_NAME = 'tianshu_proxyip_kuaishou'
 
 # MySQL配置信息
@@ -199,3 +184,10 @@ MYSQL_USER = 'tianshu'
 MYSQL_PASSWORD = 'Tianshu_123'
 MYSQL_DATABASE = 'tianshuData'
 MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
+
+# kafka 相关信息及配置
+KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
+# KAFKA_TOPIC = 'tianshu_kuaishou'
+KAFKA_TOPIC = 'zhanqi_test'
+# 设置TOPIC是否从头消费
+RESET_OFFSET_ON_START = True
