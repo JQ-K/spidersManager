@@ -187,7 +187,6 @@ MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
 
 # kafka 相关信息及配置
 KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
-# KAFKA_TOPIC = 'tianshu_kuaishou'
-KAFKA_TOPIC = 'zhanqi_test'
+KAFKA_TOPIC = 'tianshu_kuaishou'
 # 设置TOPIC是否从头消费
 RESET_OFFSET_ON_START = True
