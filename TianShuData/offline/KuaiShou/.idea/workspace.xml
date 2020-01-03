@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1619fdac-e6e1-470a-8eab-6663b217afa5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../document/kuaishou/kuaishoukey.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/items.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/middlewares.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/pipelines.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/spiders/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/spiders/kuaishou_user_counts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/utils/decoder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/utils/did.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/utils/mysql.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/utils/signatureUtil.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/utils/spiderplan.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/KuaiShou/utils/useragent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/execute.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../online/KuaiShou/scrapy.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/spidersManager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/spidersManager.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/.idea/KuaiShou.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../KuaiShou/.idea/KuaiShou.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/items.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/middlewares.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/pipelines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/spiders/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/spiders/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/spiders/kuaishou_photo_comment.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/spiders/kuaishou_photo_comment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/spiders/kuaishou_register_did.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/spiders/kuaishou_register_did.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/spiders/kuaishou_search_principalid.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/spiders/kuaishou_search_principalid.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/spiders/kuaishou_shop_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/spiders/kuaishou_shop_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/spiders/kuaishou_user_counts.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/spiders/kuaishou_user_counts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/spiders/kuaishou_user_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/spiders/kuaishou_user_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/spiders/kuaishou_user_photo_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/spiders/kuaishou_user_photo_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/spiders/kuxuan_kol_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/spiders/kuxuan_kol_user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/.idea/utils.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/KuaiShou.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/utils/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/decoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/utils/decoder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/did.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/utils/did.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/mysql.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/utils/mysql.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/signatureUtil.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/utils/signatureUtil.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/spiderplan.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/utils/spiderplan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/KuaiShou/utils/useragent.py" beforeDir="false" afterPath="$PROJECT_DIR$/KuaiShou/utils/useragent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/execute.py" beforeDir="false" afterPath="$PROJECT_DIR$/execute.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../KuaiShou/scrapy.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/scrapy.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/.idea/ProxyIP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/.idea/ProxyIP.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/items.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/middlewares.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/pipelines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/spiders/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/spiders/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/spiders/ip3366_free.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/spiders/ip3366_free.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/spiders/iphai_free.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/spiders/iphai_free.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/spiders/ipyqie_free.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/spiders/ipyqie_free.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/spiders/kuaidaili_free.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/spiders/kuaidaili_free.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/spiders/qydaili_free.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/spiders/qydaili_free.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/spiders/xicidaili_free.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/spiders/xicidaili_free.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/spiders/y89ip_free.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/spiders/y89ip_free.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/utils/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/ProxyIP/utils/useragent.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/ProxyIP/utils/useragent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/execute.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/execute.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProxyIP/scrapy.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyIP/scrapy.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../document/kuaishou/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../document/kuaishou/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../TianShuMedia/RongCloudChannel/RongCloudChannel/conf/configure.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../TianShuMedia/RongCloudChannel/RongCloudChannel/conf/configure.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../TianShuMedia/RongCloudChannel/RongCloudChannel/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../TianShuMedia/RongCloudChannel/RongCloudChannel/pipelines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../TianShuMedia/RongCloudChannel/RongCloudChannel/spiders/QiErHao.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../TianShuMedia/RongCloudChannel/RongCloudChannel/spiders/QiErHao.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../TianShuMedia/RongCloudChannel/RongCloudChannel/spiders/WeiBo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../TianShuMedia/RongCloudChannel/RongCloudChannel/spiders/WeiBo.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/KuaiShou/spiders/kuaishou_user_counts.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/KuaiShou/items.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="293">
+              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/KuaiShou/spiders/kuaishou_photo_comment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="70" column="88" selection-start-line="70" selection-start-column="70" selection-end-line="70" selection-end-column="88" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/KuaiShou.iml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="KuaiShou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KuaiShou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KuaiShou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
+              <item name="spiders" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1619fdac-e6e1-470a-8eab-6663b217afa5" name="Default Changelist" comment="" />
+      <created>1578035542198</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578035542198</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-6" y="0" width="1292" height="704" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/KuaiShou/spiders/kuaishou_user_counts.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KuaiShou/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KuaiShou/spiders/kuaishou_photo_comment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="70" column="88" selection-start-line="70" selection-start-column="70" selection-end-line="70" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

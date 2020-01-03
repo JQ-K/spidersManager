@@ -22,8 +22,8 @@ class RongcloudchannelPipeline(object):
     def __init__(self):
         self.totalDict = {}
         self.accountStaticDict = {}
-        self.mysqlClient = MysqlClient.from_settings(DB_CONF_DIR, 'mysql-write')
-        #self.mysqlClient = MysqlClient('47.110.253.169', 'tianshu', 'Tianshu_123', 'tianshuMedia')
+        #self.mysqlClient = MysqlClient.from_settings(DB_CONF_DIR, 'mysql-write')
+        self.mysqlClient = MysqlClient('47.110.253.169', 'tianshu', 'Tianshu_123', 'tianshuMedia')
 
 
     def process_item(self, item, spider):

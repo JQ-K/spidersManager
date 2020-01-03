@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import scrapy
+'''import scrapy
 import json
 import time
 import re
@@ -104,3 +104,4 @@ class WeiboSpider(scrapy.Spider):
         else:
             print('新的时间格式：' + publish_time)
             return '0000-00-00 00:00:00'
+'''
