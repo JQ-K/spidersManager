@@ -85,21 +85,17 @@ class KuaishouDownloaderMiddleware(object):
         thisua = random.choice(self.uapool)
         spider.logger.info('user-agent:{}'.format(thisua))
         request.headers.setdefault('user_agent', thisua)
-        # 获取cookie时候，不能设定cookie值，不然就一样了
-        # 酷炫拿种子，不走代理，不需要cookie
-        if spider.name =='kuxuan_kol_user':
-            return None
-        # # 设置代理IP
-        # proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-        # while proxy_list == []:
-        #     spider.logger.warn('Proxy Pool is null, Plase add proxy !')
-        #     time.sleep(60)
-        #     proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-        # proxy = proxy_list[0].decode()
-        # spider.logger.info('proxy:{}'.format(proxy))
-        # request.meta['proxy'] = proxy
+        # 设置代理IP
+        proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        while proxy_list == []:
+            spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+            time.sleep(60)
+            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        proxy = proxy_list[0].decode()
+        spider.logger.info('proxy:{}'.format(proxy))
+        request.meta['proxy'] = proxy
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
-        if spider.name in ['kuaishou_cookie_info','kuaishou_register_did']:
+        if spider.name in ['kuaishou_register_did']:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
         #
@@ -139,18 +135,18 @@ class KuaishouDownloaderMiddleware(object):
         # - return a Response object: stops process_exception() chain
         # - return a Request object: stops process_exception() chain
         # 处理请求超时的proxy:删除代理池中无效proxy，更新请求中的proxy
-        # spider.logger.warn('Request error : %s ' % exception)
-        # if 'connection' in str(exception).lower():
-        #     invaild_proxy = request.meta['proxy']
-        #     spider.logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
-        #     self.conn.srem(self.redis_proxyip_name, invaild_proxy)
-        #     proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-        #     while proxy_list == []:
-        #         time.sleep(60)
-        #         spider.logger.warn('Proxy Pool is null, Plase add proxy !')
-        #     proxy = proxy_list[0].decode()
-        #     request.meta['proxy'] = proxy
-        #     spider.logger.info('Update proxy : %s ' % proxy)
+        spider.logger.warn('Request error : %s ' % exception)
+        if 'connection' in str(exception).lower():
+            invaild_proxy = request.meta['proxy']
+            spider.logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
+            self.conn.srem(self.redis_proxyip_name, invaild_proxy)
+            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+            while proxy_list == []:
+                time.sleep(60)
+                spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+            proxy = proxy_list[0].decode()
+            request.meta['proxy'] = proxy
+            spider.logger.info('Update proxy : %s ' % proxy)
         return request
 
     def spider_opened(self, spider):
