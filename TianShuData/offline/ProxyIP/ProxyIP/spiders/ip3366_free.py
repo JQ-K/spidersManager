@@ -14,7 +14,7 @@ class Ip3366FreeSpider(scrapy.Spider):
     spider_page_start = settings.get('SPIDER_PAGE_START')
     spider_page_end = settings.get('SPIDER_PAGE_END')
     auth_urls_info = settings.get('AUTH_URLS_INFO')
-    allowed_domains = ['www.ip3366.net']
+    # allowed_domains = ['www.ip3366.net']
     start_urls = ['http://www.ip3366.net/free/?stype=1&page={}'.format(page) for page in
                   range(spider_page_start, spider_page_end)]
 
