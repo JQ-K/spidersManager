@@ -98,10 +98,10 @@ REDIS_PORT = 6379
 REDIS_PROXYIP_BASENAME = 'tianshu_proxyip'
 REDIS_PROXYIP_EXPIRE_TIME = 172800
 
-# 免费IP认证网站
-AUTH_URLS_INFO = [{'name': "kuaishou", "url": "https://live.kuaishou.com/graphql",
-                   'body': {"operationName": "searchHotQuery", "variables": {"limit": 5},
-                            "query": "query searchHotQuery($limit: Int) {\n  searchHot(limit: $limit) {\n    hotWords\n    __typename\n  }\n}\n"}}]
+# 免费IP认证接口
+AUTH_URLS_INFO = [{'name': "kuaishou", "url": "https://live.kuaishou.com/m_graphql",
+                   'body': {"operationName":"searchHotQuery","variables":{"limit":5},"query":"query searchHotQuery($limit: Int) {\n  pcSearchHot(limit: $limit)\n}\n"}
+                   }]
 
 # 翻页数
 SPIDER_PAGE_START = 1

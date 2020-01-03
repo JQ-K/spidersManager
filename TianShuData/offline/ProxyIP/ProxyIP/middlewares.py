@@ -9,6 +9,8 @@ import random
 from scrapy import signals
 from scrapy.utils.project import get_project_settings
 
+from loguru import logger
+
 
 class ProxyipSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
