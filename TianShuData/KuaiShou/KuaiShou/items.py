@@ -16,7 +16,7 @@ class KuaishouItem(scrapy.Item):
 
 class KuxuanKolUserItem(scrapy.Item):
     # define the fields for your item here like:
-    name = scrapy.Field()
+    spider_name = scrapy.Field()
     id = scrapy.Field()
     userId = scrapy.Field()
     kwaiId = scrapy.Field()
@@ -36,7 +36,7 @@ class KuxuanKolUserItem(scrapy.Item):
 
 
 class KuaishouCookieInfoItem(scrapy.Item):
-    name = scrapy.Field()
+    spider_name = scrapy.Field()
     # operation_type = scrapy.Field
     kuaishou_live_bfb1s = scrapy.Field()
     clientid = scrapy.Field()
@@ -46,7 +46,7 @@ class KuaishouCookieInfoItem(scrapy.Item):
 
 
 class KuaishouUserInfoIterm(scrapy.Item):
-    name = scrapy.Field()
+    spider_name = scrapy.Field()
     userId = scrapy.Field()
     kwaiId = scrapy.Field()
     principalId = scrapy.Field()
@@ -65,14 +65,28 @@ class KuaishouUserInfoIterm(scrapy.Item):
 
 
 class KuaishouUserPhotoInfoIterm(scrapy.Item):
-    name = scrapy.Field()
+    spider_name = scrapy.Field()
     user_photo_info = scrapy.Field()
 
 
 class KuaishouPhotoCommentInfoIterm(scrapy.Item):
-    name = scrapy.Field()
+    spider_name = scrapy.Field()
     photo_id = scrapy.Field()
     photo_comment_info = scrapy.Field()
+
+
+class KuaishouShopInfoIterm(scrapy.Item):
+    spider_name = scrapy.Field()
+    userId = scrapy.Field()
+    shopInfo = scrapy.Field()
+
+
+class KuaishouShopProductItem(scrapy.Item):
+    spider_name = scrapy.Field()
+    userId = scrapy.Field()
+    productId = scrapy.Field()
+    productInfo = scrapy.Field()
+
 
 ### old
 # class KuaiShouUserIterm(scrapy.Item):
