@@ -107,9 +107,6 @@ KAFKA_TOPIC = 'zhanqi_Test'
 # 设置TOPIC是否从头消费
 RESET_OFFSET_ON_START = True
 
-# spider cookie value num
-SPIDER_COOKIE_CNT = 10
-
 # 设置抓取酷炫的页数，<=0代表代表所有页面
 SPIDER_KUXUAN_PAGE_LIMIT = 7000
 SPIDER_KUXUAN_SORT_TYPE = 2
@@ -190,8 +187,11 @@ KUAISHOU_LIVE_WEB_ST = {
 REDIS_HOST = 'zqhd5'
 REDIS_PORT = 6379
 REDIS_DID_NAME = 'tianshu_did'
-REDIS_DID_EXPIRE_TIME = 3600
+REDIS_DID_EXPIRE_TIME = 900
 REDIS_PROXYIP_NAME = 'tianshu_proxyip_kuaishou'
+
+# spider cookie value num
+SPIDER_COOKIE_CNT = 100
 
 # MySQL配置信息
 MYSQL_HOST = 'zqhd3'

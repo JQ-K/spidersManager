@@ -10,7 +10,7 @@ from ProxyIP.items import FreeProxyIPItem
 
 class QydailiFreeSpider(scrapy.Spider):
     name = 'qydaili_free'
-    allowed_domains = ['www.qydaili.com']
+    # allowed_domains = ['www.qydaili.com']
     settings = get_project_settings()
     spider_page_start = settings.get('SPIDER_PAGE_START')
     spider_page_end = settings.get('SPIDER_PAGE_END')

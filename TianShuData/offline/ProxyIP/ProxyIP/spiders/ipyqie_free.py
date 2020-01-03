@@ -10,7 +10,7 @@ from ProxyIP.items import FreeProxyIPItem
 
 class IpyqieFreeSpider(scrapy.Spider):
     name = 'ipyqie_free'
-    allowed_domains = ['ip.yqie.com']
+    # allowed_domains = ['ip.yqie.com']
     start_urls = ['http://ip.yqie.com/ipproxy.htm']
 
     settings = get_project_settings()

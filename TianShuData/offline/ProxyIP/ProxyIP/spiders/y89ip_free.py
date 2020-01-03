@@ -10,7 +10,7 @@ from ProxyIP.items import FreeProxyIPItem
 
 class Y89ipFreeSpider(scrapy.Spider):
     name = 'y89ip_free'
-    allowed_domains = ['www.89ip.cn']
+    # allowed_domains = ['www.89ip.cn']
     settings = get_project_settings()
     spider_page_start = settings.get('SPIDER_PAGE_START')
     spider_page_end = settings.get('SPIDER_PAGE_END')

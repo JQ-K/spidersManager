@@ -10,7 +10,7 @@ from ProxyIP.items import FreeProxyIPItem
 
 class IphaiFreeSpider(scrapy.Spider):
     name = 'iphai_free'
-    allowed_domains = ['www.iphai.com/free/ng']
+    # allowed_domains = ['www.iphai.com/free/ng']
     start_urls = ['http://www.iphai.com/free/ng', 'http://www.iphai.com/free/wg']
 
     settings = get_project_settings()
