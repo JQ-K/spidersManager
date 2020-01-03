@@ -122,6 +122,8 @@ class MysqlClient(object):
             self.conn.commit()
         except Exception as e:
             self.conn.rollback()
+            print('replace into异常：')
+            print(saveDict)
             raise e
         cursor.close()
 
