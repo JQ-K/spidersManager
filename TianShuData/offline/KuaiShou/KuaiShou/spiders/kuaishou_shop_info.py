@@ -24,9 +24,10 @@ class KuaishouShopInfoSpider(scrapy.Spider):
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
-        consumer = topic.get_simple_consumer(
-            consumer_group=self.name,
-            reset_offset_on_start=reset_offset_on_start
+        consumer = topic.get_balanced_consumer(
+            consumer_group='test',
+            managed=True,
+            auto_commit_enable=True
         )
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
@@ -36,7 +37,7 @@ class KuaishouShopInfoSpider(scrapy.Spider):
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
                 msg_value_dict = eval(msg_value)
-                if msg_value_dict['name'] != 'kuanshou_kol_seeds':
+                if msg_value_dict['spider_name'] != 'kuanshou_kol_seeds':
                     continue
                 user_id = msg_value_dict['userId']
                 shopScoreUrl = "https://www.kwaishop.com/rest/app/grocery/ks/shop/score?sellerId={}"

@@ -27,9 +27,10 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
-        consumer = topic.get_simple_consumer(
-            consumer_group=self.name,
-            reset_offset_on_start=reset_offset_on_start
+        consumer = topic.get_balanced_consumer(
+            consumer_group='test',
+            managed=True,
+            auto_commit_enable=True
         )
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
@@ -39,7 +40,7 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
                 msg_value_dict = eval(msg_value)
-                if msg_value_dict['name'] != 'kuaishou_user_photo_info':
+                if msg_value_dict['spider_name'] != 'kuaishou_user_photo_info':
                     continue
                 photo_id = msg_value_dict['user_photo_info']['photoId']
                 self.photo_comment_query['variables']['photoId'] = photo_id
@@ -66,7 +67,7 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
 
         for photo_comment_info in short_video_comment_list['commentList']:
             kuaishou_photo_comment_info_iterm = KuaishouPhotoCommentInfoIterm()
-            kuaishou_photo_comment_info_iterm['name'] = self.name
+            kuaishou_photo_comment_info_iterm['spider_name'] = self.name
             kuaishou_photo_comment_info_iterm['photo_id'] = photo_id
             kuaishou_photo_comment_info_iterm['photo_comment_info'] = photo_comment_info
             yield kuaishou_photo_comment_info_iterm

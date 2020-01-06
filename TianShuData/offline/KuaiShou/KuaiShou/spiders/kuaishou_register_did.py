@@ -21,7 +21,7 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
     settings = get_project_settings()
 
     def start_requests(self):
-        start_url = 'https://live.kuaishou.com/v/hot/'
+        start_url = 'http://live.kuaishou.com/v/hot/'
         i = 0
         spider_cookie_cnt = self.settings.get('SPIDER_COOKIE_CNT')
         while i < spider_cookie_cnt:
@@ -37,7 +37,7 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
                  + re.findall('(client_key=[0-9a-z]+; )', str(response.headers))[0] \
                  + re.findall('(didv=\d+)', str(response.headers))[0]
         time_int = int(time.time() * 1000)
-        register_url = 'https://live.kuaishou.com/rest/wd/live/web/log'
+        register_url = 'http://live.kuaishou.com/rest/wd/live/web/log'
         payload_data = {
             "base": {
                 "session_id": ProduceRandomStr(16),

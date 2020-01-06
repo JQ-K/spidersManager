@@ -46,7 +46,7 @@ class KuxuanKolUserSpider(scrapy.Spider):
         data = rsp_json['rst']['data']
         for user_dict in data:
             kuxuan_kol_user_item = KuxuanKolUserItem()
-            kuxuan_kol_user_item['name'] = self.name
+            kuxuan_kol_user_item['spider_name'] = self.name
             for key, value in user_dict.items():
                 if key == 'user_id':key='userId'
                 kuxuan_kol_user_item[key] = value 

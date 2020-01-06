@@ -97,7 +97,7 @@ LOG_LEVEL = 'INFO'
 
 # 超时时间,超时尝试时间
 RETRY_ENABLED = True
-RETRY_TIMES = 1
+RETRY_TIMES = 3
 DOWNLOAD_TIMEOUT = 5
 
 # kafka 相关信息及配置
@@ -187,11 +187,11 @@ KUAISHOU_LIVE_WEB_ST = {
 REDIS_HOST = 'zqhd5'
 REDIS_PORT = 6379
 REDIS_DID_NAME = 'tianshu_did'
-REDIS_DID_EXPIRE_TIME = 900
+REDIS_DID_EXPIRE_TIME = 1800
 REDIS_PROXYIP_NAME = 'tianshu_proxyip_kuaishou'
 
 # spider cookie value num
-SPIDER_COOKIE_CNT = 100
+SPIDER_COOKIE_CNT = 20
 
 # MySQL配置信息
 MYSQL_HOST = 'zqhd3'
