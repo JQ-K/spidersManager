@@ -93,3 +93,9 @@ class KuaishouShopProductDetailItem(scrapy.Item):
     productId = scrapy.Field()
     productDetail = scrapy.Field()
 
+
+class KuaishouShopProductCommentItem(scrapy.Item):
+    spider_name = scrapy.Field()
+    productId = scrapy.Field()
+    productComment = scrapy.Field()
+
