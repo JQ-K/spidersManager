@@ -100,54 +100,6 @@ RETRY_ENABLED = True
 RETRY_TIMES = 3
 DOWNLOAD_TIMEOUT = 7
 
-# graphql
-USER_INFO_QUERY = {
-    "operationName": "userInfoQuery",
-    "variables": {
-        "principalId": "pi7758258"
-    },
-    "query": "query userInfoQuery($principalId: String) {\n  userInfo(principalId: $principalId) {\n    id\n    principalId\n    kwaiId\n    eid\n    userId\n    profile\n    name\n    description\n    sex\n    constellation\n    cityName\n    living\n    watchingCount\n    isNew\n    privacy\n    feeds {\n      eid\n      photoId\n      thumbnailUrl\n      timestamp\n      __typename\n    }\n    verifiedStatus {\n      verified\n      description\n      type\n      new\n      __typename\n    }\n    countsInfo {\n      fan\n      follow\n      photo\n      liked\n      open\n      playback\n      private\n      __typename\n    }\n    bannedStatus {\n      banned\n      defriend\n      isolate\n      socialBanned\n      __typename\n    }\n    __typename\n  }\n}\n"
-}
-
-SENSITIVE_USER_INFO_QUERY = {
-    "operationName": "sensitiveUserInfoQuery",
-    "variables": {
-        "principalId": "3xjcyhicecuz54q"
-    },
-    "query": "query sensitiveUserInfoQuery($principalId: String) {\n  sensitiveUserInfo(principalId: $principalId) {\n    kwaiId\n    userId\n    constellation\n    cityName\n    countsInfo {\n      fan\n      follow\n      photo\n      liked\n      open\n      playback\n      private\n      __typename\n    }\n    __typename\n  }\n}\n"
-}
-
-USER_PHOTO_QUERY = {
-    "operationName": "publicFeedsQuery",
-    "variables": {
-        "principalId": "{%s}",
-        "pcursor": "0",
-        "count": 200
-    },
-    "query": "query publicFeedsQuery($principalId: String, $pcursor: String, $count: Int) {\n  publicFeeds(principalId: $principalId, pcursor: $pcursor, count: $count) {\n    pcursor\n    live {\n      user {\n        id\n        kwaiId\n        eid\n        profile\n        name\n        living\n        __typename\n      }\n      watchingCount\n      src\n      title\n      gameId\n      gameName\n      categoryId\n      liveStreamId\n      playUrls {\n        quality\n        url\n        __typename\n      }\n      followed\n      type\n      living\n      redPack\n      liveGuess\n      anchorPointed\n      latestViewed\n      expTag\n      __typename\n    }\n    list {\n      photoId\n      caption\n      thumbnailUrl\n      poster\n      viewCount\n      likeCount\n      commentCount\n      timestamp\n      workType\n      type\n      useVideoPlayer\n      imgUrls\n      imgSizes\n      magicFace\n      musicName\n      location\n      liked\n      onlyFollowerCanComment\n      relativeHeight\n      width\n      height\n      user {\n        id\n        eid\n        name\n        profile\n        __typename\n      }\n      expTag\n      __typename\n    }\n    __typename\n  }\n}\n"
-}
-PHOTO_COMMENT_QUERY = {
-    "operationName": "commentListQuery",
-    "variables": {
-        "pcursor": "0",
-        "photoId": "3xz7aiwh5tgc3x9",
-        "count": 200
-    },
-    "query": "query commentListQuery($photoId: String, $page: Int, $pcursor: String, $count: Int) {\n  shortVideoCommentList(photoId: $photoId, page: $page, pcursor: $pcursor, count: $count) {\n    commentCount\n    realCommentCount\n    pcursor\n    commentList {\n      commentId\n      authorId\n      authorName\n      content\n      headurl\n      timestamp\n      authorEid\n      status\n      subCommentCount\n      subCommentsPcursor\n      likedCount\n      liked\n      subComments {\n        commentId\n        authorId\n        authorName\n        content\n        headurl\n        timestamp\n        authorEid\n        status\n        replyToUserName\n        replyTo\n        replyToEid\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
-}
-
-SEARCH_DETAIL_QUERY = {
-    "operationName": "SearchDetailQuery",
-    "variables": {
-        "key": "1",
-        "type": "author",
-        "page": 1,
-        "lssid": "null",
-        "ussid": "null"
-    },
-    "query": "query SearchDetailQuery($key: String, $type: String, $page: Int, $lssid: String, $ussid: String) {\n  searchDetail(key: $key, type: $type, page: $page, lssid: $lssid, ussid: $ussid) {\n    ... on SearchCategoryList {\n      type\n      list {\n        id\n        categoryId\n        title\n        src\n        roomNumber\n        __typename\n      }\n      __typename\n    }\n    ... on SearchUserList {\n      type\n      ussid\n      list {\n        id\n        name\n        living\n        profile\n        sex\n        description\n        countsInfo {\n          fan\n          follow\n          photo\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    ... on SearchLivestreamList {\n      type\n      lssid\n      list {\n        user {\n          id\n          profile\n          name\n          __typename\n        }\n        watchingCount\n        src\n        title\n        gameId\n        gameName\n        categoryId\n        liveStreamId\n        playUrls {\n          quality\n          url\n          __typename\n        }\n        quality\n        gameInfo {\n          category\n          name\n          pubgSurvival\n          type\n          kingHero\n          __typename\n        }\n        redPack\n        liveGuess\n        expTag\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
-}
-
 SEARCH_OVERVIEW_QUERY = {
     "operationName": "SearchOverviewQuery",
     "variables": {
@@ -155,21 +107,6 @@ SEARCH_OVERVIEW_QUERY = {
         "ussid": ""
     },
     "query": "query SearchOverviewQuery($keyword: String, $ussid: String) {\n  pcSearchOverview(keyword: $keyword, ussid: $ussid) {\n    list {\n      ... on SearchCategoryList {\n        type\n        list {\n          categoryId\n          categoryAbbr\n          title\n          src\n          __typename\n        }\n        __typename\n      }\n      ... on SearchUserList {\n        type\n        ussid\n        list {\n          id\n          name\n          living\n          avatar\n          sex\n          description\n          counts {\n            fan\n            follow\n            photo\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      ... on SearchLivestreamList {\n        type\n        lssid\n        list {\n          user {\n            id\n            avatar\n            name\n            __typename\n          }\n          poster\n          coverUrl\n          caption\n          id\n          playUrls {\n            quality\n            url\n            __typename\n          }\n          quality\n          gameInfo {\n            category\n            name\n            pubgSurvival\n            type\n            kingHero\n            __typename\n          }\n          hasRedPack\n          liveGuess\n          expTag\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
-}
-
-SEARCH_HOT_QUERY = {
-    "operationName": "searchHotQuery",
-    "variables": {
-        "limit": 5
-    },
-    "query": "query searchHotQuery($limit: Int) {\n  searchHot(limit: $limit) {\n    hotWords\n    __typename\n  }\n}\n"
-}
-
-KUAISHOU_LIVE_WEB_ST = {
-    'clientid':'3',
-    'client_key':'65890b29',
-    'userId':'1537755176',
-    'kuaishou.live.web_st': 'ChRrdWFpc2hvdS5saXZlLndlYi5zdBKgAfT_JK7WvXLx-x_LLIkGHzTiT4r8yNUMA7lNOCI3qWWqBpeHLw8VYDSHzq-hdCnMFjOCgkqa8WrjRsIHHmimku6cGkIaJ61uHfRLvcApWDi9GJ0HswNqLDVZGWtjVyRAUtlG71qHFiNfAd0qIbmO7vTzK5e0DdEiB2entMKc3RbAwBrJ7mYH_GAFQJ1KnvCKssqQ_V9B0wkL8QUkPPZsTIIaEurKvNghXkU0vIm_W_UXPUfuwSIgEAETj6-LhuO6bkDoV0fa5HT_O07vMxZf7CNXF39W7bgoBTAB'
 }
 
 # REDIS配置信息

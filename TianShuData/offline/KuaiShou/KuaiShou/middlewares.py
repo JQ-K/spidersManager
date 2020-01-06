@@ -109,6 +109,7 @@ class KuaishouDownloaderMiddleware(object):
             time.sleep(60)
             cookies_list = self.conn.srandmember(self.redis_did_name, 1)
         cookies=cookies_list[0].decode()
+        request.meta['didJson'] = cookies
         cookies_dict = eval(cookies)
         cookies_str = ''
         for key, value in cookies_dict.items():

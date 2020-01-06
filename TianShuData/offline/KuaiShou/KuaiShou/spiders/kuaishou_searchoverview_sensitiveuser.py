@@ -9,7 +9,7 @@ from loguru import logger
 from KuaiShou.items import KuaishouUserInfoIterm
 
 class KuaishouSearchUserSpider(scrapy.Spider):
-    name = 'kuaishou_search_principalid'
+    name = 'kuaishou_searchoverview_sensitiveuser'
     # allowed_domains = ['live.kuaishou.com/graphql']
     # start_urls = ['http://live.kuaishou.com/graphql/']
 
@@ -23,17 +23,18 @@ class KuaishouSearchUserSpider(scrapy.Spider):
         # 配置kafka连接信息
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
         kafka_topic = self.settings.get('KAFKA_TOPIC')
-        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
         search_overview_query = self.settings.get('SEARCH_OVERVIEW_QUERY')
         logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic))
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_balanced_consumer(
-            consumer_group='test',
+            consumer_group=self.name,
             managed=True,
             auto_commit_enable=True
         )
+        kuaishou_url = 'https://live.kuaishou.com/m_graphql'
+        headers = {'content-type': 'application/json'}
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
             try:
@@ -48,17 +49,13 @@ class KuaishouSearchUserSpider(scrapy.Spider):
                     continue
                 kwai_id = msg_value_dict['kwaiId']
                 # 查询principalId、处理kwaiId(为空的情况)
-                kuaishou_url = 'https://live.kuaishou.com/m_graphql'
-                search_overview_query = self.settings.get('SEARCH_OVERVIEW_QUERY')
-                headers = {'content-type': 'application/json'}
                 search_overview_query['variables']['keyword'] = '{}'.format(kwai_id)
-                logger.info(search_overview_query)
+                # logger.info(search_overview_query)
                 yield scrapy.Request(kuaishou_url, headers=headers, body=json.dumps(search_overview_query),
                                      method='POST',
                                      meta={'bodyJson': search_overview_query, 'msg_value_dict': msg_value_dict},
                                      callback=self.parse_search_overview, dont_filter=True
                                      )
-                # break
             except Exception as e:
                 logger.warning('Kafka message[{}] structure cannot be resolved :{}'.format(str(msg_value_dict),e))
 
@@ -70,6 +67,9 @@ class KuaishouSearchUserSpider(scrapy.Spider):
         if pc_search_overview == None:
             logger.warning('pcSearchOverview failed, result is None')
             return
+        kuaishou_url = 'http://live.kuaishou.com/graphql'
+        sensitive_user_info_query = self.settings.get('SENSITIVE_USER_INFO_QUERY')
+        headers = {'content-type': 'application/json'}
         search_overview_list = pc_search_overview['list']
         for search_overview in search_overview_list:
             if search_overview['type'] != 'authors':
@@ -84,14 +84,11 @@ class KuaishouSearchUserSpider(scrapy.Spider):
                 author_info_dict['fan'] = author_info['counts']['fan']
                 author_info_dict['follow'] = author_info['counts']['follow']
                 author_info_dict['photo'] = author_info['counts']['photo']
-                kuaishou_url = 'http://live.kuaishou.com/graphql'
-                user_info_query = self.settings.get('SENSITIVE_USER_INFO_QUERY')
-                headers = {'content-type': 'application/json'}
-                user_info_query['variables']['principalId'] = author_info_dict['principalId']
-                logger.info(user_info_query)
-                yield scrapy.Request(kuaishou_url, headers=headers, body=json.dumps(user_info_query),
+                sensitive_user_info_query['variables']['principalId'] = author_info_dict['principalId']
+                # logger.info(sensitive_user_info_query)
+                yield scrapy.Request(kuaishou_url, headers=headers, body=json.dumps(sensitive_user_info_query),
                                      method='POST',
-                                     meta={'bodyJson': user_info_query,'author_info_dict':author_info_dict},
+                                     meta={'bodyJson': sensitive_user_info_query,'author_info_dict':author_info_dict},
                                      callback=self.parse_search_user_info, dont_filter=True
                                      )
 
