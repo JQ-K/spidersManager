@@ -15,7 +15,7 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
     #参数：itemId、pcursor、offset
     pageCount = 20
     productCommentUrl = "https://www.kwaishop.com/rest/app/grocery/ks/comment/list?type=1&itemId={}&skuId=&tagId=0&pcursor={}&count=20&sourceType=99&limit=20&offset={}"
-
+    headers = {'Connection': 'keep-alive'}
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
@@ -30,7 +30,7 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_balanced_consumer(
-            consumer_group='test',
+            consumer_group=self.name,
             managed=True,
             auto_commit_enable=True
         )
@@ -42,13 +42,13 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
                 msg_value_dict = eval(msg_value)
-                if msg_value_dict['spider_name'] != 'kuanshou_kol_seeds':
+                if msg_value_dict['spider_name'] != 'kuaishou_shop_product_list':
                     continue
                 productId = msg_value_dict['productId']
                 pcursor = ''
                 offset = 0
                 yield scrapy.Request(self.productCommentUrl.format(productId, pcursor, offset),
-                                     method='GET', callback=self.parse_product_comment,
+                                     method='GET', callback=self.parse_product_comment, headers=self.headers,
                                      meta={'productId': productId, 'offset': offset})
             except Exception as e:
                 logger.warning('Kafka message structure cannot be resolved :{}'.format(e))
@@ -75,5 +75,5 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
             return
         offset += self.pageCount
         yield scrapy.Request(self.productCommentUrl.format(productId, pcursor, offset),
-                             method='GET', callback=self.parse_product_comment,
+                             method='GET', callback=self.parse_product_comment, headers=self.headers,
                              meta={'productId': productId, 'offset': offset})

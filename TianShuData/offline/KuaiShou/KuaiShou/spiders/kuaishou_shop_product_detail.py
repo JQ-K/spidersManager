@@ -28,7 +28,7 @@ class KuaishouShopProductDetailSpider(scrapy.Spider):
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_balanced_consumer(
-            consumer_group='test',
+            consumer_group=self.name,
             managed=True,
             auto_commit_enable=True
         )
@@ -40,7 +40,7 @@ class KuaishouShopProductDetailSpider(scrapy.Spider):
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
                 msg_value_dict = eval(msg_value)
-                if msg_value_dict['spider_name'] != 'kuanshou_kol_seeds':
+                if msg_value_dict['spider_name'] != 'kuaishou_shop_product_list':
                     continue
                 productId = msg_value_dict['productId']
                 yield scrapy.Request(self.productDetailUrl.format(productId), method='POST',
