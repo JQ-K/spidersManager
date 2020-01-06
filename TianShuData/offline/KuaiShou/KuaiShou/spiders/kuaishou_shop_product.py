@@ -38,7 +38,7 @@ class KuaishouShopProductSpider(scrapy.Spider):
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
                 msg_value_dict = eval(msg_value)
-                if msg_value_dict['name'] != 'kuanshou_kol_seeds':
+                if msg_value_dict['spider_name'] != 'kuanshou_kol_seeds':
                     continue
                 user_id = msg_value_dict['userId']
                 bodyDict = {
