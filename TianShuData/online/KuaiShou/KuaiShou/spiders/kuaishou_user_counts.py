@@ -27,7 +27,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_balanced_consumer(
-            consumer_group=self.name,
+            consumer_group='test',
             managed=True,
             auto_commit_enable=True
         )
@@ -41,7 +41,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
                 msg_value_dict = eval(msg_value)
                 if 'name' not in list(msg_value_dict.keys()):
                     continue
-                if msg_value_dict['name'] != 'kuaishou_user_seeds':
+                if msg_value_dict['spider_name'] != 'kuaishou_user_seeds':
                     continue
                 user_id = msg_value_dict['userId']
                 # 查询principalId、处理kwaiId(为空的情况)
@@ -54,6 +54,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
                                      meta={'bodyJson': search_overview_query, 'msg_value_dict': msg_value_dict},
                                      callback=self.parse_search_overview, dont_filter=True
                                      )
+                # break
             except Exception as e:
                 logger.warning('Kafka message[{}] structure cannot be resolved :{}'.format(str(msg_value_dict),e))
 

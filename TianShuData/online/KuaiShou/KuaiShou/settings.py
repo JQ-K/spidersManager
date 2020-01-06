@@ -97,8 +97,8 @@ LOG_LEVEL = 'INFO'
 
 # 超时时间,超时尝试时间
 RETRY_ENABLED = True
-RETRY_TIMES = 1
-DOWNLOAD_TIMEOUT = 5
+RETRY_TIMES = 3
+DOWNLOAD_TIMEOUT = 7
 
 # graphql
 USER_INFO_QUERY = {
@@ -187,7 +187,6 @@ MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
 
 # kafka 相关信息及配置
 KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
-# KAFKA_TOPIC = 'tianshu_kuaishou'
-KAFKA_TOPIC = 'zhanqi_test'
+KAFKA_TOPIC = 'tianshu_kuaishou'
 # 设置TOPIC是否从头消费
 RESET_OFFSET_ON_START = True

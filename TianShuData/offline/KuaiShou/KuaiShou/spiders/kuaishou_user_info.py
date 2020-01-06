@@ -37,9 +37,10 @@ class KuaishouUserInfoSpider(scrapy.Spider):
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
-        consumer = topic.get_simple_consumer(
-            consumer_group=self.name,
-            reset_offset_on_start=reset_offset_on_start
+        consumer = topic.get_balanced_consumer(
+            consumer_group='test',
+            managed=True,
+            auto_commit_enable=True
         )
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
@@ -50,7 +51,7 @@ class KuaishouUserInfoSpider(scrapy.Spider):
                 msg_value = message.value.decode()
                 msg_value_dict = eval(msg_value)
                 logger.info(msg_value_dict)
-                if msg_value_dict['name'] != 'kuanshou_kol_seeds':
+                if msg_value_dict['spider_name'] != 'kuanshou_kol_seeds':
                     continue
                 principal_id = msg_value_dict['principalId']
                 user_info_query['variables']['principalId'] = principal_id
@@ -89,7 +90,7 @@ class KuaishouUserInfoSpider(scrapy.Spider):
             logger.warning('SensitivUserInfoQuery failed, principalId:{}'.format(principal_id))
             yield
         kuaishou_user_info_iterm = KuaishouUserInfoIterm()
-        kuaishou_user_info_iterm['name'] = self.name
+        kuaishou_user_info_iterm['spider_name'] = self.name
         kuaishou_user_info_iterm['userId'] = user_info['userId']
         kuaishou_user_info_iterm['kwaiId'] = user_info['kwaiId']
         kuaishou_user_info_iterm['principalId'] = response.meta['bodyJson']['variables']['principalId']

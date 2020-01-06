@@ -24,9 +24,10 @@ class KuaishouShopInfoSpider(scrapy.Spider):
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
-        consumer = topic.get_simple_consumer(
-            consumer_group=self.name,
-            reset_offset_on_start=reset_offset_on_start
+        consumer = topic.get_balanced_consumer(
+            consumer_group='test',
+            managed=True,
+            auto_commit_enable=True
         )
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:

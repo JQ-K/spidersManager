@@ -99,7 +99,7 @@ class KuaishouDownloaderMiddleware(object):
         spider.logger.info('proxy:{}'.format(proxy))
         request.meta['proxy'] = proxy
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
-        if spider.name in ['kuaishou_cookie_info','kuaishou_register_did']:
+        if spider.name in ['kuaishou_register_did']:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
         #
