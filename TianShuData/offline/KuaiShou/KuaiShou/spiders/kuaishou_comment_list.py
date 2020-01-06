@@ -10,11 +10,12 @@ from KuaiShou.items import KuaishouPhotoCommentInfoIterm
 
 
 class KuaishouPhotoCommentSpider(scrapy.Spider):
-    name = 'kuaishou_photo_comment'
+    name = 'kuaishou_comment_list'
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
     settings = get_project_settings()
+
     # allowed_domains = ['live.kuaishou.com/graphql']
     # start_urls = ['http://live.kuaishou.com/graphql/']
 
@@ -22,16 +23,17 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
         # 配置kafka连接信息
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
         kafka_topic = self.settings.get('KAFKA_TOPIC')
-        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
-        self.photo_comment_query = self.settings.get('PHOTO_COMMENT_QUERY')
+        self.photo_comment_query = self.settings.get('COMMENT_lIST_QUERY')
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_balanced_consumer(
-            consumer_group='test',
+            consumer_group=self.name,
             managed=True,
             auto_commit_enable=True
         )
+        self.kuaikan_url = 'https://live.kuaishou.com/graphql'
+        self.headers = {'content-type': 'application/json'}
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
             try:
@@ -44,8 +46,7 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
                     continue
                 photo_id = msg_value_dict['user_photo_info']['photoId']
                 self.photo_comment_query['variables']['photoId'] = photo_id
-                self.kuaikan_url = 'https://live.kuaishou.com/graphql'
-                self.headers = {'content-type': 'application/json'}
+
                 yield scrapy.Request(self.kuaikan_url, headers=self.headers, body=json.dumps(self.photo_comment_query),
                                      method='POST', callback=self.parse_photo_comment,
                                      meta={'bodyJson': self.photo_comment_query}

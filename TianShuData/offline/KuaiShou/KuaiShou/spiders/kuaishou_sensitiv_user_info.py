@@ -12,7 +12,7 @@ from KuaiShou.items import KuaishouUserInfoIterm
 
 
 class KuaishouUserInfoSpider(scrapy.Spider):
-    name = 'kuaishou_user_info'
+    name = 'kuaishou_sensitiv_user_info'
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
@@ -30,18 +30,18 @@ class KuaishouUserInfoSpider(scrapy.Spider):
         # 配置kafka连接信息
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
         kafka_topic = self.settings.get('KAFKA_TOPIC')
-        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
-        # user_info_query = self.settings.get('SENSITIVE_USER_INFO_QUERY')
-        user_info_query = self.settings.get('SENSITIVE_USER_INFO_QUERY')
+        sensitiv_user_info_query = self.settings.get('SENSITIVE_USER_INFO_QUERY')
         logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic))
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_balanced_consumer(
-            consumer_group='test',
+            consumer_group=self.name,
             managed=True,
             auto_commit_enable=True
         )
+        kuaishou_url = 'https://live.kuaishou.com/graphql'
+        headers = {'content-type': 'application/json'}
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
             try:
@@ -54,18 +54,15 @@ class KuaishouUserInfoSpider(scrapy.Spider):
                 if msg_value_dict['spider_name'] != 'kuanshou_kol_seeds':
                     continue
                 principal_id = msg_value_dict['principalId']
-                user_info_query['variables']['principalId'] = principal_id
-                kuaishou_url = 'https://live.kuaishou.com/graphql'
-                headers = {'content-type': 'application/json'}
+                sensitiv_user_info_query['variables']['principalId'] = principal_id
                 logger.info('kafka message:{}'.format(msg_value))
-                logger.info(user_info_query)
-                yield scrapy.Request(kuaishou_url, headers=headers, body=json.dumps(user_info_query),
-                                     method='POST', callback=self.parse_user_info, meta={'bodyJson': user_info_query},
+                # logger.info(sensitiv_user_info_query)
+                yield scrapy.Request(kuaishou_url, headers=headers, body=json.dumps(sensitiv_user_info_query),
+                                     method='POST', callback=self.parse_user_info, meta={'bodyJson': sensitiv_user_info_query},
                                      dont_filter=True
                                      )
             except Exception as e:
                 logger.warning('Kafka message structure cannot be resolved :{}'.format(str(e)))
-            break
 
     def parse_user_info(self, response):
         logger.info(response.text)
@@ -76,15 +73,9 @@ class KuaishouUserInfoSpider(scrapy.Spider):
             yield
         if user_info['kwaiId'] == None:
             # 删掉did库中的失效did
-            kuaishou_cookie_info = {}
-            for cookie in response.headers.getlist('Set-Cookie'):
-                cookie_str = cookie.decode().split(';')[0]
-                key, value = cookie_str.split('=')
-                kuaishou_cookie_info[key.replace('.', '_')] = value
-            logger.info(response.headers.getlist('Set-Cookie'))
+            kuaishou_cookie_info = response.meta['didJson']
             logger.info('RedisDid srem invaild did:{}'.format(str(kuaishou_cookie_info)))
             self.conn.srem(self.redis_did_name, str(kuaishou_cookie_info).encode('utf-8'))
-
             body_json = response.meta['bodyJson']
             principal_id = body_json['variables']['principalId']
             logger.warning('SensitivUserInfoQuery failed, principalId:{}'.format(principal_id))

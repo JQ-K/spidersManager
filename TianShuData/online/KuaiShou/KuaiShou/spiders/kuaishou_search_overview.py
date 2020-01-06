@@ -9,7 +9,7 @@ from loguru import logger
 from KuaiShou.items import KuaishouUserInfoIterm
 
 class KuaishouUserCountsSpider(scrapy.Spider):
-    name = 'kuaishou_user_counts'
+    name = 'kuaishou_search_overview'
     # allowed_domains = ['live.kuaishou.com/m_graphql']
     # start_urls = ['http://live.kuaishou.com/m_graphql/']
 

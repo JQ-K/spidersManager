@@ -9,7 +9,7 @@ from scrapy.utils.project import get_project_settings
 from KuaiShou.items import KuaishouShopProductItem
 
 class KuaishouShopProductSpider(scrapy.Spider):
-    name = 'kuaishou_shop_product'
+    name = 'kuaishou_shop_product_list'
 
     shopProductListUrl = "https://www.kwaishop.com/rest/app/grocery/product/self/midPage/list"
 
@@ -22,12 +22,11 @@ class KuaishouShopProductSpider(scrapy.Spider):
         # 配置kafka连接信息
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
         kafka_topic = self.settings.get('KAFKA_TOPIC')
-        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_balanced_consumer(
-            consumer_group='test',
+            consumer_group=self.name,
             managed=True,
             auto_commit_enable=True
         )

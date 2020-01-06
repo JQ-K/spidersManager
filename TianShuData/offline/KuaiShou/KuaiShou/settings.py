@@ -128,7 +128,7 @@ SENSITIVE_USER_INFO_QUERY = {
     "query": "query sensitiveUserInfoQuery($principalId: String) {\n  sensitiveUserInfo(principalId: $principalId) {\n    kwaiId\n    userId\n    constellation\n    cityName\n    countsInfo {\n      fan\n      follow\n      photo\n      liked\n      open\n      playback\n      private\n      __typename\n    }\n    __typename\n  }\n}\n"
 }
 
-USER_PHOTO_QUERY = {
+PUBLIC_FEEDS_QUERY = {
     "operationName": "publicFeedsQuery",
     "variables": {
         "principalId": "{%s}",
@@ -137,7 +137,7 @@ USER_PHOTO_QUERY = {
     },
     "query": "query publicFeedsQuery($principalId: String, $pcursor: String, $count: Int) {\n  publicFeeds(principalId: $principalId, pcursor: $pcursor, count: $count) {\n    pcursor\n    live {\n      user {\n        id\n        kwaiId\n        eid\n        profile\n        name\n        living\n        __typename\n      }\n      watchingCount\n      src\n      title\n      gameId\n      gameName\n      categoryId\n      liveStreamId\n      playUrls {\n        quality\n        url\n        __typename\n      }\n      followed\n      type\n      living\n      redPack\n      liveGuess\n      anchorPointed\n      latestViewed\n      expTag\n      __typename\n    }\n    list {\n      photoId\n      caption\n      thumbnailUrl\n      poster\n      viewCount\n      likeCount\n      commentCount\n      timestamp\n      workType\n      type\n      useVideoPlayer\n      imgUrls\n      imgSizes\n      magicFace\n      musicName\n      location\n      liked\n      onlyFollowerCanComment\n      relativeHeight\n      width\n      height\n      user {\n        id\n        eid\n        name\n        profile\n        __typename\n      }\n      expTag\n      __typename\n    }\n    __typename\n  }\n}\n"
 }
-PHOTO_COMMENT_QUERY = {
+COMMENT_lIST_QUERY = {
     "operationName": "commentListQuery",
     "variables": {
         "pcursor": "0",
@@ -145,18 +145,6 @@ PHOTO_COMMENT_QUERY = {
         "count": 200
     },
     "query": "query commentListQuery($photoId: String, $page: Int, $pcursor: String, $count: Int) {\n  shortVideoCommentList(photoId: $photoId, page: $page, pcursor: $pcursor, count: $count) {\n    commentCount\n    realCommentCount\n    pcursor\n    commentList {\n      commentId\n      authorId\n      authorName\n      content\n      headurl\n      timestamp\n      authorEid\n      status\n      subCommentCount\n      subCommentsPcursor\n      likedCount\n      liked\n      subComments {\n        commentId\n        authorId\n        authorName\n        content\n        headurl\n        timestamp\n        authorEid\n        status\n        replyToUserName\n        replyTo\n        replyToEid\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
-}
-
-SEARCH_DETAIL_QUERY = {
-    "operationName": "SearchDetailQuery",
-    "variables": {
-        "key": "1",
-        "type": "author",
-        "page": 1,
-        "lssid": "null",
-        "ussid": "null"
-    },
-    "query": "query SearchDetailQuery($key: String, $type: String, $page: Int, $lssid: String, $ussid: String) {\n  searchDetail(key: $key, type: $type, page: $page, lssid: $lssid, ussid: $ussid) {\n    ... on SearchCategoryList {\n      type\n      list {\n        id\n        categoryId\n        title\n        src\n        roomNumber\n        __typename\n      }\n      __typename\n    }\n    ... on SearchUserList {\n      type\n      ussid\n      list {\n        id\n        name\n        living\n        profile\n        sex\n        description\n        countsInfo {\n          fan\n          follow\n          photo\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    ... on SearchLivestreamList {\n      type\n      lssid\n      list {\n        user {\n          id\n          profile\n          name\n          __typename\n        }\n        watchingCount\n        src\n        title\n        gameId\n        gameName\n        categoryId\n        liveStreamId\n        playUrls {\n          quality\n          url\n          __typename\n        }\n        quality\n        gameInfo {\n          category\n          name\n          pubgSurvival\n          type\n          kingHero\n          __typename\n        }\n        redPack\n        liveGuess\n        expTag\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
 }
 
 SEARCH_OVERVIEW_QUERY = {

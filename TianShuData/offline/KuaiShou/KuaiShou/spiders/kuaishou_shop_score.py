@@ -10,7 +10,7 @@ from KuaiShou.items import KuaishouShopInfoIterm
 
 
 class KuaishouShopInfoSpider(scrapy.Spider):
-    name = 'kuaishou_shop_info'
+    name = 'kuaishou_shop_score'
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
@@ -20,12 +20,11 @@ class KuaishouShopInfoSpider(scrapy.Spider):
         # 配置kafka连接信息
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
         kafka_topic = self.settings.get('KAFKA_TOPIC')
-        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
         client = KafkaClient(hosts=kafka_hosts)
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_balanced_consumer(
-            consumer_group='test',
+            consumer_group=self.name,
             managed=True,
             auto_commit_enable=True
         )
