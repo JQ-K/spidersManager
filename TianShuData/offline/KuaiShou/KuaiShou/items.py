@@ -35,16 +35,6 @@ class KuxuanKolUserItem(scrapy.Item):
     categorys = scrapy.Field()
 
 
-class KuaishouCookieInfoItem(scrapy.Item):
-    spider_name = scrapy.Field()
-    # operation_type = scrapy.Field
-    kuaishou_live_bfb1s = scrapy.Field()
-    clientid = scrapy.Field()
-    did = scrapy.Field()
-    client_key = scrapy.Field()
-    didv = scrapy.Field()
-
-
 class KuaishouUserInfoIterm(scrapy.Item):
     spider_name = scrapy.Field()
     userId = scrapy.Field()

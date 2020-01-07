@@ -31,3 +31,11 @@ class KuaishouUserInfoIterm(scrapy.Item):
     avatar = scrapy.Field()
     sex = scrapy.Field()
     description = scrapy.Field()
+
+class KuaishouCookieInfoItem(scrapy.Item):
+    spider_name = scrapy.Field()
+    kuaishou_live_bfb1s = scrapy.Field()
+    clientid = scrapy.Field()
+    did = scrapy.Field()
+    client_key = scrapy.Field()
+    didv = scrapy.Field()

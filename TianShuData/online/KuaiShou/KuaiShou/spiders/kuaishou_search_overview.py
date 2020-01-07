@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
+import time
 
 from scrapy.utils.project import get_project_settings
 from pykafka import KafkaClient
 from loguru import logger
+from redis import Redis
 
 from KuaiShou.items import KuaishouUserInfoIterm
 
@@ -17,6 +19,15 @@ class KuaishouUserCountsSpider(scrapy.Spider):
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
     settings = get_project_settings()
+    # 连接redis
+    redis_host = settings.get('REDIS_HOST')
+    redis_port = settings.get('REDIS_PORT')
+    redis_did_name = settings.get('REDIS_DID_NAME')
+    conn = Redis(host=redis_host, port=redis_port)
+
+    kuaishou_url = 'http://live.kuaishou.com/m_graphql'
+    search_overview_query = settings.get('SEARCH_OVERVIEW_QUERY')
+    headers = {'content-type': 'application/json'}
 
     def start_requests(self):
         # 配置kafka连接信息
@@ -27,7 +38,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_balanced_consumer(
-            consumer_group='test',
+            consumer_group=self.name,
             managed=True,
             auto_commit_enable=True
         )
@@ -39,33 +50,51 @@ class KuaishouUserCountsSpider(scrapy.Spider):
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
                 msg_value_dict = eval(msg_value)
-                if 'name' not in list(msg_value_dict.keys()):
+                if 'spider_name' not in list(msg_value_dict.keys()):
+                    logger.warning('Excloude key: spider_name, msg: {}'.format(msg_value))
                     continue
                 if msg_value_dict['spider_name'] != 'kuaishou_user_seeds':
                     continue
                 user_id = msg_value_dict['userId']
-                # 查询principalId、处理kwaiId(为空的情况)
-                kuaishou_url = 'http://live.kuaishou.com/m_graphql'
-                search_overview_query = self.settings.get('SEARCH_OVERVIEW_QUERY')
-                headers = {'content-type': 'application/json'}
-                search_overview_query['variables']['keyword'] = '{}'.format(user_id)
-                yield scrapy.Request(kuaishou_url, headers=headers, body=json.dumps(search_overview_query),
+                self.search_overview_query['variables']['keyword'] = '{}'.format(user_id)
+                yield scrapy.Request(self.kuaishou_url, headers=self.headers, body=json.dumps(self.search_overview_query),
                                      method='POST',
-                                     meta={'bodyJson': search_overview_query, 'msg_value_dict': msg_value_dict},
+                                     meta={'bodyJson': self.search_overview_query, 'msg_value_dict': msg_value_dict, 'retry_times':0},
                                      callback=self.parse_search_overview, dont_filter=True
                                      )
-                # break
             except Exception as e:
                 logger.warning('Kafka message[{}] structure cannot be resolved :{}'.format(str(msg_value_dict),e))
 
 
     def parse_search_overview(self, response):
-        rsp_search_overview_json = json.loads(response.text)
-        logger.info(rsp_search_overview_json)
-        pc_search_overview = rsp_search_overview_json['data']['pcSearchOverview']
+        try:
+            rsp_search_overview_json = json.loads(response.text)
+        except:
+            # 处理在频率过快的时候 response.text = 你想干嘛？等情况
+            rsp_search_overview_json = {'data':{'pcSearchOverview':None}}
+            time.sleep(3)
+        finally:
+            logger.info(rsp_search_overview_json)
+            pc_search_overview = rsp_search_overview_json['data']['pcSearchOverview']
         if pc_search_overview == None:
-            logger.warning('pcSearchOverview failed, result is None')
-            return
+            # 删掉did库中的失效did
+            kuaishou_did_json = response.meta['didJson']
+            logger.info('RedisDid srem invaild did:{}'.format(str(kuaishou_did_json)))
+            self.conn.srem(self.redis_did_name, str(kuaishou_did_json).encode('utf-8'))
+            # 再次尝试抓取，尝试7次
+            retry_times = response.meta['retry_times'] + 1
+            if retry_times>7:
+                return
+            search_overview_query = response.meta['bodyJson']
+            msg_value_dict = response.meta['msg_value_dict']
+            user_id = msg_value_dict['userId']
+            logger.warning('pcSearchOverview failed, result is None, userId: {}, retryTimes: {}'.format(user_id, retry_times))
+            time.sleep(3)
+            return scrapy.Request(self.kuaishou_url, headers=self.headers, body=json.dumps(search_overview_query),
+                                 method='POST',
+                                 meta={'bodyJson': search_overview_query, 'msg_value_dict': msg_value_dict, 'retry_times':retry_times},
+                                 callback=self.parse_search_overview, dont_filter=True
+                                 )
         search_overview_list = pc_search_overview['list']
         for search_overview in search_overview_list:
             if search_overview['type'] != 'authors':

@@ -125,5 +125,7 @@ MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
 # kafka 相关信息及配置
 KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
 KAFKA_TOPIC = 'tianshu_kuaishou'
-# 设置TOPIC是否从头消费
-RESET_OFFSET_ON_START = True
+
+# spider did pool
+SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME = 20
+SPIDER_DID_POOL_WARNING_LINE = 120

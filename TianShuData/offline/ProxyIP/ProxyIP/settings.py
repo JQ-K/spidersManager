@@ -100,13 +100,13 @@ REDIS_PROXYIP_BASENAME = 'tianshu_proxyip'
 REDIS_PROXYIP_EXPIRE_TIME = 172800
 
 # 免费IP认证接口
-AUTH_URLS_INFO = [{'name': "kuaishou", "url": "https://live.kuaishou.com/m_graphql",
+AUTH_URLS_INFO = [{'name': "kuaishou", "url": "http://live.kuaishou.com/m_graphql",
                    'body': {"operationName":"searchHotQuery","variables":{"limit":5},"query":"query searchHotQuery($limit: Int) {\n  pcSearchHot(limit: $limit)\n}\n"}
                    }]
 
 # 翻页数
 SPIDER_PAGE_START = 1
-SPIDER_PAGE_END = 30
+SPIDER_PAGE_END = 10
 
 # 超时时间
 # RETRY_ENABLED = True
