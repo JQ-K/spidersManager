@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
+import time
+import random
 
 from pykafka import KafkaClient
 from loguru import logger
@@ -15,11 +17,24 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
     #参数：itemId、pcursor、offset
     pageCount = 20
     productCommentUrl = "https://www.kwaishop.com/rest/app/grocery/ks/comment/list?type=1&itemId={}&skuId=&tagId=0&pcursor={}&count=20&sourceType=99&limit=20&offset={}"
-    headers = {'Connection': 'keep-alive'}
+    #headers = {'Connection': 'keep-alive'}
+    headers = {
+        'Referer': ''
+    }
+    # 参数：itemId
+    referer = "https://www.kwaishop.com/merchant/shop/detail/comment?itemId={}"
+
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
     settings = get_project_settings()
+
+    def getCookie(self):
+        token = '58cc04a5b35d446c9d16e65e991214e7-1577168521'
+        cookie = {
+            'token': token
+        }
+        return cookie
 
     def start_requests(self):
         # 配置kafka连接信息
@@ -47,8 +62,11 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
                 productId = msg_value_dict['productId']
                 pcursor = ''
                 offset = 0
+                curHeader = self.headers
+                curHeader['Referer'] = self.referer.format(productId)
                 yield scrapy.Request(self.productCommentUrl.format(productId, pcursor, offset),
-                                     method='GET', callback=self.parse_product_comment, headers=self.headers,
+                                     method='GET', callback=self.parse_product_comment, headers=curHeader,
+                                     cookies=self.getCookie(),
                                      meta={'productId': productId, 'offset': offset})
             except Exception as e:
                 logger.warning('Kafka message structure cannot be resolved :{}'.format(e))
@@ -74,6 +92,10 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
         if pcursor == 'no_more':
             return
         offset += self.pageCount
+        curHeader = self.headers
+        curHeader['Referer'] = self.referer.format(productId)
+        time.sleep(random.choice(range(12,16)))
         yield scrapy.Request(self.productCommentUrl.format(productId, pcursor, offset),
-                             method='GET', callback=self.parse_product_comment, headers=self.headers,
+                             method='GET', callback=self.parse_product_comment, headers=curHeader,
+                             cookies=self.getCookie(),
                              meta={'productId': productId, 'offset': offset})

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
+import time
+import random
 
 from pykafka import KafkaClient
 from loguru import logger
@@ -8,10 +10,19 @@ from scrapy.utils.project import get_project_settings
 
 from KuaiShou.items import KuaishouShopProductItem
 
+#抓取商品列表要慢，非常容易返回：操作过于频繁，请稍后再试
 class KuaishouShopProductSpider(scrapy.Spider):
     name = 'kuaishou_shop_product_list'
 
     shopProductListUrl = "https://www.kwaishop.com/rest/app/grocery/product/self/midPage/list"
+    # referer参数：user_id
+    referer = "https://www.kwaishop.com/merchant/shop/list?id={}&webviewClose=false&biz=merchant&carrierType=3&from=profile&hyId=kwaishop"
+
+    headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Referer': ''
+    }
 
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
@@ -47,8 +58,10 @@ class KuaishouShopProductSpider(scrapy.Spider):
                         "page": 1
                     }
                 }
+                curHeaders = self.headers
+                curHeaders['referer'] = self.referer.format(user_id)
                 yield scrapy.Request(self.shopProductListUrl, method='POST',
-                                     headers={'Content-Type': 'application/json'},
+                                     headers=curHeaders,
                                      body=json.dumps(bodyDict), callback=self.parse_shop_product,
                                      meta={'userId': user_id, 'bodyDict': bodyDict, 'beginFlag': True, 'curPage': 1, 'totalPage': 1})
             except Exception as e:
@@ -89,7 +102,10 @@ class KuaishouShopProductSpider(scrapy.Spider):
         curPage += 1
         if curPage <= totalPage:
             bodyDict['listProductParam']['page'] = curPage
+            curHeaders = self.headers
+            curHeaders['referer'] = self.referer.format(userId)
+            time.sleep(random.choice(range(10,15)))
             yield scrapy.Request(self.shopProductListUrl, method='POST',
-                                 headers={'Content-Type': 'application/json'},
+                                 headers=curHeaders,
                                  body=json.dumps(bodyDict), callback=self.parse_shop_product,
                                  meta={'userId': userId, 'bodyDict': bodyDict, 'beginFlag': beginFlag, 'curPage': curPage, 'totalPage': totalPage})

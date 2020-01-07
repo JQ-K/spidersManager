@@ -43,8 +43,11 @@ class KuaishouShopProductDetailSpider(scrapy.Spider):
                 if msg_value_dict['spider_name'] != 'kuaishou_shop_product_list':
                     continue
                 productId = msg_value_dict['productId']
-                yield scrapy.Request(self.productDetailUrl.format(productId), method='POST',
-                                     callback=self.parse_product_detail,
+                header = {
+                    'Referer': 'https://www.kwaishop.com/merchant/shop/detail?id={}'.format(productId)
+                }
+                yield scrapy.Request(self.productDetailUrl.format(productId), method='GET',
+                                     callback=self.parse_product_detail, headers=header,
                                      meta={'productId': productId})
             except Exception as e:
                 logger.warning('Kafka message structure cannot be resolved :{}'.format(e))
