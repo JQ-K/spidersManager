@@ -121,6 +121,7 @@ MYSQL_USER = 'tianshu'
 MYSQL_PASSWORD = 'Tianshu_123'
 MYSQL_DATABASE = 'tianshuData'
 MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
+MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME = 'kuaishou_scrapy_logs'
 
 # kafka 相关信息及配置
 KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
@@ -128,4 +129,4 @@ KAFKA_TOPIC = 'tianshu_kuaishou'
 
 # spider did pool
 SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME = 20
-SPIDER_DID_POOL_WARNING_LINE = 120
+SPIDER_DID_POOL_WARNING_LINE = 60

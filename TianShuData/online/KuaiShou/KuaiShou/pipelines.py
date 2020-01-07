@@ -93,11 +93,43 @@ class KuaishouUserSeedsMySQLPipeline(object):
         if select_res == 0:
             self.mysql_client.insert(self.mysql_kuaishou_user_seeds_tablename,msg)
             self.mysql_client.commit()
-            spider.logger.info('Msg insert mysql[%s]: %s' % (self.mysql_host, str(msg)))
+            spider.logger.info('Msg insert mysql[%s] table[%s]: %s' % (self.mysql_host, self.mysql_kuaishou_user_seeds_tablename, str(msg)))
             return item
         self.mysql_client.update(self.mysql_kuaishou_user_seeds_tablename,msg, {"userId": msg['userId']})
         self.mysql_client.commit()
-        spider.logger.info('Msg update mysql[%s]: %s' % (self.mysql_host, str(msg)))
+        spider.logger.info('Msg update mysql[%s] table[%s]: %s' % (self.mysql_host, self.mysql_kuaishou_user_seeds_tablename, str(msg)))
+        return item
+
+    def close_spider(self, spider):
+        self.mysql_client.close()
+        spider.logger.info('Mysql[%s] Conn closed!' % (self.mysql_host))
+
+
+class KuaishouScrapyLogsPipeline(object):
+
+    def open_spider(self, spider):
+        settings = get_project_settings()
+        self.mysql_host = settings.get('MYSQL_HOST')
+        self.mysql_user = settings.get('MYSQL_USER')
+        self.mysql_password = settings.get('MYSQL_PASSWORD')
+        self.mysql_database = settings.get('MYSQL_DATABASE')
+        self.mysql_kuaishou_scrapy_logs_tablename = settings.get('MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME')
+        spider.logger.info(
+            'MySQLConn:host = %s,user = %s,db = %s' % (self.mysql_host, self.mysql_user, self.mysql_database))
+        self.mysql_client = MySQLClient(host=self.mysql_host, user=self.mysql_user, password=self.mysql_password,
+                                        dbname=self.mysql_database)
+
+    def process_item(self, item, spider):
+        msg = {}
+        if 'userId' in list(item.keys()):
+            msg['item_id'] = item['userId']
+        elif 'principalId' in list(item.keys()):
+            msg['item_id'] = item['principalId']
+        msg['item_type'] = item['spider_name']
+        msg['scrapy_time'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.mysql_client.insert(self.mysql_kuaishou_scrapy_logs_tablename,msg)
+        self.mysql_client.commit()
+        spider.logger.info('Msg insert mysql[%s] table[%s]: %s' % (self.mysql_host, self.mysql_kuaishou_scrapy_logs_tablename, str(msg)))
         return item
 
     def close_spider(self, spider):

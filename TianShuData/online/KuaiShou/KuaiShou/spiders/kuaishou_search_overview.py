@@ -16,7 +16,8 @@ class KuaishouUserCountsSpider(scrapy.Spider):
     # start_urls = ['http://live.kuaishou.com/m_graphql/']
 
     custom_settings = {'ITEM_PIPELINES': {
-        'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
+        'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
+        'KuaiShou.pipelines.KuaishouScrapyLogsPipeline':701
     }}
     settings = get_project_settings()
     # 连接redis
@@ -76,6 +77,8 @@ class KuaishouUserCountsSpider(scrapy.Spider):
         finally:
             logger.info(rsp_search_overview_json)
             pc_search_overview = rsp_search_overview_json['data']['pcSearchOverview']
+        msg_value_dict = response.meta['msg_value_dict']
+        user_id = msg_value_dict['userId']
         if pc_search_overview == None:
             # 删掉did库中的失效did
             kuaishou_did_json = response.meta['didJson']
@@ -86,8 +89,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
             if retry_times>7:
                 return
             search_overview_query = response.meta['bodyJson']
-            msg_value_dict = response.meta['msg_value_dict']
-            user_id = msg_value_dict['userId']
+
             logger.warning('pcSearchOverview failed, result is None, userId: {}, retryTimes: {}'.format(user_id, retry_times))
             time.sleep(3)
             return scrapy.Request(self.kuaishou_url, headers=self.headers, body=json.dumps(search_overview_query),
@@ -99,16 +101,22 @@ class KuaishouUserCountsSpider(scrapy.Spider):
         for search_overview in search_overview_list:
             if search_overview['type'] != 'authors':
                 continue
-            for  author_info in search_overview['list']:
-                logger.info('Search userinfo reslut: {}'.format(str(author_info)))
-                kuaishou_user_info_iterm = KuaishouUserInfoIterm()
-                kuaishou_user_info_iterm['spider_name'] = self.name
-                kuaishou_user_info_iterm['principalId'] = author_info['id']
-                kuaishou_user_info_iterm['nickname'] = author_info['name']
-                kuaishou_user_info_iterm['avatar'] = author_info['avatar']
-                kuaishou_user_info_iterm['sex'] = author_info['sex']
-                kuaishou_user_info_iterm['description'] = author_info['description']
-                kuaishou_user_info_iterm['fan'] = author_info['counts']['fan']
-                kuaishou_user_info_iterm['follow'] = author_info['counts']['follow']
-                kuaishou_user_info_iterm['photo'] = author_info['counts']['photo']
-                yield kuaishou_user_info_iterm
+            search_overview_authors = search_overview['list']
+            if search_overview_authors == []:
+                continue
+            author_info = search_overview_authors[0]
+            logger.info('Search userinfo reslut: {}'.format(str(author_info)))
+            kuaishou_user_info_iterm = KuaishouUserInfoIterm()
+            kuaishou_user_info_iterm['spider_name'] = self.name
+            kuaishou_user_info_iterm['userId'] = user_id
+            kuaishou_user_info_iterm['principalId'] = author_info['id']
+            kuaishou_user_info_iterm['nickname'] = author_info['name']
+            kuaishou_user_info_iterm['avatar'] = author_info['avatar']
+            kuaishou_user_info_iterm['sex'] = author_info['sex']
+            kuaishou_user_info_iterm['description'] = author_info['description']
+            kuaishou_user_info_iterm['fan'] = author_info['counts']['fan']
+            kuaishou_user_info_iterm['follow'] = author_info['counts']['follow']
+            kuaishou_user_info_iterm['photo'] = author_info['counts']['photo']
+            yield kuaishou_user_info_iterm
+
+
