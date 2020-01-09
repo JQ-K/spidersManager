@@ -86,12 +86,12 @@ class KuaishouDownloaderMiddleware(object):
         spider.logger.info('user-agent:{}'.format(thisua))
         request.headers.setdefault('user_agent', thisua)
         # 设置代理IP
-        proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        proxy_list = list(self.conn.smembers(self.redis_proxyip_name))
         while len(proxy_list) < 10:
             spider.logger.warn('Proxy Pool is dry, Waiting to add proxy !')
             time.sleep(60)
-            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-        proxy = proxy_list[0].decode()
+            proxy_list = list(self.conn.smembers(self.redis_proxyip_name))
+        proxy = random.choice(proxy_list).decode('utf-8')
         spider.logger.info('proxy:{}'.format(proxy))
         request.meta['proxy'] = proxy
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
