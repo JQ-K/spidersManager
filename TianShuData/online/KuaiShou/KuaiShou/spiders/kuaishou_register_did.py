@@ -24,6 +24,7 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
     redis_host = settings.get('REDIS_HOST')
     redis_port = settings.get('REDIS_PORT')
     redis_did_name = settings.get('REDIS_DID_NAME')
+    redis_did_expire_time = settings.get('REDIS_DID_EXPIRE_TIME')
     conn = Redis(host=redis_host, port=redis_port)
 
     def start_requests(self):
@@ -31,7 +32,10 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
         spider_did_supplements_quantity_per_time = self.settings.get('SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME')
         spider_did_pool_warning_line = self.settings.get('SPIDER_DID_POOL_WARNING_LINE')
         while True:
-            did_pool_quantity = self.conn.scard(self.redis_did_name)
+            # zremrangebyscore(name, min, max)
+            max_score = int(time.time()) - int(self.redis_did_expire_time)
+            self.conn.zremrangebyscore(self.redis_did_name,0,max_score)
+            did_pool_quantity = self.conn.zcard(self.redis_did_name)
             logger.info('Did pool quantity: {}'.format(did_pool_quantity))
             if did_pool_quantity > spider_did_pool_warning_line:
                 time.sleep(10)
@@ -90,9 +94,9 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
         set_cookie_list = response.headers.getlist('Set-Cookie')
         if set_cookie_list == []:
             return
+        cookie_str = ''
         for cookie in set_cookie_list:
-            cookie_str = cookie.decode().split(';')[0]
-            key, value = cookie_str.split('=')
-            kuaishou_cookie_info_item[key.replace('.', '_')] = value
+            cookie_str += cookie.decode().split(';')[0] + ';'
+        kuaishou_cookie_info_item['Cookie'] = cookie_str[:-1]
         logger.info(kuaishou_cookie_info_item)
         return kuaishou_cookie_info_item

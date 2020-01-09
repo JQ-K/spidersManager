@@ -16,6 +16,7 @@ class KuaishouItem(scrapy.Item):
 
 class KuaishouUserInfoIterm(scrapy.Item):
     spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
     userId = scrapy.Field()
     kwaiId = scrapy.Field()
     principalId = scrapy.Field()
@@ -31,11 +32,8 @@ class KuaishouUserInfoIterm(scrapy.Item):
     avatar = scrapy.Field()
     sex = scrapy.Field()
     description = scrapy.Field()
+    is_successed = scrapy.Field()
 
 class KuaishouCookieInfoItem(scrapy.Item):
     spider_name = scrapy.Field()
-    kuaishou_live_bfb1s = scrapy.Field()
-    clientid = scrapy.Field()
-    did = scrapy.Field()
-    client_key = scrapy.Field()
-    didv = scrapy.Field()
+    Cookie = scrapy.Field()

@@ -23,7 +23,7 @@ NEWSPIDER_MODULE = 'KuaiShou.spiders'
 # ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 3
+CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -114,6 +114,7 @@ REDIS_HOST = 'zqhd5'
 REDIS_PORT = 6379
 REDIS_DID_NAME = 'tianshu_did'
 REDIS_PROXYIP_NAME = 'tianshu_proxyip_kuaishou'
+REDIS_DID_EXPIRE_TIME = 900
 
 # MySQL配置信息
 MYSQL_HOST = 'zqhd3'
@@ -125,8 +126,9 @@ MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME = 'kuaishou_scrapy_logs'
 
 # kafka 相关信息及配置
 KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
-KAFKA_TOPIC = 'tianshu_kuaishou'
+KAFKA_USERINFO_SEEDS_TOPIC = 'kuaishou_userInfo_seeds'
+KAFKA_ONLINE_DAILY_TOPIC = 'kuaishou_online_daily'
 
 # spider did pool
-SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME = 20
+SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME = 6
 SPIDER_DID_POOL_WARNING_LINE = 60

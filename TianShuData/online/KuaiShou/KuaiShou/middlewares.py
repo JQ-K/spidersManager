@@ -87,8 +87,8 @@ class KuaishouDownloaderMiddleware(object):
         request.headers.setdefault('user_agent', thisua)
         # 设置代理IP
         proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-        while proxy_list == []:
-            spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+        while len(proxy_list) < 10:
+            spider.logger.warn('Proxy Pool is dry, Waiting to add proxy !')
             time.sleep(60)
             proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
         proxy = proxy_list[0].decode()
@@ -98,22 +98,17 @@ class KuaishouDownloaderMiddleware(object):
         if spider.name in ['kuaishou_register_did']:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
-        #
-        cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-        while cookies_list == []:
-            spider.logger.warn('Did Pool is null, Plase add did !')
+        cookies_list = self.conn.zrevrange(self.redis_did_name, 0, -1)
+        while len(cookies_list) < 10:
+            spider.logger.warn('Did Pool is dry, Waiting to add did !')
             time.sleep(60)
-            cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-        cookies=cookies_list[0].decode()
-        request.meta['didJson'] = cookies
-        cookies_dict = eval(cookies)
-        cookies_str = ''
-        for key, value in cookies_dict.items():
-            cookies_str += '{}={}; '.format(key,value)
+            cookies_list = self.conn.zrevrange(self.redis_did_name, 0, -1)
+        cookies_str = random.choice(cookies_list)
+        request.meta['Cookie'] = cookies_str
         # 对于用户隐私数据需要带上这个,这里主要是 kuaishou_user_info和kuaishou_search_principalid两个spides用到
         if spider.name in ['kuaishou_search_principalid','kuaishou_user_info']:
             for key, value in self.kuaishou_live_web_st.items():
-                cookies_str += '{}={}; '.format(key,value)
+                cookies_str += '{}={};'.format(key,value)
         spider.logger.info('Cookie:{}'.format(cookies_str[:-2] ))
         request.headers.setdefault('Cookie', cookies_str[:-2])
         return None
