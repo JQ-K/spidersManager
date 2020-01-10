@@ -20,7 +20,7 @@ class KuaishouUserInfoIterm(scrapy.Item):
     userId = scrapy.Field()
     kwaiId = scrapy.Field()
     principalId = scrapy.Field()
-    constellation  = scrapy.Field()
+    constellation = scrapy.Field()
     cityName = scrapy.Field()
     fan = scrapy.Field()
     follow = scrapy.Field()
