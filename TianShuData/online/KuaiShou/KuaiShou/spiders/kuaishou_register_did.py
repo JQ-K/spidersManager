@@ -17,7 +17,7 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
     # start_urls = ['https://live.kuaishou.com/graphql/']
     custom_settings = {'ITEM_PIPELINES':
                            {'KuaiShou.pipelines.KuaishouRedisPipeline': 700},
-                       'CONCURRENT_REQUESTS': 1
+                       'CONCURRENT_REQUESTS': 16
                        }
     settings = get_project_settings()
 
@@ -43,7 +43,7 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
             counter = 0
             while counter < spider_did_supplements_quantity_per_time:
                 counter += 1
-                time.sleep(random.randint(10, 20))
+                time.sleep(random.randint(3, 6))
                 yield scrapy.Request(start_url, method='GET', callback=self.produce_did, dont_filter=True)
 
     def produce_did(self, response):
@@ -99,4 +99,4 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
             cookie_str += cookie.decode().split(';')[0] + ';'
         kuaishou_cookie_info_item['Cookie'] = cookie_str[:-1]
         logger.info(kuaishou_cookie_info_item)
-        return kuaishou_cookie_info_item
+        # return kuaishou_cookie_info_item
