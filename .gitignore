@@ -13,6 +13,8 @@ TianShuData/offline/ProxyIP/*.zip
 
 TianShuData/online/KuaiShou/.idea/
 TianShuData/online/KuaiShou/KuaiShou/__pycache__/
+TianShuData/online/KuaiShou/KuaiShou/spiders/__pycache__/
+TianShuData/online/KuaiShou/KuaiShou/utils/__pycache__/
 TianShuData/online/KuaiShou/*.zip
 
 
