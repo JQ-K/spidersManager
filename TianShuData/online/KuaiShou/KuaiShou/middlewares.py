@@ -95,11 +95,11 @@ class KuaishouDownloaderMiddleware(object):
         spider.logger.info('proxy:{}'.format(proxy))
         request.meta['proxy'] = proxy
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
-        if spider.name in ['kuaishou_register_did']:
+        if spider.name in ['kuaishou_register_did'] or 'kuaishou_app' in spider.name:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
         cookies_list = self.conn.zrevrange(self.redis_did_name, 0, -1)
-        while len(cookies_list) < 10:
+        while len(cookies_list) < 1:
             spider.logger.warn('Did Pool is dry, Waiting to add did !')
             time.sleep(60)
             cookies_list = self.conn.zrevrange(self.redis_did_name, 0, -1)
