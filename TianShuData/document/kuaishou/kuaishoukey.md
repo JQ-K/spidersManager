@@ -62,7 +62,7 @@
 | itemId       | 商品id             |
 | nickName     | 店名               |
 | imageUrl     | 商品图片url        |
-| itemLinkUrl  | 商品url            |
+| itemLinkUrl  | 商品url            | 
 | itemTagList  | 商品标签           |
 | productPrice | 商品价格，单位：分 |
 | productTitle | 商品标题           |
@@ -71,3 +71,14 @@
 | stock        | 库存               |
 | updatetime   | 更新时间           |
 | volume       | 销量               |
+
+
+####爬虫采集并发送kafka结果队列的数据json样例：
+1. 每日用户统计信息更新接口 kuaishou_search_overview  spider采集样例：
+{'avatar': 'https://js2.a.yximgs.com/uhead/AB/2019/09/11/22/BMjAxOTA5MTEyMjU2NTlfNjgxMzcxMF8xX2hkNjM0Xzk1Mg==_s.jpg', 
+   'description': '', 'fan': '1778.7w', 'follow': '368', 'is_successed': 1, 
+   'nickname': '浩南 'photo': 53, 'principalId': 'haonan666', 'sex': 'M', 
+   'spider_datetime': '2020-01-14 10:43:31', 'spider_name': 'kuaishou_search_overview', 
+   'userId': 6813710}
+   
+2. 小店首页整体统计信息：

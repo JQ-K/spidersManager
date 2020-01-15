@@ -1,8 +1,8 @@
 目前爬虫系统spiderManager所支撑的几大块业务：
-1. 天枢媒体平台TianshuMedia:
+1. 天枢媒体平台TianShuMedia:
     1.1 渠道数据回流：
     1.2 启航号内容采集：
-2. 天萤数据平台TianyingData:
+2. 天萤数据平台TianYingData:
     2.1 快手平台：用户主页，快手小店，视频详情，商品详情
     2.2 抖音平台：
     2.3 淘宝直播：
