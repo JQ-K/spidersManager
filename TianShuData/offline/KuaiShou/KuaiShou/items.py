@@ -67,12 +67,14 @@ class KuaishouPhotoCommentInfoIterm(scrapy.Item):
 
 class KuaishouShopInfoIterm(scrapy.Item):
     spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
     userId = scrapy.Field()
     shopInfo = scrapy.Field()
 
 
 class KuaishouShopProductItem(scrapy.Item):
     spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
     userId = scrapy.Field()
     productId = scrapy.Field()
     productInfo = scrapy.Field()
@@ -80,12 +82,14 @@ class KuaishouShopProductItem(scrapy.Item):
 
 class KuaishouShopProductDetailItem(scrapy.Item):
     spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
     productId = scrapy.Field()
     productDetail = scrapy.Field()
 
 
 class KuaishouShopProductCommentItem(scrapy.Item):
     spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
     productId = scrapy.Field()
     productComment = scrapy.Field()
 
