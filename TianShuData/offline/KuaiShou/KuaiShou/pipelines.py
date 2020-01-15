@@ -33,6 +33,7 @@ class KuaishouKafkaPipeline(object):
         #     return item
         # if item['name'] != 'kuaishou':
         #     return item
+        item['spider_datetime'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         msg = str(item).replace('\n', '').encode('utf-8')
         self.producer.produce(msg)
         spider.logger.info('Msg Produced kafka[%s]: %s' % (self.kafka_topic, msg))
