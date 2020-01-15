@@ -5,6 +5,8 @@ TianShuMedia/RongCloudChannel/*.zip
 
 TianShuData/offline/KuaiShou/.idea/
 TianShuData/offline/KuaiShou/KuaiShou/__pycache__/
+TianShuData/offline/KuaiShou/KuaiShou/spiders/__pycache__/
+TianShuData/offline/KuaiShou/KuaiShou/utils/__pycache__/
 TianShuData/offline/KuaiShou/*.zip
 
 TianShuData/offline/ProxyIP/.idea/
