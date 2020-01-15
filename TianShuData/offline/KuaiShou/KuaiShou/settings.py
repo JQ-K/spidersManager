@@ -13,7 +13,7 @@ import random
 
 BOT_NAME = 'KuaiShou'
 
-SPIDER_MODULES = ['KuaiShou.spiders']
+SPIDERREDIS_PROXYIP_NAME_MODULES = ['KuaiShou.spiders']
 NEWSPIDER_MODULE = 'KuaiShou.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

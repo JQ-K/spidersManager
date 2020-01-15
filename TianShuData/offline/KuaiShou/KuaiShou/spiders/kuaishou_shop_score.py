@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
+import time
+import random
 
 from pykafka import KafkaClient
 from loguru import logger
@@ -40,6 +42,7 @@ class KuaishouShopInfoSpider(scrapy.Spider):
                     continue
                 user_id = msg_value_dict['userId']
                 shopScoreUrl = "https://www.kwaishop.com/rest/app/grocery/ks/shop/score?sellerId={}"
+                time.sleep(random.choice(range(10, 20)))
                 yield scrapy.Request(shopScoreUrl.format(user_id), method='GET',
                                      callback=self.parse_shop, meta={'userId': user_id})
             except Exception as e:
@@ -57,6 +60,7 @@ class KuaishouShopInfoSpider(scrapy.Spider):
         shopInfo['spider_name'] = self.name
         shopInfo['userId'] = userId
         shopInfo['shopInfo'] = rsp_json
+        print(shopInfo)
         yield shopInfo
 
 

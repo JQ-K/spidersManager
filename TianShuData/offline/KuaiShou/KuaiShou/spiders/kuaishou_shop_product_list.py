@@ -60,6 +60,7 @@ class KuaishouShopProductSpider(scrapy.Spider):
                 }
                 curHeaders = self.headers
                 curHeaders['referer'] = self.referer.format(user_id)
+                time.sleep(random.choice(range(30, 50)))
                 yield scrapy.Request(self.shopProductListUrl, method='POST',
                                      headers=curHeaders,
                                      body=json.dumps(bodyDict), callback=self.parse_shop_product,
