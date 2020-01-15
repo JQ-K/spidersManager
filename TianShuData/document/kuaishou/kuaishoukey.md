@@ -81,4 +81,4 @@
    'spider_datetime': '2020-01-14 10:43:31', 'spider_name': 'kuaishou_search_overview', 
    'userId': 6813710}
    
-2. 
+2. 小店首页整体统计信息：
