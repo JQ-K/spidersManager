@@ -80,11 +80,15 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
             print('get interface error: ' + response.text)
             return
         if 'comments' in rltJson:
-            commentItem = KuaishouShopProductCommentItem()
-            commentItem['spider_name'] = self.name
-            commentItem['productId'] = productId
-            commentItem['productComment'] = rltJson['comments']
-            yield commentItem
+            comments = rltJson['comments']
+            for comment in comments:
+                if 'commentId' in comment:
+                    commentItem = KuaishouShopProductCommentItem()
+                    commentItem['spider_name'] = self.name
+                    commentItem['productId'] = productId
+                    commentItem['commentId'] = comment['commentId']
+                    commentItem['productComment'] = comment
+                    yield commentItem
 
         if 'pcursor' not in rltJson:
             return

@@ -29,18 +29,43 @@ class KuaishouShopProductSpider(scrapy.Spider):
     }}
     settings = get_project_settings()
 
+
+    def __init__(self, partitionIdx='0', useProxy='0', *args, **kwargs):
+        super(KuaishouShopProductSpider, self).__init__(*args, **kwargs)
+        self.partitionIdx = int(partitionIdx)
+        self.useProxy = int(useProxy)
+
+
     def start_requests(self):
         # 配置kafka连接信息
+        # kafka_hosts = self.settings.get('KAFKA_HOSTS')
+        # kafka_topic = self.settings.get('KAFKA_TOPIC')
+        # client = KafkaClient(hosts=kafka_hosts)
+        # topic = client.topics[kafka_topic]
+        # # 配置kafka消费信息
+        # consumer = topic.get_balanced_consumer(
+        #     consumer_group=self.name,
+        #     managed=True,
+        #     auto_commit_enable=True
+        # )
+
+        # 配置kafka连接信息
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
+        zookeeper_hosts = self.settings.get('ZOOKEEPER_HOSTS')
         kafka_topic = self.settings.get('KAFKA_TOPIC')
-        client = KafkaClient(hosts=kafka_hosts)
+        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
+        logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic) + '\n')
+        client = KafkaClient(hosts=kafka_hosts, zookeeper_hosts=zookeeper_hosts, broker_version='0.10.1.0')
         topic = client.topics[kafka_topic]
+        partitions = topic.partitions
         # 配置kafka消费信息
-        consumer = topic.get_balanced_consumer(
+        consumer = topic.get_simple_consumer(
             consumer_group=self.name,
-            managed=True,
-            auto_commit_enable=True
+            reset_offset_on_start=reset_offset_on_start,
+            auto_commit_enable=True,
+            partitions=[partitions[self.partitionIdx]]
         )
+
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
             try:
@@ -49,9 +74,10 @@ class KuaishouShopProductSpider(scrapy.Spider):
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
                 msg_value_dict = eval(msg_value)
-                if msg_value_dict['spider_name'] != 'kuanshou_kol_seeds':
+                if msg_value_dict['spider_name'] != 'kuaishou_shop_score':
                     continue
                 user_id = msg_value_dict['userId']
+                logger.info('user_id: ' + str(user_id))
                 bodyDict = {
                     "listProductParam": {
                         "id": str(user_id),
@@ -60,7 +86,7 @@ class KuaishouShopProductSpider(scrapy.Spider):
                 }
                 curHeaders = self.headers
                 curHeaders['referer'] = self.referer.format(user_id)
-                time.sleep(random.choice(range(30, 50)))
+                time.sleep(random.choice(range(50, 100)))
                 yield scrapy.Request(self.shopProductListUrl, method='POST',
                                      headers=curHeaders,
                                      body=json.dumps(bodyDict), callback=self.parse_shop_product,
@@ -80,15 +106,18 @@ class KuaishouShopProductSpider(scrapy.Spider):
             print('get interface error: ' + response.text)
             return
         if 'itemSize' not in rltJson:
+            logger.info('itemSize not in response json, user_id: ' + str(userId))
             return
         else:
             if rltJson['itemSize'] == 0:
+                logger.info('itemSize == 0, user_id: ' + str(userId))
                 return
         if beginFlag:
             totalPage = rltJson['pageNum']
             beginFlag = False
 
         if 'products' not in rltJson:
+            logger.info('products not in response json, user_id: ' + str(userId))
             return
 
         products = rltJson['products']
@@ -98,6 +127,7 @@ class KuaishouShopProductSpider(scrapy.Spider):
             productItem['userId'] = userId
             productItem['productId'] = product['itemId']
             productItem['productInfo'] = product
+            print(productItem)
             yield productItem
 
         curPage += 1
@@ -105,7 +135,7 @@ class KuaishouShopProductSpider(scrapy.Spider):
             bodyDict['listProductParam']['page'] = curPage
             curHeaders = self.headers
             curHeaders['referer'] = self.referer.format(userId)
-            time.sleep(random.choice(range(10,15)))
+            time.sleep(random.choice(range(50, 100)))
             yield scrapy.Request(self.shopProductListUrl, method='POST',
                                  headers=curHeaders,
                                  body=json.dumps(bodyDict), callback=self.parse_shop_product,
