@@ -27,6 +27,10 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
     redis_did_expire_time = settings.get('REDIS_DID_EXPIRE_TIME')
     conn = Redis(host=redis_host, port=redis_port)
 
+    def __init__(self, useProxy='0', *args, **kwargs):
+        super(KuaishouRegisterDidSpider, self).__init__(*args, **kwargs)
+        self.useProxy = int(useProxy)
+
     def start_requests(self):
         start_url = 'http://live.kuaishou.com/v/hot/'
         spider_did_supplements_quantity_per_time = self.settings.get('SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME')
@@ -99,4 +103,4 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
             cookie_str += cookie.decode().split(';')[0] + ';'
         kuaishou_cookie_info_item['Cookie'] = cookie_str[:-1]
         logger.info(kuaishou_cookie_info_item)
-        # return kuaishou_cookie_info_item
+        return kuaishou_cookie_info_item

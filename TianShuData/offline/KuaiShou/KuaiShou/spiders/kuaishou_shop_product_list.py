@@ -52,7 +52,7 @@ class KuaishouShopProductSpider(scrapy.Spider):
         # 配置kafka连接信息
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
         zookeeper_hosts = self.settings.get('ZOOKEEPER_HOSTS')
-        kafka_topic = self.settings.get('KAFKA_TOPIC')
+        kafka_topic = self.settings.get('KAFKA_TOPIC_DATA')
         reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
         logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic) + '\n')
         client = KafkaClient(hosts=kafka_hosts, zookeeper_hosts=zookeeper_hosts, broker_version='0.10.1.0')
@@ -73,7 +73,7 @@ class KuaishouShopProductSpider(scrapy.Spider):
                     continue
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
-                msg_value_dict = eval(msg_value)
+                msg_value_dict = json.loads(msg_value)
                 if msg_value_dict['spider_name'] != 'kuaishou_shop_score':
                     continue
                 user_id = msg_value_dict['userId']

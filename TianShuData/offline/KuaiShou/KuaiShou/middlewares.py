@@ -72,6 +72,13 @@ class KuaishouDownloaderMiddleware(object):
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
 
+    def getCookie(self, cookieIdx):
+        tempCookie = self.conn.hgetall('kuaishou_cookie_{}'.format(cookieIdx))
+        rltCookie = {}
+        for key, val in tempCookie.items():
+            rltCookie[str(key, encoding="utf-8")] = str(val, encoding="utf-8")
+        return rltCookie
+
     def process_request(self, request, spider):
         # Called for each request that goes through the downloader
         # middleware.
@@ -106,15 +113,22 @@ class KuaishouDownloaderMiddleware(object):
                            'kuaishou_shop_product_list']:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
-        #
-        cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-        while cookies_list == []:
-            spider.logger.warn('Did Pool is null, Plase add did !')
-            time.sleep(60)
+        if spider.cookieManual:
+            cookies_all = self.getCookie(spider.cookieIdx)
+            if spider.name in ['kuaishou_shop_product_detail']:
+                cookies_dict = {'did': cookies_all['did']}
+            else:
+                ###后期有新的spider再添加
+                cookies_dict = cookies_all
+        else:
             cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-        cookies = cookies_list[0].decode()
-        request.meta['didJson'] = cookies
-        cookies_dict = eval(cookies)
+            while cookies_list == []:
+                spider.logger.warn('Did Pool is null, Plase add did !')
+                time.sleep(60)
+                cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+            cookies = cookies_list[0].decode()
+            request.meta['didJson'] = cookies
+            cookies_dict = eval(cookies)
         cookies_str = ''
         for key, value in cookies_dict.items():
             cookies_str += '{}={}; '.format(key,value)

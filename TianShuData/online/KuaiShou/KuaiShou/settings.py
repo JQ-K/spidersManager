@@ -93,7 +93,8 @@ DOWNLOADER_MIDDLEWARES = {
 
 HTTPERROR_ALLOWED_CODES = [500, 400]
 # log
-LOG_LEVEL = 'INFO'
+# LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'WARNING'
 
 # 超时时间,超时尝试时间
 RETRY_ENABLED = True
@@ -110,22 +111,29 @@ SEARCH_OVERVIEW_QUERY = {
 }
 
 # REDIS配置信息
-REDIS_HOST = 'zqhd5'
+# REDIS_HOST = 'zqhd5'
+REDIS_HOST = '10.8.26.105'
 REDIS_PORT = 6379
 REDIS_DID_NAME = 'tianshu_did'
 REDIS_PROXYIP_NAME = 'tianshu_proxyip_kuaishou'
 REDIS_DID_EXPIRE_TIME = 900
 
 # MySQL配置信息
-MYSQL_HOST = 'zqhd3'
-MYSQL_USER = 'tianshu'
-MYSQL_PASSWORD = 'Tianshu_123'
+# MYSQL_HOST = 'zqhd3'
+# MYSQL_USER = 'tianshu'
+# MYSQL_PASSWORD = 'Tianshu_123'
+# MYSQL_DATABASE = 'tianshuData'
+MYSQL_HOST = '10.8.26.106'
+MYSQL_USER = 'scrapy'
+MYSQL_PASSWORD = 'Scrapy_123'
 MYSQL_DATABASE = 'tianshuData'
 MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
 MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME = 'kuaishou_scrapy_logs'
 
 # kafka 相关信息及配置
-KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
+# KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
+KAFKA_HOSTS = 'zb2627:9092,zb2628:9092,zb2629:9092'
+ZOOKEEPER_HOSTS = 'zb2627:2181,zb2628:2181,zb2629:2181'
 KAFKA_USERINFO_SEEDS_TOPIC = 'kuaishou_userInfo_seeds'
 KAFKA_ONLINE_DAILY_TOPIC = 'kuaishou_online_daily'
 
