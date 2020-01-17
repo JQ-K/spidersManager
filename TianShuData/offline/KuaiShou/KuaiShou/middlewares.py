@@ -110,13 +110,15 @@ class KuaishouDownloaderMiddleware(object):
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
         if spider.name in ['kuaishou_register_did',
                            'kuaishou_shop_score',
-                           'kuaishou_shop_product_list']:
+                           'kuaishou_shop_product_list',]:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
         if spider.cookieManual:
             cookies_all = self.getCookie(spider.cookieIdx)
             if spider.name in ['kuaishou_shop_product_detail']:
                 cookies_dict = {'did': cookies_all['did']}
+            elif spider.name in ['kuaishou_shop_product_comment']:
+                cookies_dict = {'token': cookies_all['token']}
             else:
                 ###后期有新的spider再添加
                 cookies_dict = cookies_all
@@ -136,7 +138,7 @@ class KuaishouDownloaderMiddleware(object):
         if spider.name in ['kuaishou_search_principalid','kuaishou_user_info']:
             for key, value in self.kuaishou_live_web_st.items():
                 cookies_str += '{}={}; '.format(key,value)
-        spider.logger.info('Cookie:{}'.format(cookies_str[:-2] ))
+        spider.logger.info('Cookie:{}'.format(cookies_str[:-2]))
         request.headers.setdefault('Cookie', cookies_str[:-2])
         return None
 
