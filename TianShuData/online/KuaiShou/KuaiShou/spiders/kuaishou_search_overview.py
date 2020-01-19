@@ -24,43 +24,44 @@ class KuaishouUserCountsSpider(scrapy.Spider):
     'CONCURRENT_REQUESTS' : 1
     }
     settings = get_project_settings()
-    # 连接redis
-    redis_host = settings.get('REDIS_HOST')
-    redis_port = settings.get('REDIS_PORT')
-    redis_did_name = settings.get('REDIS_DID_NAME')
-    redis_proxyip_name = settings.get('REDIS_PROXYIP_NAME')
-    conn = Redis(host=redis_host, port=redis_port)
-    kuaishou_url = 'http://live.kuaishou.com/m_graphql'
-    search_overview_query = settings.get('SEARCH_OVERVIEW_QUERY')
-    headers = {
-    "accept": "*/*",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-    "Connection": "keep-alive",
-    "content-type": "application/json",
-    "Origin": "https://live.kuaishou.com",
-    "Referer": "https://live.kuaishou.com/search/?keyword=1",
-    "Sec-Fetch-Mode": "cors",
-    "Sec-Fetch-Site": "same-origin"
-    }
-
-    # 配置kafka连接信息
-    kafka_hosts = settings.get('KAFKA_HOSTS')
-    kafka_topic = settings.get('KAFKA_USERINFO_SEEDS_TOPIC')
-    logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic))
-    client = KafkaClient(hosts=kafka_hosts)
-    topic = client.topics[kafka_topic]
-    # 配置kafka消费信息
-    consumer = topic.get_balanced_consumer(
-        consumer_group=name,
-        managed=True,
-        auto_commit_enable=True
-    )
 
     def start_requests(self):
+        # 连接redis
+        redis_host = self.settings.get('REDIS_HOST')
+        redis_port = self.settings.get('REDIS_PORT')
+        self.redis_did_name = self.settings.get('REDIS_DID_NAME')
+        self.redis_proxyip_name = self.settings.get('REDIS_PROXYIP_NAME')
+        self.conn = Redis(host=redis_host, port=redis_port)
+
+        kuaishou_url = 'http://live.kuaishou.com/m_graphql'
+        search_overview_query = self.settings.get('SEARCH_OVERVIEW_QUERY')
+        headers = {
+            "accept": "*/*",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+            "Connection": "keep-alive",
+            "content-type": "application/json",
+            "Origin": "https://live.kuaishou.com",
+            "Referer": "https://live.kuaishou.com/search/?keyword=1",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-origin"
+        }
+
+        # 配置kafka连接信息
+        kafka_hosts = self.settings.get('KAFKA_HOSTS')
+        kafka_topic = self.settings.get('KAFKA_USERINFO_SEEDS_TOPIC')
+        logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic))
+        client = KafkaClient(hosts=kafka_hosts)
+        topic = client.topics[kafka_topic]
+        # 配置kafka消费信息
+        consumer = topic.get_balanced_consumer(
+            consumer_group=self.name,
+            managed=True,
+            auto_commit_enable=True
+        )
 
         # 获取被消费数据的偏移量和消费内容
-        for message in self.consumer:
+        for message in consumer:
             try:
                 if message is None:
                     continue
@@ -73,14 +74,14 @@ class KuaishouUserCountsSpider(scrapy.Spider):
                 if msg_value_dict['spider_name'] != 'kuaishou_user_seeds':
                     continue
                 user_id = msg_value_dict['userId']
-                self.headers['Referer'] = 'https://live.kuaishou.com/search/?keyword={}'.format(user_id)
-                self.search_overview_query['variables']['keyword'] = '{}'.format(user_id)
+                headers['Referer'] = 'https://live.kuaishou.com/search/?keyword={}'.format(user_id)
+                search_overview_query['variables']['keyword'] = '{}'.format(user_id)
                 # logger.info(json.dumps(self.search_overview_query))
                 # self.conn.incr('kwai_userInfo_offSetSize', 1)
-                yield scrapy.Request(self.kuaishou_url, headers=self.headers,
-                                     body=json.dumps(self.search_overview_query),
+                yield scrapy.Request(kuaishou_url, headers=headers,
+                                     body=json.dumps(search_overview_query),
                                      method='POST',
-                                     meta={'bodyJson': self.search_overview_query, 'msg_value_dict': msg_value_dict,
+                                     meta={'bodyJson': search_overview_query, 'msg_value_dict': msg_value_dict,
                                            'retry_times': 0},
                                      callback=self.parse_search_overview, dont_filter=True
                                      )
