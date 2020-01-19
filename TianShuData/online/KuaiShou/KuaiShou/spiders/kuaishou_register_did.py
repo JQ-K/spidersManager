@@ -3,9 +3,11 @@ import scrapy
 import re, time
 import json, random
 
+from scrapy_splash import SplashRequest
 from scrapy.utils.project import get_project_settings
 from loguru import logger
 from redis import Redis
+from urllib.parse import urlencode
 
 from KuaiShou.utils import ProduceRandomStr
 from KuaiShou.items import KuaishouCookieInfoItem
@@ -13,28 +15,70 @@ from KuaiShou.items import KuaishouCookieInfoItem
 
 class KuaishouRegisterDidSpider(scrapy.Spider):
     name = 'kuaishou_register_did'
-    # allowed_domains = ['live.kuaishou.com/graphql']
-    # start_urls = ['https://live.kuaishou.com/graphql/']
     custom_settings = {'ITEM_PIPELINES':
                            {'KuaiShou.pipelines.KuaishouRedisPipeline': 700},
-                       'CONCURRENT_REQUESTS': 16
+                       'CONCURRENT_REQUESTS': 1,
+                       'DOWNLOAD_DELAY' : random.randint(5, 10),
+                       'CONCURRENT_REQUESTS_PER_IP' : 1,
+                       'DOWNLOADER_MIDDLEWARES':
+                           {
+                               # 'KuaiShou.middlewares.KuaishouDownloaderMiddleware': 727,
+                               'scrapy_splash.SplashCookiesMiddleware': 723,
+                               'scrapy_splash.SplashMiddleware': 725,
+                               'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+                           },
+                       'SPIDER_MIDDLEWARES':
+                           {
+                               'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+                           },
+                       'DUPEFILTER_CLASS': 'scrapy_splash.SplashAwareDupeFilter',
+                       'SPLASH_URL': 'http://localhost:8050/',
+                       'COOKIES_ENABLED': 'False'
                        }
-    settings = get_project_settings()
 
+    # 设置加载完整的页面
+    lua_load_all = """
+        function main(splash, args)
+          -- 自定义请求头
+          splash:set_custom_headers({
+                ["Cookie"] = "%s"
+            })
+          args = {
+            url = "http://live.kuaishou.com/search/?keyword=%s"
+          }
+          assert(splash:go(args.url))
+          assert(splash:wait(1))
+          splash:evaljs("window.onload")
+          assert(splash:wait(3))
+          assert(splash:go(args.url))
+          assert(splash:wait(1))
+          splash:evaljs("window.onload")
+          assert(splash:wait(3))
+          return {
+            html = splash:html(),
+            png = splash:png(),
+            har = splash:har(),
+            cookies = splash:get_cookies(),
+          }
+        end
+
+    """
+    settings = get_project_settings()
     redis_host = settings.get('REDIS_HOST')
     redis_port = settings.get('REDIS_PORT')
     redis_did_name = settings.get('REDIS_DID_NAME')
     redis_did_expire_time = settings.get('REDIS_DID_EXPIRE_TIME')
+    redis_proxyip_name = settings.get('REDIS_PROXYIP_NAME')
     conn = Redis(host=redis_host, port=redis_port)
 
     def start_requests(self):
-        start_url = 'http://live.kuaishou.com/v/hot/'
+        start_url = 'http://live.kuaishou.com/search/?keyword=%s' % random.randint(100, 10000)
         spider_did_supplements_quantity_per_time = self.settings.get('SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME')
         spider_did_pool_warning_line = self.settings.get('SPIDER_DID_POOL_WARNING_LINE')
         while True:
             # zremrangebyscore(name, min, max)
             max_score = int(time.time()) - int(self.redis_did_expire_time)
-            self.conn.zremrangebyscore(self.redis_did_name,0,max_score)
+            self.conn.zremrangebyscore(self.redis_did_name, 0, max_score)
             did_pool_quantity = self.conn.zcard(self.redis_did_name)
             logger.info('Did pool quantity: {}'.format(did_pool_quantity))
             if did_pool_quantity > spider_did_pool_warning_line:
@@ -43,60 +87,35 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
             counter = 0
             while counter < spider_did_supplements_quantity_per_time:
                 counter += 1
-                time.sleep(random.randint(3, 6))
+                time.sleep(random.randint(10, 15))
                 yield scrapy.Request(start_url, method='GET', callback=self.produce_did, dont_filter=True)
 
     def produce_did(self, response):
-        referer = response.url
-        time_int = int(time.time() * 1000)
-        register_url = 'http://live.kuaishou.com/rest/wd/live/web/log'
-        payload_data = {
-            "base": {
-                "session_id": ProduceRandomStr(16),
-                "page_id": '{}_{}'.format(ProduceRandomStr(16), time_int - 1012),
-                "refer_page_id": "",
-                "refer_show_id": "",
-                "refer_url": referer,
-                "page_live_stream_id": "",
-                "url": referer,
-                "screen": "1280*800",
-                "platform": "MacIntel",
-                "log_time": "{}".format(time_int)
-            },
-            "events": [{
-                "type": "pv",
-                "data": {
-                    "event_time": time_int - 1012,
-                    "from": "/",
-                    "to": "/v/hot/",
-                    "is_spammer": 'false'
-                }
-            }]
-        }
-        headers = {
-            'kpf': 'PC_WEB',
-            'kpn': 'GAME_ZONE',
-            'Content-Type': 'text/plain;charset=UTF-8',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-            'Connection': 'keep-alive',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-origin',
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Mobile Safari/537.36'
-        }
-        return scrapy.Request(register_url, headers=headers, body=json.dumps(payload_data),
-                             method='POST', callback=self.register_did,
-                             dont_filter=True
-                             )
-
-    def register_did(self, response):
-        kuaishou_cookie_info_item = KuaishouCookieInfoItem()
+        # 设置代理IP
+        # proxy = response.meta['proxy']
+        # ua =  response.meta['ua']
+        # logger.info(proxy)
+        search_url = response.url
+        keyword = re.findall('live\.kuaishou\.com/search/\?keyword=([0-9a-z]+)', search_url)[0]
         set_cookie_list = response.headers.getlist('Set-Cookie')
         if set_cookie_list == []:
             return
         cookie_str = ''
         for cookie in set_cookie_list:
-            cookie_str += cookie.decode().split(';')[0] + ';'
-        kuaishou_cookie_info_item['Cookie'] = cookie_str[:-1]
+            cookie_str += cookie.decode().split(' ')[0]
+        lua_load_all = self.lua_load_all % (cookie_str, keyword)
+        headers = {
+            "Host": "live.kuaishou.com",
+            "Connection": "keep-alive",
+            # "User-Agent": ua,
+        }
+        yield SplashRequest(search_url, callback=self.register_did, endpoint='execute', headers=headers, method='GET',
+                            args={'lua_source': lua_load_all}, cache_args=['lua_source'],
+                            meta={'Cookie': cookie_str})
+
+    def register_did(self, response):
+        kuaishou_cookie_info_item = KuaishouCookieInfoItem()
+        Cookie = response.meta['Cookie']
+        kuaishou_cookie_info_item['Cookie'] = Cookie
         logger.info(kuaishou_cookie_info_item)
-        # return kuaishou_cookie_info_item
+        return kuaishou_cookie_info_item

@@ -4,7 +4,7 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-import datetime, time
+import datetime, time, json
 
 from pykafka import KafkaClient
 from redis import Redis
@@ -34,7 +34,7 @@ class KuaishouKafkaPipeline(object):
         # if item['name'] != 'kuaishou':
         #     return item
         item['spider_datetime'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        msg = str(item).replace('\n', '').encode('utf-8')
+        msg =  bytes(json.dumps(dict(item)), encoding='utf-8')
         self.producer.produce(msg)
         spider.logger.info('Msg Produced kafka[%s]: %s' % (self.kafka_topic, msg))
         return item

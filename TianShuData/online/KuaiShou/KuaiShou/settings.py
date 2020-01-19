@@ -23,7 +23,7 @@ NEWSPIDER_MODULE = 'KuaiShou.spiders'
 # ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 1
+# CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -91,19 +91,19 @@ DOWNLOADER_MIDDLEWARES = {
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-HTTPERROR_ALLOWED_CODES = [500, 400]
+HTTPERROR_ALLOWED_CODES = [500, 400, 401, 404]
 # log
 LOG_LEVEL = 'INFO'
 
 # 超时时间,超时尝试时间
 RETRY_ENABLED = True
-RETRY_TIMES = 3
-DOWNLOAD_TIMEOUT = 7
+RETRY_TIMES = 1
+DOWNLOAD_TIMEOUT = 15
 
 SEARCH_OVERVIEW_QUERY = {
     "operationName": "SearchOverviewQuery",
     "variables": {
-        "keyword": "500730148",
+        "keyword": "666",
         "ussid": ""
     },
     "query": "query SearchOverviewQuery($keyword: String, $ussid: String) {\n  pcSearchOverview(keyword: $keyword, ussid: $ussid) {\n    list {\n      ... on SearchCategoryList {\n        type\n        list {\n          categoryId\n          categoryAbbr\n          title\n          src\n          __typename\n        }\n        __typename\n      }\n      ... on SearchUserList {\n        type\n        ussid\n        list {\n          id\n          name\n          living\n          avatar\n          sex\n          description\n          counts {\n            fan\n            follow\n            photo\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      ... on SearchLivestreamList {\n        type\n        lssid\n        list {\n          user {\n            id\n            avatar\n            name\n            __typename\n          }\n          poster\n          coverUrl\n          caption\n          id\n          playUrls {\n            quality\n            url\n            __typename\n          }\n          quality\n          gameInfo {\n            category\n            name\n            pubgSurvival\n            type\n            kingHero\n            __typename\n          }\n          hasRedPack\n          liveGuess\n          expTag\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
@@ -114,7 +114,7 @@ REDIS_HOST = 'zqhd5'
 REDIS_PORT = 6379
 REDIS_DID_NAME = 'tianshu_did'
 REDIS_PROXYIP_NAME = 'tianshu_proxyip_kuaishou'
-REDIS_DID_EXPIRE_TIME = 900
+REDIS_DID_EXPIRE_TIME = 172800
 
 # MySQL配置信息
 MYSQL_HOST = 'zqhd3'
@@ -130,5 +130,5 @@ KAFKA_USERINFO_SEEDS_TOPIC = 'kuaishou_userInfo_seeds'
 KAFKA_ONLINE_DAILY_TOPIC = 'kuaishou_online_daily'
 
 # spider did pool
-SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME = 6
-SPIDER_DID_POOL_WARNING_LINE = 60
+SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME = 3
+SPIDER_DID_POOL_WARNING_LINE = 50

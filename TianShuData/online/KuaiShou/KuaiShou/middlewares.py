@@ -82,9 +82,11 @@ class KuaishouDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+
         thisua = random.choice(self.uapool)
-        spider.logger.info('user-agent:{}'.format(thisua))
-        request.headers.setdefault('user_agent', thisua)
+        spider.logger.info('User-Agent:{}'.format(thisua))
+        request.headers.setdefault('User-Agent', thisua)
+        request.meta['ua'] = thisua
         # 设置代理IP
         proxy_list = list(self.conn.smembers(self.redis_proxyip_name))
         while len(proxy_list) < 10:
@@ -95,22 +97,24 @@ class KuaishouDownloaderMiddleware(object):
         spider.logger.info('proxy:{}'.format(proxy))
         request.meta['proxy'] = proxy
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
-        if spider.name in ['kuaishou_register_did'] or 'kuaishou_app' in spider.name:
+        if spider.name in ['kuaishou_register_did'] or 'app' in spider.name:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
         cookies_list = self.conn.zrevrange(self.redis_did_name, 0, -1)
-        while len(cookies_list) < 1:
+        while len(cookies_list) < 3:
             spider.logger.warn('Did Pool is dry, Waiting to add did !')
             time.sleep(60)
             cookies_list = self.conn.zrevrange(self.redis_did_name, 0, -1)
-        cookies_str = random.choice(cookies_list)
+
+        cookies_str =bytes.decode(random.choice(cookies_list))
         request.meta['Cookie'] = cookies_str
+        cookies_str = cookies_str.replace(';','; ')
         # 对于用户隐私数据需要带上这个,这里主要是 kuaishou_user_info和kuaishou_search_principalid两个spides用到
         if spider.name in ['kuaishou_search_principalid','kuaishou_user_info']:
             for key, value in self.kuaishou_live_web_st.items():
-                cookies_str += '{}={};'.format(key,value)
-        spider.logger.info('Cookie:{}'.format(cookies_str[:-2] ))
-        request.headers.setdefault('Cookie', cookies_str[:-2])
+                cookies_str += '{}={}; '.format(key,value)
+        spider.logger.info('Cookie: {}'.format(cookies_str))
+        request.headers.setdefault('Cookie', cookies_str)
         return None
 
     def process_response(self, request, response, spider):

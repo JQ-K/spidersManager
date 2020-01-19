@@ -19,7 +19,10 @@ class KuaishouUserCountsSpider(scrapy.Spider):
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
         'KuaiShou.pipelines.KuaishouScrapyLogsPipeline': 701
-    }}
+    },
+    'CONCURRENT_REQUESTS_PER_DOMAIN' : 16,
+    'CONCURRENT_REQUESTS' : 1
+    }
     settings = get_project_settings()
     # 连接redis
     redis_host = settings.get('REDIS_HOST')
@@ -27,29 +30,37 @@ class KuaishouUserCountsSpider(scrapy.Spider):
     redis_did_name = settings.get('REDIS_DID_NAME')
     redis_proxyip_name = settings.get('REDIS_PROXYIP_NAME')
     conn = Redis(host=redis_host, port=redis_port)
-
     kuaishou_url = 'http://live.kuaishou.com/m_graphql'
     search_overview_query = settings.get('SEARCH_OVERVIEW_QUERY')
-    headers = {'content-type': 'application/json',
-               'Host': 'live.kuaishou.com',
-               'Origin': 'http://live.kuaishou.com'
-               }
+    headers = {
+    "accept": "*/*",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+    "Connection": "keep-alive",
+    "content-type": "application/json",
+    "Origin": "https://live.kuaishou.com",
+    "Referer": "https://live.kuaishou.com/search/?keyword=1",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-origin"
+    }
+
+    # 配置kafka连接信息
+    kafka_hosts = settings.get('KAFKA_HOSTS')
+    kafka_topic = settings.get('KAFKA_USERINFO_SEEDS_TOPIC')
+    logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic))
+    client = KafkaClient(hosts=kafka_hosts)
+    topic = client.topics[kafka_topic]
+    # 配置kafka消费信息
+    consumer = topic.get_balanced_consumer(
+        consumer_group=name,
+        managed=True,
+        auto_commit_enable=True
+    )
 
     def start_requests(self):
-        # 配置kafka连接信息
-        kafka_hosts = self.settings.get('KAFKA_HOSTS')
-        kafka_topic = self.settings.get('KAFKA_USERINFO_SEEDS_TOPIC')
-        logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic))
-        client = KafkaClient(hosts=kafka_hosts)
-        topic = client.topics[kafka_topic]
-        # 配置kafka消费信息
-        consumer = topic.get_balanced_consumer(
-            consumer_group=self.name,
-            managed=True,
-            auto_commit_enable=True
-        )
+
         # 获取被消费数据的偏移量和消费内容
-        for message in consumer:
+        for message in self.consumer:
             try:
                 if message is None:
                     continue
@@ -121,9 +132,10 @@ class KuaishouUserCountsSpider(scrapy.Spider):
                     yield self.create_sucess_items(user_id, author_info)
                     break
                 logger.warning('userId: {}, pcSearchOverview authors list is [] ! '.format(user_id))
-                invaild_proxy = response.meta['proxy']
-                logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
-                self.conn.srem(self.redis_proxyip_name, str(invaild_proxy).encode('utf-8'))
+                # 删掉did库中的失效did
+                invaild_did = response.meta['Cookie']
+                logger.info('RedisDid srem invaild did:{}'.format(str(invaild_did)))
+                self.conn.zrem(self.redis_did_name, str(invaild_did).encode('utf-8'))
                 # 再次尝试抓取，尝试7次
                 if current_retry_times > 3:
                     yield self.create_fail_items(user_id, -2)
