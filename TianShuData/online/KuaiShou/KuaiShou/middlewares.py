@@ -90,7 +90,7 @@ class KuaishouDownloaderMiddleware(object):
         # 设置代理IP
         proxy_list = list(self.conn.smembers(self.redis_proxyip_name))
         while len(proxy_list) < 10:
-            spider.logger.warn('Proxy Pool is dry, Waiting to add proxy !')
+            spider.logger.warn('Proxy Pool is dry, count:{}, Waiting to add proxy !'.format(len(proxy_list)))
             time.sleep(60)
             proxy_list = list(self.conn.smembers(self.redis_proxyip_name))
         proxy = random.choice(proxy_list).decode('utf-8')
@@ -102,7 +102,7 @@ class KuaishouDownloaderMiddleware(object):
         # 两种方式，一种是设置headers，一个是直接设置cookies
         cookies_list = self.conn.zrevrange(self.redis_did_name, 0, -1)
         while len(cookies_list) < 3:
-            spider.logger.warn('Did Pool is dry, Waiting to add did !')
+            spider.logger.warn('Did Pool is dry, count:{}, Waiting to add did !'.format(len(cookies_list)))
             time.sleep(60)
             cookies_list = self.conn.zrevrange(self.redis_did_name, 0, -1)
 

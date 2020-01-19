@@ -16,17 +16,17 @@ class KuaishouUserInfoSpider(scrapy.Spider):
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
     }}
-    settings = get_project_settings()
     # allowed_domains = ['live.kuaishou.com/graphql']
     # start_urls = ['http://live.kuaishou.com/graphql/']
-    # 连接redis
-    redis_host = settings.get('REDIS_HOST')
-    redis_port = settings.get('REDIS_PORT')
-    redis_did_name = settings.get('REDIS_DID_NAME')
 
-    conn = Redis(host=redis_host, port=redis_port)
 
     def start_requests(self):
+        settings = get_project_settings()
+        # 连接redis
+        redis_host = settings.get('REDIS_HOST')
+        redis_port = settings.get('REDIS_PORT')
+        self.redis_did_name = settings.get('REDIS_DID_NAME')
+        self.conn = Redis(host=redis_host, port=redis_port)
         # 配置kafka连接信息
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
         kafka_topic = self.settings.get('KAFKA_TOPIC')

@@ -77,6 +77,8 @@ class KuaishouUserSeedsMySQLPipeline(object):
                                         dbname=self.mysql_database)
 
     def process_item(self, item, spider):
+        if int(item['is_successed'])<0:
+            return None
         msg = {}
         msg['userId'] = item['userId']
         msg['kwaiId'] = item['kwaiId']
@@ -105,7 +107,7 @@ class KuaishouUserSeedsMySQLPipeline(object):
         spider.logger.info('Mysql[%s] Conn closed!' % (self.mysql_host))
 
 
-class KuaishouScrapyLogsPipeline(object):
+class KuaishouScrapyLogsMySQLPipeline(object):
 
     def open_spider(self, spider):
         settings = get_project_settings()

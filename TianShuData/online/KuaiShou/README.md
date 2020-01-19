@@ -12,41 +12,37 @@
 
 - KuaishouRedisPipeline
 
-  主要是对Redis库中key为kuaishou_did的数据，建立一个did池，供快手爬虫使用，主要字段为：如下说明
+  在redis中动态加入注册的did到did池中，其中did池是由一个有序的set，其中key值为kuaishou_did，成员及其分数分别为注册的含有did的cookie值和过期时间
 
   ```MySQL
-  # value结构为：
-  {'did': 'web_6f1b84f77f3d498ea1f8684517d9283f', 'didv': '1577082503000'}
+  # 手动添加命令
+  ZADD kuaishou_did "kuaishou.live.bfb1s=477cb0011daca84b36b3a4676857e5a1;clientid=3;did=web_2f207c637e9a28073fcf40986503b7c6;client_key=65890b29;" 15700000000
   ```
 
 （3）处理流程：
 
 - [ ] step1：通过访问指定接口，产生did
-- [ ] step2：通过访问特定接口，注册did
+- [ ] step2：通过docker容器模拟页面加载对did注册激活
 
 
 
-### 2.releasetask.py
+### 2.spider:kuaishou_search_overview
 
-（1）作用：分发任务，现在只做了简单的数据查询并分发，后期考虑如何将任务合理的分布在一天的各个时段
+（1）作用：监听种子topic，实时更新用户的动态数据等
 
-（2）类型：不缺失principalId任务 和  缺失principalId任务
+（2）管道：KuaishouKafkaPipeline，KuaishouScrapyLogsMySQLPipeline，KuaishouUserSeedsMySQLPipeline
 
-（3）消息目的：kakfa消息列队
+- KuaishouKafkaPipeline
 
-（4）消息结构：
+  获取KOL的动态数据，比如粉丝数等，并将最新的数据发送到topic[kuaishou_online_daily]，供数据整合端对数据进一步处理
 
-- 不缺失principalId任务
+- KuaishouScrapyLogsMySQLPipeline
 
-  ```json
-  {'name': 'kuanshou_kol_seeds', 'userId': 268937622, 'kwaiId': 'YangGe666', 'principalId': 'YangGe666'}
-  ```
+  记录KOL种子动态数据更新任务的最终结果，并记录下来
 
-- 缺失principalId任务
+- KuaishouUserSeedsMySQLPipeline
 
-  ```json
-  {'name': 'kuanshou_seeds_search', 'userId': 570567973, 'kwaiId': '570567973'}
-  ```
+  对查询到的KOL静态数据，主要是kwaiId和principalId，进行跟新，同时更新下一次任务调度时间
 
 ### 3.Scrapy-Splash的安装
 
