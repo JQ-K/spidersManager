@@ -77,9 +77,10 @@
 1. 每日用户统计信息更新接口 kuaishou_search_overview  spider采集样例：
 {'avatar': 'https://js2.a.yximgs.com/uhead/AB/2019/09/11/22/BMjAxOTA5MTEyMjU2NTlfNjgxMzcxMF8xX2hkNjM0Xzk1Mg==_s.jpg', 
    'description': '', 'fan': '1778.7w', 'follow': '368', 'is_successed': 1, 
-   'nickname': '浩南 'photo': 53, 'principalId': 'haonan666', 'sex': 'M', 
+   'nickname': '浩南 'photo': '53', 'principalId': 'haonan666', 'sex': 'M', 
    'spider_datetime': '2020-01-14 10:43:31', 'spider_name': 'kuaishou_search_overview', 
-   'userId': 6813710}
+   'userId': 6813710
+}
    
 2. 小店首页整体统计信息：
 {
@@ -102,7 +103,7 @@
 	'userId': 144077034
 }
 
-3. 小店商品信息
+3. 小店商品列表单个商品的总览信息
 {
 	'productId': 56684372034,
 	'productInfo': {
@@ -124,7 +125,7 @@
 	'userId': 144077034
 }
 
-4. 小店商品详情
+4. 小店中单个商品详情页信息
 {
 	'productDetail': {
 		'address': '河北省 衡水市 枣强县',
