@@ -18,7 +18,7 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
     custom_settings = {'ITEM_PIPELINES':
                            {'KuaiShou.pipelines.KuaishouRedisPipeline': 700},
                        'CONCURRENT_REQUESTS': 1,
-                       'DOWNLOAD_DELAY' : random.randint(5, 10),
+                       'DOWNLOAD_DELAY' : random.randint(3, 5),
                        'CONCURRENT_REQUESTS_PER_IP' : 1,
                        'DOWNLOADER_MIDDLEWARES':
                            {
@@ -86,7 +86,7 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
             counter = 0
             while counter < spider_did_supplements_quantity_per_time:
                 counter += 1
-                time.sleep(random.randint(10, 15))
+                time.sleep(random.randint(7, 10))
                 yield scrapy.Request(start_url, method='GET', callback=self.produce_did, dont_filter=True)
 
     def produce_did(self, response):
