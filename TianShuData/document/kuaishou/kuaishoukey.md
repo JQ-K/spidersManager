@@ -377,3 +377,70 @@
 	'spider_datetime': '2020-01-15 16:03:47',
 	'spider_name': 'kuaishou_shop_product_detail'
 }
+
+5. 小店商品评论
+{
+	'commentId': 449056631,
+	'productComment': {
+		'anonymous': 0,
+		'auditStatus': 1,
+		'auto': 0,
+		'commentId': 449056631,
+		'commentImgUrls': [],
+		'commentUser': {
+			'avatar': 'https://tx2.a.yximgs.com/uhead/AB/2019/12/20/23/BMjAxOTEyMjAyMzExMjVfMTIwNDQ0NzU2NF8yX2hkNzEzXzQwNQ==_s.jpg',
+			'nickName': '天山雪鹰526'
+		},
+		'commentUserId': 1204447564,
+		'commentVideoIds': [],
+		'commentVideoUrls': [],
+		'complainStatus': 0,
+		'content': '此用户未填写评价内容',
+		'creditScore': 5,
+		'itemId': 38951473034,
+		'itemSkuId': 38951476034,
+		'itemSkuSpecDesc': 'XL',
+		'itemUserId': 144077034,
+		'likeCount': 0,
+		'liked': 0,
+		'likedByVisitor': 0,
+		'logisticsScore': 5,
+		'oid': 2000400007082564,
+		'qualityScore': 5,
+		'replied': 0,
+		'replyCnt': 0,
+		'serviceScore': 5,
+		'subComments': [{
+			'anonymous': 0,
+			'attached': 0,
+			'auditStatus': 1,
+			'commentId': 449133933,
+			'commentImgUrls': ['https://ali-ec.static.yximgs.com/ufile/adsocial/0fd73993-a553-45de-a20e-a0623a89e183.jpg', 'https://ali-ec.static.yximgs.com/ufile/adsocial/cde38aa9-ef96-478d-8da2-bab0c852f4c7.jpg'],
+			'commentUser': {
+				'avatar': 'https://tx2.a.yximgs.com/uhead/AB/2019/12/20/23/BMjAxOTEyMjAyMzExMjVfMTIwNDQ0NzU2NF8yX2hkNzEzXzQwNQ==_s.jpg',
+				'nickName': '天山雪鹰526'
+			},
+			'commentUserId': 1204447564,
+			'commentVideoIds': [],
+			'commentVideoUrls': [],
+			'complainStatus': 0,
+			'content': '货真价实又便宜还真毛最实惠了朋友们赶快拿起手机定够吧',
+			'itemId': 38951473034,
+			'itemSkuId': 38951476034,
+			'itemUserId': 144077034,
+			'itemUserReply': 0,
+			'likeCount': 0,
+			'liked': 0,
+			'logisticsScore': 0,
+			'qualityScore': 0,
+			'replied': 0,
+			'replyToCommentId': 449056631,
+			'serviceScore': 0,
+			'timestamp': 1578907047343
+		}],
+		'timestamp': 1578905315101
+	},
+	'productId': 38951473034,
+	'spider_datetime': '2020-01-16 09:55:22',
+	'spider_name': 'kuaishou_shop_product_comment'
+}
