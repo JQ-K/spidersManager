@@ -67,6 +67,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
                 if message is None:
                     continue
                 # 信息分为message.offset, message.value
+                logger.info('KAFKA offset: %s ' % message.offset)
                 msg_value = message.value.decode()
                 msg_value_dict = eval(msg_value)
                 if 'spider_name' not in list(msg_value_dict.keys()):
