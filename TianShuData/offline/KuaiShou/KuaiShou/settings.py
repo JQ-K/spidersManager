@@ -93,7 +93,8 @@ DOWNLOADER_MIDDLEWARES = {
 
 HTTPERROR_ALLOWED_CODES = [500, 400]
 # log
-LOG_LEVEL = 'INFO'
+#LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'WARNING'
 
 # 超时时间,超时尝试时间
 RETRY_ENABLED = True
@@ -101,11 +102,19 @@ RETRY_TIMES = 3
 DOWNLOAD_TIMEOUT = 7
 
 # kafka 相关信息及配置
-KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
-# KAFKA_TOPIC = 'tianshu_kuaishou'
-KAFKA_TOPIC = 'zhanqi_Test'
-# 设置TOPIC是否从头消费
+# KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
+# KAFKA_TOPIC = 'zhanqi_Test'
+# # 设置TOPIC是否从头消费
+# RESET_OFFSET_ON_START = False
+
+
+# kafka 相关信息及配置
+KAFKA_HOSTS = 'zb2627:9092,zb2628:9092,zb2629:9092'
+ZOOKEEPER_HOSTS = 'zb2627:2181,zb2628:2181,zb2629:2181'
+KAFKA_TOPIC = 'kuaishou_test'
+KAFKA_TOPIC_DATA = 'kuaishou_data'
 RESET_OFFSET_ON_START = True
+
 
 # 设置抓取酷炫的页数，<=0代表代表所有页面
 SPIDER_KUXUAN_PAGE_LIMIT = 7000
@@ -172,7 +181,9 @@ KUAISHOU_LIVE_WEB_ST = {
 }
 
 # REDIS配置信息
-REDIS_HOST = 'zqhd5'
+# REDIS_HOST = 'zqhd5'
+# REDIS_PORT = 6379
+REDIS_HOST = '10.8.26.105'
 REDIS_PORT = 6379
 REDIS_DID_NAME = 'tianshu_did'
 REDIS_DID_EXPIRE_TIME = 1200
@@ -183,8 +194,15 @@ SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME = 20
 SPIDER_DID_POOL_WARNING_LINE = 120
 
 # MySQL配置信息
-MYSQL_HOST = 'zqhd3'
-MYSQL_USER = 'tianshu'
-MYSQL_PASSWORD = 'Tianshu_123'
+# MYSQL_HOST = 'zqhd3'
+# MYSQL_USER = 'tianshu'
+# MYSQL_PASSWORD = 'Tianshu_123'
+# MYSQL_DATABASE = 'tianshuData'
+# MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
+
+# MySQL配置信息
+MYSQL_HOST = '10.8.26.106'
+MYSQL_USER = 'scrapy'
+MYSQL_PASSWORD = 'Scrapy_123'
 MYSQL_DATABASE = 'tianshuData'
 MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'

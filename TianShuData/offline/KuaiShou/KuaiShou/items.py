@@ -91,5 +91,6 @@ class KuaishouShopProductCommentItem(scrapy.Item):
     spider_name = scrapy.Field()
     spider_datetime = scrapy.Field()
     productId = scrapy.Field()
+    commentId = scrapy.Field()
     productComment = scrapy.Field()
 

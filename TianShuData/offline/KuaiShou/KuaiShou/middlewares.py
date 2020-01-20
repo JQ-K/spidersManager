@@ -72,6 +72,13 @@ class KuaishouDownloaderMiddleware(object):
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
 
+    def getCookie(self, cookieIdx):
+        tempCookie = self.conn.hgetall('kuaishou_cookie_{}'.format(cookieIdx))
+        rltCookie = {}
+        for key, val in tempCookie.items():
+            rltCookie[str(key, encoding="utf-8")] = str(val, encoding="utf-8")
+        return rltCookie
+
     def process_request(self, request, spider):
         # Called for each request that goes through the downloader
         # middleware.
@@ -89,30 +96,41 @@ class KuaishouDownloaderMiddleware(object):
         # 酷炫拿种子，不走代理，不需要cookie
         if spider.name =='kuxuan_kol_user':
             return None
-        # # 设置代理IP
-        proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-        while proxy_list == []:
-            spider.logger.warn('Proxy Pool is null, Plase add proxy !')
-            time.sleep(60)
+        # 设置代理IP
+        if spider.useProxy:
             proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-        proxy = proxy_list[0].decode()
-        spider.logger.info('proxy:{}'.format(proxy))
-        request.meta['proxy'] = proxy
+            while proxy_list == []:
+                spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+                time.sleep(60)
+                proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+            proxy = proxy_list[0].decode()
+            spider.logger.info('proxy:{}'.format(proxy))
+            request.meta['proxy'] = proxy
+
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
         if spider.name in ['kuaishou_register_did',
                            'kuaishou_shop_score',
-                           'kuaishou_shop_product_list']:
+                           'kuaishou_shop_product_list',]:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
-        #
-        cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-        while cookies_list == []:
-            spider.logger.warn('Did Pool is null, Plase add did !')
-            time.sleep(60)
+        if spider.cookieManual:
+            cookies_all = self.getCookie(spider.cookieIdx)
+            if spider.name in ['kuaishou_shop_product_detail']:
+                cookies_dict = {'did': cookies_all['did']}
+            elif spider.name in ['kuaishou_shop_product_comment']:
+                cookies_dict = {'token': cookies_all['token']}
+            else:
+                ###后期有新的spider再添加
+                cookies_dict = cookies_all
+        else:
             cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-        cookies=cookies_list[0].decode()
-        request.meta['didJson'] = cookies
-        cookies_dict = eval(cookies)
+            while cookies_list == []:
+                spider.logger.warn('Did Pool is null, Plase add did !')
+                time.sleep(60)
+                cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+            cookies = cookies_list[0].decode()
+            request.meta['didJson'] = cookies
+            cookies_dict = eval(cookies)
         cookies_str = ''
         for key, value in cookies_dict.items():
             cookies_str += '{}={}; '.format(key,value)
@@ -120,7 +138,7 @@ class KuaishouDownloaderMiddleware(object):
         if spider.name in ['kuaishou_search_principalid','kuaishou_user_info']:
             for key, value in self.kuaishou_live_web_st.items():
                 cookies_str += '{}={}; '.format(key,value)
-        spider.logger.info('Cookie:{}'.format(cookies_str[:-2] ))
+        spider.logger.info('Cookie:{}'.format(cookies_str[:-2]))
         request.headers.setdefault('Cookie', cookies_str[:-2])
         return None
 

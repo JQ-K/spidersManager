@@ -5,6 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 import datetime
+import json
 
 from pykafka import KafkaClient
 from redis import Redis
@@ -20,7 +21,8 @@ class KuaishouKafkaPipeline(object):
     def open_spider(self, spider):
         settings = get_project_settings()
         self.kafka_hosts = settings.get('KAFKA_HOSTS')
-        self.kafka_topic = settings.get('KAFKA_TOPIC')
+        # self.kafka_topic = settings.get('KAFKA_TOPIC')
+        self.kafka_topic = settings.get('KAFKA_TOPIC_DATA')
         client = KafkaClient(hosts=self.kafka_hosts)
         topic = client.topics[self.kafka_topic]
         self.producer = topic.get_producer()
@@ -34,7 +36,8 @@ class KuaishouKafkaPipeline(object):
         # if item['name'] != 'kuaishou':
         #     return item
         item['spider_datetime'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        msg = str(item).replace('\n', '').encode('utf-8')
+        # msg = str(item).replace('\n', '').encode('utf-8')
+        msg = bytes(json.dumps(dict(item)), encoding='utf-8')
         self.producer.produce(msg)
         spider.logger.info('Msg Produced kafka[%s]: %s' % (self.kafka_topic, msg))
         return item
