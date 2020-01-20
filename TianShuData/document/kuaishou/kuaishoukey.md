@@ -104,20 +104,20 @@
 
 3. 小店商品信息
 {
-	'productId': 56684372034,
+	'productId': 38951473034,
 	'productInfo': {
 		'addType': 0,
-		'imageUrl': 'https://ali-ec.static.yximgs.com/ufile/adsocial/1d32f5f6-f983-4f36-a668-3ed0145c9e48.jpg',
-		'itemId': 56684372034,
-		'itemLinkUrl': 'https://www.kwaishop.com/merchant/shop/detail?id=56684372034',
+		'imageUrl': 'https://ali-ec.static.yximgs.com/ufile/adsocial/04d73b3e-eff2-4c50-83c8-d43124deaeb9-i38951473034.jpg',
+		'itemId': 38951473034,
+		'itemLinkUrl': 'https://www.kwaishop.com/merchant/shop/detail?id=38951473034',
 		'itemTagList': [],
-		'productPrice': 338000,
-		'productTitle': '男士新款水貂整貂内胆狐狸毛领',
+		'productPrice': 168000,
+		'productTitle': '19年新款男士短款无领',
 		'showCoupon': False,
 		'sourceType': 99,
 		'stock': 0,
-		'updateTime': 1577547082953,
-		'volume': 7
+		'updateTime': 1578724493927,
+		'volume': 91
 	},
 	'spider_datetime': '2020-01-15 16:06:16',
 	'spider_name': 'kuaishou_shop_product_list',
