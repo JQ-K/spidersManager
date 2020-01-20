@@ -107,3 +107,44 @@ class KuaishouUserSeedsMySQLPipeline(object):
     def close_spider(self, spider):
         self.mysql_client.close()
         spider.logger.info('Mysql[%s] Conn closed!' % (self.mysql_host))
+
+
+class KuaishouScrapyLogsPipeline(object):
+
+    def open_spider(self, spider):
+        settings = get_project_settings()
+        self.mysql_host = settings.get('MYSQL_HOST')
+        self.mysql_user = settings.get('MYSQL_USER')
+        self.mysql_password = settings.get('MYSQL_PASSWORD')
+        self.mysql_database = settings.get('MYSQL_DATABASE')
+        self.mysql_kuaishou_scrapy_logs_tablename = settings.get('MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME')
+        spider.logger.info(
+            'MySQLConn:host = %s,user = %s,db = %s' % (self.mysql_host, self.mysql_user, self.mysql_database))
+        self.mysql_client = MySQLClient(host=self.mysql_host, user=self.mysql_user, password=self.mysql_password,
+                                        dbname=self.mysql_database)
+
+    def process_item(self, item, spider):
+        msg = {}
+        msg['item_type'] = item['spider_name']
+        msg['is_successed'] = 1
+        msg['scrapy_time'] = item['spider_datetime']
+
+        if item['spider_name'] == 'kuaishou_shop_score':
+            msg['item_id'] = item['userId']
+        if item['spider_name'] == 'kuaishou_shop_product_list':
+            msg['item_id'] = item['productId']
+        if item['spider_name'] == 'kuaishou_shop_product_detail':
+            msg['item_id'] = item['productId']
+        if item['spider_name'] == 'kuaishou_shop_product_comment':
+            msg['item_id'] = item['commentId']
+
+        self.mysql_client.insert(self.mysql_kuaishou_scrapy_logs_tablename, msg)
+        self.mysql_client.commit()
+        spider.logger.info('Msg insert mysql[%s] table[%s]: %s' % (self.mysql_host, self.mysql_kuaishou_scrapy_logs_tablename, str(msg)))
+        return item
+
+    def close_spider(self, spider):
+        self.mysql_client.close()
+        spider.logger.info('Mysql[%s] Conn closed!' % (self.mysql_host))
+
+

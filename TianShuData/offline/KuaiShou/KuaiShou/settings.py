@@ -113,7 +113,7 @@ KAFKA_HOSTS = 'zb2627:9092,zb2628:9092,zb2629:9092'
 ZOOKEEPER_HOSTS = 'zb2627:2181,zb2628:2181,zb2629:2181'
 KAFKA_TOPIC = 'kuaishou_test'
 KAFKA_TOPIC_DATA = 'kuaishou_data'
-RESET_OFFSET_ON_START = True
+RESET_OFFSET_ON_START = False
 
 
 # 设置抓取酷炫的页数，<=0代表代表所有页面
@@ -206,3 +206,4 @@ MYSQL_USER = 'scrapy'
 MYSQL_PASSWORD = 'Scrapy_123'
 MYSQL_DATABASE = 'tianshuData'
 MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
+MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME = 'kuaishou_scrapy_logs'

@@ -26,7 +26,8 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
     referer = "https://www.kwaishop.com/merchant/shop/detail/comment?itemId={}"
 
     custom_settings = {'ITEM_PIPELINES': {
-        'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
+        'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
+        'KuaiShou.pipelines.KuaishouScrapyLogsPipeline': 701
     }}
     settings = get_project_settings()
 
