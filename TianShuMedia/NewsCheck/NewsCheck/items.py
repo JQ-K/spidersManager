@@ -20,6 +20,7 @@ class NewsInfo(scrapy.Item):
     url = scrapy.Field()
     title = scrapy.Field()
     content = scrapy.Field()
+    text = scrapy.Field()
     publish_time = scrapy.Field()
     read_count = scrapy.Field()
     like_count = scrapy.Field()

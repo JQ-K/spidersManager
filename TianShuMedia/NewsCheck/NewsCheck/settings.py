@@ -133,7 +133,15 @@ UA_POOL = [
 NEWS_INFO_ITEM_FILE_PATH = '/data/code/crawlab/data/news_check/'
 
 # kafka 相关信息及配置
-KAFKA_HOSTS = 'zb2627:9092,zb2628:9092,zb2629:9092'
-ZOOKEEPER_HOSTS = 'zb2627:2181,zb2628:2181,zb2629:2181'
-KAFKA_TOPIC = 'news_check'
+#KAFKA_HOSTS = 'zb2627:9092,zb2628:9092,zb2629:9092'
+KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
+#ZOOKEEPER_HOSTS = 'zb2627:2181,zb2628:2181,zb2629:2181'
+#KAFKA_TOPIC = 'news_check'
+KAFKA_TOPIC = 'tianshu_piyao'
+
+
+# REDIS配置信息
+REDIS_HOST = 'zqhd5'
+REDIS_PORT = 6379
+REDIS_DID_NAME = 'tianshu_did'
 

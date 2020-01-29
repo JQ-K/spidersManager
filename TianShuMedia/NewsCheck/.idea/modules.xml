@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/.idea/KuaiShou.iml" filepath="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/.idea/KuaiShou.iml" />
       <module fileurl="file://$PROJECT_DIR$/../spidersManager/TianShuData/offline/KuaiShou/.idea/KuaiShou.iml" filepath="$PROJECT_DIR$/../spidersManager/TianShuData/offline/KuaiShou/.idea/KuaiShou.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../spiderComplements/kuaishou/KuaishouComplements/.idea/KuaishouComplements.iml" filepath="$PROJECT_DIR$/../../../spiderComplements/kuaishou/KuaishouComplements/.idea/KuaishouComplements.iml" />
       <module fileurl="file://$PROJECT_DIR$/../spiderComplements/kuaishou/KuaishouComplements/.idea/KuaishouComplements.iml" filepath="$PROJECT_DIR$/../spiderComplements/kuaishou/KuaishouComplements/.idea/KuaishouComplements.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/NewsCheck.iml" filepath="$PROJECT_DIR$/.idea/NewsCheck.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../RongCloudChannel/.idea/RongCloudChannel.iml" filepath="$PROJECT_DIR$/../RongCloudChannel/.idea/RongCloudChannel.iml" />
       <module fileurl="file://$PROJECT_DIR$/../spidersManager/TianShuMedia/RongCloudChannel/.idea/RongCloudChannel.iml" filepath="$PROJECT_DIR$/../spidersManager/TianShuMedia/RongCloudChannel/.idea/RongCloudChannel.iml" />
     </modules>
   </component>

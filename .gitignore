@@ -3,6 +3,10 @@ TianShuMedia/RongCloudChannel/RongCloudChannel/__pycache__/
 TianShuMedia/RongCloudChannel/RongCloudChannel/test/
 TianShuMedia/RongCloudChannel/*.zip
 
+TianShuMedia/NewsCheck/*.zip
+TianShuMedia/NewsCheck/*.txt
+TianShuMedia/NewsCheck/NewsCheck/test/
+
 TianShuData/offline/KuaiShou/.idea/
 TianShuData/offline/KuaiShou/KuaiShou/__pycache__/
 TianShuData/offline/KuaiShou/KuaiShou/spiders/__pycache__/

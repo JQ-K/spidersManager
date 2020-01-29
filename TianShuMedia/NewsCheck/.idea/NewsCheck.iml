@@ -7,6 +7,9 @@
     <orderEntry type="module" module-name="RongCloudChannel" />
     <orderEntry type="module" module-name="KuaishouComplements" />
     <orderEntry type="module" module-name="KuaiShou" />
+    <orderEntry type="module" module-name="RongCloudChannel" />
+    <orderEntry type="module" module-name="KuaiShou" />
+    <orderEntry type="module" module-name="KuaishouComplements" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Twisted Trial" />
