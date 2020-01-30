@@ -1,0 +1,22 @@
+{
+  "local": {
+    "at_mobiles": [18758879865],
+    "ddmsg_notify": "False",
+    "is_at_all": "False"
+  },
+  "beta": {
+    "at_mobiles": [18758879865],
+    "ddmsg_notify": "Ture",
+    "is_at_all": "False"
+  },
+  "pre": {
+    "at_mobiles": [18758879865],
+    "ddmsg_notify": "Ture",
+    "is_at_all": "False"
+  },
+  "web": {
+    "at_mobiles": [18758879865],
+    "ddmsg_notify": "Ture",
+    "is_at_all": "False"
+  }
+}

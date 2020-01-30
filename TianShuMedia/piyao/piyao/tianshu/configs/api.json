@@ -1,0 +1,90 @@
+{
+  "local":
+  {
+
+    "login_params":
+    {
+      "mobile": "13000000001",
+      "sms_code": "0000",
+      "password": "123456"
+    },
+    "login_api":"http://beta.dashboard.tianshucloud.cn/api/platform/login/login",
+    "setting_get_api":"http://beta.dashboard.tianshucloud.cn/api/platform/setting/get",
+    "create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createNews?",
+    "internal_create_api":"https://tianshucloud.cn/api/platform/video_handle_log/internalCreate",
+    "videoh_create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createVideoH",
+    "videov_create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createVideoV",
+    "post_create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createPost",
+    "image_upload_api":"https://tianshucloud.cn/api/custom/image/upload",
+    "wechat_auth_list_api":"https://tianshucloud.cn/api/platform/weixin/internalAuthList?",
+    "wechat_create_api":"http://beta.dashboard.tianshucloud.cn/api/platform/mcn/content/internalCreateNews?",
+    "wechat_create_api_piyao":"http://beta.dashboard.tianshucloud.cn/api/platform/mcn/content2/internalCreateNews",
+    "wechat_refresh_taken_api":"https://tianshucloud.cn/api/platform/weixin/refreshToken?"
+  },
+  "beta":
+  {
+
+    "login_params":
+    {
+      "mobile": "13000000001",
+      "sms_code": "0000",
+      "password": "123456"
+    },
+    "login_api":"http://beta.dashboard.tianshucloud.cn/api/platform/login/login",
+    "setting_get_api":"http://beta.dashboard.tianshucloud.cn/api/platform/setting/get",
+    "create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createNews?",
+    "internal_create_api":"http://beta.dashboard.tianshucloud.cn/api/platform/video_handle_log/internalCreate",
+    "videoh_create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createVideoH",
+    "videov_create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createVideoV",
+    "post_create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createPost",
+    "image_upload_api":"https://tianshucloud.cn/api/custom/image/upload",
+    "wechat_auth_list_api":"http://beta.dashboard.tianshucloud.cn/api/platform/weixin/internalAuthList?",
+    "wechat_create_api":"http://beta.dashboard.tianshucloud.cn/api/platform/mcn/content/internalCreateNews?",
+    "wechat_create_api_piyao":"http://beta.dashboard.tianshucloud.cn/api/platform/mcn/content2/internalCreateNews",
+    "wechat_refresh_taken_api":"http://beta.dashboard.tianshucloud.cn/api/platform/weixin/refreshToken?"
+  },
+  "pre":
+  {
+    "login_params":
+    {
+      "mobile": "13000000001",
+      "sms_code": "0000",
+      "password": "123456"
+    },
+    "login_api":"http://beta.dashboard.tianshucloud.cn/api/platform/login/login",
+    "setting_get_api":"http://beta.dashboard.tianshucloud.cn/api/platform/setting/get",
+    "create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createNews?",
+    "internal_create_api":"http://beta.dashboard.tianshucloud.cn/api/platform/video_handle_log/internalCreate",
+    "videoh_create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createVideoH",
+    "videov_create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createVideoV",
+    "post_create_api":"http://beta.dashboard.tianshucloud.cn/api/custom/content/createPost",
+    "image_upload_api":"https://tianshucloud.cn/api/custom/image/upload",
+    "wechat_auth_list_api":"http://beta.dashboard.tianshucloud.cn/api/platform/weixin/internalAuthList?",
+    "wechat_create_api_piyao":"http://beta.dashboard.tianshucloud.cn/api/platform/mcn/content2/internalCreateNews",
+    "wechat_create_api":"http://beta.dashboard.tianshucloud.cn/api/platform/mcn/content/internalCreateNews?",
+    "wechat_refresh_taken_api":"http://beta.dashboard.tianshucloud.cn/api/platform/weixin/refreshToken?"
+  },
+  "web":
+  {
+
+    "login_params":
+    {
+      "mobile": "18118181818",
+      "sms_code": "0000",
+      "password": "123456"
+    },
+
+    "login_api":"https://tianshucloud.cn/api/platform/login/login",
+    "setting_get_api":"https://tianshucloud.cn/api/platform/setting/get",
+    "create_api":"https://tianshucloud.cn/api/custom/content/createNews?",
+    "internal_create_api":"https://tianshucloud.cn/api/platform/video_handle_log/internalCreate",
+    "videoh_create_api":"https://tianshucloud.cn/api/custom/content/createVideoH",
+    "videov_create_api":"https://tianshucloud.cn/api/custom/content/createVideoV",
+    "post_create_api":"https://tianshucloud.cn/api/custom/content/createPost",
+    "image_upload_api":"https://tianshucloud.cn/api/custom/image/upload",
+    "wechat_auth_list_api":"https://tianshucloud.cn/api/platform/weixin/internalAuthList?",
+    "wechat_create_api":"https://tianshucloud.cn/api/platform/mcn/content/internalCreateNews?",
+    "wechat_create_api_piyao":"https://tianshucloud.cn/api/platform/mcn/content2/internalCreateNews?",
+    "wechat_refresh_taken_api":"https://tianshucloud.cn/api/platform/weixin/refreshToken?"
+  }
+}

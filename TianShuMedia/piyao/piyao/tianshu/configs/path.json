@@ -1,0 +1,22 @@
+{
+    "local":
+    {
+        "videos_dir": "/Users/lish/Desktop/crawler/videos",
+        "articles_dir": "/Users/lish/Desktop/crawler/news"
+    },
+    "beta":
+    {
+        "videos_dir": "/data/tmp/crawl/videos",
+        "articles_dir": "/data/tmp/crawl/news"
+    },
+    "pre":
+    {
+        "videos_dir": "/data/tmp/crawl/videos",
+        "articles_dir": "/data/tmp/crawl/news"
+    },
+    "web":
+    {
+        "videos_dir": "/data/tmp/crawl/videos",
+        "articles_dir": "/data/tmp/crawl/news"
+    }
+}
