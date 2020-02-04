@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6cdf0e3f-0fab-447f-ae9f-bd58052ba320" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/NewsCheck.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NewsCheck.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsCheck/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewsCheck/items.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsCheck/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewsCheck/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsCheck/spiders/PiYaoPlatform.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewsCheck/spiders/PiYaoPlatform.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +14,17 @@
     <favorites_list name="NewsCheck" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3572">
+              <caret line="189" column="59" lean-forward="true" selection-start-line="189" selection-start-column="59" selection-end-line="189" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -50,21 +54,22 @@
         <option value="$PROJECT_DIR$/NewsCheck/spiders/SinaPiYao.py" />
         <option value="$PROJECT_DIR$/NewsCheck/items.py" />
         <option value="$PROJECT_DIR$/NewsCheck/settings.py" />
-        <option value="$PROJECT_DIR$/NewsCheck/spiders/PiYaoPlatform.py" />
-        <option value="$PROJECT_DIR$/NewsCheck/spiders/KuaiShouFeed.py" />
-        <option value="$PROJECT_DIR$/NewsCheck/test/testDate.py" />
-        <option value="$PROJECT_DIR$/NewsCheck/pipelines.py" />
         <option value="$PROJECT_DIR$/NewsCheck/util/EmailClass.py" />
         <option value="$PROJECT_DIR$/wechat.txt" />
         <option value="$PROJECT_DIR$/wechat_result.txt" />
+        <option value="$PROJECT_DIR$/wechat-23-31.txt" />
         <option value="$PROJECT_DIR$/NewsCheck/util/wordMatch.py" />
+        <option value="$PROJECT_DIR$/NewsCheck/spiders/KuaiShouFeed.py" />
+        <option value="$PROJECT_DIR$/NewsCheck/test/testDate.py" />
+        <option value="$PROJECT_DIR$/NewsCheck/spiders/PiYaoPlatform.py" />
+        <option value="$PROJECT_DIR$/NewsCheck/pipelines.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="822" />
+    <option name="height" value="821" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -72,41 +77,35 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
               <item name="spiders" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
+              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -125,7 +124,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.wordMatch">
+  <component name="RunManager" selected="Python.testDate">
     <configuration name="EmailClass" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="NewsCheck" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -191,8 +190,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.wordMatch" />
         <item itemvalue="Python.testDate" />
+        <item itemvalue="Python.wordMatch" />
         <item itemvalue="Python.EmailClass" />
       </list>
     </recent_temporary>
@@ -211,14 +210,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="822" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="821" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49915397" visible="true" weight="0.19943622" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49915397" visible="true" weight="0.2670895" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.500846" side_tool="true" weight="0.16701902" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32784638" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -233,10 +232,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../spidersManager/TianShuMedia/RongCloudChannel/RongCloudChannel/settings.py" />
-    <entry file="file://$PROJECT_DIR$/../spiderComplements/kuaishou/KuaishouComplements/KuaishouComplements/middlewares.py" />
-    <entry file="file://$PROJECT_DIR$/../spidersManager/TianShuData/offline/KuaiShou/KuaiShou/middlewares.py" />
-    <entry file="file://$PROJECT_DIR$/../spiderComplements/kuaishou/KuaishouComplements/KuaishouComplements/spiders/user_info.py" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/scrapy/http/request/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -285,13 +280,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="189" column="59" lean-forward="true" selection-start-line="189" selection-start-column="59" selection-end-line="189" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NewsCheck/spiders/SinaPiYao.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
@@ -299,13 +287,6 @@
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NewsCheck/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="145" column="30" lean-forward="true" selection-start-line="145" selection-start-column="30" selection-end-line="145" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -352,13 +333,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_comment_list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="76" column="18" lean-forward="true" selection-start-line="75" selection-start-column="8" selection-end-line="76" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/email/message.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
@@ -379,46 +353,7 @@
     <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/utils/decoder.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/2020-01-28.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../spiderComplements/kuaishou/KuaishouComplements/KuaishouComplements/spiders/principal_id.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="36" column="64" lean-forward="true" selection-start-line="36" selection-start-column="64" selection-end-line="36" selection-end-column="64" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NewsCheck/test/testDate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NewsCheck/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NewsCheck/spiders/PiYaoPlatform.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="81" column="51" lean-forward="true" selection-start-line="81" selection-start-column="51" selection-end-line="81" selection-end-column="51" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/2020-01-28.txt" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/smtplib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -426,64 +361,142 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NewsCheck/spiders/KuaiShouFeed.py">
+    <entry file="file://$PROJECT_DIR$/NewsCheck/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wechat_result_2.txt" />
+    <entry file="file://$PROJECT_DIR$/wechat_result.txt" />
+    <entry file="file://$PROJECT_DIR$/wechat_result_1.txt" />
+    <entry file="file://$PROJECT_DIR$/../../../spiderComplements/kuaishou/KuaishouComplements/KuaishouComplements/spiders/principal_id.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2185">
-          <caret line="115" lean-forward="true" selection-start-line="115" selection-end-line="115" />
+        <state relative-caret-position="-2187">
+          <caret line="36" column="64" lean-forward="true" selection-start-line="36" selection-start-column="64" selection-end-line="36" selection-end-column="64" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/wechat.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="2589" selection-start-line="2589" selection-end-line="2589" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wechat-23-31.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="3543" selection-start-line="3543" selection-end-line="3543" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_shop_product_comment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="32" column="61" lean-forward="true" selection-start-line="32" selection-start-column="61" selection-end-line="32" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_comment_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1064">
+          <caret line="76" column="18" lean-forward="true" selection-start-line="75" selection-start-column="8" selection-end-line="76" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wechat_result_23-31.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NewsCheck/util/wordMatch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/datetime.pyi">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="140" column="12" selection-start-line="140" selection-start-column="12" selection-end-line="140" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/NewsCheck/util/EmailClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="49" column="51" lean-forward="true" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
+        <state relative-caret-position="246">
+          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
           <folding>
             <element signature="e#25#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NewsCheck/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/NewsCheck/test/testDate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1862">
+          <caret line="98" column="30" lean-forward="true" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NewsCheck/spiders/KuaiShouFeed.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1620">
+          <caret line="113" column="45" lean-forward="true" selection-start-line="113" selection-start-column="45" selection-end-line="113" selection-end-column="45" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NewsCheck/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="145" column="30" lean-forward="true" selection-start-line="145" selection-start-column="30" selection-end-line="145" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NewsCheck/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NewsCheck/spiders/PiYaoPlatform.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-990">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NewsCheck/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="194" column="59" lean-forward="true" selection-start-line="194" selection-start-column="59" selection-end-line="194" selection-end-column="59" />
+        <state relative-caret-position="414">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
           <folding>
             <element signature="e#194#205#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NewsCheck/util/wordMatch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="29" column="31" lean-forward="true" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_shop_product_list.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/wechat_result_1.txt">
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wechat_result.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="33" lean-forward="true" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wechat.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="2589" selection-start-line="2589" selection-end-line="2589" />
+        <state relative-caret-position="3572">
+          <caret line="189" column="59" lean-forward="true" selection-start-line="189" selection-start-column="59" selection-end-line="189" selection-end-column="59" />
         </state>
       </provider>
     </entry>

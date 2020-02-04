@@ -109,7 +109,7 @@ class KuaishoufeedSpider(scrapy.Spider):
 
     def getYesterday(self):
         today = datetime.date.today()
-        oneday = datetime.timedelta(days=1)
+        oneday = datetime.timedelta(days=0)
         yesterday = today - oneday
         return yesterday.strftime('%Y-%m-%d')
 

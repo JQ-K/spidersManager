@@ -55,7 +55,7 @@ class NewscheckPipeline(object):
             return False
 
     def close_spider(self, spider):
-        self.red.close()
+        #self.red.close()
         print('此次爬虫抓取统计结果:')
         print(self.totalNum)
 
@@ -89,8 +89,12 @@ class KuaishouKafkaPipeline(object):
 
 
     def isNewsFake(self, item):
-        wordList = ['肺炎','疫情','野味','武汉','病例','浙一','疾控','发热','口罩','N95','蝙蝠',
-                    '果子狸','钟南山','重大卫生事件','冠状病毒','卫健委','发烧','咳嗽','隔离','传染']
+        # wordList = ['肺炎','疫情','野味','武汉','病例','浙一','疾控','发热','口罩','N95','蝙蝠',
+        #             '果子狸','钟南山','重大卫生事件','冠状病毒','卫健委','发烧','咳嗽','隔离','传染']
+        wordList = ['肺炎', '疫情', '野味', '武汉', '病例', '浙一', '疾控', '发热', '口罩',
+                    'N95', '蝙蝠', '果子狸', '钟南山', '重大卫生事件', '冠状病毒', '卫健委',
+                    '发烧', '咳嗽', '隔离', '传染', '感染', '2019-nCov', '确诊', '突发公共卫生事件',
+                    '驰援', '雷神山', '火神山', '小汤山', '封城', '钟南山', 'SARS', '消毒']
         cont = ''
         if 'title' in item:
             cont += item['title']

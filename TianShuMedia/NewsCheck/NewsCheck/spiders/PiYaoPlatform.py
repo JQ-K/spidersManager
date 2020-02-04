@@ -103,4 +103,5 @@ class PiyaoplatformSpider(scrapy.Spider):
 
 
     def close(self):
-        self.red.close()
+        #self.red.close()
+        pass
