@@ -109,9 +109,16 @@ DOWNLOAD_TIMEOUT = 7
 
 
 # kafka 相关信息及配置
-KAFKA_HOSTS = 'zb2627:9092,zb2628:9092,zb2629:9092'
-ZOOKEEPER_HOSTS = 'zb2627:2181,zb2628:2181,zb2629:2181'
-KAFKA_TOPIC = 'kuaishou_test'
+# # 富春云
+# KAFKA_HOSTS = 'zb2627:9092,zb2628:9092,zb2629:9092'
+# ZOOKEEPER_HOSTS = 'zb2627:2181,zb2628:2181,zb2629:2181'
+# KAFKA_TOPIC = 'kuaishou_test'
+# KAFKA_TOPIC_DATA = 'kuaishou_data'
+# RESET_OFFSET_ON_START = False
+# # 战旗beta
+KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
+ZOOKEEPER_HOSTS = 'zqhd1:2181,zqhd2:2181,zqhd3:2181'
+KAFKA_TOPIC = 'kuaishou_userInfo_seeds'
 KAFKA_TOPIC_DATA = 'kuaishou_data'
 RESET_OFFSET_ON_START = False
 
@@ -181,10 +188,12 @@ KUAISHOU_LIVE_WEB_ST = {
 }
 
 # REDIS配置信息
-# REDIS_HOST = 'zqhd5'
-# REDIS_PORT = 6379
-REDIS_HOST = '10.8.26.105'
+# #战旗beta
+REDIS_HOST = 'zqhd5'
 REDIS_PORT = 6379
+# #富春云
+# REDIS_HOST = '10.8.26.105'
+# REDIS_PORT = 6379
 REDIS_DID_NAME = 'tianshu_did'
 REDIS_DID_EXPIRE_TIME = 1200
 REDIS_PROXYIP_NAME = 'tianshu_proxyip_kuaishou'
@@ -194,16 +203,17 @@ SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME = 20
 SPIDER_DID_POOL_WARNING_LINE = 120
 
 # MySQL配置信息
-# MYSQL_HOST = 'zqhd3'
-# MYSQL_USER = 'tianshu'
-# MYSQL_PASSWORD = 'Tianshu_123'
-# MYSQL_DATABASE = 'tianshuData'
-# MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
-
-# MySQL配置信息
-MYSQL_HOST = '10.8.26.106'
-MYSQL_USER = 'scrapy'
-MYSQL_PASSWORD = 'Scrapy_123'
+# # 战旗beta
+MYSQL_HOST = 'zqhd3'
+MYSQL_USER = 'tianshu'
+MYSQL_PASSWORD = 'Tianshu_123'
 MYSQL_DATABASE = 'tianshuData'
 MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
 MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME = 'kuaishou_scrapy_logs'
+# #富春云
+# MYSQL_HOST = '10.8.26.106'
+# MYSQL_USER = 'scrapy'
+# MYSQL_PASSWORD = 'Scrapy_123'
+# MYSQL_DATABASE = 'tianshuData'
+# MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
+# MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME = 'kuaishou_scrapy_logs'

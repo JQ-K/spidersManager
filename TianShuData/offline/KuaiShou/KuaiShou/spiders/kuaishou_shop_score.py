@@ -64,7 +64,10 @@ class KuaishouShopInfoSpider(scrapy.Spider):
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
                 msg_value_dict = eval(msg_value)
-                if msg_value_dict['spider_name'] != 'kuaishou_kol_seeds':
+                # #富春云
+                # if msg_value_dict['spider_name'] != 'kuaishou_kol_seeds':
+                # #战旗beta
+                if msg_value_dict['spider_name'] != 'kuaishou_user_seeds':
                     continue
                 user_id = msg_value_dict['userId']
                 logger.info('user_id: ' + str(user_id))
@@ -80,17 +83,17 @@ class KuaishouShopInfoSpider(scrapy.Spider):
         rsp_json = json.loads(response.text)
         userId = response.meta['userId']
         if rsp_json['result'] != 1:
-            print('response json result != 1, user_id: ' + str(userId))
+            logger.info('response json result != 1, user_id: ' + str(userId))
             return
         if rsp_json['userShopScoreView'] is None:
-            print('response json userShopScoreView is None, user_id: ' + str(userId))
+            logger.info('response json userShopScoreView is None, user_id: ' + str(userId))
             return
         shopInfo = KuaishouShopInfoIterm()
         shopInfo['spider_name'] = self.name
         shopInfo['userId'] = userId
         shopInfo['shopInfo'] = rsp_json
         logger.info('get shopInfo, user_id: ' + str(userId))
-        print(shopInfo)
+        #print(shopInfo)
         yield shopInfo
 
 
