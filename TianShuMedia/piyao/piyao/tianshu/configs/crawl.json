@@ -1,0 +1,27 @@
+{
+  "mp163":
+  {
+    "crawl_days":7,
+    "check_t":1800
+  },
+  "toutiaoixigua":
+  {
+    "crawl_days":7,
+    "check_t":36000
+  },
+  "zhanqi":
+  {
+    "crawl_days":7,
+    "check_t":1800
+  },
+  "tianmu":
+  {
+    "crawl_days":7,
+    "check_t":600
+  },
+  "wechatfake":
+  {
+    "crawl_days":3,
+    "check_t":1200
+  }
+}

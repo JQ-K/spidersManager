@@ -1,0 +1,40 @@
+
+{
+  "local":
+  {
+    "OSS_PATH":"/Users/lish/Desktop/crawler",
+    "OSS_ACCESS_KEY":"LTAIG2GlGs58z03w",
+    "OSS_ACCESS_SECRET": "tNFvykFEtzfbkzzwSP7ZjdMtBa3O5z",
+    "OSS_BUCKET":"zqrong-test",
+    "OSS_ENDPOINT": "oss-cn-hangzhou-internal.aliyuncs.com",
+    "OSS_DOMAIN":"http://zqrong-test.oss-cn-hangzhou.aliyuncs.com"
+  },
+  "beta":
+  {
+    "OSS_PATH":"/data/test_ossfs",
+    "OSS_ACCESS_KEY":"LTAIG2GlGs58z03w",
+    "OSS_ACCESS_SECRET": "tNFvykFEtzfbkzzwSP7ZjdMtBa3O5z",
+    "OSS_BUCKET":"zqrong-test",
+    "OSS_ENDPOINT": "oss-cn-hangzhou-internal.aliyuncs.com",
+    "OSS_DOMAIN":"http://zqrong-test.oss-cn-hangzhou.aliyuncs.com"
+  },
+    "pre":
+  {
+    "OSS_PATH":"/data/test_ossfs",
+    "OSS_ACCESS_KEY":"LTAIG2GlGs58z03w",
+    "OSS_ACCESS_SECRET": "tNFvykFEtzfbkzzwSP7ZjdMtBa3O5z",
+    "OSS_BUCKET":"zqrong-test",
+    "OSS_ENDPOINT": "oss-cn-hangzhou-internal.aliyuncs.com",
+    "OSS_DOMAIN":"http://zqrong-test.oss-cn-hangzhou.aliyuncs.com"
+  },
+    "web":
+  {
+    "OSS_PATH":"/data/ossfs",
+    "OSS_ACCESS_KEY":"LTAIG2GlGs58z03w",
+    "OSS_ACCESS_SECRET": "tNFvykFEtzfbkzzwSP7ZjdMtBa3O5z",
+    "OSS_BUCKET":"rong-video",
+    "OSS_ENDPOINT": "oss-cn-hangzhou-internal.aliyuncs.com",
+    "OSS_DOMAIN":"http://rong-video.oss-cn-hangzhou.aliyuncs.com"
+  }
+
+}

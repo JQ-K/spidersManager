@@ -1,0 +1,18 @@
+{
+    "local":
+    {
+        "log_dir": "/Users/lish/Desktop/crawler/logs"
+    },
+    "beta":
+    {
+        "log_dir": "/data/tmp/crawl/logs"
+    },
+    "pre":
+    {
+        "log_dir": "/data/tmp/crawl/logs"
+    },
+    "web":
+    {
+        "log_dir": "/data/tmp/crawl/logs"
+    }
+}

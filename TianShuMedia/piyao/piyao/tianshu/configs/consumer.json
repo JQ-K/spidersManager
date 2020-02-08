@@ -1,0 +1,18 @@
+{
+    "local":
+    {
+        "consumer_group": "test"
+    },
+    "beta":
+    {
+        "consumer_group": "xinmeiquan"
+    },
+    "pre":
+    {
+        "consumer_group": "test"
+    },
+    "web":
+    {
+        "consumer_group": "xinmeiquan"
+    }
+}
