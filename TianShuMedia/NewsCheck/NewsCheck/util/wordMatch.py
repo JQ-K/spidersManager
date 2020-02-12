@@ -1,5 +1,5 @@
-srcFilePath = '/Users/macbookpro/PycharmProjects/spidersManager/TianShuMedia/NewsCheck/wechat-23-31.txt'
-dstFilePath = '/Users/macbookpro/PycharmProjects/spidersManager/TianShuMedia/NewsCheck/wechat_result_23-31.txt'
+srcFilePath = '/Users/macbookpro/PycharmProjects/spidersManager/TianShuMedia/NewsCheck/douyin-202058.txt'
+dstFilePath = '/Users/macbookpro/PycharmProjects/spidersManager/TianShuMedia/NewsCheck/douyin-202058_result.txt'
 
 # wordList = ['冠状病毒', '隔离', '感染', '传染', '肺炎', '疫情', '确诊', '病例',
 #             '突发公共卫生事件', '重大卫生事件', '口罩', '驰援', '雷神山', '火神山',

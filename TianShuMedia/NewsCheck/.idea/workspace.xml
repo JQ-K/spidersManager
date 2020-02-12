@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6cdf0e3f-0fab-447f-ae9f-bd58052ba320" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="6cdf0e3f-0fab-447f-ae9f-bd58052ba320" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,12 +12,30 @@
     <favorites_list name="NewsCheck" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3572">
-              <caret line="189" column="59" lean-forward="true" selection-start-line="189" selection-start-column="59" selection-end-line="189" selection-end-column="59" />
+            <state relative-caret-position="644">
+              <caret line="189" column="59" selection-start-line="189" selection-start-column="59" selection-end-line="189" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/NewsCheck/util/wordMatch.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/douyin-202058_result.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -58,16 +74,18 @@
         <option value="$PROJECT_DIR$/wechat.txt" />
         <option value="$PROJECT_DIR$/wechat_result.txt" />
         <option value="$PROJECT_DIR$/wechat-23-31.txt" />
-        <option value="$PROJECT_DIR$/NewsCheck/util/wordMatch.py" />
         <option value="$PROJECT_DIR$/NewsCheck/spiders/KuaiShouFeed.py" />
         <option value="$PROJECT_DIR$/NewsCheck/test/testDate.py" />
         <option value="$PROJECT_DIR$/NewsCheck/spiders/PiYaoPlatform.py" />
         <option value="$PROJECT_DIR$/NewsCheck/pipelines.py" />
+        <option value="$PROJECT_DIR$/douyin-202058.txt" />
+        <option value="$PROJECT_DIR$/NewsCheck/util/wordMatch.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="28" />
+    <option name="y" value="31" />
     <option name="width" value="1440" />
     <option name="height" value="821" />
   </component>
@@ -77,35 +95,23 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
+              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
-              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
-              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
-              <item name="spiders" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
-              <item name="KuaiShou" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
+              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -124,7 +130,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.testDate">
+  <component name="RunManager" selected="Python.wordMatch">
     <configuration name="EmailClass" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="NewsCheck" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -190,8 +196,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.testDate" />
         <item itemvalue="Python.wordMatch" />
+        <item itemvalue="Python.testDate" />
         <item itemvalue="Python.EmailClass" />
       </list>
     </recent_temporary>
@@ -210,9 +216,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="821" extended-state="0" />
+    <frame x="28" y="31" width="1440" height="821" extended-state="1" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49915397" visible="true" weight="0.2670895" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49915397" visible="true" weight="0.1627907" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.500846" side_tool="true" weight="0.16701902" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -232,14 +238,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/scrapy/http/request/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../spidersManager/TianShuMedia/RongCloudChannel/RongCloudChannel/spiders/MeiPai.py" />
     <entry file="file://$PROJECT_DIR$/../spidersManager/TianShuMedia/RongCloudChannel/RongCloudChannel/spiders/QiErHao.py" />
     <entry file="file://$PROJECT_DIR$/../spidersManager/TianShuMedia/RongCloudChannel/RongCloudChannel/spiders/RenMinHao.py" />
     <entry file="file://$PROJECT_DIR$/../spidersManager/TianShuMedia/RongCloudChannel/RongCloudChannel/spiders/WangYiHao.py" />
@@ -377,20 +375,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wechat.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="2589" selection-start-line="2589" selection-end-line="2589" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wechat-23-31.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="3543" selection-start-line="3543" selection-end-line="3543" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/wechat.txt" />
+    <entry file="file://$PROJECT_DIR$/wechat-23-31.txt" />
     <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_shop_product_comment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -405,20 +391,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wechat_result_23-31.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NewsCheck/util/wordMatch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/wechat_result_23-31.txt" />
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/datetime.pyi">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
@@ -495,8 +468,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3572">
-          <caret line="189" column="59" lean-forward="true" selection-start-line="189" selection-start-column="59" selection-end-line="189" selection-end-column="59" />
+        <state relative-caret-position="644">
+          <caret line="189" column="59" selection-start-line="189" selection-start-column="59" selection-end-line="189" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/douyin-202058.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="491" selection-start-line="491" selection-end-line="491" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/douyin-202058_result.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NewsCheck/util/wordMatch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
         </state>
       </provider>
     </entry>
