@@ -128,7 +128,7 @@ class KuaishouShopProductSpider(scrapy.Spider):
             productItem['userId'] = userId
             productItem['productId'] = product['itemId']
             productItem['productInfo'] = product
-            print(productItem)
+            #print(productItem)
             yield productItem
 
         curPage += 1
