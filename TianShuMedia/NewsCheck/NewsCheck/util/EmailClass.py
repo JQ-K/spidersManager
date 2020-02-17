@@ -20,8 +20,10 @@ class EmailClass(object):
         #self.receivers = ['zhjj@8531.cn', 'daill@8531.cn']
         self.msg_title = '快手号-浙江日报数据-'
         self.sender_server = 'smtp.8531.cn'
-        self.From = '戴莉莉'
-        self.To = '融媒体数据中心-数据统计'
+        # self.From = '戴莉莉'
+        # self.To = '融媒体数据中心-数据统计'
+        self.From = self.sender
+        self.To = ','.join(self.receivers)
 
     '''
     配置邮件内容
@@ -46,11 +48,11 @@ class EmailClass(object):
     '''
     def sendEmail(self,message):
         try:
-            smtpObj = smtplib.SMTP()
-            smtpObj.connect(self.sender_server, 25)
-            #smtpObj.connect(self.sender_server, 465)
+            smtpObj = smtplib.SMTP_SSL(self.sender_server, 465)
+            # smtpObj = smtplib.SMTP()
+            # smtpObj.connect(self.sender_server, 25)
             smtpObj.login(self.sender,self.password)
-            smtpObj.sendmail(self.sender,self.receivers , message.as_string())
+            smtpObj.sendmail(self.sender, self.receivers, message.as_string())
             smtpObj.quit()
             logger.info("邮件发送成功")
         except smtplib.SMTPException as ex:
