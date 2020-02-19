@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6cdf0e3f-0fab-447f-ae9f-bd58052ba320" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="6cdf0e3f-0fab-447f-ae9f-bd58052ba320" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +12,7 @@
     <favorites_list name="NewsCheck" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -52,9 +50,10 @@
         <option value="$PROJECT_DIR$/NewsCheck/spiders/PiYaoPlatform.py" />
         <option value="$PROJECT_DIR$/NewsCheck/pipelines.py" />
         <option value="$PROJECT_DIR$/douyin-202058.txt" />
-        <option value="$PROJECT_DIR$/NewsCheck/util/wordMatch.py" />
         <option value="$PROJECT_DIR$/NewsCheck/test/testMail.py" />
         <option value="$PROJECT_DIR$/NewsCheck/util/EmailClass.py" />
+        <option value="$PROJECT_DIR$/NewsCheck/util/wordMatch.py" />
+        <option value="$PROJECT_DIR$/douyin-202059.txt" />
       </list>
     </option>
   </component>
@@ -80,24 +79,6 @@
               <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
               <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
               <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="spiders" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -230,8 +211,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../spidersManager/TianShuMedia/RongCloudChannel/RongCloudChannel/spiders/RenMinHao.py" />
-    <entry file="file://$PROJECT_DIR$/../spidersManager/TianShuMedia/RongCloudChannel/RongCloudChannel/spiders/WangYiHao.py" />
     <entry file="file://$PROJECT_DIR$/../spidersManager/TianShuMedia/RongCloudChannel/RongCloudChannel/spiders/BaiJiaHao.py" />
     <entry file="file://$PROJECT_DIR$/../spidersManager/TianShuData/offline/KuaiShou/KuaiShou/utils/did.py" />
     <entry file="file://$PROJECT_DIR$/../spidersManager/TianShuMedia/RongCloudChannel/RongCloudChannel/pipelines.py" />
@@ -393,13 +372,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NewsCheck/util/wordMatch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/smtplib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -471,6 +443,27 @@
           <folding>
             <element signature="e#169#195#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NewsCheck/util/wordMatch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/douyin-202059_result.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/douyin-202059.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="508" lean-forward="true" selection-start-line="508" selection-end-line="508" />
         </state>
       </provider>
     </entry>
