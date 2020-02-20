@@ -147,12 +147,13 @@ SENSITIVE_USER_INFO_QUERY = {
 PUBLIC_FEEDS_QUERY = {
     "operationName": "publicFeedsQuery",
     "variables": {
-        "principalId": "{%s}",
+        "principalId": "123",
         "pcursor": "0",
-        "count": 200
+        "count": 24
     },
-    "query": "query publicFeedsQuery($principalId: String, $pcursor: String, $count: Int) {\n  publicFeeds(principalId: $principalId, pcursor: $pcursor, count: $count) {\n    pcursor\n    live {\n      user {\n        id\n        kwaiId\n        eid\n        profile\n        name\n        living\n        __typename\n      }\n      watchingCount\n      src\n      title\n      gameId\n      gameName\n      categoryId\n      liveStreamId\n      playUrls {\n        quality\n        url\n        __typename\n      }\n      followed\n      type\n      living\n      redPack\n      liveGuess\n      anchorPointed\n      latestViewed\n      expTag\n      __typename\n    }\n    list {\n      photoId\n      caption\n      thumbnailUrl\n      poster\n      viewCount\n      likeCount\n      commentCount\n      timestamp\n      workType\n      type\n      useVideoPlayer\n      imgUrls\n      imgSizes\n      magicFace\n      musicName\n      location\n      liked\n      onlyFollowerCanComment\n      relativeHeight\n      width\n      height\n      user {\n        id\n        eid\n        name\n        profile\n        __typename\n      }\n      expTag\n      __typename\n    }\n    __typename\n  }\n}\n"
+    "query": "query publicFeedsQuery($principalId: String, $pcursor: String, $count: Int) {\n  publicFeeds(principalId: $principalId, pcursor: $pcursor, count: $count) {\n    pcursor\n    live {\n      user {\n        id\n        avatar\n        name\n        __typename\n      }\n      watchingCount\n      poster\n      coverUrl\n      caption\n      id\n      playUrls {\n        quality\n        url\n        __typename\n      }\n      quality\n      gameInfo {\n        category\n        name\n        pubgSurvival\n        type\n        kingHero\n        __typename\n      }\n      hasRedPack\n      liveGuess\n      expTag\n      __typename\n    }\n    list {\n      id\n      thumbnailUrl\n      poster\n      workType\n      type\n      useVideoPlayer\n      imgUrls\n      imgSizes\n      magicFace\n      musicName\n      caption\n      location\n      liked\n      onlyFollowerCanComment\n      relativeHeight\n      timestamp\n      width\n      height\n      counts {\n        displayView\n        displayLike\n        displayComment\n        __typename\n      }\n      user {\n        id\n        eid\n        name\n        avatar\n        __typename\n      }\n      expTag\n      __typename\n    }\n    __typename\n  }\n}\n"
 }
+
 COMMENT_lIST_QUERY = {
     "operationName": "commentListQuery",
     "variables": {

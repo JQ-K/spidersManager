@@ -56,11 +56,14 @@ class KuaishouUserInfoIterm(scrapy.Item):
 
 class KuaishouUserPhotoInfoIterm(scrapy.Item):
     spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
+    photo_id = scrapy.Field()
     user_photo_info = scrapy.Field()
 
 
 class KuaishouPhotoCommentInfoIterm(scrapy.Item):
     spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
     photo_id = scrapy.Field()
     photo_comment_info = scrapy.Field()
 

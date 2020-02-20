@@ -115,7 +115,7 @@ class KuaishouDownloaderMiddleware(object):
         # 两种方式，一种是设置headers，一个是直接设置cookies
         if spider.cookieManual:
             cookies_all = self.getCookie(spider.cookieIdx)
-            if spider.name in ['kuaishou_shop_product_detail']:
+            if spider.name in ['kuaishou_shop_product_detail', 'kuaishou_public_feeds']:
                 cookies_dict = {'did': cookies_all['did']}
             elif spider.name in ['kuaishou_shop_product_comment']:
                 cookies_dict = {'token': cookies_all['token']}

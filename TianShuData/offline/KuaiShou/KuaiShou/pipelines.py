@@ -137,6 +137,8 @@ class KuaishouScrapyLogsPipeline(object):
             msg['item_id'] = item['productId']
         if item['spider_name'] == 'kuaishou_shop_product_comment':
             msg['item_id'] = item['commentId']
+        if item['spider_name'] == 'kuaishou_public_feeds':
+            msg['item_id'] = item['photo_id']
 
         self.mysql_client.insert(self.mysql_kuaishou_scrapy_logs_tablename, msg)
         self.mysql_client.commit()
