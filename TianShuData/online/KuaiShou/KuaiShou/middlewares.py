@@ -82,20 +82,19 @@ class KuaishouDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
-
         thisua = random.choice(self.uapool)
         spider.logger.info('User-Agent:{}'.format(thisua))
         request.headers.setdefault('User-Agent', thisua)
         request.meta['ua'] = thisua
-        # 设置代理IP
-        proxy_list = list(self.conn.smembers(self.redis_proxyip_name))
-        while len(proxy_list) < 10:
-            spider.logger.warn('Proxy Pool is dry, count:{}, Waiting to add proxy !'.format(len(proxy_list)))
-            time.sleep(60)
-            proxy_list = list(self.conn.smembers(self.redis_proxyip_name))
-        proxy = random.choice(proxy_list).decode('utf-8')
-        spider.logger.info('proxy:{}'.format(proxy))
-        request.meta['proxy'] = proxy
+        # # 设置代理IP
+        # proxy_list = list(self.conn.smembers(self.redis_proxyip_name))
+        # while len(proxy_list) < 3:
+        #     spider.logger.warn('Proxy Pool is dry, count:{}, Waiting to add proxy !'.format(len(proxy_list)))
+        #     time.sleep(60)
+        #     proxy_list = list(self.conn.smembers(self.redis_proxyip_name))
+        # proxy = random.choice(proxy_list).decode('utf-8')
+        # spider.logger.info('proxy:{}'.format(proxy))
+        # request.meta['proxy'] = proxy
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
         if spider.name in ['kuaishou_register_did'] or 'app' in spider.name:
             return None
@@ -106,8 +105,13 @@ class KuaishouDownloaderMiddleware(object):
             time.sleep(60)
             cookies_list = self.conn.zrevrange(self.redis_did_name, 0, -1)
 
-        cookies_str =bytes.decode(random.choice(cookies_list))
-        request.meta['Cookie'] = cookies_str
+        time_float = time.time()
+        n_set = [chr(i) for i in range(48, 58)]
+        s_char_set = [chr(i) for i in range(97, 122)]
+        total_set = n_set + s_char_set
+        hm_lvt_value = "".join(random.sample(total_set, 32))
+        cookies_str ='{};didv={};Hm_lvt_{}={}'.format(bytes.decode(random.choice(cookies_list)), int(time_float*1000), hm_lvt_value, int(time_float))
+        request.meta['Cookie'] =cookies_str
         cookies_str = cookies_str.replace(';','; ')
         # 对于用户隐私数据需要带上这个,这里主要是 kuaishou_user_info和kuaishou_search_principalid两个spides用到
         if spider.name in ['kuaishou_search_principalid','kuaishou_user_info']:
@@ -134,19 +138,19 @@ class KuaishouDownloaderMiddleware(object):
         # - return None: continue processing this exception
         # - return a Response object: stops process_exception() chain
         # - return a Request object: stops process_exception() chain
-        # 处理请求超时的proxy:删除代理池中无效proxy，更新请求中的proxy
-        spider.logger.warn('Request error : %s ' % exception)
-        if 'connection' in str(exception).lower():
-            invaild_proxy = request.meta['proxy']
-            spider.logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
-            self.conn.srem(self.redis_proxyip_name, invaild_proxy)
-            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-            while proxy_list == []:
-                time.sleep(60)
-                spider.logger.warn('Proxy Pool is null, Plase add proxy !')
-            proxy = proxy_list[0].decode()
-            request.meta['proxy'] = proxy
-            spider.logger.info('Update proxy : %s ' % proxy)
+        # # 处理请求超时的proxy:删除代理池中无效proxy，更新请求中的proxy
+        # spider.logger.warn('Request error : %s ' % exception)
+        # if 'connection' in str(exception).lower():
+        #     invaild_proxy = request.meta['proxy']
+        #     spider.logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
+        #     self.conn.srem(self.redis_proxyip_name, invaild_proxy)
+        #     proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        #     while proxy_list == []:
+        #         time.sleep(60)
+        #         spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+        #     proxy = proxy_list[0].decode()
+        #     request.meta['proxy'] = proxy
+        #     spider.logger.info('Update proxy : %s ' % proxy)
         return request
 
     def spider_opened(self, spider):

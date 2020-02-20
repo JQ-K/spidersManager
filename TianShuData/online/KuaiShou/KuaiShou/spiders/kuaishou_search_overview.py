@@ -19,9 +19,9 @@ class KuaishouUserCountsSpider(scrapy.Spider):
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
         'KuaiShou.pipelines.KuaishouScrapyLogsMySQLPipeline': 701,
-        'KuaiShou.pipelines.KuaishouUserSeedsMySQLPipeline': 702,
+        # 'KuaiShou.pipelines.KuaishouUserSeedsMySQLPipeline': 702,
     },
-    'CONCURRENT_REQUESTS_PER_DOMAIN' : 16,
+    'CONCURRENT_REQUESTS_PER_DOMAIN' : 1,
     'CONCURRENT_REQUESTS' : 1
     }
     kuaishou_url = 'http://live.kuaishou.com/m_graphql'
@@ -78,7 +78,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
                 user_id = msg_value_dict['userId']
                 self.headers['Referer'] = 'https://live.kuaishou.com/search/?keyword={}'.format(user_id)
                 search_overview_query['variables']['keyword'] = '{}'.format(user_id)
-                # logger.info(json.dumps(self.search_overview_query))
+                # logger.info(json.dumps(search_overview_query))
                 # self.conn.incr('kwai_userInfo_offSetSize', 1)
                 yield scrapy.Request(self.kuaishou_url, headers=self.headers,
                                      body=json.dumps(search_overview_query),
@@ -101,6 +101,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
         finally:
             logger.info(rsp_search_overview_json)
             pc_search_overview = rsp_search_overview_json['data']['pcSearchOverview']
+        # logger.info(pc_search_overview)
         msg_value_dict = response.meta['msg_value_dict']
         search_overview_query = response.meta['bodyJson']
         current_retry_times = response.meta['retry_times'] + 1
