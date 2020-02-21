@@ -445,3 +445,40 @@
 	'spider_datetime': '2020-01-16 09:55:22',
 	'spider_name': 'kuaishou_shop_product_comment'
 }
+
+6. 视频信息
+{
+	"id": "3x69cc7hgugxruc",
+	"thumbnailUrl": "https://tx2.a.yximgs.com/upic/2019/12/18/22/BMjAxOTEyMTgyMjQ5MDlfMTQ0MDc3MDM0XzIwNjYwNDM4MzE2XzFfMw==_Bc8163177e264f79905d38bffc2529d7c.jpg",
+	"poster": "https://tx2.a.yximgs.com/upic/2019/12/18/22/BMjAxOTEyMTgyMjQ5MDlfMTQ0MDc3MDM0XzIwNjYwNDM4MzE2XzFfMw==_Bc8163177e264f79905d38bffc2529d7c.jpg",
+	"workType": "video",
+	"type": "work",
+	"useVideoPlayer": true,
+	"imgUrls": [],
+	"imgSizes": [],
+	"magicFace": null,
+	"musicName": null,
+	"caption": "#热 #热门 #官方大大我要上热门 #官方大大我要热门官方大大 #感谢快手我要上热门",
+	"location": null,
+	"liked": false,
+	"onlyFollowerCanComment": true,
+	"relativeHeight": null,
+	"timestamp": 1576680551300,
+	"width": 720,
+	"height": 1280,
+	"counts": {
+		"displayView": "4.1w",
+		"displayLike": "435",
+		"displayComment": "3",
+		"__typename": "VideoCountInfo"
+	},
+	"user": {
+		"id": "CCTT7777",
+		"eid": "3x6fazsj5q2ujfy",
+		"name": "小马皮草店",
+		"avatar": "https://js2.a.yximgs.com/uhead/AB/2018/12/20/21/BMjAxODEyMjAyMTI4MDNfMTQ0MDc3MDM0XzFfaGQyNV80ODI=_s.jpg",
+		"__typename": "User"
+	},
+	"expTag": "1_i/0_null",
+	"__typename": "VideoFeed"
+}

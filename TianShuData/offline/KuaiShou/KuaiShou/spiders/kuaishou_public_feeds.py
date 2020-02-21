@@ -91,10 +91,27 @@ class KuaishouUserPhotoSpider(scrapy.Spider):
 
 
     def parse_user_photo(self, response):
-        #print(response.text)
         rsp_json = json.loads(response.text)
-        public_feeds = rsp_json['data']['publicFeeds']
         principalId = response.meta['principalId']
+
+        if 'data' not in rsp_json:
+            logger.info('data not in response, principalId: ' + str(principalId))
+            return
+
+        if 'publicFeeds' not in rsp_json['data']:
+            logger.info('publicFeeds not in response data, principalId: ' + str(principalId))
+            return
+
+        public_feeds = rsp_json['data']['publicFeeds']
+
+        if public_feeds is None:
+            logger.info('public_feeds is None: ' + str(principalId))
+            return
+
+        if 'list' not in public_feeds:
+            logger.info('list not in public_feeds, principalId: ' + str(principalId))
+            return
+
         if public_feeds['list'] == []:
             # 删掉did库中的失效did
             # ...待开发

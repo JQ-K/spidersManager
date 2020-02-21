@@ -8,6 +8,7 @@
 from scrapy import signals
 from redis import Redis
 from scrapy.utils.project import get_project_settings
+from loguru import logger
 
 import random
 import time
@@ -123,14 +124,34 @@ class KuaishouDownloaderMiddleware(object):
                 ###后期有新的spider再添加
                 cookies_dict = cookies_all
         else:
-            cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-            while cookies_list == []:
-                spider.logger.warn('Did Pool is null, Plase add did !')
+            # cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+            # while cookies_list == []:
+            #     spider.logger.warn('Did Pool is null, Plase add did !')
+            #     time.sleep(60)
+            #     cookies_list = self.conn.srandmember(self.redis_did_name, 1)
+            # cookies = cookies_list[0].decode()
+            # request.meta['didJson'] = cookies
+            cookies_list = self.conn.zrevrange(self.redis_did_name, 0, -1)
+            while len(cookies_list) < 3:
+                # spider.logger.warn('Did Pool is dry, count:{}, Waiting to add did !'.format(len(cookies_list)))
+                logger.warning('Did Pool is dry, count:{}, Waiting to add did !'.format(len(cookies_list)))
                 time.sleep(60)
-                cookies_list = self.conn.srandmember(self.redis_did_name, 1)
-            cookies = cookies_list[0].decode()
-            request.meta['didJson'] = cookies
-            cookies_dict = eval(cookies)
+                cookies_list = self.conn.zrevrange(self.redis_did_name, 0, -1)
+            oneCookieList = bytes.decode(random.choice(cookies_list)).strip().split(';')
+            cookies_all = {}
+            for coo in oneCookieList:
+                parts = coo.split('=')
+                if len(parts) == 2:
+                    cookies_all[parts[0]] = parts[1]
+
+            if spider.name in ['kuaishou_shop_product_detail', 'kuaishou_public_feeds']:
+                if 'did' in cookies_all:
+                    cookies_dict = {'did': cookies_all['did']}
+                else:
+                    cookies_dict = {}
+            else:
+                cookies_dict = cookies_all
+
         cookies_str = ''
         for key, value in cookies_dict.items():
             cookies_str += '{}={}; '.format(key,value)
@@ -139,8 +160,10 @@ class KuaishouDownloaderMiddleware(object):
             for key, value in self.kuaishou_live_web_st.items():
                 cookies_str += '{}={}; '.format(key,value)
         spider.logger.info('Cookie:{}'.format(cookies_str[:-2]))
+        # logger.info("cookie_str: " + cookies_str)
         request.headers.setdefault('Cookie', cookies_str[:-2])
         return None
+
 
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.
