@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import re, time
-import json, random
+import json, random, os
+import subprocess
 
 from scrapy_splash import SplashRequest
 from scrapy.utils.project import get_project_settings
@@ -85,6 +86,12 @@ class KuaishouRegisterDidSpider(scrapy.Spider):
                 continue
             counter = 0
             while counter < spider_did_supplements_quantity_per_time:
+                # 判断SplashServer服务是否正常
+                child = subprocess.Popen(["pgrep", "-f", '/usr/bin/docker-proxy'], stdout=subprocess.PIPE, shell=False)
+                pid = child.communicate()[0].decode('utf-8')
+                if pid == '':
+                    os.system('sudo docker pull scrapinghub/splash')
+                    os.system('sudo docker run -d -p 8050:8050 scrapinghub/splash')
                 counter += 1
                 time.sleep(random.randint(7, 10))
                 yield scrapy.Request(start_url, method='GET', callback=self.produce_did, dont_filter=True)

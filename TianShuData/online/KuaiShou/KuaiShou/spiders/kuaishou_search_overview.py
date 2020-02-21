@@ -58,7 +58,8 @@ class KuaishouUserCountsSpider(scrapy.Spider):
         consumer = topic.get_balanced_consumer(
             consumer_group=self.name,
             managed=True,
-            auto_commit_enable=True
+            auto_commit_enable=True,
+            auto_commit_interval_ms=3000
         )
 
         # 获取被消费数据的偏移量和消费内容
@@ -110,7 +111,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
             # 删掉did库中的失效did
             kuaishou_did_json = response.meta['Cookie']
             logger.info('RedisDid srem invaild did:{}'.format(str(kuaishou_did_json)))
-            self.conn.zrem(self.redis_did_name, str(kuaishou_did_json).encode('utf-8'))
+            self.conn.zrem(self.redis_did_name, str(kuaishou_did_json).encode('utf-8')[:-70])
             # 再次尝试抓取，尝试3次
             logger.warning('userId: {}, pcSearchOverview authors list is None ! '.format(user_id))
             if current_retry_times > 7:
@@ -140,7 +141,7 @@ class KuaishouUserCountsSpider(scrapy.Spider):
                 # 删掉did库中的失效did
                 invaild_did = response.meta['Cookie']
                 logger.info('RedisDid srem invaild did:{}'.format(str(invaild_did)))
-                self.conn.zrem(self.redis_did_name, str(invaild_did).encode('utf-8'))
+                self.conn.zrem(self.redis_did_name, str(invaild_did).encode('utf-8')[:-70])
                 # 再次尝试抓取，尝试7次
                 if current_retry_times > 3:
                     yield self.create_fail_items(user_id, -2)
