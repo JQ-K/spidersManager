@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6cdf0e3f-0fab-447f-ae9f-bd58052ba320" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/middlewares.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_public_feeds.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_public_feeds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/utils/batchProcessKafkaItemToLog.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-272">
+            <state relative-caret-position="103">
+              <caret line="40" column="25" selection-start-line="40" selection-end-line="41" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -27,11 +27,31 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/utils/mysql.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-624">
+              <folding>
+                <element signature="e#66#80#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/utils/sendSeedToKafka.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-203">
-              <caret line="192" column="19" selection-start-line="192" selection-start-column="14" selection-end-line="192" selection-end-column="19" />
+            <state relative-caret-position="159">
+              <caret line="116" column="31" lean-forward="true" selection-start-line="116" selection-start-column="31" selection-end-line="116" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -86,12 +106,13 @@
         <option value="$PROJECT_DIR$/douyin-202059.txt" />
         <option value="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_shop_product_list.py" />
         <option value="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/pipelines.py" />
-        <option value="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/settings.py" />
         <option value="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/items.py" />
         <option value="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/test/testCookie.html" />
         <option value="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/test/testCookie.py" />
         <option value="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/middlewares.py" />
         <option value="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_public_feeds.py" />
+        <option value="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/settings.py" />
+        <option value="$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/utils/sendSeedToKafka.py" />
       </list>
     </option>
   </component>
@@ -256,7 +277,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="821" extended-state="1" />
+    <frame x="0" y="23" width="1440" height="821" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49915397" visible="true" weight="0.22692037" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -278,26 +300,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/NewsCheck/spiders/HuaShuZiXun.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NewsCheck/spiders/DaZheChengShi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1273">
-          <caret line="67" column="57" lean-forward="true" selection-start-line="67" selection-start-column="27" selection-end-line="67" selection-end-column="57" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NewsCheck/spiders/SinaPiYao.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
@@ -563,17 +565,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/utils/batchProcessKafkaItemToLog.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-272">
+        <state relative-caret-position="103">
+          <caret line="40" column="25" selection-start-line="40" selection-end-line="41" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/utils/mysql.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-624">
+          <folding>
+            <element signature="e#66#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/utils/sendSeedToKafka.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../../TianShuData/offline/KuaiShou/KuaiShou/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-203">
-          <caret line="192" column="19" selection-start-line="192" selection-start-column="14" selection-end-line="192" selection-end-column="19" />
+        <state relative-caret-position="159">
+          <caret line="116" column="31" lean-forward="true" selection-start-line="116" selection-start-column="31" selection-end-line="116" selection-end-column="31" />
         </state>
       </provider>
     </entry>

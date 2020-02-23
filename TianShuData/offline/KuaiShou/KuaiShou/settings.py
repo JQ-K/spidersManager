@@ -119,6 +119,7 @@ DOWNLOAD_TIMEOUT = 7
 KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
 ZOOKEEPER_HOSTS = 'zqhd1:2181,zqhd2:2181,zqhd3:2181'
 KAFKA_TOPIC = 'kuaishou_userInfo_seeds'
+KAFKA_TOPIC_SHOP_SEED = 'kuaishou_shop_seeds'
 KAFKA_TOPIC_DATA = 'kuaishou_data'
 RESET_OFFSET_ON_START = False
 
