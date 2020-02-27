@@ -47,32 +47,24 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
 
         self.filePath = self.settings.get('OTHER_TYPE_MSG_FILE_PATH')  #需要在服务器上创建该路径，待做
         self.OtherTypeMsgfile = open(self.filePath+"OtherTypeMsgfile.txt",mode='a',  encoding='UTF-8')
-
-        #初始化时,将biz传给kafka，等待消费,等所有消费完后检查入库信息，如果有遗漏再将个别biz放入kafka
-        #从数据库中获得biz
-        biz_list=mysqlInfo().getAllAccountFromMySQL('biz')
-        mysqlInfo().close() #里面有个数据库的连接需要关闭
-        logger.info('biz_list:{}'.format(''.join(biz_list)))
-
-        dataSendToKafka().bizsToKafka(biz_list)
+        # 配置kafka连接信息
+        self.kafka_hosts = self.settings.get('KAFKA_HOSTS')
+        self.zookeeper_hosts=self.settings.get('ZOOKEEPER_HOSTS')
+        self.kafka_topic = settings.get('KAFKA_TOPIC_WECHAT')
+        self.reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
+        logger.info('reset_offset_on_start:%d,1表示true,0表示false' % self.reset_offset_on_start)
+        self.kafkaClient = KafkaClient(hosts=self.kafka_hosts,zookeeper_hosts=self.zookeeper_hosts, broker_version='0.10.1.0')
+        logger.info('kafka info, hosts:{},zookeeper_hosts:{}, topic:{}'.format(self.kafka_hosts,self.zookeeper_hosts, self.kafka_topic))
 
 
     def start_requests(self):
-        # 配置kafka连接信息
-        kafka_hosts = self.settings.get('KAFKA_HOSTS')
-        zookeeper_hosts=self.settings.get('ZOOKEEPER_HOSTS')
-        kafka_topic = self.settings.get('KAFKA_TOPIC')
-        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
-        logger.info('reset_offset_on_start:%d,1表示true,0表示false' % reset_offset_on_start)
-        logger.info('kafka info, hosts:{},zookeeper_hosts:{}, topic:{}'.format(kafka_hosts,zookeeper_hosts, kafka_topic))
-        client = KafkaClient(hosts=kafka_hosts,zookeeper_hosts=zookeeper_hosts, broker_version='0.10.1.0')
-        topic = client.topics[kafka_topic]
 
+        topic = self.kafkaClient.topics[self.kafka_topic]
         partitions = topic.partitions
         # 配置kafka消费信息
         consumer = topic.get_simple_consumer(
             consumer_group=self.name,
-            reset_offset_on_start=reset_offset_on_start,
+            reset_offset_on_start=self.reset_offset_on_start,
             auto_commit_enable=True,
             partitions=[partitions[self.partitionIdx]]
         )
@@ -80,20 +72,31 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
         # 获取被消费数据的偏移量和消费内容
         cnt = 0
         for message in consumer:
+            logger.info('start to consume')
             try:
                 if message is None:
                     continue
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
+                logger.info('msg_value {}'.format(msg_value))
                 msg_value_dict = json.loads(msg_value)
+
                 __biz = msg_value_dict['__biz']
                 logger.info('__biz: ' + str(__biz))
                 cnt += 1
+                now_unix_time=self.red.hget(self.redis_wechat_crawlInfo,__biz)
+                logger.info('now_unix_time :{}'.format(now_unix_time))
+                #=0，表示该biz对应的cookie失效，，这是对于某一个biz而言的，
+                #null，该biz不存在，则全部更新成功，或者还没有轮到他
+                if now_unix_time!=0:
+                    continue
                 #根据__biz从redis中获取其他参数，如果该参数不存在，则返回null
                 uin_key =self.red.hget(self.redis_wechat_params, str(__biz))
+                logger.info('uin_key :{}'.format(uin_key))
                 if uin_key is None:
                     #此时biz被消息，需要重新添加到kafka队列中
-                    dataSendToKafka().bizsToKafka([__biz])
+                    logger.info('uin_key param is not in redis')
+                    bizsToKafka(self.kafkaClient,self.kafka_topic,[__biz])
                     continue
                 # uin_key = json.loads(self.red.hget(self.redis_wechat_params, str(__biz)))
                 uin_key_tmpList=uin_key.split("_")
@@ -118,7 +121,7 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
         key=response.meta.get("key", "")
         paramsDict={"__biz":__biz,"uin":uin,"key":key}
         ret, status = rltJson.get('ret'), rltJson.get('errmsg')  # 状态信息
-        now_unix_time=0   #如果在key的有效期内，7天数据的爬取全部success，那么redis中now_unix_time=0
+        now_unix_time=0   #爬虫失败为0，那么redis中now_unix_time=0
 
         if 0 == ret or 'ok' == status:
             general_msg_list = rltJson['general_msg_list']
@@ -172,13 +175,13 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
         else:
             logger.info('ret:{}, status:{},表明cookie失效'.format(ret, status))
             '''
-            #如果在key的有效期内，7天数据的爬取全部success，那么redis中now_unix_time=0
+            #cookie失效，需要等待下一个cookie，那么redis中now_unix_time=0
             #如果在7天数据未全部爬完的时候，key失效，则返回当前爬取的时间，并保存至redis中,且该key失效时间为12小时
             #同时将biz传给kafka
            '''
             logger.info('失效时，该公众号{}，目前正在爬取该天{}的数据：'.format(__biz,now_unix_time))
-            self.red.hmset(self.redis_wechat_crawlInfo,{__biz:now_unix_time})
-            dataSendToKafka().bizsToKafka([__biz])
+            self.red.hmset(self.redis_wechat_crawlInfo,{__biz:now_unix_time})   #
+            bizsToKafka(self.kafkaClient,self.kafka_topic,[__biz])
 
 
 
@@ -239,7 +242,7 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
 
         logger.info("articalItem:")
         logger.info(articalItem)
-        #开始解析阅读数的页面
+        #开始解析阅读数的页面，
         curBody = self.articalBody.format(mid, sn, idx, scene)
         time.sleep(10)
         yield scrapy.Request(self.articalUrl.format(paramsDict.get('uin',''), paramsDict.get('key',''), paramsDict.get('__biz','')),
@@ -250,6 +253,8 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
 
 
     def parseArticalNum(self, response):
+        #cookie半途失效，可能会导致response.status == 200
+        #如何记录半途失效的情况
         if response.status != 200:
             print('get url error: ' + response.url)
             return
