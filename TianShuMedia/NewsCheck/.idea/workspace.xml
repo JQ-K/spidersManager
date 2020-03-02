@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6cdf0e3f-0fab-447f-ae9f-bd58052ba320" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../TianShuData/document/kuaishou/kuaishoukey.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../TianShuData/document/kuaishou/kuaishoukey.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,7 +14,7 @@
     <favorites_list name="NewsCheck" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -61,8 +60,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="70" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="24" />
     <option name="width" value="1440" />
     <option name="height" value="821" />
   </component>
@@ -72,29 +71,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NewsCheck" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="NewsCheck" type="462c0819:PsiDirectoryNode" />
-              <item name="spiders" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -199,9 +177,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="70" width="1440" height="821" extended-state="0" />
+    <frame x="0" y="27" width="1440" height="821" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49915397" visible="true" weight="0.17970401" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49915397" visible="true" weight="0.17899929" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.500846" side_tool="true" weight="0.16701902" />
       <window_info anchor="bottom" id="Message" order="0" />
