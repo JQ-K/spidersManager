@@ -1,5 +1,4 @@
 __author__ = 'zlx'
-__author__ = 'zlx'
 # -*- coding: utf-8 -*-
 import scrapy
 import json
