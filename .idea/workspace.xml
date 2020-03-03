@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be2494cd-2216-4449-ba17-acef6fbea5c9" name="Default Changelist" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_tag_feed_hot.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_tag_feed_new.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_tag_info.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/spiders/kuaishou_tag_rec_list.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TianShuData/document/kuaishou/快手字段.docx" afterPath="$PROJECT_DIR$/TianShuData/document/kuaishou/快手字段.docx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/items.py" afterPath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/items.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TianShuData/document/kuaishou/kuaishoukey.md" afterPath="$PROJECT_DIR$/TianShuData/document/kuaishou/kuaishoukey.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/middlewares.py" afterPath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/middlewares.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/pipelines.py" afterPath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/pipelines.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/utils/signatureUtil.py" afterPath="$PROJECT_DIR$/TianShuData/offline/KuaiShou/KuaiShou/utils/signatureUtil.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeChat/ArticleSpider/ArticleSpider/spiders/weChatTest.py" afterPath="$PROJECT_DIR$/WeChat/ArticleSpider/ArticleSpider/spiders/weChatTest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TianShuMedia/NewsCheck/NewsCheck/util/wordMatch.py" afterPath="$PROJECT_DIR$/TianShuMedia/NewsCheck/NewsCheck/util/wordMatch.py" />
-    </list>
+    <list default="true" id="be2494cd-2216-4449-ba17-acef6fbea5c9" name="Default Changelist" comment="" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -461,7 +448,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="0" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
