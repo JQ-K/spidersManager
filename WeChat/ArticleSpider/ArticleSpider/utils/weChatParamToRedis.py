@@ -116,8 +116,10 @@ class WeChatParams:
                     param_dict[key]=value
                 biz= param_dict.get("__biz","")
                 uin_key=param_dict.get("uin","")+'_'+param_dict.get("key","")
+                print(uin_key)
                 self.red.hmset(self.redis_wechat_params,{biz:uin_key})
                 logger.info("发送一个参数成功")
+                logger.info(uin_key)
 
 
     def change_txt(self):
@@ -171,11 +173,12 @@ if __name__=="__main__":
 
     wechatParams=WeChatParams()
     # #将biz_list传送给kafaka等待消费
-    biz_list=wechatParams.getAllAccountFromMySQL('biz')
-    wechatParams.close() #里面有个数据库的连接需要关闭
-    logger.info('biz_list:{}'.format(''.join(biz_list)))
-    wechatParams.bizsToKafka(biz_list)
-
+    # biz_list=wechatParams.getAllAccountFromMySQL('biz')
+    # wechatParams.close() #里面有个数据库的连接需要关闭
+    # logger.info('biz_list:{}'.format(''.join(biz_list)))
+    # # biz_list=['MzAxMTM3OTI4Mw==','']
+    # wechatParams.bizsToKafka(biz_list)
+    wechatParams.get_key()
     '''
     备注：1、按键精灵脚本中指定微信安装位置为：ADDRESS = "D:\Program Files (x86)\Tencent\WeChat\WeChat.exe"，
           当按键精灵脚本挪到别处使用，需要相同的安装位置
@@ -189,15 +192,16 @@ if __name__=="__main__":
     #开启按键精灵，按键精灵每30秒点一个公众号，每点3个等待1分钟，在这一分钟内，通过get_key() 向redis发送一次参数
     # handle=wechatParams.start_process(name)
     #开启定时脚本，向redis传送参数
-    current_time =datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    current_time_add=(datetime.datetime.now()+datetime.timedelta(hours=5)).strftime("%Y-%m-%d %H:%M:%S")
-    sched.add_job(wechatParams.get_key(),'interval', minutes=2, start_date=current_time,end_date=current_time_add)
-    sched.start()
-
-    print(datetime.datetime.now())
+    # time.sleep(3)
+    # current_time =datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # current_time_add=(datetime.datetime.now()+datetime.timedelta(hours=5)).strftime("%Y-%m-%d %H:%M:%S")
+    # sched.add_job(wechatParams.get_key,'interval', minutes=2, start_date=current_time,end_date=current_time_add)
+    # sched.start()
+    #
+    # print(datetime.datetime.now())
     #结束进程
     # win32process.TerminateProcess(handle[0], 0)                       # 终止进程
-    win32event.WaitForSingleObject(handle[0], -1)                      # 等待进程结束
+    # win32event.WaitForSingleObject(handle[0], -1)                      # 等待进程结束
 
 
     # #每隔一天 执行抓包程序

@@ -51,6 +51,27 @@ class mysqlInfo(object):
 
         return bizList
 
+    def getWeChatName(self,condition):
+        curName=''
+        sql="select weChat_name from {} where biz=={}".format(self.table_name,condition)
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql)
+            results = cursor.fetchall()
+            for row in results:
+                # print("row")
+                # print(row)
+                curName = row[0]
+                # click_rank=row[1]
+                # bizList.append(curId)
+        except Exception as e:
+            curName = ''
+            raise e
+        cursor.close()
+
+        return curName
+
+
 
     def close(self):
         try:

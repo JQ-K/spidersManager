@@ -107,10 +107,11 @@ class MySQLClient:
     def select(self, tbname, condition):
         condition_str = ''
         for key, value in condition.items():
-            condition_str += ' {} = {} AND '.format(key, value)
+            condition_str += ' {} = "{}" AND '.format(key, value)
         condition_str = condition_str[:-5]
         _prefix = "".join(['SELECT * FROM  `', tbname, '`', ' WHERE '])
         _sql = "".join([_prefix, condition_str])
+        print(_sql)
         self.conn.ping(True)
         return self.cur.execute(_sql)
 

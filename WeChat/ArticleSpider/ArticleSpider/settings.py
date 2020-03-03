@@ -142,7 +142,8 @@ ZOOKEEPER_HOSTS = 'zb2627:2181,zb2628:2181,zb2629:2181'
 # KAFKA_TOPIC = 'test_kuaishou_seed'
 # KAFKA_TOPIC  = 'test_kuaishou_seed__tmp'
 KAFKA_TOPIC = 'principal_id'
-KAFKA_TOPIC_WECHAT='wechat_biz'
+# KAFKA_TOPIC_WECHAT='wechat_biz'
+KAFKA_TOPIC_WECHAT='wechat_biz_one'
 # 设置TOPIC是否从头消费
 RESET_OFFSET_ON_START = False
 
@@ -190,4 +191,5 @@ MYSQL_WECHAT_ARTICAL_INFO_TABLENAME='wechat_official_account_article_info_sdt0'
 USE_PROXY=False
 
 
-OTHER_TYPE_MSG_FILE_PATH = '/data/code/crawlab/data/wechat'
+# OTHER_TYPE_MSG_FILE_PATH = '/data/code/crawlab/data/wechat'
+OTHER_TYPE_MSG_FILE_PATH ='d:/data'

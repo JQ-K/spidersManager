@@ -9,6 +9,7 @@ import json
 import time
 import redis
 from redis import Redis
+import loguru
 from scrapy.utils.project import get_project_settings
 from ArticleSpider.utils.mysql import MySQLClient
 # from twisted.enterprise import adbapi
@@ -21,7 +22,7 @@ class WechatArticalPipeline(object):
         self.mysql_host = settings.get('MYSQL_HOST')
         self.mysql_user = settings.get('MYSQL_USER')
         self.mysql_password = settings.get('MYSQL_PASSWORD')
-        self.mysql_database = settings.get('MYSQL_DATABASE')
+        self.mysql_database = settings.get('MYSQL_DATABASE_WECHAT')
         self.mysql_wechat_artical_info_tablename=settings.get('MYSQL_WECHAT_ARTICAL_INFO_TABLENAME')
 
         spider.logger.info(
@@ -32,13 +33,17 @@ class WechatArticalPipeline(object):
     def process_item(self, item, spider):
         #需要执行insert和update操作
         #查看有没有这个sn,biz
-        select_res = self.mysql_client.select(self.mysql_wechat_artical_info_tablename, {"SN": item['SN'],"biz": item['biz']})
+        # select_res = self.mysql_client.select(self.mysql_wechat_artical_info_tablename, {"SN": item['SN'],"biz": item['biz']})
+
+        spider.logger.info('item insert mysql[%s]: %s' % (self.mysql_host, str(item)))
+        select_res = self.mysql_client.select(self.mysql_wechat_artical_info_tablename, {"SN": item["SN"]})
         if select_res == 0:
             self.mysql_client.insert(self.mysql_wechat_artical_info_tablename,item)
             self.mysql_client.commit()
             spider.logger.info('item insert mysql[%s]: %s' % (self.mysql_host, str(item)))
             return item
-        self.mysql_client.update(self.mysql_wechat_artical_info_tablename,item, {"SN": item['SN'],"biz": item['biz']})
+
+        self.mysql_client.update(self.mysql_wechat_artical_info_tablename,item, {"SN": item['SN']})
 
         return item
 
