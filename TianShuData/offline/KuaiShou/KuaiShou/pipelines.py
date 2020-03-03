@@ -150,3 +150,10 @@ class KuaishouScrapyLogsPipeline(object):
         spider.logger.info('Mysql[%s] Conn closed!' % (self.mysql_host))
 
 
+
+class KuaishouTestPipeline(object):
+    def process_item(self, item, spider):
+        item['spider_datetime'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(json.dumps(dict(item)))
+        print('\n\n')
+

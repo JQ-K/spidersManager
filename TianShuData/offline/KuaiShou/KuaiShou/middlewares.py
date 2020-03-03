@@ -110,8 +110,8 @@ class KuaishouDownloaderMiddleware(object):
 
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
         if spider.name in ['kuaishou_register_did',
-                           'kuaishou_shop_score',
-                           'kuaishou_shop_product_list',]:
+                           'kuaishou_shop_score', 'kuaishou_shop_product_list',
+                           'kuaishou_tag_rec_list', 'kuaishou_tag_info', 'kuaishou_tag_feed_hot', 'kuaishou_tag_feed_new', ]:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
         if spider.cookieManual:
@@ -182,28 +182,31 @@ class KuaishouDownloaderMiddleware(object):
         # - return None: continue processing this exception
         # - return a Response object: stops process_exception() chain
         # - return a Request object: stops process_exception() chain
+
         # 处理请求超时的proxy:删除代理池中无效proxy，更新请求中的proxy
-        spider.logger.warn('Request error : %s ' % exception)
-        if 'connection' in str(exception).lower():
-            invaild_proxy = request.meta['proxy']
-            spider.logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
-            self.conn.srem(self.redis_proxyip_name, invaild_proxy)
-            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-            while proxy_list == []:
-                time.sleep(60)
-                spider.logger.warn('Proxy Pool is null, Plase add proxy !')
-            proxy = proxy_list[0].decode()
-            request.meta['proxy'] = proxy
-            spider.logger.info('Update proxy : %s ' % proxy)
-        return request
+        # spider.logger.warn('Request error : %s ' % exception)
+        # if 'connection' in str(exception).lower():
+        #     invaild_proxy = request.meta['proxy']
+        #     spider.logger.info('Proxy : %s is invaild ! Proxy sreming...' % invaild_proxy)
+        #     self.conn.srem(self.redis_proxyip_name, invaild_proxy)
+        #     proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+        #     while proxy_list == []:
+        #         time.sleep(60)
+        #         spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+        #     proxy = proxy_list[0].decode()
+        #     request.meta['proxy'] = proxy
+        #     spider.logger.info('Update proxy : %s ' % proxy)
+        # return request
+        return None
 
     def spider_opened(self, spider):
         settings = get_project_settings()
         self.kuaishou_live_web_st = settings.get('KUAISHOU_LIVE_WEB_ST')
         self.uapool = settings.get('UAPOOL')
-        self.redis_host = settings.get('REDIS_HOST')
-        self.redis_port = settings.get('REDIS_PORT')
-        self.redis_did_name = settings.get('REDIS_DID_NAME')
-        self.redis_proxyip_name = settings.get('REDIS_PROXYIP_NAME')
-        self.conn = Redis(host=self.redis_host, port=self.redis_port)
+        if spider.name not in ['kuaishou_tag_rec_list', 'kuaishou_tag_info', 'kuaishou_tag_feed_hot', 'kuaishou_tag_feed_new', ]:
+            self.redis_host = settings.get('REDIS_HOST')
+            self.redis_port = settings.get('REDIS_PORT')
+            self.redis_did_name = settings.get('REDIS_DID_NAME')
+            self.redis_proxyip_name = settings.get('REDIS_PROXYIP_NAME')
+            self.conn = Redis(host=self.redis_host, port=self.redis_port)
         spider.logger.info('Spider opened: %s' % spider.name)

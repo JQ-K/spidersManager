@@ -97,3 +97,37 @@ class KuaishouShopProductCommentItem(scrapy.Item):
     commentId = scrapy.Field()
     productComment = scrapy.Field()
 
+
+class KuaishouTagRecItem(scrapy.Item):
+    spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
+    tagId = scrapy.Field()
+    tagName = scrapy.Field()
+    tagRecInfo = scrapy.Field()
+
+
+class KuaishouTagInfoItem(scrapy.Item):
+    spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
+    tagId = scrapy.Field()
+    tagName = scrapy.Field()
+    tagInfo = scrapy.Field()
+
+
+class KuaishouTagHotPhotoItem(scrapy.Item):
+    spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
+    tagId = scrapy.Field()
+    tagName = scrapy.Field()
+    photo_id = scrapy.Field()
+    photoInfo = scrapy.Field()
+
+
+class KuaishouTagNewPhotoItem(scrapy.Item):
+    spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
+    tagId = scrapy.Field()
+    tagName = scrapy.Field()
+    photo_id = scrapy.Field()
+    photoInfo = scrapy.Field()
+

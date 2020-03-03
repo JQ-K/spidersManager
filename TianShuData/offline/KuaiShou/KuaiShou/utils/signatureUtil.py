@@ -50,9 +50,9 @@ if __name__ == '__main__':
     #srcStr = "mod=OPPO(OPPO%20R11)&lon=120.174975&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270968&ver=5.2&type=7&page=1&coldStart=false&count=20&pv=false&id=6&refreshTimes=2&pcursor=&client_key=3c2cd3f3&os=android"
     #srcStr = "mod=OPPO(OPPO%20R11)&lon=120.174975&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270968&ver=5.2&user=1215741150&client_key=3c2cd3f3&os=android&sig=723e6c8f2c74fea99fbc89bcc6d36737"
     #srcStr = "mod=OPPO(OPPO%20R11)&lon=120.174975&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270968&ver=5.2&token=&user_id=605395700&lang=zh&count=30&privacy=public&referer=ks%3A%2F%2Fprofile%2F605395700%2F5221360837644739313%2F1_a%2F2000005775957550673_h495%2F8&client_key=3c2cd3f3&os=android"
-    #srcStr = "mod=samsung(SM-G9200)&lon=120.174933&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270955&ver=5.2&user=325629379&client_key=3c2cd3f3&os=androi"
-    # srcStr = "mod=samsung(SM-G9200)&lon=120.174933&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270955&ver=5.2&user=325629379&client_key=3c2cd3f4&os=android&sig=d3cb0a1b766a33dd15d2da9b95d5122c"
-    srcStr = 'userId=1537755176'
+    #srcStr = "mod=samsung(SM-G9200)&lon=120.174933&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270955&ver=5.2&user=325629379&client_key=3c2cd3f3&os=android"
+    srcStr = "mod=samsung(SM-G9200)&lon=120.174933&country_code=CN&did=ANDROID_982cbccac9d99034&app=0&net=WIFI&oc=UNKNOWN&ud=0&c=ALI_CPD&sys=ANDROID_5.1.1&appver=5.2.1.4686&ftt=&language=zh-cn&lat=30.270955&ver=5.2&user=325629379&client_key=3c2cd3f4&os=android&sig=d3cb0a1b766a33dd15d2da9b95d5122c"
+    #srcStr = 'userId=1537755176'
     sig = sigUtil.getSig(srcStr)
     print(sig)
 
