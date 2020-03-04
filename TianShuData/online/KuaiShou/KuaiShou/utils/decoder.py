@@ -83,6 +83,8 @@ def decrypt_str(s, mapping):
 
 def get_mapping(page):
     m = re.search('(http.*?.woff)', page)
+    # print(m)
+    # print(m.group(1))
     if m:
         woff_link = m.group(1)
         headers1 = {
@@ -126,8 +128,11 @@ def kuaishou_decoder(url, str):
     return decrypt_str(str, mapping)
 
 if __name__ == '__main__':
-    url = 'https://live.kuaishou.com/profile/h952814899'
-    res = kuaishou_decoder(url,'뷝껚.뾮w')
-
-
+    # url = 'https://live.kuaishou.com/profile/h952814899'
+    # res = kuaishou_decoder(url, '뷝껚.뾮w')
+    # url = 'https://live.kuaishou.com/profile/haonan666'
+    # res = kuaishou_decoder(url, '믊껻곝꫋.ꯍw')
+    url = 'https://live.kuaishou.com/profile/w17861031657'
+    res = kuaishou_decoder(url, '믊첬뷊')
+    print(res)
 
