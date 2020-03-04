@@ -22,6 +22,7 @@ class MySQLClient:
             self.conn = pymysql.connect(host=self.host, port=self.port, user=self.user, passwd=self.password)
             self.conn.autocommit(True)
             self.conn.set_charset(self.charset)
+            self.conn.connect_timeout = 31536000
             self.cur = self.conn.cursor()
             if (dbname):
                 try:
