@@ -3,12 +3,14 @@ import scrapy
 import json
 import time
 import random
+import redis
 
 from pykafka import KafkaClient
 from loguru import logger
 from scrapy.utils.project import get_project_settings
 
 from KuaiShou.items import KuaishouShopProductCommentItem
+from KuaiShou.utils.mysql import MySQLClient
 
 
 #cookie中需要token
@@ -25,30 +27,73 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
     referer = "https://www.kwaishop.com/merchant/shop/detail/comment?itemId={}"
 
     custom_settings = {'ITEM_PIPELINES': {
-        'KuaiShou.pipelines.KuaishouKafkaPipeline': 700
+        'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
+        'KuaiShou.pipelines.KuaishouScrapyLogsPipeline': 701
     }}
     settings = get_project_settings()
 
-    def getCookie(self):
-        token = '58cc04a5b35d446c9d16e65e991214e7-1577168521'
-        cookie = {
-            'token': token
-        }
-        return cookie
+
+    def __init__(self, partitionIdx='0', useProxy='0', cookieManual='1', cookieIdx='0', *args, **kwargs):
+        super(KuaishouShopProductCommentSpider, self).__init__(*args, **kwargs)
+        self.partitionIdx = int(partitionIdx)
+        self.useProxy = int(useProxy)
+        self.cookieManual = int(cookieManual)
+        self.cookieIdx = int(cookieIdx)
+
+        self.mysql_host = self.settings.get('MYSQL_HOST')
+        self.mysql_user = self.settings.get('MYSQL_USER')
+        self.mysql_password = self.settings.get('MYSQL_PASSWORD')
+        self.mysql_database = self.settings.get('MYSQL_DATABASE')
+        self.mysql_kuaishou_scrapy_logs_tablename = self.settings.get('MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME')
+        logger.info('MySQLConn:host = %s,user = %s,db = %s' % (self.mysql_host, self.mysql_user, self.mysql_database))
+        self.mysql_client = MySQLClient(host=self.mysql_host, user=self.mysql_user, password=self.mysql_password,
+                                        dbname=self.mysql_database)
+
+        # self.redis_host = self.settings.get('REDIS_HOST')
+        # self.redis_port = self.settings.get('REDIS_PORT')
+        # self.red = redis.Redis(host=self.redis_host, port=self.redis_port)
+
+
+    # def getCookie(self, cookieIdx):
+    #     tempCookie = self.red.hgetall('kuaishou_app_cookie_{}'.format(cookieIdx))
+    #     rltCookie = {}
+    #     for key, val in tempCookie.items():
+    #         rltCookie[str(key, encoding="utf-8")] = str(val, encoding="utf-8")
+    #     print({'token': rltCookie['token']})
+    #     return {'token': rltCookie['token']}
+
 
     def start_requests(self):
         # 配置kafka连接信息
+        # kafka_hosts = self.settings.get('KAFKA_HOSTS')
+        # kafka_topic = self.settings.get('KAFKA_TOPIC')
+        # reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
+        # client = KafkaClient(hosts=kafka_hosts)
+        # topic = client.topics[kafka_topic]
+        # # 配置kafka消费信息
+        # consumer = topic.get_balanced_consumer(
+        #     consumer_group=self.name,
+        #     managed=True,
+        #     auto_commit_enable=True
+        # )
+
+        # 配置kafka连接信息
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
-        kafka_topic = self.settings.get('KAFKA_TOPIC')
+        zookeeper_hosts = self.settings.get('ZOOKEEPER_HOSTS')
+        kafka_topic = self.settings.get('KAFKA_TOPIC_DATA')
         reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
-        client = KafkaClient(hosts=kafka_hosts)
+        logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic) + '\n')
+        client = KafkaClient(hosts=kafka_hosts, zookeeper_hosts=zookeeper_hosts, broker_version='0.10.1.0')
         topic = client.topics[kafka_topic]
+        partitions = topic.partitions
         # 配置kafka消费信息
-        consumer = topic.get_balanced_consumer(
+        consumer = topic.get_simple_consumer(
             consumer_group=self.name,
-            managed=True,
-            auto_commit_enable=True
+            reset_offset_on_start=reset_offset_on_start,
+            auto_commit_enable=True,
+            partitions=[partitions[self.partitionIdx]]
         )
+
         # 获取被消费数据的偏移量和消费内容
         for message in consumer:
             try:
@@ -56,17 +101,20 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
                     continue
                 # 信息分为message.offset, message.value
                 msg_value = message.value.decode()
-                msg_value_dict = eval(msg_value)
+                #msg_value_dict = eval(msg_value)
+                msg_value_dict = json.loads(msg_value)
                 if msg_value_dict['spider_name'] != 'kuaishou_shop_product_list':
                     continue
                 productId = msg_value_dict['productId']
+                logger.info('product_id: ' + str(productId))
                 pcursor = ''
                 offset = 0
                 curHeader = self.headers
                 curHeader['Referer'] = self.referer.format(productId)
+                time.sleep(random.choice(range(12, 20)))
                 yield scrapy.Request(self.productCommentUrl.format(productId, pcursor, offset),
                                      method='GET', callback=self.parse_product_comment, headers=curHeader,
-                                     cookies=self.getCookie(),
+                                     #cookies=self.getCookie(self.cookieIdx),
                                      meta={'productId': productId, 'offset': offset})
             except Exception as e:
                 logger.warning('Kafka message structure cannot be resolved :{}'.format(e))
@@ -80,11 +128,19 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
             print('get interface error: ' + response.text)
             return
         if 'comments' in rltJson:
-            commentItem = KuaishouShopProductCommentItem()
-            commentItem['spider_name'] = self.name
-            commentItem['productId'] = productId
-            commentItem['productComment'] = rltJson['comments']
-            yield commentItem
+            comments = rltJson['comments']
+            for comment in comments:
+                if 'commentId' in comment:
+                    commentItem = KuaishouShopProductCommentItem()
+                    commentItem['spider_name'] = self.name
+                    commentItem['productId'] = productId
+                    commentItem['commentId'] = comment['commentId']
+                    commentItem['productComment'] = comment
+                    if self.isCommentIdExistTable(comment['commentId']):
+                        logger.info('comment id exist: ' + comment['commentId'])
+                    else:
+                        logger.info('add one comment record, product_id: ' + str(productId))
+                        yield commentItem
 
         if 'pcursor' not in rltJson:
             return
@@ -94,8 +150,25 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
         offset += self.pageCount
         curHeader = self.headers
         curHeader['Referer'] = self.referer.format(productId)
-        time.sleep(random.choice(range(12,16)))
+        time.sleep(random.choice(range(6, 10)))
         yield scrapy.Request(self.productCommentUrl.format(productId, pcursor, offset),
                              method='GET', callback=self.parse_product_comment, headers=curHeader,
-                             cookies=self.getCookie(),
+                             #cookies=self.getCookie(self.cookieIdx),
                              meta={'productId': productId, 'offset': offset})
+
+
+    def isCommentIdExistTable(self, commentId):
+        sql = "select count(*) from kuaishou_scrapy_logs where item_id = '{}' and is_successed = 1".format(commentId)
+        self.mysql_client.query(sql)
+        d = self.mysql_client.fetchRow()
+        rowCount = d[0]
+        if rowCount > 0:
+            return True
+        else:
+            return False
+
+
+    def close(self):
+        self.mysql_client.close()
+        # self.red.close()
+

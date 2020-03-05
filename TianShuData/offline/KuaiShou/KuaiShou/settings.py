@@ -93,7 +93,8 @@ DOWNLOADER_MIDDLEWARES = {
 
 HTTPERROR_ALLOWED_CODES = [500, 400]
 # log
-LOG_LEVEL = 'INFO'
+#LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'WARNING'
 
 # 超时时间,超时尝试时间
 RETRY_ENABLED = True
@@ -101,11 +102,28 @@ RETRY_TIMES = 3
 DOWNLOAD_TIMEOUT = 7
 
 # kafka 相关信息及配置
+# KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
+# KAFKA_TOPIC = 'zhanqi_Test'
+# # 设置TOPIC是否从头消费
+# RESET_OFFSET_ON_START = False
+
+
+# kafka 相关信息及配置
+# # 富春云
+# KAFKA_HOSTS = 'zb2627:9092,zb2628:9092,zb2629:9092'
+# ZOOKEEPER_HOSTS = 'zb2627:2181,zb2628:2181,zb2629:2181'
+# KAFKA_TOPIC = 'kuaishou_test'
+# KAFKA_TOPIC_DATA = 'kuaishou_data'
+# RESET_OFFSET_ON_START = False
+# # 战旗beta
 KAFKA_HOSTS = 'zqhd1:9092,zqhd2:9092,zqhd3:9092'
-# KAFKA_TOPIC = 'tianshu_kuaishou'
-KAFKA_TOPIC = 'zhanqi_Test'
-# 设置TOPIC是否从头消费
-RESET_OFFSET_ON_START = True
+ZOOKEEPER_HOSTS = 'zqhd1:2181,zqhd2:2181,zqhd3:2181'
+KAFKA_TOPIC = 'kuaishou_userInfo_seeds'
+KAFKA_TOPIC_SHOP_SEED = 'kuaishou_shop_seeds'
+KAFKA_TOPIC_DATA = 'kuaishou_data'
+KAFKA_TOPIC_DATA_TAG = 'kuaishou_data_tag'   #该topic用于话题相关爬虫测试
+RESET_OFFSET_ON_START = False
+
 
 # 设置抓取酷炫的页数，<=0代表代表所有页面
 SPIDER_KUXUAN_PAGE_LIMIT = 7000
@@ -131,12 +149,13 @@ SENSITIVE_USER_INFO_QUERY = {
 PUBLIC_FEEDS_QUERY = {
     "operationName": "publicFeedsQuery",
     "variables": {
-        "principalId": "{%s}",
+        "principalId": "123",
         "pcursor": "0",
-        "count": 200
+        "count": 24
     },
-    "query": "query publicFeedsQuery($principalId: String, $pcursor: String, $count: Int) {\n  publicFeeds(principalId: $principalId, pcursor: $pcursor, count: $count) {\n    pcursor\n    live {\n      user {\n        id\n        kwaiId\n        eid\n        profile\n        name\n        living\n        __typename\n      }\n      watchingCount\n      src\n      title\n      gameId\n      gameName\n      categoryId\n      liveStreamId\n      playUrls {\n        quality\n        url\n        __typename\n      }\n      followed\n      type\n      living\n      redPack\n      liveGuess\n      anchorPointed\n      latestViewed\n      expTag\n      __typename\n    }\n    list {\n      photoId\n      caption\n      thumbnailUrl\n      poster\n      viewCount\n      likeCount\n      commentCount\n      timestamp\n      workType\n      type\n      useVideoPlayer\n      imgUrls\n      imgSizes\n      magicFace\n      musicName\n      location\n      liked\n      onlyFollowerCanComment\n      relativeHeight\n      width\n      height\n      user {\n        id\n        eid\n        name\n        profile\n        __typename\n      }\n      expTag\n      __typename\n    }\n    __typename\n  }\n}\n"
+    "query": "query publicFeedsQuery($principalId: String, $pcursor: String, $count: Int) {\n  publicFeeds(principalId: $principalId, pcursor: $pcursor, count: $count) {\n    pcursor\n    live {\n      user {\n        id\n        avatar\n        name\n        __typename\n      }\n      watchingCount\n      poster\n      coverUrl\n      caption\n      id\n      playUrls {\n        quality\n        url\n        __typename\n      }\n      quality\n      gameInfo {\n        category\n        name\n        pubgSurvival\n        type\n        kingHero\n        __typename\n      }\n      hasRedPack\n      liveGuess\n      expTag\n      __typename\n    }\n    list {\n      id\n      thumbnailUrl\n      poster\n      workType\n      type\n      useVideoPlayer\n      imgUrls\n      imgSizes\n      magicFace\n      musicName\n      caption\n      location\n      liked\n      onlyFollowerCanComment\n      relativeHeight\n      timestamp\n      width\n      height\n      counts {\n        displayView\n        displayLike\n        displayComment\n        __typename\n      }\n      user {\n        id\n        eid\n        name\n        avatar\n        __typename\n      }\n      expTag\n      __typename\n    }\n    __typename\n  }\n}\n"
 }
+
 COMMENT_lIST_QUERY = {
     "operationName": "commentListQuery",
     "variables": {
@@ -172,8 +191,12 @@ KUAISHOU_LIVE_WEB_ST = {
 }
 
 # REDIS配置信息
+# #战旗beta
 REDIS_HOST = 'zqhd5'
 REDIS_PORT = 6379
+# #富春云
+# REDIS_HOST = '10.8.26.105'
+# REDIS_PORT = 6379
 REDIS_DID_NAME = 'tianshu_did'
 REDIS_DID_EXPIRE_TIME = 1200
 REDIS_PROXYIP_NAME = 'tianshu_proxyip_kuaishou'
@@ -183,8 +206,17 @@ SPIDER_DID_SUPPLEMENTS_QUANTITY_PER_TIME = 20
 SPIDER_DID_POOL_WARNING_LINE = 120
 
 # MySQL配置信息
+# # 战旗beta
 MYSQL_HOST = 'zqhd3'
 MYSQL_USER = 'tianshu'
 MYSQL_PASSWORD = 'Tianshu_123'
 MYSQL_DATABASE = 'tianshuData'
 MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
+MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME = 'kuaishou_scrapy_logs'
+# #富春云
+# MYSQL_HOST = '10.8.26.106'
+# MYSQL_USER = 'scrapy'
+# MYSQL_PASSWORD = 'Scrapy_123'
+# MYSQL_DATABASE = 'tianshuData'
+# MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
+# MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME = 'kuaishou_scrapy_logs'

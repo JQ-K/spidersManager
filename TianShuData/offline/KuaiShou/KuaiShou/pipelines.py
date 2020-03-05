@@ -5,6 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 import datetime
+import json
 
 from pykafka import KafkaClient
 from redis import Redis
@@ -20,7 +21,8 @@ class KuaishouKafkaPipeline(object):
     def open_spider(self, spider):
         settings = get_project_settings()
         self.kafka_hosts = settings.get('KAFKA_HOSTS')
-        self.kafka_topic = settings.get('KAFKA_TOPIC')
+        # self.kafka_topic = settings.get('KAFKA_TOPIC_DATA')
+        self.kafka_topic = settings.get('KAFKA_TOPIC_DATA_TAG')  #用于话题相关爬虫测试
         client = KafkaClient(hosts=self.kafka_hosts)
         topic = client.topics[self.kafka_topic]
         self.producer = topic.get_producer()
@@ -34,7 +36,8 @@ class KuaishouKafkaPipeline(object):
         # if item['name'] != 'kuaishou':
         #     return item
         item['spider_datetime'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        msg = str(item).replace('\n', '').encode('utf-8')
+        # msg = str(item).replace('\n', '').encode('utf-8')
+        msg = bytes(json.dumps(dict(item)), encoding='utf-8')
         self.producer.produce(msg)
         spider.logger.info('Msg Produced kafka[%s]: %s' % (self.kafka_topic, msg))
         return item
@@ -104,3 +107,63 @@ class KuaishouUserSeedsMySQLPipeline(object):
     def close_spider(self, spider):
         self.mysql_client.close()
         spider.logger.info('Mysql[%s] Conn closed!' % (self.mysql_host))
+
+
+class KuaishouScrapyLogsPipeline(object):
+
+    def open_spider(self, spider):
+        settings = get_project_settings()
+        self.mysql_host = settings.get('MYSQL_HOST')
+        self.mysql_user = settings.get('MYSQL_USER')
+        self.mysql_password = settings.get('MYSQL_PASSWORD')
+        self.mysql_database = settings.get('MYSQL_DATABASE')
+        self.mysql_kuaishou_scrapy_logs_tablename = settings.get('MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME')
+        spider.logger.info(
+            'MySQLConn:host = %s,user = %s,db = %s' % (self.mysql_host, self.mysql_user, self.mysql_database))
+        self.mysql_client = MySQLClient(host=self.mysql_host, user=self.mysql_user, password=self.mysql_password,
+                                        dbname=self.mysql_database)
+
+    def process_item(self, item, spider):
+        msg = {}
+        msg['item_type'] = item['spider_name']
+        msg['is_successed'] = 1
+        msg['scrapy_time'] = item['spider_datetime']
+        #小店
+        if item['spider_name'] == 'kuaishou_shop_score':
+            msg['item_id'] = item['userId']
+        if item['spider_name'] == 'kuaishou_shop_product_list':
+            msg['item_id'] = item['productId']
+        if item['spider_name'] == 'kuaishou_shop_product_detail':
+            msg['item_id'] = item['productId']
+        if item['spider_name'] == 'kuaishou_shop_product_comment':
+            msg['item_id'] = item['commentId']
+        #视频
+        if item['spider_name'] == 'kuaishou_public_feeds':
+            msg['item_id'] = item['photo_id']
+        #话题
+        if item['spider_name'] == 'kuaishou_tag_rec_list_v5':
+            msg['item_id'] = item['tagId']
+        if item['spider_name'] == 'kuaishou_tag_info_v5':
+            msg['item_id'] = item['tagId']
+        if item['spider_name'] == 'kuaishou_tag_feed_hot_v5':
+            msg['item_id'] = str(item['tagId']) + '_' + str(item['photo_id'])
+        if item['spider_name'] == 'kuaishou_tag_feed_new_v5':
+            msg['item_id'] = str(item['tagId']) + '_' + str(item['photo_id'])
+
+        self.mysql_client.insert(self.mysql_kuaishou_scrapy_logs_tablename, msg)
+        self.mysql_client.commit()
+        spider.logger.info('Msg insert mysql[%s] table[%s]: %s' % (self.mysql_host, self.mysql_kuaishou_scrapy_logs_tablename, str(msg)))
+        return item
+
+    def close_spider(self, spider):
+        self.mysql_client.close()
+        spider.logger.info('Mysql[%s] Conn closed!' % (self.mysql_host))
+
+
+
+class KuaishouTestPipeline(object):
+    def process_item(self, item, spider):
+        item['spider_datetime'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(json.dumps(dict(item)))
+        print('\n\n')
+
