@@ -146,9 +146,9 @@ class KuaishouScrapyLogsPipeline(object):
         if item['spider_name'] == 'kuaishou_tag_info_v5':
             msg['item_id'] = item['tagId']
         if item['spider_name'] == 'kuaishou_tag_feed_hot_v5':
-            msg['item_id'] = item['tagId'] + '_' + item['photo_id']
+            msg['item_id'] = str(item['tagId']) + '_' + str(item['photo_id'])
         if item['spider_name'] == 'kuaishou_tag_feed_new_v5':
-            msg['item_id'] = item['tagId'] + '_' + item['photo_id']
+            msg['item_id'] = str(item['tagId']) + '_' + str(item['photo_id'])
 
         self.mysql_client.insert(self.mysql_kuaishou_scrapy_logs_tablename, msg)
         self.mysql_client.commit()
