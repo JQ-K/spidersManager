@@ -128,7 +128,7 @@ class KuaishouScrapyLogsPipeline(object):
         msg['item_type'] = item['spider_name']
         msg['is_successed'] = 1
         msg['scrapy_time'] = item['spider_datetime']
-
+        #小店
         if item['spider_name'] == 'kuaishou_shop_score':
             msg['item_id'] = item['userId']
         if item['spider_name'] == 'kuaishou_shop_product_list':
@@ -137,8 +137,18 @@ class KuaishouScrapyLogsPipeline(object):
             msg['item_id'] = item['productId']
         if item['spider_name'] == 'kuaishou_shop_product_comment':
             msg['item_id'] = item['commentId']
+        #视频
         if item['spider_name'] == 'kuaishou_public_feeds':
             msg['item_id'] = item['photo_id']
+        #话题
+        if item['spider_name'] == 'kuaishou_tag_rec_list_v5':
+            msg['item_id'] = item['tagId']
+        if item['spider_name'] == 'kuaishou_tag_info_v5':
+            msg['item_id'] = item['tagId']
+        if item['spider_name'] == 'kuaishou_tag_feed_hot_v5':
+            msg['item_id'] = item['tagId'] + '_' + item['photo_id']
+        if item['spider_name'] == 'kuaishou_tag_feed_new_v5':
+            msg['item_id'] = item['tagId'] + '_' + item['photo_id']
 
         self.mysql_client.insert(self.mysql_kuaishou_scrapy_logs_tablename, msg)
         self.mysql_client.commit()

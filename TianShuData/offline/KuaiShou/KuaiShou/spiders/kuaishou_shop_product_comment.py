@@ -10,6 +10,7 @@ from loguru import logger
 from scrapy.utils.project import get_project_settings
 
 from KuaiShou.items import KuaishouShopProductCommentItem
+from KuaiShou.utils.mysql import MySQLClient
 
 
 #cookie中需要token
@@ -38,6 +39,15 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
         self.useProxy = int(useProxy)
         self.cookieManual = int(cookieManual)
         self.cookieIdx = int(cookieIdx)
+
+        self.mysql_host = self.settings.get('MYSQL_HOST')
+        self.mysql_user = self.settings.get('MYSQL_USER')
+        self.mysql_password = self.settings.get('MYSQL_PASSWORD')
+        self.mysql_database = self.settings.get('MYSQL_DATABASE')
+        self.mysql_kuaishou_scrapy_logs_tablename = self.settings.get('MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME')
+        logger.info('MySQLConn:host = %s,user = %s,db = %s' % (self.mysql_host, self.mysql_user, self.mysql_database))
+        self.mysql_client = MySQLClient(host=self.mysql_host, user=self.mysql_user, password=self.mysql_password,
+                                        dbname=self.mysql_database)
 
         # self.redis_host = self.settings.get('REDIS_HOST')
         # self.redis_port = self.settings.get('REDIS_PORT')
@@ -126,8 +136,11 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
                     commentItem['productId'] = productId
                     commentItem['commentId'] = comment['commentId']
                     commentItem['productComment'] = comment
-                    logger.info('add one comment record, product_id: ' + str(productId))
-                    yield commentItem
+                    if self.isCommentIdExistTable(comment['commentId']):
+                        logger.info('comment id exist: ' + comment['commentId'])
+                    else:
+                        logger.info('add one comment record, product_id: ' + str(productId))
+                        yield commentItem
 
         if 'pcursor' not in rltJson:
             return
@@ -144,5 +157,18 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
                              meta={'productId': productId, 'offset': offset})
 
 
-    # def close(self):
-    #     self.red.close()
+    def isCommentIdExistTable(self, commentId):
+        sql = "select count(*) from kuaishou_scrapy_logs where item_id = '{}' and is_successed = 1".format(commentId)
+        self.mysql_client.query(sql)
+        d = self.mysql_client.fetchRow()
+        rowCount = d[0]
+        if rowCount > 0:
+            return True
+        else:
+            return False
+
+
+    def close(self):
+        self.mysql_client.close()
+        # self.red.close()
+
