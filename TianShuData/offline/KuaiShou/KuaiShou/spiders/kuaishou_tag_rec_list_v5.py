@@ -16,9 +16,9 @@ from KuaiShou.utils.signatureArgUtil import signatureArgUtil
 class KuaishouTagRecListV5Spider(scrapy.Spider):
     name = 'kuaishou_tag_rec_list_v5'
     custom_settings = {'ITEM_PIPELINES': {
-        'KuaiShou.pipelines.KuaishouTestPipeline': 699,
-        # 'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
-        # 'KuaiShou.pipelines.KuaishouScrapyLogsPipeline': 701
+        # 'KuaiShou.pipelines.KuaishouTestPipeline': 699,
+        'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
+        'KuaiShou.pipelines.KuaishouScrapyLogsPipeline': 701
     }}
     settings = get_project_settings()
 

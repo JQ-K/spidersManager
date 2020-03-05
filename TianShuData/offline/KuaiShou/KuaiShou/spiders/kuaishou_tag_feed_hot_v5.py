@@ -16,9 +16,9 @@ from KuaiShou.utils.signatureArgUtil import signatureArgUtil
 class KuaishouTagFeedHotV5Spider(scrapy.Spider):
     name = 'kuaishou_tag_feed_hot_v5'
     custom_settings = {'ITEM_PIPELINES': {
-        'KuaiShou.pipelines.KuaishouTestPipeline': 699,
-        # 'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
-        # 'KuaiShou.pipelines.KuaishouScrapyLogsPipeline': 701
+        # 'KuaiShou.pipelines.KuaishouTestPipeline': 699,
+        'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
+        'KuaiShou.pipelines.KuaishouScrapyLogsPipeline': 701
     }}
     settings = get_project_settings()
 
@@ -58,15 +58,57 @@ class KuaishouTagFeedHotV5Spider(scrapy.Spider):
 
 
     def start_requests(self):
-        tagId = 17842124
-        tagName = '我的快手影集'
-        mainUrl = self.getMainUrl({'pcursor': '0', 'tagName': tagName})
-        sig = self.sigUtil.getSig(mainUrl)
-        url = self.preUrl + mainUrl + self.sigPart.format(sig)
-        yield scrapy.Request(url, method='POST', headers=self.headers,
-                             callback=self.parseTagPhotoInfo,
-                             meta={'tagId': tagId, 'tagName': tagName})
+        # tagId = 17842124
+        # tagName = '我的快手影集'
+        # mainUrl = self.getMainUrl({'pcursor': '0', 'tagName': tagName})
+        # sig = self.sigUtil.getSig(mainUrl)
+        # url = self.preUrl + mainUrl + self.sigPart.format(sig)
+        # yield scrapy.Request(url, method='POST', headers=self.headers,
+        #                      callback=self.parseTagPhotoInfo,
+        #                      meta={'tagId': tagId, 'tagName': tagName})
 
+        # 配置kafka连接信息
+        kafka_hosts = self.settings.get('KAFKA_HOSTS')
+        zookeeper_hosts = self.settings.get('ZOOKEEPER_HOSTS')
+        # kafka_topic = self.settings.get('KAFKA_TOPIC_DATA')
+        kafka_topic = self.settings.get('KAFKA_TOPIC_DATA_TAG')  # 该topic用于话题相关爬虫测试
+        reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
+        logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic) + '\n')
+        client = KafkaClient(hosts=kafka_hosts, zookeeper_hosts=zookeeper_hosts, broker_version='0.10.1.0')
+        topic = client.topics[kafka_topic]
+        partitions = topic.partitions
+        # 配置kafka消费信息
+        consumer = topic.get_simple_consumer(
+            consumer_group=self.name,
+            reset_offset_on_start=reset_offset_on_start,
+            auto_commit_enable=True,
+            partitions=[partitions[self.partitionIdx]]
+        )
+
+        # 获取被消费数据的偏移量和消费内容
+        for message in consumer:
+            try:
+                if message is None:
+                    continue
+                # 信息分为message.offset, message.value
+                msg_value = message.value.decode()
+                # msg_value_dicte) = eval(msg_value)
+                msg_value_dict = json.loads(msg_value)
+                if msg_value_dict['spider_name'] != 'kuaishou_tag_rec_list_v5':
+                    continue
+                tagId = msg_value_dict['tagId']
+                tagName = msg_value_dict['tagName']
+                logger.info('tag_id: ' + str(tagId))
+                time.sleep(random.choice(range(15, 25)))
+
+                mainUrl = self.getMainUrl({'pcursor': '0', 'tagName': tagName})
+                sig = self.sigUtil.getSig(mainUrl)
+                url = self.preUrl + mainUrl + self.sigPart.format(sig)
+                yield scrapy.Request(url, method='POST', headers=self.headers,
+                                     callback=self.parseTagPhotoInfo,
+                                     meta={'tagId': tagId, 'tagName': tagName})
+            except Exception as e:
+                logger.warning('Kafka message structure cannot be resolved :{}'.format(e))
 
     def parseTagPhotoInfo(self, response):
         # print(response.text)
