@@ -99,7 +99,7 @@ class KuaishouTagFeedHotV5Spider(scrapy.Spider):
                 tagId = msg_value_dict['tagId']
                 tagName = msg_value_dict['tagName']
                 logger.info('tag_id: ' + str(tagId))
-                time.sleep(random.choice(range(15, 25)))
+                time.sleep(random.choice(range(30, 60)))
 
                 mainUrl = self.getMainUrl({'pcursor': '0', 'tagName': tagName})
                 sig = self.sigUtil.getSig(mainUrl)
@@ -131,6 +131,7 @@ class KuaishouTagFeedHotV5Spider(scrapy.Spider):
             photoItem['tagName'] = tagName
             photoItem['photo_id'] = photoInfo['photo_id']
             photoItem['photoInfo'] = photoInfo
+            logger.info('get one photo, tag_id: ' + str(photoItem['tagId']))
             yield photoItem
 
         if 'pcursor' in rlt_json:

@@ -99,7 +99,7 @@ class KuaishouTagInfoV5Spider(scrapy.Spider):
                 tagId = msg_value_dict['tagId']
                 tagName = msg_value_dict['tagName']
                 logger.info('tag_id: ' + str(tagId))
-                time.sleep(random.choice(range(15, 25)))
+                time.sleep(random.choice(range(30, 60)))
 
                 mainUrl = self.getMainUrl({'tagName': tagName})
                 sig = self.sigUtil.getSig(mainUrl)
@@ -127,6 +127,7 @@ class KuaishouTagInfoV5Spider(scrapy.Spider):
         tagItem['tagId'] = tagId
         tagItem['tagName'] = tagName
         tagItem['tagInfo'] = rlt_json['tagInfo']
+        logger.info('get one tag: ' + str(tagItem['tagId']))
         yield tagItem
 
 

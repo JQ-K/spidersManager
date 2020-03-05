@@ -84,6 +84,7 @@ class KuaishouTagRecListV5Spider(scrapy.Spider):
             tagItem['tagId'] = curTag['id']
             tagItem['tagName'] = curTag['name']
             tagItem['tagRecInfo'] = tagInfo
+            logger.info('get one tag: ' + str(tagItem['tagId']))
             yield tagItem
 
         if 'pcursor' in rlt_json:
