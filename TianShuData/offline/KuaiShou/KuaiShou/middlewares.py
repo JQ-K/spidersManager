@@ -111,7 +111,8 @@ class KuaishouDownloaderMiddleware(object):
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
         if spider.name in ['kuaishou_register_did',
                            'kuaishou_shop_score', 'kuaishou_shop_product_list',
-                           'kuaishou_tag_rec_list', 'kuaishou_tag_info', 'kuaishou_tag_feed_hot', 'kuaishou_tag_feed_new', ]:
+                           'kuaishou_tag_rec_list', 'kuaishou_tag_info', 'kuaishou_tag_feed_hot', 'kuaishou_tag_feed_new',
+                           'kuaishou_tag_rec_list_v5', 'kuaishou_tag_info_v5', 'kuaishou_tag_feed_hot_v5', 'kuaishou_tag_feed_new_v5', ]:
             return None
         # 两种方式，一种是设置headers，一个是直接设置cookies
         if spider.cookieManual:
@@ -203,7 +204,15 @@ class KuaishouDownloaderMiddleware(object):
         settings = get_project_settings()
         self.kuaishou_live_web_st = settings.get('KUAISHOU_LIVE_WEB_ST')
         self.uapool = settings.get('UAPOOL')
-        if spider.name not in ['kuaishou_tag_rec_list', 'kuaishou_tag_info', 'kuaishou_tag_feed_hot', 'kuaishou_tag_feed_new', ]:
+        if spider.name not in ['kuaishou_tag_rec_list',
+                               'kuaishou_tag_info',
+                               'kuaishou_tag_feed_hot',
+                               'kuaishou_tag_feed_new',
+                               'kuaishou_tag_rec_list_v5',
+                               'kuaishou_tag_info_v5',
+                               'kuaishou_tag_feed_hot_v5',
+                               'kuaishou_tag_feed_new_v5',
+                               ]:
             self.redis_host = settings.get('REDIS_HOST')
             self.redis_port = settings.get('REDIS_PORT')
             self.redis_did_name = settings.get('REDIS_DID_NAME')

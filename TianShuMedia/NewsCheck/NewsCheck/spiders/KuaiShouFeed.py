@@ -7,6 +7,7 @@ import re
 import datetime
 
 from loguru import logger
+from redis import Redis
 from NewsCheck.items import NewsInfo
 
 class KuaishoufeedSpider(scrapy.Spider):
@@ -32,22 +33,37 @@ class KuaishoufeedSpider(scrapy.Spider):
         'Content-Type':'application/json'
     }
 
-    cookies = {
-        'did': 'web_54091ed760f84f168198018254a24fec',
-    }
+    # cookies = {
+    #     'did': 'web_54091ed760f84f168198018254a24fec',
+    # }
 
     custom_settings = {'ITEM_PIPELINES': {
         'NewsCheck.pipelines.KuaiShouPipeline': 700,
     }}
 
 
-    def __init__(self, minTime='2020-01-24', *args, **kwargs):
+    def getCookie(self, cookieIdx):
+        conn = Redis(host='zqhd5', port=6379)
+        tempCookie = conn.hgetall('kuaishou_cookie_{}'.format(cookieIdx))
+        # conn.close()
+        rltCookie = {}
+        for key, val in tempCookie.items():
+            rltCookie[str(key, encoding="utf-8")] = str(val, encoding="utf-8")
+        # return {'did':rltCookie['did']}
+        # return rltCookie
+        return {'did': rltCookie['did']}
+
+
+    def __init__(self, minTime='2020-01-24', cookieIdx='1', *args, **kwargs):
         super(KuaishoufeedSpider, self).__init__(*args, **kwargs)
         self.minTime = minTime + " 00:00:00"
         self.minTimeStamp = self.strToTimeStamp(self.minTime) * 1000
+        self.cookieIdx = int(cookieIdx)
 
         #self.today = time.strftime("%Y-%m-%d", time.localtime(time.time()))
         self.maxTimeStamp = self.strToTimeStamp(self.getYesterday() + " 00:00:00") * 1000
+
+        self.cookies = self.getCookie(self.cookieIdx)
 
 
     def start_requests(self):
@@ -90,7 +106,6 @@ class KuaishoufeedSpider(scrapy.Spider):
                                  callback=self.parseFeedList, meta={'pid': self.principalId})
 
 
-
     def strToTimeStamp(self, timeStr):
         try:
             # 先转换为时间数组
@@ -104,7 +119,7 @@ class KuaishoufeedSpider(scrapy.Spider):
 
 
     def timeStampToStr(self, timeStamp):
-        return time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(int(str(timeStamp)[0:10])))
+        return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(str(timeStamp)[0:10])))
 
 
     def getYesterday(self):

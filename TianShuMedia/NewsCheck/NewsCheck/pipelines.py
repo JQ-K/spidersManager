@@ -174,6 +174,7 @@ class KuaiShouPipeline(object):
         self.today = time.strftime("%Y-%m-%d", time.localtime(time.time()))
         #self.path = '/Users/macbookpro/PycharmProjects/spidersManager/TianShuMedia/NewsCheck/'
         self.path = '/data/code/crawlab-master/data/kuaishou/ZJRB/'
+        #self.path = 'D:/ZJRB/'
         self.filepath = self.path + '{}.txt'.format(self.today)
         self.totalNum = 0
 

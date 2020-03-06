@@ -121,6 +121,7 @@ ZOOKEEPER_HOSTS = 'zqhd1:2181,zqhd2:2181,zqhd3:2181'
 KAFKA_TOPIC = 'kuaishou_userInfo_seeds'
 KAFKA_TOPIC_SHOP_SEED = 'kuaishou_shop_seeds'
 KAFKA_TOPIC_DATA = 'kuaishou_data'
+KAFKA_TOPIC_DATA_TAG = 'kuaishou_data_tag'   #该topic用于话题相关爬虫测试
 RESET_OFFSET_ON_START = False
 
 

@@ -1,11 +1,12 @@
-srcFilePath = '/Users/macbookpro/PycharmProjects/spidersManager/TianShuMedia/NewsCheck/douyin-202060.txt'
-dstFilePath = '/Users/macbookpro/PycharmProjects/spidersManager/TianShuMedia/NewsCheck/douyin-202060_result.txt'
+srcFilePath = 'D:/py_workspace/temp_work/spidersManager/TianShuMedia/NewsCheck/douyin-202061.txt'
+dstFilePath = 'D:/py_workspace/temp_work/spidersManager/TianShuMedia/NewsCheck/douyin-202061_result.txt'
 
 # wordList = ['冠状病毒', '隔离', '感染', '传染', '肺炎', '疫情', '确诊', '病例',
 #             '突发公共卫生事件', '重大卫生事件', '口罩', '驰援', '雷神山', '火神山',
 #             '小汤山', '野味', '武汉', 'N95', '封城', '钟南山', '卫健委', 'SARS',
 #             '消毒', '蝙蝠', '果子狸', '2019-nCov']
 
+#新冠病毒、
 wordList = ['肺炎', '疫情', '野味', '武汉', '病例', '浙一', '疾控', '发热', '口罩',
             'N95', '蝙蝠', '果子狸', '钟南山', '重大卫生事件', '冠状病毒', '卫健委',
             '发烧', '咳嗽', '隔离', '传染', '感染', '2019-nCov', '确诊', '突发公共卫生事件',
