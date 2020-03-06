@@ -19,10 +19,9 @@ class KuaishouUserCountsSpider(scrapy.Spider):
     custom_settings = {'ITEM_PIPELINES': {
         'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
         'KuaiShou.pipelines.KuaishouScrapyLogsMySQLPipeline': 701,
-        # 'KuaiShou.pipelines.KuaishouUserSeedsMySQLPipeline': 702,
     },
-    'CONCURRENT_REQUESTS_PER_DOMAIN' : 1,
-    'CONCURRENT_REQUESTS' : 1
+        'CONCURRENT_REQUESTS_PER_DOMAIN': 1,
+        'CONCURRENT_REQUESTS': 1
     }
     kuaishou_url = 'http://live.kuaishou.com/m_graphql'
 
@@ -100,18 +99,19 @@ class KuaishouUserCountsSpider(scrapy.Spider):
             rsp_search_overview_json = {'data': {'pcSearchOverview': None}}
             time.sleep(10)
         finally:
-            logger.info(rsp_search_overview_json)
+            # logger.info(rsp_search_overview_json)
             pc_search_overview = rsp_search_overview_json['data']['pcSearchOverview']
         # logger.info(pc_search_overview)
+        self.kuaishou_did_json = response.meta['Cookie']
         msg_value_dict = response.meta['msg_value_dict']
         search_overview_query = response.meta['bodyJson']
         current_retry_times = response.meta['retry_times'] + 1
         user_id = msg_value_dict['userId']
         if pc_search_overview == None:
             # 删掉did库中的失效did
-            kuaishou_did_json = response.meta['Cookie']
-            logger.info('RedisDid srem invaild did:{}'.format(str(kuaishou_did_json)))
-            self.conn.zrem(self.redis_did_name, str(kuaishou_did_json).encode('utf-8')[:-70])
+
+            logger.info('RedisDid srem invaild did:{}'.format(str(self.kuaishou_did_json)))
+            self.conn.zrem(self.redis_did_name, str(self.kuaishou_did_json).encode('utf-8')[:-70])
             # 再次尝试抓取，尝试3次
             logger.warning('userId: {}, pcSearchOverview authors list is None ! '.format(user_id))
             if current_retry_times > 7:

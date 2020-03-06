@@ -3,7 +3,7 @@
 __author__ = 'lish'
 
 
-import os
+import os,json
 import requests
 import re
 from fontTools.ttLib import TTFont
@@ -85,17 +85,13 @@ def get_mapping(page):
     m = re.search('(http.*?.woff)', page)
     if m:
         woff_link = m.group(1)
+        print(woff_link)
         headers1 = {
             'Host': "static.yximgs.com",
             'Connection': "keep-alive",
-            'Upgrade-Insecure-Requests': "1",
             'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36",
             'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
             'Accept-Encoding': "gzip, deflate, br",
-            'Accept-Language': "zh-CN,zh;q=0.9",
-            'Cache-Control': "no-cache",
-            'Postman-Token': "0d97a0b9-6e4d-4eb4-8192-8cf365f77ef6,ca4b1512-7916-4238-8c94-7b1afb3fad56",
-            'cache-control': "no-cache"
         }
         woff_res = requests.get(woff_link, headers=headers1, verify=False)
         file_name = woff_link.split('/')[-1]
@@ -106,14 +102,16 @@ def get_mapping(page):
         return mapping
 
 
-def kuaishou_decoder(url, str):
+def kuaishou_decoder(url, str, cookie=None):
+    if cookie == None:
+        cookie = 'clientid=3; did=web_d5d4a44a3564a3f9d896fd29876ca00f; client_key=65890b29; didv=1582085446462; kuaishou.live.bfb1s=477cb0011daca84b36b3a4676857e5a1'
     headers = {
         "Host": "live.kuaishou.com",
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
         "Accept-Encoding": "gzip, deflate, br",
         "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-        'Cookie': 'did=web_d54ea5e1190a41e481809b9cd17f92aa; didv=1574056613000; clientid=3; client_key=65890b29; kuaishou.live.bfb1s=477cb0011daca84b36b3a4676857e5a1; userId=1537755176; kuaishou.live.web_st=ChRrdWFpc2hvdS5saXZlLndlYi5zdBKgAaJugToRJTLfgDSM4JY6TDGIWXSFgsXYAL5vUVlgROHXOQqR0N9chBkFZKS-MFT2fgRLcWwmlgQj3-8aT8aISBY2UR_qdAiOzsG8SRvm2xtiNZd3gAPJSG-ssufpJMhRAQSIFeWDwVse84Rt6fHslyIGYge6ZCwWz-5Y9V014ABmcnrMGJ-t6IlMcEQP-fNt9xif434leuOV4AlQKuDbj8YaEhrHsWfESUHgv806qk-5eqStgCIg1w7uEFYlp5iQsH8xqegbYkRyGuuUAn0JV7PksrO2Z34oBTAB; kuaishou.live.web_ph=6fd3b324201a7554fd20880da29ade8d1458; userId=1537755176'
+        'Cookie': cookie
     }
 
     r = requests.get(url, headers=headers, verify=False)
@@ -126,8 +124,15 @@ def kuaishou_decoder(url, str):
     return decrypt_str(str, mapping)
 
 if __name__ == '__main__':
-    url = 'https://live.kuaishou.com/profile/h952814899'
-    res = kuaishou_decoder(url,'뷝껚.뾮w')
+    cookie = 'clientid=3; did=web_d5d4a44a3564a3f9d896fd29876ca00f; client_key=65890b29; didv=1582085446462; kuaishou.live.bfb1s=9b8f70844293bed778aade6e0a8f9942'
 
+    url = 'https://live.kuaishou.com/search/?keyword=w17861031657'
+    res = kuaishou_decoder(url,'뷍쳚.곭w')
+    print(res)
 
+    url = 'https://live.kuaishou.com/profile/w17861031657'
+    res = kuaishou_decoder(url,'뷍쳚.곭w')
+    print(res)
 
+    # font = TTFont('/Users/lish/Downloads/fontscn_yx77i032.woff')
+    # font.saveXML('fonts.xml')

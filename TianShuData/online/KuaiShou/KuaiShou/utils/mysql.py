@@ -25,7 +25,7 @@ class MySQLClient:
 
     def _conn(self):
         try:
-            self.conn = pymysql.connect(host=self.host, port=self.port, user=self.user, passwd=self.password)
+            self.conn = pymysql.connect(host=self.host, port=self.port, user=self.user, passwd=self.password, database=self.dbname)
             self.conn.autocommit(True)
             self.conn.set_charset(self.charset)
             self.cur = self.conn.cursor()
@@ -99,47 +99,59 @@ class MySQLClient:
         return d
 
     def insert(self, table_name, data):
-        self._reConn()
-        columns = data.keys()
-        _prefix = "".join(['INSERT INTO `', table_name, '`'])
-        _fields = ",".join(["".join(['`', column, '`']) for column in columns])
-        _values = ",".join(["%s" for i in range(len(columns))])
-        _sql = "".join([_prefix, "(", _fields, ") VALUES (", _values, ")"])
-        _params = [data[key] for key in columns]
-        return self.cur.execute(_sql, tuple(_params))
+        try:
+            self._reConn()
+            columns = data.keys()
+            _prefix = "".join(['INSERT INTO `', table_name, '`'])
+            _fields = ",".join(["".join(['`', column, '`']) for column in columns])
+            _values = ",".join(["%s" for i in range(len(columns))])
+            _sql = "".join([_prefix, "(", _fields, ") VALUES (", _values, ")"])
+            _params = [data[key] for key in columns]
+            return self.cur.execute(_sql, tuple(_params))
+        except pymysql.Error as e:
+            logger.error("Mysql Error:%s\nSQL:%s" % (e, _sql))
 
     def update(self, tbname, data, condition):
-        self._reConn()
-        condition_str = ''
-        for key, value in condition.items():
-            condition_str += ' {} = {} AND '.format(key, value)
-        condition_str = condition_str[:-5]
-        _fields = []
-        _prefix = "".join(['UPDATE `', tbname, '`', 'SET'])
-        for key in data.keys():
-            _fields.append("`%s` = '%s'" % (key, data[key]))
-        _sql = " ".join([_prefix, ','.join(_fields), 'WHERE', condition_str])
-        return self.cur.execute(_sql)
+        try:
+            self._reConn()
+            condition_str = ''
+            for key, value in condition.items():
+                condition_str += ' {} = "{}" AND '.format(key, value)
+            condition_str = condition_str[:-5]
+            _fields = []
+            _prefix = "".join(['UPDATE `', tbname, '`', 'SET'])
+            for key in data.keys():
+                _fields.append("`%s` = '%s'" % (key, data[key]))
+            _sql = " ".join([_prefix, ','.join(_fields), 'WHERE', condition_str])
+            return self.cur.execute(_sql)
+        except pymysql.Error as e:
+            logger.error("Mysql Error:%s\nSQL:%s" % (e, _sql))
 
     def delete(self, tbname, condition):
-        self._reConn()
-        condition_str = ''
-        for key, value in condition.items():
-            condition_str += ' {} = {} AND '.format(key, value)
-        condition_str = condition_str[:-5]
-        _prefix = "".join(['DELETE FROM  `', tbname, '`', ' WHERE '])
-        _sql = "".join([_prefix, condition_str])
-        return self.cur.execute(_sql)
+        try:
+            self._reConn()
+            condition_str = ''
+            for key, value in condition.items():
+                condition_str += ' {} = "{}" AND '.format(key, value)
+            condition_str = condition_str[:-5]
+            _prefix = "".join(['DELETE FROM  `', tbname, '`', ' WHERE '])
+            _sql = "".join([_prefix, condition_str])
+            return self.cur.execute(_sql)
+        except pymysql.Error as e:
+            logger.error("Mysql Error:%s\nSQL:%s" % (e, _sql))
 
     def select(self, tbname, condition):
-        self._reConn()
-        condition_str = ''
-        for key, value in condition.items():
-            condition_str += ' {} = {} AND '.format(key, value)
-        condition_str = condition_str[:-5]
-        _prefix = "".join(['SELECT * FROM  `', tbname, '`', ' WHERE '])
-        _sql = "".join([_prefix, condition_str])
-        return self.cur.execute(_sql)
+        try:
+            self._reConn()
+            condition_str = ''
+            for key, value in condition.items():
+                condition_str += ' {} = "{}" AND '.format(key, value)
+            condition_str = condition_str[:-5]
+            _prefix = "".join(['SELECT * FROM  `', tbname, '`', ' WHERE '])
+            _sql = "".join([_prefix, condition_str])
+            return self.cur.execute(_sql)
+        except pymysql.Error as e:
+            logger.error("Mysql Error:%s\nSQL:%s" % (e, _sql))
 
     def getLastInsertId(self):
         self._reConn()

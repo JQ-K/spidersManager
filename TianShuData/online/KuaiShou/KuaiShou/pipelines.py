@@ -28,6 +28,8 @@ class KuaishouKafkaPipeline(object):
         spider.logger.info('KafkaClient:hosts = %s,topic = %s' % (self.kafka_hosts, self.kafka_topic))
 
     def process_item(self, item, spider):
+        if item ==None or int(item['is_successed'])<0:
+            return item
         # 不同的蜘蛛使用不同的管道，也可以选用如下方法：
         # if spider.name != 'kuxuan_kol_user':
         #     return item
@@ -77,27 +79,21 @@ class KuaishouUserSeedsMySQLPipeline(object):
                                         dbname=self.mysql_database)
 
     def process_item(self, item, spider):
-        if int(item['is_successed'])<0:
-            return None
+        if item ==None or int(item['is_successed'])<0:
+            return item
         msg = {}
-        msg['userId'] = item['userId']
-        msg['kwaiId'] = item['kwaiId']
-        if msg['kwaiId'] == '':
-            msg['kwaiId'] = item['user_id']
-        msg['principalId'] = item['kwaiId']
-        if 'principalId' in list(item.keys()):
-            msg['principalId'] = item['principalId']
+        msg['principalId'] = item['principalId']
         msg['status'] = 1
         # 粉丝数为False，即更新种子库 principalId，更新后我们按照100W的粉丝数给其初始化下次抓取时间
         msg['next_scheduling_date'] = SeedsFansPlan(item['fan'])
         msg['pre_scheduling_date'] = datetime.datetime.now().strftime("%Y-%m-%d")
-        select_res = self.mysql_client.select(self.mysql_kuaishou_user_seeds_tablename, {"userId": msg['userId']})
+        select_res = self.mysql_client.select(self.mysql_kuaishou_user_seeds_tablename, {"principalId": msg['principalId']})
         if select_res == 0:
             self.mysql_client.insert(self.mysql_kuaishou_user_seeds_tablename,msg)
             self.mysql_client.commit()
             spider.logger.info('Msg insert mysql[%s] table[%s]: %s' % (self.mysql_host, self.mysql_kuaishou_user_seeds_tablename, str(msg)))
             return item
-        self.mysql_client.update(self.mysql_kuaishou_user_seeds_tablename,msg, {"userId": msg['userId']})
+        self.mysql_client.update(self.mysql_kuaishou_user_seeds_tablename,msg, {"principalId": msg['principalId']})
         self.mysql_client.commit()
         spider.logger.info('Msg update mysql[%s] table[%s]: %s' % (self.mysql_host, self.mysql_kuaishou_user_seeds_tablename, str(msg)))
         return item
