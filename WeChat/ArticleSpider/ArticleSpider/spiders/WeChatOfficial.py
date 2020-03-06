@@ -10,19 +10,21 @@ from loguru import logger
 from ArticleSpider.items import *
 from ArticleSpider.utils.mysqlUtil import *
 from ArticleSpider.utils.toKafka import *
+from ArticleSpider.utils.readConfig import *
+from ArticleSpider.utils.writeConfig import  *
 from scrapy.utils.project import get_project_settings
-
+import configparser
 import datetime
 
 class WeChatOfficalAccountsSpider(scrapy.Spider):
-    name = 'WeChatOfficalAccountTest'
+    name = 'WeChatOffical'
     headers={
         "User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36 QBCore/4.0.1278.400 QQBrowser/9.0.2524.400 Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2875.116 Safari/537.36 NetType/WIFI MicroMessenger/7.0.5 WindowsWechat" ,
    }
     settings = get_project_settings()
 
     def __init__(self, partitionIdx='0',offset=0):
-        allowed_domains=['mp.weixin.qq.com']
+
         self.partitionIdx=int(partitionIdx)
         self.offset = offset
         self.headers = {
@@ -36,7 +38,6 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
         #param: mid, sn, idx, scene
         self.articalBody = "mid={}&sn={}&idx={}&scene={}&is_only_read=1"
 
-
         #初始化redis
         self.redis_host = self.settings.get('REDIS_HOST')
         self.redis_port = self.settings.get('REDIS_PORT')
@@ -48,6 +49,9 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
 
         self.filePath = self.settings.get('FILE_PATH')  #需要在服务器上创建该路径，待做
         self.OtherTypeMsgfile = open(self.filePath+"OtherTypeMsgfile.txt",mode='a',  encoding='UTF-8')
+
+
+
         # 配置kafka连接信息
         self.kafka_hosts = self.settings.get('KAFKA_HOSTS')
         self.zookeeper_hosts=self.settings.get('ZOOKEEPER_HOSTS')
@@ -57,12 +61,6 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
         self.kafkaClient = KafkaClient(hosts=self.kafka_hosts,zookeeper_hosts=self.zookeeper_hosts, broker_version='0.10.1.0')
         logger.info('kafka info, hosts:{},zookeeper_hosts:{}, topic:{}'.format(self.kafka_hosts,self.zookeeper_hosts, self.kafka_topic))
 
-        # self.biz_list=mysqlInfo().getAllAccountFromMySQL('biz')
-        # mysqlInfo().close() #里面有个数据库的连接需要关闭
-        # logger.info('biz_list:{}'.format(''.join(self.biz_list)))
-        # # biz_list=['MzAxMTM3OTI4Mw==','']
-
-        # wechatParams.bizsToKafka(biz_list)
 
     def start_requests(self):
         cnt=0
@@ -101,7 +99,7 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
             general_msg_list = rltJson['general_msg_list']
             msg_list= json.loads(general_msg_list)['list']  # 获取文章列表
             logger.info(msg_list)
-
+            ArticalNumList=[]
             for msg in msg_list:   #从时间最早的开始爬取，依次爬到第7天，msg_list中有10天的量,但是日期范围可能是覆盖15天的
                 comm_msg_info = msg['comm_msg_info']  # 该数据是本次推送多篇文章公共的
                 #没有单篇文章的发布时间，这一天的文章有一个统一的时间，存在于一天的list中
@@ -110,7 +108,7 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
                 diff_days=(crawl_time-publish_time).days
                 logger.info('当前解析{}天前的文章列表'.format(diff_days))
                 # logger.info('{},{}'.format(str(now_unix_time), publish_time.strftime('%Y-%m-%d %H:%M:%S')))
-                if diff_days >7:
+                if diff_days >3:
                     logger.info("近7天数据已经爬完啦，当前日期是{}，相差{}天，退出循环"\
                                 .format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now_unix_time)),str(diff_days)))
                     break
@@ -122,9 +120,9 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
                #文章表中七日阅读数，即publish_time-crawl_time=7day，将该值更新到数据库中，微信名称、微信账号、SN是唯一标识
                #假如这7天内的数据还没有爬完，key就失效的情况，如何继续上一次爬虫，根据文件的id
                '''
-                if diff_days not in [1,3,7]:  #一个公众号下，只抓取符合时间的文章
-                    continue
-
+                # if diff_days not in [1,3]:  #一个公众号下，只抓取符合时间的文章
+                #     continue
+                #保存0，1，2，3天文章的数量
                 if msg_type==49:  #需要爬取全部内容
                     # 49：图文消息：，1：文字消息，3：图片消息
                     logger.info("start to deal type 49")
@@ -136,61 +134,26 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
                         # 本次推送的首条文章,
                         logger.info("first artical")
                         oneDayArticalList.append(app_msg_ext_info)
-                        # logger.info('other artical')
-                        # multi_app_msg_item_list = app_msg_ext_info.get('multi_app_msg_item_list')
-                        # if multi_app_msg_item_list:
-                        #     # for item in multi_app_msg_item_list:
-                        #     oneDayArticalList+= multi_app_msg_item_list
-                        for info in oneDayArticalList:
-                            articalItem = ArticalItem()
-                            logger.info("start to  parse one article")
-                            content_url_origin = info.get('content_url','')  # 微信地址
-                            # logger.info('content_url_origin')
-                            # logger.info(content_url_origin)
-                            # #文章永久链接
-                            content_url = content_url_origin.replace('amp;', '').replace('#wechat_redirect', '').replace('http', 'https')
-                            curUrl = content_url_origin.replace("http://mp.weixin.qq.com/s?", "").replace("#wechat_redirect", "")
-                            paramList = curUrl.split(self.spaceMark)
-                            mid = ""
-                            sn = ""
-                            idx = ""
-                            scene = ""
-                            for curParam in paramList:
-                                if curParam.startswith("mid="):
-                                    mid = curParam[4:]
-                                if curParam.startswith("sn="):
-                                    sn = curParam[3:]
-                                if curParam.startswith("idx="):
-                                    idx = curParam[4:]
-                                if curParam.startswith("scene="):
-                                    scene = curParam[6:]
+
+                        logger.info('other artical')
+                        multi_app_msg_item_list = app_msg_ext_info.get('multi_app_msg_item_list')
+                        if multi_app_msg_item_list:
+                            # for item in multi_app_msg_item_list:
+                            oneDayArticalList+= multi_app_msg_item_list
+                    self.writeToConfig(diff_days,len(oneDayArticalList))
 
 
-                            articalItem['biz']=paramsDict.get('__biz','')
-                            articalItem['SN']=sn
-                            publish_time_str = publish_time.strftime('%Y-%m-%d %H:%M:%S')
-                            articalItem['publish_time']=publish_time_str
-                            # diff_days==3 or diff_days==7 只有以上两个字段
-                            if  diff_days==1:
-                                title = info.get('title','')  # 标题
-                                author = info.get('author')  # 作者   #diff_days=3时，标题、作者可不用解析
-                                articalItem['SN']=sn
-                                articalItem['title']=title
-                                articalItem['author']=author
-                                articalItem['article_url']=content_url
-                                articalItem['rank']=idx
+                    #按键精灵脚本2读取参数，进行点击
+                    #fiddler捕获每一篇文章的参数传给kafka，再逐一进行解析
 
-                            logger.info("articalItem:")
-                            logger.info(articalItem)
-
-                            curBody = self.articalBody.format(mid, sn, idx, scene)
-                                                                                                                             # MzAxMDI3NzA1OA==
-                            yield scrapy.Request(self.articalUrl.format(paramsDict.get('uin',''), paramsDict.get('key',''), 'MzAxMDI3NzA1OA%3D%3D'),
-                                 body=curBody, method='POST',
-                                 headers=self.headers,
-                                 callback=self.parseArticalNum,
-                                 dont_filter=True,
-                                 meta={'articalItem': articalItem,'diff_days':diff_days})
+                    curBody = ''
+                                                                                                                     # MzAxMDI3NzA1OA==
+                    yield scrapy.Request(self.articalUrl.format(paramsDict.get('uin',''), paramsDict.get('key',''), 'MzAxMDI3NzA1OA%3D%3D'),
+                         body=curBody, method='POST',
+                         headers=self.headers,
+                         callback=self.parseArticalNum,
+                         dont_filter=True,
+                         meta={'diff_days':diff_days})
                 else:
                     logger.info("msg_type!=49 时list msg ={} ,可查看除type 49以外的其他类型" .format(str(msg)) )
                     #保存到服务器，写入文本文件
@@ -221,6 +184,15 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
             self.red.hmset(self.redis_wechat_crawlInfo,{__biz:now_unix_time})   #
             # bizsToKafka(self.kafkaClient,self.kafka_topic,[__biz])
 
+    def writeToConfig(self,diff_days,num):
+        sectionName='wechatArtical_'+str(diff_days)
+        rConifg=ReadConifg(self.filePath,"config.ini")
+        sectionList=rConifg.read_sections()
+        #将这个list传给windows，写入Config.ini中
+        wConfig=WriteConfig(self.filePath,"config.ini")
+        if sectionName in sectionList:# 如果分组存在则先删除
+            wConfig.remove_section(sectionName)
+        wConfig.set_options(sectionName, 'num', num)
 
     def parseArticalNum(self, response):
         #cookie半途失效，可能会导致response.status == 200
@@ -242,13 +214,6 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
         # if 'comment_count' in rltJson:   #猜测：这个评论是总的评论数，而微信界面显示的是精选评论，精选评论在另一个接口
         #     articalItem['_'+diff_days+'_day_comment_count'] = rltJson['comment_count']
         yield articalItem
-
-
-
-
-
-
-
 
 
 
