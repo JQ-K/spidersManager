@@ -20,5 +20,7 @@ TianShuData/online/KuaiShou/KuaiShou/spiders/__pycache__/
 TianShuData/online/KuaiShou/KuaiShou/utils/__pycache__/
 TianShuData/online/KuaiShou/*.zip
 
-
-
+TianShuMedia/NewsCheck/.idea/
+TianShuMedia/NewsCheck/NewsCheck/__pycache__/
+TianShuMedia/NewsCheck/NewsCheck/test/
+TianShuMedia/NewsCheck/*.zip
