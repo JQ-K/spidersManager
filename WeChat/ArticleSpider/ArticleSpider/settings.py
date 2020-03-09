@@ -144,6 +144,7 @@ ZOOKEEPER_HOSTS = 'zb2627:2181,zb2628:2181,zb2629:2181'
 KAFKA_TOPIC = 'principal_id'
 # KAFKA_TOPIC_WECHAT='wechat_biz'
 KAFKA_TOPIC_WECHAT='wechat_biz_one'
+KAFKA_TOPIC_WECHAT_SN='wechat_sn'
 # 设置TOPIC是否从头消费
 RESET_OFFSET_ON_START = False
 
@@ -167,6 +168,7 @@ REDIS_DID_NAME = 'tianshu_did'
 REDIS_DID_EXPIRE_TIME = 3600
 
 REDIS_WECHAT_PARAMS='wechat_params'
+REDIS_WECHAT_NUMPARAMS='wechat_numparams'
 REDIS_WECHAT_CRAWLINFO='wechat_crawl_info'
 REDIS_WECHAT_CRAWLINFO_EXPIRE_TIME=43200  #12小时
 
@@ -192,4 +194,4 @@ USE_PROXY=False
 
 
 # OTHER_TYPE_MSG_FILE_PATH = '/data/code/crawlab/data/wechat'
-OTHER_TYPE_MSG_FILE_PATH ='d:/data'
+FILE_PATH ='D:/anjianParam'

@@ -45,7 +45,7 @@ class WeChatOfficalAccountsSpider(scrapy.Spider):
         self.redis_wechat_crawlInfo_expire_time = settings.get('REDIS_WECHAT_CRAWLINFO_EXPIRE_TIME')
         self.red.expire(self.redis_wechat_crawlInfo, self.redis_wechat_crawlInfo_expire_time)
 
-        self.filePath = self.settings.get('OTHER_TYPE_MSG_FILE_PATH')  #需要在服务器上创建该路径，待做
+        self.filePath = self.settings.get('FILE_PATH')  #需要在服务器上创建该路径，待做
         self.OtherTypeMsgfile = open(self.filePath+"OtherTypeMsgfile.txt",mode='a',  encoding='UTF-8')
         # 配置kafka连接信息
         self.kafka_hosts = self.settings.get('KAFKA_HOSTS')
