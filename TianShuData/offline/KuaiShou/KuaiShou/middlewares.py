@@ -204,18 +204,23 @@ class KuaishouDownloaderMiddleware(object):
         settings = get_project_settings()
         self.kuaishou_live_web_st = settings.get('KUAISHOU_LIVE_WEB_ST')
         self.uapool = settings.get('UAPOOL')
-        if spider.name not in ['kuaishou_tag_rec_list',
-                               'kuaishou_tag_info',
-                               'kuaishou_tag_feed_hot',
-                               'kuaishou_tag_feed_new',
-                               'kuaishou_tag_rec_list_v5',
-                               'kuaishou_tag_info_v5',
-                               'kuaishou_tag_feed_hot_v5',
-                               'kuaishou_tag_feed_new_v5',
-                               ]:
-            self.redis_host = settings.get('REDIS_HOST')
-            self.redis_port = settings.get('REDIS_PORT')
-            self.redis_did_name = settings.get('REDIS_DID_NAME')
-            self.redis_proxyip_name = settings.get('REDIS_PROXYIP_NAME')
-            self.conn = Redis(host=self.redis_host, port=self.redis_port)
+        # if spider.name not in ['kuaishou_tag_rec_list',
+        #                        'kuaishou_tag_info',
+        #                        'kuaishou_tag_feed_hot',
+        #                        'kuaishou_tag_feed_new',
+        #                        'kuaishou_tag_rec_list_v5',
+        #                        'kuaishou_tag_info_v5',
+        #                        'kuaishou_tag_feed_hot_v5',
+        #                        'kuaishou_tag_feed_new_v5',
+        #                        ]:
+        #     self.redis_host = settings.get('REDIS_HOST')
+        #     self.redis_port = settings.get('REDIS_PORT')
+        #     self.redis_did_name = settings.get('REDIS_DID_NAME')
+        #     self.redis_proxyip_name = settings.get('REDIS_PROXYIP_NAME')
+        #     self.conn = Redis(host=self.redis_host, port=self.redis_port)
+        self.redis_host = settings.get('REDIS_HOST')
+        self.redis_port = settings.get('REDIS_PORT')
+        self.redis_did_name = settings.get('REDIS_DID_NAME')
+        self.redis_proxyip_name = settings.get('REDIS_PROXYIP_NAME')
+        self.conn = Redis(host=self.redis_host, port=self.redis_port)
         spider.logger.info('Spider opened: %s' % spider.name)

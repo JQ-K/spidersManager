@@ -70,8 +70,8 @@ class KuaishouTagInfoV5Spider(scrapy.Spider):
         # 配置kafka连接信息
         kafka_hosts = self.settings.get('KAFKA_HOSTS')
         zookeeper_hosts = self.settings.get('ZOOKEEPER_HOSTS')
-        # kafka_topic = self.settings.get('KAFKA_TOPIC_DATA')
-        kafka_topic = self.settings.get('KAFKA_TOPIC_DATA_TAG')   #该topic用于话题相关爬虫测试
+        kafka_topic = self.settings.get('KAFKA_TOPIC_DATA')
+        # kafka_topic = self.settings.get('KAFKA_TOPIC_DATA_TAG')   #该topic用于话题相关爬虫测试
         reset_offset_on_start = self.settings.get('RESET_OFFSET_ON_START')
         logger.info('kafka info, hosts:{}, topic:{}'.format(kafka_hosts, kafka_topic) + '\n')
         client = KafkaClient(hosts=kafka_hosts, zookeeper_hosts=zookeeper_hosts, broker_version='0.10.1.0')
