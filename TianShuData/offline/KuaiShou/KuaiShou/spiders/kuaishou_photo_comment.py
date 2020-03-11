@@ -15,9 +15,9 @@ from KuaiShou.utils.mysql import MySQLClient
 class KuaishouPhotoCommentSpider(scrapy.Spider):
     name = 'kuaishou_photo_comment'
     custom_settings = {'ITEM_PIPELINES': {
-        'KuaiShou.pipelines.KuaishouTestPipeline': 699,
-        # 'KuaiShou.pipelines.KuaishouFilePipeline': 700,
-        # 'KuaiShou.pipelines.KuaishouScrapyLogsPipeline': 701,
+        # 'KuaiShou.pipelines.KuaishouTestPipeline': 699,
+        'KuaiShou.pipelines.KuaishouFilePipeline': 700,
+        'KuaiShou.pipelines.KuaishouScrapyLogsPipeline': 701,
     }}
     settings = get_project_settings()
 
