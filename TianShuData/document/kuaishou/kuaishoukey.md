@@ -1102,3 +1102,90 @@
 	},
 	"spider_datetime": "2020-02-29 14:03:51"
 }
+
+11. 视频评论信息
+{
+	"spider_name": "kuaishou_photo_comment",
+	"photo_id": "3x7qgrnnavc5tja",
+	"commentId": "158843589390",
+	"commentInfo": {
+		"commentId": "158843589390",
+		"authorId": "353658718",
+		"authorName": "媛宝兔兔🐰🐰",
+		"content": "新年快乐，祝娜姐全家幸福也祝跳跳和俏俏健康茁壮成长[赞][赞][赞]",
+		"headurl": "https://js2.a.yximgs.com/uhead/AB/2019/06/24/16/BMjAxOTA2MjQxNjQ5MzlfMzUzNjU4NzE4XzJfaGQxNV80NjA=_s.jpg",
+		"timestamp": 1577777387088,
+		"authorEid": "3xfi7z53dztjmt6",
+		"status": "done",
+		"subCommentCount": "155",
+		"subCommentsPcursor": "158849881539",
+		"likedCount": "1.6w",
+		"liked": false,
+		"subComments": [{
+			"commentId": "158847102650",
+			"authorId": "1003899050",
+			"authorName": "90后《岁月》",
+			"content": "回复 鹏鹏⭐满天星辰：[赞][赞]",
+			"headurl": "https://js2.a.yximgs.com/uhead/AB/2019/12/22/18/BMjAxOTEyMjIxODE0NTRfMTAwMzg5OTA1MF8yX2hkMTk2XzE2NQ==_s.jpg",
+			"timestamp": 1577778400744,
+			"authorEid": "3xvbtz4q7zjc2kw",
+			"status": "done",
+			"replyToUserName": "鹏鹏⭐满天星辰",
+			"replyTo": "520939510",
+			"replyToEid": "3xrnsan7y8w9xzu",
+			"__typename": "SubComment"
+		}, {
+			"commentId": "158847981678",
+			"authorId": "535294647",
+			"authorName": "无敌美少女战士✨",
+			"content": "回复 媛宝兔兔🐰🐰：[赞][赞][赞]",
+			"headurl": "https://tx2.a.yximgs.com/uhead/AB/2020/03/08/19/BMjAyMDAzMDgxOTI3MTdfNTM1Mjk0NjQ3XzJfaGQxOTVfODcw_s.jpg",
+			"timestamp": 1577778647381,
+			"authorEid": "3xrc2ptddchfbzy",
+			"status": "done",
+			"replyToUserName": "媛宝兔兔🐰🐰",
+			"replyTo": "353658718",
+			"replyToEid": "3xfi7z53dztjmt6",
+			"__typename": "SubComment"
+		}, {
+			"commentId": "158848788013",
+			"authorId": "1522879126",
+			"authorName": "施舍温柔♞",
+			"content": "回复 媛宝兔兔🐰🐰：[赞][赞][赞]",
+			"headurl": "https://js2.a.yximgs.com/uhead/AB/2020/03/10/09/BMjAyMDAzMTAwOTQ4MzdfMTUyMjg3OTEyNl8yX2hkNDk2Xzk4_s.jpg",
+			"timestamp": 1577778870250,
+			"authorEid": "3xgk492p954eui4",
+			"status": "done",
+			"replyToUserName": "媛宝兔兔🐰🐰",
+			"replyTo": "353658718",
+			"replyToEid": "3xfi7z53dztjmt6",
+			"__typename": "SubComment"
+		}],
+		"__typename": "Comment"
+	},
+	"hasSubComment": true,
+	"spider_datetime": "2020-03-11 13:35:29"
+}
+
+12. 视频子评论信息
+{
+	"spider_name": "kuaishou_photo_sub_comment",
+	"photo_id": "3x7qgrnnavc5tja",
+	"rootCommentId": "158878958708",
+	"commentId": "159041322328",
+	"commentInfo": {
+		"commentId": "159041322328",
+		"authorId": "1314330984",
+		"authorName": "9520享受🍹😋甜美",
+		"content": "回复 牛奶咖啡☕＠加面包：新年快乐娜姐姐",
+		"headurl": "https://js2.a.yximgs.com/uhead/AB/2020/01/10/09/BMjAyMDAxMTAwOTQyMTNfMTMxNDMzMDk4NF8yX2hkNjJfNzQz_s.jpg",
+		"timestamp": 1577807572406,
+		"authorEid": "3xjtraddn8na8fu",
+		"status": "done",
+		"replyToUserName": "牛奶咖啡☕＠加面包",
+		"replyTo": "627910311",
+		"replyToEid": "3xt4kkcc96zh4e6",
+		"__typename": "SubComment"
+	},
+	"spider_datetime": "2020-03-11 14:38:28"
+}

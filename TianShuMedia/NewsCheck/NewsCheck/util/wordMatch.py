@@ -1,5 +1,5 @@
-srcFilePath = 'D:/py_workspace/temp_work/spidersManager/TianShuMedia/NewsCheck/douyin-202061.txt'
-dstFilePath = 'D:/py_workspace/temp_work/spidersManager/TianShuMedia/NewsCheck/douyin-202061_result.txt'
+srcFilePath = 'D:/py_workspace/temp_work/spidersManager/TianShuMedia/NewsCheck/douyin-202062.txt'
+dstFilePath = 'D:/py_workspace/temp_work/spidersManager/TianShuMedia/NewsCheck/douyin-202062_result.txt'
 
 # wordList = ['冠状病毒', '隔离', '感染', '传染', '肺炎', '疫情', '确诊', '病例',
 #             '突发公共卫生事件', '重大卫生事件', '口罩', '驰援', '雷神山', '火神山',

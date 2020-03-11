@@ -40,7 +40,7 @@ class KuaishouUserInfoIterm(scrapy.Item):
     userId = scrapy.Field()
     kwaiId = scrapy.Field()
     principalId = scrapy.Field()
-    constellation  = scrapy.Field()
+    constellation = scrapy.Field()
     cityName = scrapy.Field()
     fan = scrapy.Field()
     follow = scrapy.Field()
@@ -61,11 +61,22 @@ class KuaishouUserPhotoInfoIterm(scrapy.Item):
     user_photo_info = scrapy.Field()
 
 
-class KuaishouPhotoCommentInfoIterm(scrapy.Item):
+class KuaishouPhotoCommentItem(scrapy.Item):
     spider_name = scrapy.Field()
     spider_datetime = scrapy.Field()
     photo_id = scrapy.Field()
-    photo_comment_info = scrapy.Field()
+    commentId = scrapy.Field()
+    commentInfo = scrapy.Field()
+    hasSubComment = scrapy.Field() #该条评论是否有子评论
+
+
+class KuaishouPhotoSubCommentItem(scrapy.Item):
+    spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
+    photo_id = scrapy.Field()
+    rootCommentId = scrapy.Field()
+    commentId = scrapy.Field()
+    commentInfo = scrapy.Field()
 
 
 class KuaishouShopInfoIterm(scrapy.Item):

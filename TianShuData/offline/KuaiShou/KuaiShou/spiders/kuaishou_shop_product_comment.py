@@ -158,7 +158,7 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
 
 
     def isCommentIdExistTable(self, commentId):
-        sql = "select count(*) from kuaishou_scrapy_logs where item_id = '{}' and is_successed = 1".format(commentId)
+        sql = "select count(*) from kuaishou_scrapy_logs where item_id = '{}' and is_successed = 1 and item_type = '{}'".format(commentId, self.name)
         self.mysql_client.query(sql)
         d = self.mysql_client.fetchRow()
         rowCount = d[0]

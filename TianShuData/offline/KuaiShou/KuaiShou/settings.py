@@ -220,3 +220,8 @@ MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME = 'kuaishou_scrapy_logs'
 # MYSQL_DATABASE = 'tianshuData'
 # MYSQL_KUAISHOU_USER_SEEDS_TABLENAME = 'kuaishou_user_seeds'
 # MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME = 'kuaishou_scrapy_logs'
+
+
+FILE_PATH_PHOTO_COMMENT = '/data/code/crawlab-master/data/kuaishou/photo_comment/'
+FILE_PATH_PHOTO_SUB_COMMENT = '/data/code/crawlab-master/data/kuaishou/photo_sub_comment/'
+

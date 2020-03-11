@@ -145,7 +145,8 @@ class KuaishouDownloaderMiddleware(object):
                 if len(parts) == 2:
                     cookies_all[parts[0]] = parts[1]
 
-            if spider.name in ['kuaishou_shop_product_detail', 'kuaishou_public_feeds']:
+            if spider.name in ['kuaishou_shop_product_detail', 'kuaishou_public_feeds',
+                               'kuaishou_photo_comment', 'kuaishou_photo_sub_comment']:
                 if 'did' in cookies_all:
                     cookies_dict = {'did': cookies_all['did']}
                 else:

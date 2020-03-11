@@ -6,9 +6,11 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 import datetime
 import json
+import time
 
 from pykafka import KafkaClient
 from redis import Redis
+from loguru import logger
 from scrapy.utils.project import get_project_settings
 
 from KuaiShou.utils.mysql import MySQLClient
@@ -140,6 +142,10 @@ class KuaishouScrapyLogsPipeline(object):
         #视频
         if item['spider_name'] == 'kuaishou_public_feeds':
             msg['item_id'] = item['photo_id']
+        if item['spider_name'] == 'kuaishou_photo_comment':
+            msg['item_id'] = item['commentId']
+        if item['spider_name'] == 'kuaishou_photo_sub_comment':
+            msg['item_id'] = item['commentId']
         #话题
         if item['spider_name'] == 'kuaishou_tag_rec_list_v5':
             msg['item_id'] = item['tagId']
@@ -159,6 +165,25 @@ class KuaishouScrapyLogsPipeline(object):
         self.mysql_client.close()
         spider.logger.info('Mysql[%s] Conn closed!' % (self.mysql_host))
 
+
+class KuaishouFilePipeline(object):
+    def open_spider(self, spider):
+        self.today = time.strftime("%Y-%m-%d", time.localtime(time.time()))
+
+    def process_item(self, item, spider):
+        item['spider_datetime'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        isSuccess = self.writeItemToTxt(item, spider.saveFilePath)
+        if not isSuccess:
+            logger.error('write file error: ' + str(item))
+
+    def writeItemToTxt(self, item, filePath):
+        try:
+            f = open(filePath + '{}.txt'.format(self.today), "a+", encoding="utf-8")
+            f.write(json.dumps(dict(item)) + '\n')
+            f.close()
+            return True
+        except:
+            return False
 
 
 class KuaishouTestPipeline(object):
