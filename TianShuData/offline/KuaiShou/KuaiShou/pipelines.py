@@ -169,16 +169,18 @@ class KuaishouScrapyLogsPipeline(object):
 class KuaishouFilePipeline(object):
     def open_spider(self, spider):
         self.today = time.strftime("%Y-%m-%d", time.localtime(time.time()))
+        self.filePath = spider.saveFilePath
 
     def process_item(self, item, spider):
         item['spider_datetime'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        isSuccess = self.writeItemToTxt(item, spider.saveFilePath)
+        isSuccess = self.writeItemToTxt(item)
         if not isSuccess:
             logger.error('write file error: ' + str(item))
+        return item
 
-    def writeItemToTxt(self, item, filePath):
+    def writeItemToTxt(self, item):
         try:
-            f = open(filePath + '{}.txt'.format(self.today), "a+", encoding="utf-8")
+            f = open(self.filePath + '{}.txt'.format(self.today), "a+", encoding="utf-8")
             f.write(json.dumps(dict(item)) + '\n')
             f.close()
             return True
@@ -191,4 +193,4 @@ class KuaishouTestPipeline(object):
         item['spider_datetime'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         print(json.dumps(dict(item)))
         print('\n\n')
-
+        return item

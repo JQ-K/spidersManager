@@ -98,6 +98,7 @@ class KuaishouPhotoSubCommentSpider(scrapy.Spider):
                     continue
                 pcursor = "0"
                 photoId = msg_value_dict['photo_id']
+                logger.info('photoId: ' + str(photoId))
                 rootCommentId = msg_value_dict['commentId']
                 curQuery = self.query
                 curQuery['variables']['pcursor'] = pcursor
@@ -112,7 +113,6 @@ class KuaishouPhotoSubCommentSpider(scrapy.Spider):
 
 
     def parseSubCommentList(self, response):
-        print(response.text)
         rlt_json = json.loads(response.text)
         photoId = response.meta['photoId']
         rootCommentId = response.meta['rootCommentId']
