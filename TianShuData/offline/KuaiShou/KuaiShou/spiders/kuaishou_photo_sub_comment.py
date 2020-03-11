@@ -96,6 +96,9 @@ class KuaishouPhotoSubCommentSpider(scrapy.Spider):
                 msg_value_dict = json.loads(msg_value)
                 if msg_value_dict['spider_name'] != 'kuaishou_photo_comment':
                     continue
+                hasSubComment = msg_value_dict['hasSubComment']
+                if not hasSubComment:
+                    continue
                 pcursor = "0"
                 photoId = msg_value_dict['photo_id']
                 logger.info('photoId: ' + str(photoId))
