@@ -2,9 +2,10 @@
 import scrapy
 import time, random, os
 import subprocess
-import re
+import re, json
 import requests
 import urllib3
+
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 from scrapy_splash import SplashRequest
@@ -12,7 +13,6 @@ from fontTools.ttLib import TTFont
 from scrapy.utils.project import get_project_settings
 from pykafka import KafkaClient
 from loguru import logger
-from redis import Redis
 
 from KuaiShou.items import KuaishouUserInfoIterm
 
@@ -20,33 +20,33 @@ from KuaiShou.items import KuaishouUserInfoIterm
 class KuaishouFontscnDecoderSpider(scrapy.Spider):
     name = 'kuaishou_fontscn_decoder'
     custom_settings = {
-                        'ITEM_PIPELINES': {
-                            'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
-                            'KuaiShou.pipelines.KuaishouUserSeedsMySQLPipeline': 702,
-                            'KuaiShou.pipelines.KuaishouScrapyLogsMySQLPipeline': 703,
-                        },
-                       'CONCURRENT_REQUESTS': 1,
-                       'DOWNLOAD_DELAY' : random.randint(1, 2),
-                       # 'CONCURRENT_REQUESTS_PER_IP' : 1,
-                       'DOWNLOADER_MIDDLEWARES':
-                           {
-                               # 'KuaiShou.middlewares.KuaishouDownloaderMiddleware': 727,
-                               'scrapy_splash.SplashCookiesMiddleware': 723,
-                               'scrapy_splash.SplashMiddleware': 725,
-                               'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
-                           },
-                       'SPIDER_MIDDLEWARES':
-                           {
-                               'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
-                           },
-                       'DUPEFILTER_CLASS': 'scrapy_splash.SplashAwareDupeFilter',
-                       'SPLASH_URL': 'http://localhost:8050/',
-                       'COOKIES_ENABLED': 'False'
-                       }
+        'ITEM_PIPELINES': {
+            'KuaiShou.pipelines.KuaishouKafkaPipeline': 700,
+            'KuaiShou.pipelines.KuaishouUserSeedsMySQLPipeline': 702,
+            'KuaiShou.pipelines.KuaishouScrapyLogsMySQLPipeline': 703,
+        },
+        'CONCURRENT_REQUESTS': 1,
+        'DOWNLOAD_DELAY': random.randint(1, 2),
+        # 'CONCURRENT_REQUESTS_PER_IP' : 1,
+        'DOWNLOADER_MIDDLEWARES':
+            {
+                # 'KuaiShou.middlewares.KuaishouDownloaderMiddleware': 727,
+                'scrapy_splash.SplashCookiesMiddleware': 723,
+                'scrapy_splash.SplashMiddleware': 725,
+                'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+            },
+        'SPIDER_MIDDLEWARES':
+            {
+                'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+            },
+        'DUPEFILTER_CLASS': 'scrapy_splash.SplashAwareDupeFilter',
+        'SPLASH_URL': 'http://localhost:8050/',
+        'COOKIES_ENABLED': 'False'
+    }
 
     def start_requests(self):
         # 设置加载完整的页面
-        self.lua_load_all = """
+        lua_load_base = """
             function main(splash, args)
               args = {
                 url = "%s"
@@ -69,13 +69,6 @@ class KuaishouFontscnDecoderSpider(scrapy.Spider):
 
         """
         settings = get_project_settings()
-        # 连接redis
-        redis_host = settings.get('REDIS_HOST')
-        redis_port = settings.get('REDIS_PORT')
-        self.redis_did_name = settings.get('REDIS_DID_NAME')
-        self.redis_proxyip_name = settings.get('REDIS_PROXYIP_NAME')
-        self.conn = Redis(host=redis_host, port=redis_port)
-
         # 配置kafka连接信息
         kafka_hosts = settings.get('KAFKA_HOSTS')
         kafka_topic = settings.get('KAFKA_USERINFO_SEEDS_TOPIC')
@@ -84,7 +77,7 @@ class KuaishouFontscnDecoderSpider(scrapy.Spider):
         topic = client.topics[kafka_topic]
         # 配置kafka消费信息
         consumer = topic.get_balanced_consumer(
-            consumer_group=self.name,
+            consumer_group='test',  # self.name,
             managed=True,
             auto_commit_enable=True,
             auto_commit_interval_ms=3000
@@ -108,29 +101,50 @@ class KuaishouFontscnDecoderSpider(scrapy.Spider):
                 principal_id = msg_value_dict['principalId']
                 start_url = 'http://live.kuaishou.com/search/?keyword={pid}'.format(pid=principal_id)
                 logger.info(start_url)
-
                 # 判断SplashServer服务是否正常
                 # child = subprocess.Popen(["pgrep", "-f", '/usr/bin/docker-proxy'], stdout=subprocess.PIPE, shell=False)
                 # pid = child.communicate()[0].decode('utf-8')
                 # if pid == '':
                 #     os.system('sudo docker pull scrapinghub/splash')
                 #     os.system('sudo docker run -d -p 8050:8050 scrapinghub/splash')
-                lua_load_all = self.lua_load_all % (start_url)
+                lua_load_all = lua_load_base % start_url
                 headers = {
                     "Host": "live.kuaishou.com",
-                    "Connection": "keep-alive",
+                    "Connection": "keep-alive"
                 }
-                yield SplashRequest(start_url, callback=self.fontscn_decoder, endpoint='execute', headers=headers, method='GET',
-                                    args={'lua_source': lua_load_all}, cache_args=['lua_source'])
+                yield SplashRequest(start_url, callback=self.fontscn_decoder, endpoint='execute', headers=headers,
+                                    method='GET',
+                                    meta={'msg_value_dict': msg_value_dict}, args={'lua_source': lua_load_all},
+                                    cache_args=['lua_source'])
+
+
             except Exception as e:
-                logger.warning('Kafka message[{}] structure cannot be resolved :{}'.format(str(msg_value_dict), e))
+                logger.warning('Kafka message[{}] failed ！ :{}'.format(str(msg_value_dict), e))
 
     def fontscn_decoder(self, response):
         """
         :param response:
         :return:
         """
-        logger.info(response.url)
+        n_set = [chr(i) for i in range(48, 58)]
+        s_char_set = [chr(i) for i in range(97, 122)]
+        total_set = n_set + s_char_set
+        msg_value_dict = response.meta['msg_value_dict']
+        cookie_str = ''
+        for para in response.cookiejar:
+            cookie_k, cookie_v = re.findall('([^\s]+)=([^\s]+)', str(para))[0]
+            if cookie_k not in ['client_key', 'clientid', 'did', 'kuaishou.live.bfb1s']:
+                continue
+            if cookie_k == 'client_key':
+                # 构造client_key值
+                n_str = "".join(random.sample(n_set, 4))
+                ns_str = "".join(random.sample(total_set, 4))
+                cookie_v = n_str + ns_str
+            cookie_str += '{}={}; '.format(cookie_k, cookie_v)
+        time_float = time.time()
+        hm_lvt_value = "".join(random.sample(total_set, 32))
+        cookie_str = '{}didv={}; Hm_lvt_{}={}'.format(cookie_str, int(time_float * 1000), hm_lvt_value, int(time_float))
+        logger.info(cookie_str)
         kuaishou_user_info_iterm = KuaishouUserInfoIterm()
         principal_id = re.findall('keyword=([^\?]+)', response.url)[0]
         r_text = response.text
@@ -143,7 +157,7 @@ class KuaishouFontscnDecoderSpider(scrapy.Spider):
             return kuaishou_user_info_iterm
         for autor_card in author_list:
             href_list = autor_card.xpath('//div[@class="profile-card-user-info"]/a/@href').extract()
-            if '/profile/{pid}'.format(pid=principal_id) not in href_list:continue
+            if '/profile/{pid}'.format(pid=principal_id) not in href_list: continue
             user_info_counts_list = autor_card.xpath('//p[@class="profile-card-user-info-counts"]/text()').extract()
             if user_info_counts_list == []:
                 continue
@@ -158,23 +172,62 @@ class KuaishouFontscnDecoderSpider(scrapy.Spider):
                     break
                 except:
                     pass
-            fan = self.decrypt_str(res.group(1), mapping)
-            follow = self.decrypt_str(res.group(2), mapping)
-            photo = self.decrypt_str(res.group(3), mapping)
             is_successed = 1
+            msg_value_dict['fan'] = self.decrypt_str(res.group(1), mapping)
+            msg_value_dict['follow'] = self.decrypt_str(res.group(2), mapping)
+            msg_value_dict['photo'] = self.decrypt_str(res.group(3), mapping)
+        msg_value_dict['is_successed'] = is_successed
+        user_id = msg_value_dict['userId']
+        settings = get_project_settings()
+        headers = {
+            "accept": "*/*",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+            "Connection": "keep-alive",
+            "content-type": "application/json",
+            "Origin": "https://live.kuaishou.com",
+            "Referer": response.url,
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-origin",
+            "Cookie": cookie_str
+        }
+        search_overview_query = settings.get('SEARCH_OVERVIEW_QUERY')
+        search_overview_query['variables']['keyword'] = '{}'.format(user_id)
+        # logger.info(json.dumps(search_overview_query))
+        yield scrapy.Request('http://live.kuaishou.com/m_graphql', headers=headers,
+                             body=json.dumps(search_overview_query),
+                             method='POST',
+                             meta={'bodyJson': search_overview_query, 'msg_value_dict': msg_value_dict},
+                             callback=self.parse_search_overview, dont_filter=True
+                             )
 
-        kuaishou_user_info_iterm['is_successed'] = is_successed
-        if is_successed != 1:
+    def parse_search_overview(self, response):
+        msg_value_dict = response.meta['msg_value_dict']
+        rsp_search_overview_json = json.loads(response.text)
+        pc_search_overview = rsp_search_overview_json['data']['pcSearchOverview']
+        search_overview_list = pc_search_overview['list']
+        for search_overview in search_overview_list:
+            if search_overview['type'] != 'authors': continue
+            search_overview_authors = search_overview['list']
+            if search_overview_authors == []: continue
+            author_info = search_overview_authors[0]
+            kuaishou_user_info_iterm = KuaishouUserInfoIterm()
+            logger.info('Search userinfo reslut: {}'.format(str(author_info)))
+            kuaishou_user_info_iterm['spider_name'] = self.name
+            kuaishou_user_info_iterm['userId'] = msg_value_dict['userId']
+            kuaishou_user_info_iterm['kwaiId'] = author_info['id']
+            kuaishou_user_info_iterm['principalId'] = author_info['id']
+            kuaishou_user_info_iterm['nickname'] = author_info['name']
+            kuaishou_user_info_iterm['avatar'] = author_info['avatar']
+            kuaishou_user_info_iterm['sex'] = author_info['sex']
+            kuaishou_user_info_iterm['description'] = author_info['description']
+            kuaishou_user_info_iterm['fan'] = msg_value_dict['fan']
+            kuaishou_user_info_iterm['follow'] = msg_value_dict['follow']
+            kuaishou_user_info_iterm['photo'] = msg_value_dict['photo']
+            kuaishou_user_info_iterm['is_successed'] = msg_value_dict['is_successed']
             return kuaishou_user_info_iterm
-        kuaishou_user_info_iterm['fan'] = fan
-        kuaishou_user_info_iterm['follow'] = follow
-        kuaishou_user_info_iterm['photo'] = photo
 
-        # logger.info(kuaishou_user_info_iterm)
-        return kuaishou_user_info_iterm
-
-
-    def get_mapping(self,page):
+    def get_mapping(self, page):
         m = re.search('(http.*?.woff)', page)
         if m:
             woff_link = m.group(1)
@@ -193,7 +246,7 @@ class KuaishouFontscnDecoderSpider(scrapy.Spider):
             os.remove(file_name)
             return mapping
 
-    def create_mapping(self,font_file):
+    def create_mapping(self, font_file):
         """ 打开字体文件并创建字符和数字之间的映射. """
         # 打开字体文件，加载glyf
         font = TTFont(font_file)
@@ -258,4 +311,3 @@ class KuaishouFontscnDecoderSpider(scrapy.Spider):
         for c in s:
             res = res + self.decrypt_font(c, mapping)
         return res
-
