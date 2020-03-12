@@ -23,7 +23,10 @@ class KuaishouKafkaPipeline(object):
     def open_spider(self, spider):
         settings = get_project_settings()
         self.kafka_hosts = settings.get('KAFKA_HOSTS')
-        self.kafka_topic = settings.get('KAFKA_TOPIC_DATA')
+        if spider.name in ['kuaishou_photo_comment', 'kuaishou_photo_sub_comment']:
+            self.kafka_topic = settings.get('KAFKA_TOPIC_DATA_PHOTO_COMMENT')
+        else:
+            self.kafka_topic = settings.get('KAFKA_TOPIC_DATA')
         # self.kafka_topic = settings.get('KAFKA_TOPIC_DATA_TAG')  #用于话题相关爬虫测试
         client = KafkaClient(hosts=self.kafka_hosts)
         topic = client.topics[self.kafka_topic]

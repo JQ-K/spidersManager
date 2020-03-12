@@ -17,7 +17,8 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
     custom_settings = {'ITEM_PIPELINES': {
         # 'KuaiShou.pipelines.KuaishouTestPipeline': 699,
         'KuaiShou.pipelines.KuaishouFilePipeline': 700,
-        'KuaiShou.pipelines.KuaishouScrapyLogsPipeline': 701,
+        'KuaiShou.pipelines.KuaishouKafkaPipeline': 701,
+        'KuaiShou.pipelines.KuaishouScrapyLogsPipeline': 702,
     }}
     settings = get_project_settings()
 
