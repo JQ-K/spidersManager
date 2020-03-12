@@ -89,6 +89,7 @@ class KuaishouUserSeedsMySQLPipeline(object):
         msg['pre_scheduling_date'] = datetime.datetime.now().strftime("%Y-%m-%d")
         select_res = self.mysql_client.select(self.mysql_kuaishou_user_seeds_tablename, {"principalId": msg['principalId']})
         if select_res == 0:
+            msg['userId'] = item['userId']
             self.mysql_client.insert(self.mysql_kuaishou_user_seeds_tablename,msg)
             self.mysql_client.commit()
             spider.logger.info('Msg insert mysql[%s] table[%s]: %s' % (self.mysql_host, self.mysql_kuaishou_user_seeds_tablename, str(msg)))
