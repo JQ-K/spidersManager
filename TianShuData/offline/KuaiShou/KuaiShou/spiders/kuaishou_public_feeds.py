@@ -8,7 +8,7 @@ from pykafka import KafkaClient
 from loguru import logger
 from scrapy.utils.project import get_project_settings
 
-from KuaiShou.items import KuaishouUserPhotoInfoIterm
+from KuaiShou.items import KuaishouPhotoInfoItem
 
 
 class KuaishouUserPhotoSpider(scrapy.Spider):
@@ -121,7 +121,7 @@ class KuaishouUserPhotoSpider(scrapy.Spider):
             logger.info('response list = [], principalId: ' + str(principalId))
             return
         for user_photo_info in public_feeds['list']:
-            kuaishou_user_photo_info_iterm = KuaishouUserPhotoInfoIterm()
+            kuaishou_user_photo_info_iterm = KuaishouPhotoInfoItem()
             kuaishou_user_photo_info_iterm['spider_name'] = self.name
             kuaishou_user_photo_info_iterm['photo_id'] = user_photo_info['id']
             kuaishou_user_photo_info_iterm['user_photo_info'] = user_photo_info

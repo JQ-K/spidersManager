@@ -111,6 +111,7 @@ class KuaishouDownloaderMiddleware(object):
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
         if spider.name in ['kuaishou_register_did',
                            'kuaishou_shop_score', 'kuaishou_shop_product_list',
+                           'kuaishou_public_feeds_v5',
                            'kuaishou_tag_rec_list', 'kuaishou_tag_info', 'kuaishou_tag_feed_hot', 'kuaishou_tag_feed_new',
                            'kuaishou_tag_rec_list_v5', 'kuaishou_tag_info_v5', 'kuaishou_tag_feed_hot_v5', 'kuaishou_tag_feed_new_v5', ]:
             return None
