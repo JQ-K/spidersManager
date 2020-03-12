@@ -446,7 +446,7 @@
 	'spider_name': 'kuaishou_shop_product_comment'
 }
 
-6. 视频信息
+6. 视频信息_pc端版本
 {
 	"spider_name": "kuaishou_public_feeds",
 	"spider_datetime": "2020-02-20 09:55:22",
@@ -487,6 +487,10 @@
 		"__typename": "VideoFeed"
 	}
 }
+
+6.视频信息_手机端5.2版本
+
+
 
 7.话题列表中单个话题的总揽信息
 {
