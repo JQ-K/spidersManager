@@ -90,7 +90,7 @@ class KuaishouTagRecListV5Spider(scrapy.Spider):
         if 'pcursor' in rlt_json:
             pcursor = rlt_json['pcursor']
             logger.info('pcursor: ' + str(pcursor))
-            if pcursor == 'no_more':
+            if pcursor is None or pcursor == 'no_more':
                 return
             mainUrl = self.getMainUrl({'pcursor': pcursor})
             sig = self.sigUtil.getSig(mainUrl)

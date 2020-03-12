@@ -160,7 +160,7 @@ class KuaishouPhotoSubCommentSpider(scrapy.Spider):
 
         pcursor = subCommentList['pcursor']
         logger.info('pcursor: ' + str(pcursor))
-        if pcursor == 'no_more':
+        if pcursor is None or pcursor == 'no_more':
             return
 
         time.sleep(random.choice(range(30, 50)))

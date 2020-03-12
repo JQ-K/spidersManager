@@ -128,7 +128,7 @@ class KuaishouUserPhotoSpider(scrapy.Spider):
             logger.info('get one photo record, photo_id: ' + str(user_photo_info['id']))
             yield kuaishou_user_photo_info_iterm
         pcursor = public_feeds['pcursor']
-        if pcursor == 'no_more':
+        if pcursor is None or pcursor == 'no_more':
             return
 
         time.sleep(random.choice(range(10, 20)))

@@ -145,7 +145,7 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
         if 'pcursor' not in rltJson:
             return
         pcursor = rltJson['pcursor']
-        if pcursor == 'no_more':
+        if pcursor is None or pcursor == 'no_more':
             return
         offset += self.pageCount
         curHeader = self.headers
