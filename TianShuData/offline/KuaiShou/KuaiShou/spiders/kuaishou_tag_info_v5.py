@@ -51,7 +51,7 @@ class KuaishouTagInfoV5Spider(scrapy.Spider):
     argUtil = signatureArgUtil()
 
 
-    def __init__(self, partitionIdx='0', useProxy='0', *args, **kwargs):
+    def __init__(self, partitionIdx='0', useProxy='1', *args, **kwargs):
         super(KuaishouTagInfoV5Spider, self).__init__(*args, **kwargs)
         self.partitionIdx = int(partitionIdx)
         self.useProxy = int(useProxy)

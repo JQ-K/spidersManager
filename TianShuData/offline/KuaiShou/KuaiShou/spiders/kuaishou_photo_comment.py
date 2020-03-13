@@ -37,7 +37,7 @@ class KuaishouPhotoCommentSpider(scrapy.Spider):
     }
 
 
-    def __init__(self, partitionIdx='0', useProxy='0', cookieManual='0', cookieIdx='0', *args, **kwargs):
+    def __init__(self, partitionIdx='0', useProxy='1', cookieManual='0', cookieIdx='0', *args, **kwargs):
         super(KuaishouPhotoCommentSpider, self).__init__(*args, **kwargs)
         self.partitionIdx = int(partitionIdx)
         self.useProxy = int(useProxy)

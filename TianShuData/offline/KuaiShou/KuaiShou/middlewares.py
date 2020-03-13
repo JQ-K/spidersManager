@@ -12,6 +12,7 @@ from loguru import logger
 
 import random
 import time
+import requests
 
 class KuaishouSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -80,6 +81,14 @@ class KuaishouDownloaderMiddleware(object):
             rltCookie[str(key, encoding="utf-8")] = str(val, encoding="utf-8")
         return rltCookie
 
+    def getProxyIp(self):
+        r = requests.get(self.proxy_interface)
+        while (r.status_code != 200):
+            r = requests.get(self.proxy_interface)
+        # logger.info('proxy: ' + str(r.text))
+        return r.text
+
+
     def process_request(self, request, spider):
         # Called for each request that goes through the downloader
         # middleware.
@@ -99,14 +108,14 @@ class KuaishouDownloaderMiddleware(object):
             return None
         # 设置代理IP
         if spider.useProxy:
-            proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-            while proxy_list == []:
-                spider.logger.warn('Proxy Pool is null, Plase add proxy !')
-                time.sleep(60)
-                proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
-            proxy = proxy_list[0].decode()
-            spider.logger.info('proxy:{}'.format(proxy))
-            request.meta['proxy'] = proxy
+            # proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+            # while proxy_list == []:
+            #     spider.logger.warn('Proxy Pool is null, Plase add proxy !')
+            #     time.sleep(60)
+            #     proxy_list = self.conn.srandmember(self.redis_proxyip_name, 1)
+            # proxy = proxy_list[0].decode()
+            # spider.logger.info('proxy:{}'.format(proxy))
+            request.meta['proxy'] = self.getProxyIp()
 
         # 获取cookie不能设置cookie，不然cookie就都是设定的了
         if spider.name in ['kuaishou_register_did',
@@ -227,4 +236,5 @@ class KuaishouDownloaderMiddleware(object):
         self.redis_did_name = settings.get('REDIS_DID_NAME')
         self.redis_proxyip_name = settings.get('REDIS_PROXYIP_NAME')
         self.conn = Redis(host=self.redis_host, port=self.redis_port)
+        self.proxy_interface = settings.get('PROXY_INTERFACE')
         spider.logger.info('Spider opened: %s' % spider.name)

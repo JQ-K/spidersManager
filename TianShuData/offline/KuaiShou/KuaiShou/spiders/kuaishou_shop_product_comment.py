@@ -33,7 +33,7 @@ class KuaishouShopProductCommentSpider(scrapy.Spider):
     settings = get_project_settings()
 
 
-    def __init__(self, partitionIdx='0', useProxy='0', cookieManual='0', cookieIdx='0', *args, **kwargs):
+    def __init__(self, partitionIdx='0', useProxy='1', cookieManual='0', cookieIdx='0', *args, **kwargs):
         super(KuaishouShopProductCommentSpider, self).__init__(*args, **kwargs)
         self.partitionIdx = int(partitionIdx)
         self.useProxy = int(useProxy)

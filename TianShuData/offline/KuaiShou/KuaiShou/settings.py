@@ -226,3 +226,7 @@ MYSQL_KUAISHOU_SCRAPY_LOGS_TABLENAME = 'kuaishou_scrapy_logs'
 FILE_PATH_PHOTO_COMMENT = '/data/code/crawlab-master/data/kuaishou/photo_comment/'
 FILE_PATH_PHOTO_SUB_COMMENT = '/data/code/crawlab-master/data/kuaishou/photo_sub_comment/'
 
+
+# 'http://47.98.235.102:5555/random'
+PROXY_INTERFACE = 'http://zqhd6:5555/random'
+
